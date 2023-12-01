@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "976930978751",
+    "project_id": "let-s-vote-fab75",
+    "storage_bucket": "let-s-vote-fab75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976930978751:android:db8ca3019cdb322c19bf0a",
+        "android_client_info": {
+          "package_name": "com.navindu.lets_vote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJDKdyGWdjqWHcGfE8cEukDyBVzUXPUN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
