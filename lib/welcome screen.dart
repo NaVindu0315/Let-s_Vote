@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_vote/signup.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -30,7 +31,11 @@ class WelcomeScreen extends StatelessWidget {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                /*Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ()),
+                );*/
               },
               child: const Text('Login'),
               style: ElevatedButton.styleFrom(
@@ -41,7 +46,10 @@ class WelcomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/signup');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => signup()),
+                );
               },
               child: const Text('Sign Up'),
               style: ElevatedButton.styleFrom(
