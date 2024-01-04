@@ -58,10 +58,17 @@ class _facecompareState extends State<facecompare> {
     final imgUrl1Bytes = utf8.encode(imgurl1);
     final imgUrl2Bytes = utf8.encode(imgurl2);
 
-    request.add(http.MultipartFile.fromBytes('image', imgUrl1Bytes,
-        contentType: MediaType('application', 'json')));
-    request.add(http.MultipartFile.fromBytes('image', imgUrl2Bytes,
-        contentType: MediaType('application', 'json')));
+    request.files.add(await http.MultipartFile.fromPath(
+      'image1',
+      imgurl1,
+      contentType: MediaType('image', 'jpeg'),
+    ));
+
+    request.files.add(await http.MultipartFile.fromPath(
+      'image2',
+      imgurl2,
+      contentType: MediaType('image', 'jpeg'),
+    ));
 
     // Send the request and parse the response
     final response = await request.send();
