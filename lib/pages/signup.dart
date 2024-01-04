@@ -9,17 +9,17 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 //void main() => runApp(gemifysign());
 void main() {
-  runApp(gemifysign());
+  runApp(signup());
 }
 
-class gemifysign extends StatefulWidget {
+class signup extends StatefulWidget {
   static String id = 'signup';
 
   @override
-  State<gemifysign> createState() => _gemifysignState();
+  State<signup> createState() => _signupState();
 }
 
-class _gemifysignState extends State<gemifysign> {
+class _signupState extends State<signup> {
   final storage = FirebaseStorage.instance;
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
@@ -186,7 +186,7 @@ class _gemifysignState extends State<gemifysign> {
                                 primary: Colors.purple.shade200,
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, gemifysign.id);
+                                Navigator.pushNamed(context, signup.id);
                               },
                               child: Text(
                                 'SIGNUP',
