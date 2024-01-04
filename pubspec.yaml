@@ -45,6 +45,10 @@ dependencies:
 
   firebase_auth: ^4.4.0
   cloud_firestore: ^4.5.0
+  http: ^1.1.2
+
+
+
 
 
 dev_dependencies:
