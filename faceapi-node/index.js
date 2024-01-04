@@ -9,6 +9,7 @@ const endpoint = "https://letsvotetry1.cognitiveservices.azure.com/";
 
 const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } });
 const client = new Face.FaceClient(credentials, endpoint);
+//didnt work
 
 
 const image_base_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
