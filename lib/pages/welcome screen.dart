@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lets_vote/signup.dart';
+import 'package:lets_vote/pages/signup.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
