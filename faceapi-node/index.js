@@ -9,16 +9,16 @@ const endpoint = 'https://nav.cognitiveservices.azure.com/face/v1.0/detect';
 
 // Set up the request headers
 const headers = {
- 'Content-Type': 'application/json',
- 'Ocp-Apim-Subscription-Key': apiKey
-};
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': apiKey
+   };
 
 // Define the request body (optional)
-const body = {
- returnFaceId: true,
- returnFaceLandmarks: false,
- returnFaceAttributes: ['age', 'gender', 'headPose', 'smile', 'facialHair', 'glasses', 'emotion', 'hair', 'makeup', 'occlusion', 'accessories', 'blur', 'exposure', 'noise']
-};
+const body = JSON.stringify({
+    returnFaceId: true,
+    returnFaceLandmarks: false,
+    returnFaceAttributes: ['age', 'gender', 'headPose', 'smile', 'facialHair', 'glasses', 'emotion', 'hair', 'makeup', 'occlusion', 'accessories', 'blur', 'exposure', 'noise']
+   });
 
 // Make the request to the Azure Face API
 axios.post(endpoint, body, { headers: headers })
