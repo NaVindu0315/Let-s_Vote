@@ -1,0 +1,45 @@
+response wish
+{
+  "status": "success",
+  "uuid": "ced2ee0e-ac62-11ee-86d3-0242ac120002",
+  "name": "wish",
+  "faces": [
+    {
+      "uuid": "ceb9fc7f-ac62-11ee-86d3-0242ac120002",
+      "url": "https://faces.nyc3.digitaloceanspaces.com/ceb9fc7f-ac62-11ee-86d3-0242ac120002.jpg"
+    }
+  ],
+  "collections": [
+    {
+      "uuid": "cee1915e-ac62-11ee-86d3-0242ac120002",
+      "name": "users"
+    }
+  ]
+}
+
+///image 3 added to faces
+{
+  "status": "success",
+  "added_faces": [
+    {
+      "uuid": "ed8ae1ed-aca3-11ee-86d3-0242ac120002",
+      "url": "https://faces.nyc3.digitaloceanspaces.com/ed8ae1ed-aca3-11ee-86d3-0242ac120002.jpg"
+    }
+  ]
+}
+
+
+//trried image 5 using thhe demo worked
+
+{
+  "status": "success",
+  "message": "verified",
+  "probability": 0.9993547201156616,
+  "rectangle": {
+    "left": 343,
+    "top": 274,
+    "right": 657,
+    "bottom": 588
+  },
+  "rotation": 0
+}
