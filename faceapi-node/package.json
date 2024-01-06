@@ -12,6 +12,7 @@
     "@azure/cognitiveservices-face": "^5.0.0",
     "@azure/ms-rest-js": "^2.7.0",
     "axios": "^1.6.4",
+    "fs": "^0.0.1-security",
     "nodemon": "^3.0.2",
     "uuid": "^9.0.1"
   }
