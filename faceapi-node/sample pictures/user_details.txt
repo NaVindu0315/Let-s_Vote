@@ -17,3 +17,13 @@ response wish
   ]
 }
 
+///image 3 added to faces
+{
+  "status": "success",
+  "added_faces": [
+    {
+      "uuid": "ed8ae1ed-aca3-11ee-86d3-0242ac120002",
+      "url": "https://faces.nyc3.digitaloceanspaces.com/ed8ae1ed-aca3-11ee-86d3-0242ac120002.jpg"
+    }
+  ]
+}
