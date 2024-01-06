@@ -27,3 +27,19 @@ response wish
     }
   ]
 }
+
+
+//trried image 5 using thhe demo worked
+
+{
+  "status": "success",
+  "message": "verified",
+  "probability": 0.9993547201156616,
+  "rectangle": {
+    "left": 343,
+    "top": 274,
+    "right": 657,
+    "bottom": 588
+  },
+  "rotation": 0
+}
