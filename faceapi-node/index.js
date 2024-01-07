@@ -16,21 +16,23 @@ const imageBase64_2 = fs.readFileSync('./path/to/image2.jpg').toString('base64')
 // OR
 const faceToken1 = 'face_token_1';
 const faceToken2 = 'face_token_2';*/
-const image_url1 = '';
-const image_url2 = '';
+const imageurl1 = 'https://firebasestorage.googleapis.com/v0/b/cam-test-2-78bd3.appspot.com/o/people%2Fwish_5.jpeg?alt=media&token=27e24282-d003-4a61-912c-a8717237eb7f';
+const imageurl2 = 'https://firebasestorage.googleapis.com/v0/b/cam-test-2-78bd3.appspot.com/o/people%2Fwish_1.jpeg?alt=media&token=6febd89e-61ac-4318-8ac4-994876371669';
 
 const formData = {
   api_key: apiKey,
   api_secret: apiSecret,
   // Choose one of the following based on your image data format:
-  image_file1: imageFile1,
+ /* image_file1: imageFile1,
   image_file2: imageFile2,
   // OR
   image_base64_1: imageBase64_1,
   image_base64_2: imageBase64_2,
   // OR
   face_token1: faceToken1,
-  face_token2: faceToken2
+  face_token2: faceToken2*/
+  image_url1: imageurl1,
+  image_url2: imageurl2
 };
 
 const options = {
