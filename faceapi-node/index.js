@@ -7,6 +7,7 @@ const apiSecret = 'YOUR_API_SECRET';
 const requestUrl = 'https://api-us.faceplusplus.com/facepp/v3/compare';
 
 // Specify how you'll provide image data (choose one):
+/*
 const imageFile1 = fs.readFileSync('./path/to/image1.jpg');
 const imageFile2 = fs.readFileSync('./path/to/image2.jpg');
 // OR
@@ -14,7 +15,9 @@ const imageBase64_1 = fs.readFileSync('./path/to/image1.jpg').toString('base64')
 const imageBase64_2 = fs.readFileSync('./path/to/image2.jpg').toString('base64');
 // OR
 const faceToken1 = 'face_token_1';
-const faceToken2 = 'face_token_2';
+const faceToken2 = 'face_token_2';*/
+const image_url1 = '';
+const image_url2 = '';
 
 const formData = {
   api_key: apiKey,
