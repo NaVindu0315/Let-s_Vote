@@ -1,8 +1,8 @@
 const https = require('https');
 const fs = require('fs');
 
-const apiKey = 'YOUR_API_KEY';
-const apiSecret = 'YOUR_API_SECRET';
+const apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+const apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
 
 const requestUrl = 'https://api-us.faceplusplus.com/facepp/v3/compare';
 
