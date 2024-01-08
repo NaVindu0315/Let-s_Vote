@@ -11,3 +11,12 @@ https://console.faceplusplus.com/app/apikey/view/65594
 need to be tested using node then flutter
 
 //node js code need to be created
+
+//api key and links 
+const apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+const apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
+
+const requestUrl = 'https://api-us.faceplusplus.com/facepp/v3/compare';
+
+const imageurl1 = 'https://firebasestorage.googleapis.com/v0/b/cam-test-2-78bd3.appspot.com/o/people%2Fwish_5.jpeg?alt=media&token=27e24282-d003-4a61-912c-a8717237eb7f';
+const imageurl2 = 'https://firebasestorage.googleapis.com/v0/b/cam-test-2-78bd3.appspot.com/o/people%2Fwish_1.jpeg?alt=media&token=6febd89e-61ac-4318-8ac4-994876371669';
