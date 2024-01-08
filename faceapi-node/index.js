@@ -22,7 +22,8 @@ request(options, (error, response, body) => {
   if (error) {
     console.error(error);
   } else {
-    console.log(body); // Response from the Face++ API
+    //console.log(body); // Response from the Face++ API
+    console.log(JSON.parse(body).confidence); // Confidence of the comparison
   }
 });
 //dindnt work with below
