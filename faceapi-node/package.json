@@ -12,6 +12,8 @@
     "@azure/cognitiveservices-face": "^5.0.0",
     "@azure/ms-rest-js": "^2.7.0",
     "axios": "^1.6.4",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "nodemon": "^3.0.2",
