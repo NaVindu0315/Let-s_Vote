@@ -25,3 +25,15 @@ request(options, (error, response, body) => {
     console.log(body); // Response from the Face++ API
   }
 });
+//dindnt work with below
+/*
+
+request(options, (error, response, body) => {
+  if (error) {
+    console.error(error);
+  } else {
+    const responseData = JSON.parse(body); // Parse the JSON response
+    const confidence = responseData.confidence; // Access the confidence value
+    console.log("Confidence:", confidence); // Log the confidence value
+  }
+});*/
