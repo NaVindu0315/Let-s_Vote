@@ -7,6 +7,13 @@ app.use(express.json());
 const apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
 const apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+  
+
 app.post('/compareFaces', (req, res) => {
     const {  faceurl1, faceurl2 } = req.body;
 
