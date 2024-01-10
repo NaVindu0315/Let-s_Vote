@@ -48,6 +48,7 @@ dependencies:
   http: ^1.1.2
   json_annotation: ^4.8.1
   http_parser: ^4.0.2
+  quickalert: ^1.0.2
 
 
 

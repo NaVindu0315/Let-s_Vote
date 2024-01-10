@@ -8,6 +8,7 @@ import 'package:lets_vote/faceapi/compare-and-get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
+import 'package:quickalert/quickalert.dart';
 
 List<CameraDescription>? cameras;
 
@@ -153,6 +154,26 @@ class _MyHomePageState extends State<MyHomePage> {
           final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
           final confidence = responseJson['confidence'] as double;
           print('Confidence: $confidence');
+          if (confidence > 85.00) {
+            QuickAlert.show(
+              context: context,
+              type: QuickAlertType.success,
+              title: 'Same Person',
+              text: 'Same Person! confidence =  $confidence',
+              autoCloseDuration: const Duration(seconds: 4),
+              showConfirmBtn: false,
+            );
+          } else {
+            QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Not the same person',
+              text: 'person doesnt match confidence:  $confidence',
+              backgroundColor: Colors.black,
+              titleColor: Colors.white,
+              textColor: Colors.white,
+            );
+          }
 
           // Store the confidence value in a variable for further use
           double storedConfidence = confidence;
@@ -210,6 +231,8 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 50,
               ),
+
+              ///camera prview
               /* Container(
                 width: 200,
                 height: 200,
@@ -217,7 +240,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   aspectRatio: controller!.value.aspectRatio,
                   child: CameraPreview(controller!),
                 ),
-              ),*/
+              ),
+              */
+              ///camera preview end
+
               /// to check my face api
               TextButton(onPressed: compareFaces, child: Text('compare')),
 
