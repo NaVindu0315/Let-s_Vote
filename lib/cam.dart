@@ -40,6 +40,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController url1controller = TextEditingController();
   TextEditingController url2controller = TextEditingController();
+  TextEditingController uploadedurl1controller = TextEditingController();
+  TextEditingController uploaderurl2controller = TextEditingController();
 
   late String url1img;
   late String url2img;
