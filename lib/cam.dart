@@ -7,6 +7,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lets_vote/faceapi/compare-and-get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
+import 'package:quickalert/quickalert.dart';
 
 List<CameraDescription>? cameras;
 
@@ -36,6 +38,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController url1controller = TextEditingController();
+  TextEditingController url2controller = TextEditingController();
+
+  late String url1img;
+  late String url2img;
+
   ///firebase storage
   final storage = FirebaseStorage.instance;
   CameraController? controller;
@@ -64,44 +72,132 @@ class _MyHomePageState extends State<MyHomePage> {
     iurl = imageUrl;
   }
 
-  ///new
-  /*Future<void> upld() async {
-    final ref = storage.ref().child('images/${DateTime.now().toString()}.jpg');
-    final metadata = Metadata()
-      ..contentType =
-          'image/jpeg'; // Set content type to 'image/jpeg' for JPEG images
-    final uploadTask = ref.putFile(
-        File(imagePath), metadata); // Pass metadata with content type
-    final snapshot = await uploadTask.whenComplete(() {});
-    final imageUrl = await snapshot.ref.getDownloadURL();
-    iurl = imageUrl;
+  ///faceapi try
 
-  }*/
-  ///my face api function
-  void callCompareFacesAPI() async {
+  Future<void> compareFaces() async {
     try {
-      final url = Uri.parse('http://localhost:3000/api/compareFaces');
-      final requestBody = jsonEncode({
-        "faceurl1":
-            "https://firebasestorage.googleapis.com/v0/b/navindu-store.appspot.com/o/face-api%20images%2Fnngi_2.jpeg?alt=media&token=af022352-c7f2-4b21-9f4a-036bc857e6b0",
-        "faceurl2":
-            "https://firebasestorage.googleapis.com/v0/b/navindu-store.appspot.com/o/face-api%20images%2Fnngi_1.jpeg?alt=media&token=8525b947-ce30-471b-98d3-d2f2ed9afcdb"
-      });
+      // Replace with your actual Face++ API keys
+      final apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+      final apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
 
-      final response = await http.post(url, body: requestBody);
+      // Replace with the actual face tokens
+      final imageurl1 =
+          'https://firebasestorage.googleapis.com/v0/b/navindu-store.appspot.com/o/face-api%20images%2Fnngi_2.jpeg?alt=media&token=af022352-c7f2-4b21-9f4a-036bc857e6b0';
+      final imageurl2 =
+          'https://firebasestorage.googleapis.com/v0/b/navindu-store.appspot.com/o/face-api%20images%2Fnngi_1.jpeg?alt=media&token=8525b947-ce30-471b-98d3-d2f2ed9afcdb';
+
+      final url =
+          Uri.parse('https://api-us.faceplusplus.com/facepp/v3/compare');
+      final request = http.MultipartRequest('POST', url);
+
+      request.fields['api_key'] = apiKey;
+      request.fields['api_secret'] = apiSecret;
+      request.fields['image_url1'] = imageurl1;
+      request.fields['image_url2'] = imageurl2;
+
+      final response = await request.send();
 
       if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        print(responseData); // Print the response to the console
+        final responseData = await response.stream.bytesToString();
+        //print(responseData);
+        ///trying to get the confidence value extracted
+        try {
+          final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
+          final confidence = responseJson['confidence'] as double;
+          print('Confidence: $confidence');
+
+          // Store the confidence value in a variable for further use
+          double storedConfidence = confidence;
+
+          // Use the storedConfidence variable as needed in your application
+        } catch (error) {
+          print('Error parsing JSON response: $error');
+        }
+
+        ///end
+        // Handle the successful response data
       } else {
-        print('API request failed with status code: ${response.statusCode}');
+        print('Request failed with status: ${response.statusCode}');
+        // Handle the error response
       }
     } catch (error) {
-      print('Error occurred: $error');
+      print('Error: $error');
+      // Handle other errors
     }
   }
 
-  ///end
+  ///face api end
+
+  /// function to paste urls and then compare
+  Future<void> comaprewithurl(String imageurl1, String imageurl2) async {
+    try {
+      // Replace with your actual Face++ API keys
+      final apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+      final apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
+
+      final url =
+          Uri.parse('https://api-us.faceplusplus.com/facepp/v3/compare');
+      final request = http.MultipartRequest('POST', url);
+
+      request.fields['api_key'] = apiKey;
+      request.fields['api_secret'] = apiSecret;
+      request.fields['image_url1'] = imageurl1;
+      request.fields['image_url2'] = imageurl2;
+
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        final responseData = await response.stream.bytesToString();
+        //print(responseData);
+        ///trying to get the confidence value extracted
+        try {
+          final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
+          final confidence = responseJson['confidence'] as double;
+          print('Confidence: $confidence');
+          if (confidence > 85.00) {
+            QuickAlert.show(
+              context: context,
+              type: QuickAlertType.success,
+              title: 'Same Person',
+              text: 'Same Person! confidence =  $confidence',
+              autoCloseDuration: const Duration(seconds: 4),
+              showConfirmBtn: false,
+            );
+          } else {
+            QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Not the same person',
+              text: 'person doesnt match confidence:  $confidence',
+              backgroundColor: Colors.black,
+              titleColor: Colors.white,
+              textColor: Colors.white,
+            );
+          }
+
+          // Store the confidence value in a variable for further use
+          double storedConfidence = confidence;
+
+          // Use the storedConfidence variable as needed in your application
+        } catch (error) {
+          print('Error parsing JSON response: $error');
+        }
+
+        ///end
+        // Handle the successful response data
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        // Handle the error response
+      }
+    } catch (error) {
+      print('Error: $error');
+      // Handle other errors
+    }
+  }
+
+  /// url paste compare end
+  ///controller
+  ///
 
   /// frebase uploading function end
   @override
@@ -135,6 +231,8 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 50,
               ),
+
+              ///camera prview
               /* Container(
                 width: 200,
                 height: 200,
@@ -142,9 +240,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   aspectRatio: controller!.value.aspectRatio,
                   child: CameraPreview(controller!),
                 ),
-              ),*/
+              ),
+              */
+              ///camera preview end
+
               /// to check my face api
-              TextButton(onPressed: callCompareFacesAPI, child: Text('click')),
+              TextButton(onPressed: compareFaces, child: Text('compare')),
 
               ///my face api end
               TextButton(
@@ -174,7 +275,93 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 10,
               ),
-              Text('$imagePath & $iurl')
+              //Text('$imagePath & $iurl')
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 2, // Set the width of the SizedBox to 300 pixels
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: url1controller,
+                        readOnly: false,
+                        enabled: true,
+                        onChanged: (value) {
+                          url1img = value;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'url1',
+                          labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10.0),
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              ///url2 textfield
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 2, // Set the width of the SizedBox to 300 pixels
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: url2controller,
+                        readOnly: false,
+                        enabled: true,
+                        onChanged: (value) {
+                          url2img = value;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'url2',
+                          labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10.0),
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              ///url 2 end
+              ///button row
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextButton(
+                      // onPressed: () => comaprewithurl(url1img, url2img),
+                      onPressed: () async {
+                        comaprewithurl(url1img, url2img);
+                        url1controller.clear();
+                        url2controller.clear();
+                      },
+                      child: Text('compare two images'))
+                ],
+              ),
+
+              ///button end
             ],
           ),
         ),
