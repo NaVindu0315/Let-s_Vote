@@ -248,9 +248,42 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 ///camera preview end
 
-                ///my face api end
+                ///textfield to display the upload image url 1
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // Set the width of the SizedBox to 300 pixels
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          controller: uploadedurl1controller,
+                          readOnly: true,
+                          enabled: false,
+                          decoration: InputDecoration(
+                            labelText: uploadedurl1,
+                            labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0),
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                ///end uploaded textfiled 1
                 TextButton(
                     onPressed: () async {
+                      uploadedurl1 = "";
                       try {
                         final image = await controller!.takePicture();
                         setState(() {
