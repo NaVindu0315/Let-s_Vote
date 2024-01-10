@@ -184,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),*/
               /// to check my face api
-              TextButton(onPressed: compareFaces, child: Text('click')),
+              TextButton(onPressed: compareFaces, child: Text('compare')),
 
               ///my face api end
               TextButton(
