@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lets_vote/faceapi/compare-and-get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
 
 List<CameraDescription>? cameras;
 
@@ -104,6 +105,42 @@ class _MyHomePageState extends State<MyHomePage> {
   ///end
   ///faceapi try
 
+  Future<void> compareFaces() async {
+    try {
+      // Replace with your actual Face++ API keys
+      final apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+      final apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
+
+      // Replace with the actual face tokens
+      final imageurl1 =
+          'https://firebasestorage.googleapis.com/v0/b/navindu-store.appspot.com/o/face-api%20images%2Fnngi_2.jpeg?alt=media&token=af022352-c7f2-4b21-9f4a-036bc857e6b0';
+      final imageurl2 =
+          'https://firebasestorage.googleapis.com/v0/b/navindu-store.appspot.com/o/face-api%20images%2Fnngi_1.jpeg?alt=media&token=8525b947-ce30-471b-98d3-d2f2ed9afcdb';
+
+      final url =
+          Uri.parse('https://api-us.faceplusplus.com/facepp/v3/compare');
+      final request = http.MultipartRequest('POST', url);
+
+      request.fields['api_key'] = apiKey;
+      request.fields['api_secret'] = apiSecret;
+      request.fields['image_url1'] = imageurl1;
+      request.fields['image_url2'] = imageurl2;
+
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        final responseData = await response.stream.bytesToString();
+        print(responseData); // Handle the successful response data
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        // Handle the error response
+      }
+    } catch (error) {
+      print('Error: $error');
+      // Handle other errors
+    }
+  }
+
   ///face api end
 
   /// frebase uploading function end
@@ -147,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),*/
               /// to check my face api
-              TextButton(onPressed: callCompareFacesAPI, child: Text('click')),
+              TextButton(onPressed: compareFaces, child: Text('click')),
 
               ///my face api end
               TextButton(
