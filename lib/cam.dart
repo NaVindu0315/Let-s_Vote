@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController url2controller = TextEditingController();
   TextEditingController uploadedurl1controller = TextEditingController();
 
-  TextEditingController uploaderurl2controller = TextEditingController();
+  TextEditingController uploadedurl2controller = TextEditingController();
 
   late String url1img;
   late String url2img;
@@ -52,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   CameraController? controller;
   late String imagePath = "";
   late String uploadedurl1 = "";
+  late String uploadedurl2 = "";
 
   ///firebase upload function begin
   /*
@@ -63,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     iurl = imageUrl;
   }
 */
+  ///to capture the first photo
   Future<void> upload1() async {
     final ref = storage.ref().child('images/${DateTime.now().toString()}.jpg');
     final metadata = SettableMetadata(
@@ -76,6 +78,24 @@ class _MyHomePageState extends State<MyHomePage> {
     uploadedurl1controller.text = uploadedurl1;
     print(uploadedurl1);
   }
+
+  ///first photo capturing end
+  ///second phot capturing
+  Future<void> upload2() async {
+    final ref = storage.ref().child('images/${DateTime.now().toString()}.jpg');
+    final metadata = SettableMetadata(
+        contentType: 'image/jpeg'); // Set content type explicitly
+
+    final uploadTask = ref.putFile(
+        File(imagePath), metadata); // Pass metadata along with the file
+    final snapshot = await uploadTask.whenComplete(() {});
+    final imageUrl = await snapshot.ref.getDownloadURL();
+    uploadedurl2 = imageUrl;
+    uploadedurl2controller.text = uploadedurl2;
+    print(uploadedurl2);
+  }
+
+  ///second photo capturing end
 
   ///faceapi try
 
@@ -283,6 +303,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
 
                 ///end uploaded textfiled 1
+                ///second text field
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // Set the width of the SizedBox to 300 pixels
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          controller: uploadedurl2controller,
+                          readOnly: true,
+                          enabled: false,
+                          decoration: InputDecoration(
+                            labelText: 'Image url2',
+                            labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0),
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                ///second text field end
                 TextButton(
                     onPressed: () async {
                       uploadedurl1controller.clear();
