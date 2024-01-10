@@ -336,20 +336,51 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
 
                 ///second text field end
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 60.0,
+                    ),
+                    TextButton(
+                        onPressed: () async {
+                          uploadedurl1controller.clear();
+                          try {
+                            final image = await controller!.takePicture();
+                            setState(() {
+                              imagePath = image.path;
+                            });
+                            upload1();
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        child: Text("Capture image 1")),
+                    TextButton(
+                        onPressed: () async {
+                          uploadedurl2controller.clear();
+                          try {
+                            final image = await controller!.takePicture();
+                            setState(() {
+                              imagePath = image.path;
+                            });
+                            upload2();
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        child: Text("Capture image 2")),
+                  ],
+                ),
+
+                ///button row end
+                ///this button call the compare function check the captured photos are working
                 TextButton(
                     onPressed: () async {
+                      comaprewithurl(uploadedurl1, uploadedurl2);
                       uploadedurl1controller.clear();
-                      try {
-                        final image = await controller!.takePicture();
-                        setState(() {
-                          imagePath = image.path;
-                        });
-                        upload1();
-                      } catch (e) {
-                        print(e);
-                      }
+                      uploadedurl2controller.clear();
                     },
-                    child: Text("Capture image 1")),
+                    child: Text('Compare the captured images')),
 
                 ///begin
                 /*   if (imagePath != "")
