@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final storage = FirebaseStorage.instance;
   CameraController? controller;
   late String imagePath = "";
-  late String iurl = "";
+  late String uploadedurl1 = "";
 
   ///firebase upload function begin
   /*
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     iurl = imageUrl;
   }
 */
-  Future<void> upld() async {
+  Future<void> upload1() async {
     final ref = storage.ref().child('images/${DateTime.now().toString()}.jpg');
     final metadata = SettableMetadata(
         contentType: 'image/jpeg'); // Set content type explicitly
@@ -69,7 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
         File(imagePath), metadata); // Pass metadata along with the file
     final snapshot = await uploadTask.whenComplete(() {});
     final imageUrl = await snapshot.ref.getDownloadURL();
-    iurl = imageUrl;
+    uploadedurl1 = imageUrl;
+    print(uploadedurl1);
   }
 
   ///faceapi try
@@ -224,145 +225,144 @@ class _MyHomePageState extends State<MyHomePage> {
       return Container();
     }
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 50,
-              ),
-
-              ///camera prview
-              /* Container(
-                width: 200,
-                height: 200,
-                child: AspectRatio(
-                  aspectRatio: controller!.value.aspectRatio,
-                  child: CameraPreview(controller!),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 50,
                 ),
-              ),
-              */
-              ///camera preview end
 
-              /// to check my face api
-              TextButton(onPressed: compareFaces, child: Text('compare')),
-
-              ///my face api end
-              TextButton(
-                  onPressed: () async {
-                    try {
-                      final image = await controller!.takePicture();
-                      setState(() {
-                        imagePath = image.path;
-                      });
-                      upld();
-                    } catch (e) {
-                      print(e);
-                    }
-                  },
-                  child: Text("Take Photo")),
-
-              ///begin
-              /*   if (imagePath != "")
+                ///camera prview
                 Container(
-                    width: 300,
-                    height: 300,
-                    child: Image.file(
-                      File(imagePath),
-                    )),
-*/
-              ///end
-              SizedBox(
-                height: 10,
-              ),
-              //Text('$imagePath & $iurl')
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 2, // Set the width of the SizedBox to 300 pixels
-                    child: Card(
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        controller: url1controller,
-                        readOnly: false,
-                        enabled: true,
-                        onChanged: (value) {
-                          url1img = value;
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'url1',
-                          labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 10.0),
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
+                  width: 200,
+                  height: 200,
+                  child: AspectRatio(
+                    aspectRatio: controller!.value.aspectRatio,
+                    child: CameraPreview(controller!),
+                  ),
+                ),
+
+                ///camera preview end
+
+                ///my face api end
+                TextButton(
+                    onPressed: () async {
+                      try {
+                        final image = await controller!.takePicture();
+                        setState(() {
+                          imagePath = image.path;
+                        });
+                        upload1();
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                    child: Text("Take Photo")),
+
+                ///begin
+                /*   if (imagePath != "")
+                  Container(
+                      width: 300,
+                      height: 300,
+                      child: Image.file(
+                        File(imagePath),
+                      )),
+        */
+                ///end
+                SizedBox(
+                  height: 10,
+                ),
+                //Text('$imagePath & $iurl')
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // Set the width of the SizedBox to 300 pixels
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          controller: url1controller,
+                          readOnly: false,
+                          enabled: true,
+                          onChanged: (value) {
+                            url1img = value;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'url1',
+                            labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0),
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-              ///url2 textfield
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 2, // Set the width of the SizedBox to 300 pixels
-                    child: Card(
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        controller: url2controller,
-                        readOnly: false,
-                        enabled: true,
-                        onChanged: (value) {
-                          url2img = value;
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'url2',
-                          labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 10.0),
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
+                ///url2 textfield
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // Set the width of the SizedBox to 300 pixels
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          controller: url2controller,
+                          readOnly: false,
+                          enabled: true,
+                          onChanged: (value) {
+                            url2img = value;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'url2',
+                            labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0),
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-              ///url 2 end
-              ///button row
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  TextButton(
-                      // onPressed: () => comaprewithurl(url1img, url2img),
-                      onPressed: () async {
-                        comaprewithurl(url1img, url2img);
-                        url1controller.clear();
-                        url2controller.clear();
-                      },
-                      child: Text('compare two images'))
-                ],
-              ),
+                ///url 2 end
+                ///button row
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton(
+                        // onPressed: () => comaprewithurl(url1img, url2img),
+                        onPressed: () async {
+                          comaprewithurl(url1img, url2img);
+                          url1controller.clear();
+                          url2controller.clear();
+                        },
+                        child: Text('compare two images'))
+                  ],
+                ),
 
-              ///button end
-            ],
+                ///button end
+              ],
+            ),
           ),
         ),
       ),
