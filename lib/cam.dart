@@ -41,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController url1controller = TextEditingController();
   TextEditingController url2controller = TextEditingController();
   TextEditingController uploadedurl1controller = TextEditingController();
+
   TextEditingController uploaderurl2controller = TextEditingController();
 
   late String url1img;
@@ -72,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final snapshot = await uploadTask.whenComplete(() {});
     final imageUrl = await snapshot.ref.getDownloadURL();
     uploadedurl1 = imageUrl;
+    uploadedurl1controller.text = uploadedurl1;
     print(uploadedurl1);
   }
 
@@ -263,7 +265,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           readOnly: true,
                           enabled: false,
                           decoration: InputDecoration(
-                            labelText: uploadedurl1,
+                            labelText: 'Image url1',
                             labelStyle: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -283,7 +285,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ///end uploaded textfiled 1
                 TextButton(
                     onPressed: () async {
-                      uploadedurl1 = "";
+                      uploadedurl1controller.clear();
                       try {
                         final image = await controller!.takePicture();
                         setState(() {
@@ -294,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         print(e);
                       }
                     },
-                    child: Text("Take Photo")),
+                    child: Text("Capture image 1")),
 
                 ///begin
                 /*   if (imagePath != "")
