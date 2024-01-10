@@ -78,31 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
     iurl = imageUrl;
 
   }*/
-  ///my face api function
-  void callCompareFacesAPI() async {
-    try {
-      final url = Uri.parse('http://localhost:3000/compareFaces');
-      final requestBody = jsonEncode({
-        "faceurl1":
-            "https://firebasestorage.googleapis.com/v0/b/navindu-store.appspot.com/o/face-api%20images%2Fnngi_2.jpeg?alt=media&token=af022352-c7f2-4b21-9f4a-036bc857e6b0",
-        "faceurl2":
-            "https://firebasestorage.googleapis.com/v0/b/navindu-store.appspot.com/o/face-api%20images%2Fnngi_1.jpeg?alt=media&token=8525b947-ce30-471b-98d3-d2f2ed9afcdb"
-      });
 
-      final response = await http.post(url, body: requestBody);
-
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        print(responseData); // Print the response to the console
-      } else {
-        print('API request failed with status code: ${response.statusCode}');
-      }
-    } catch (error) {
-      print('Error occurred: $error');
-    }
-  }
-
-  ///end
   ///faceapi try
 
   Future<void> compareFaces() async {
@@ -158,6 +134,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ///face api end
+  ///
+  /// function to paste urls and then compare
+
+  /// url paste compare end
 
   /// frebase uploading function end
   @override
