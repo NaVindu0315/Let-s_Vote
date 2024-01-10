@@ -130,7 +130,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
       if (response.statusCode == 200) {
         final responseData = await response.stream.bytesToString();
-        print(responseData); // Handle the successful response data
+        //print(responseData);
+        ///trying to get the confidence value extracted
+        try {
+          final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
+          final confidence = responseJson['confidence'] as double;
+          print('Confidence: $confidence');
+
+          // Store the confidence value in a variable for further use
+          double storedConfidence = confidence;
+
+          // Use the storedConfidence variable as needed in your application
+        } catch (error) {
+          print('Error parsing JSON response: $error');
+        }
+
+        ///end
+        // Handle the successful response data
       } else {
         print('Request failed with status: ${response.statusCode}');
         // Handle the error response
