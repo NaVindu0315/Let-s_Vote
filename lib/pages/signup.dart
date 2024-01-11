@@ -11,12 +11,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../cam.dart';
+
 //void main() => runApp(gemifysign());
 void main() {
   runApp(signup());
 }
-
-List<CameraDescription>? cameras;
 
 class signup extends StatefulWidget {
   static String id = 'signup';
@@ -180,45 +180,196 @@ class _signupState extends State<signup> {
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ///camera prview
+                  Container(
+                    width: 100,
+                    height: 150,
+                    child: AspectRatio(
+                      aspectRatio: controller!.value.aspectRatio,
+                      child: CameraPreview(controller!),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(left: 50),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.purple.shade200,
+                      SizedBox(
+                        height: 20.0,
+                      ),
+
+                      ////for the image adding button
+
+                      ////image adding button end
+
+                      //// sign up and login labels
+
+                      ////sign up and login labels end
+
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      //username
+                      TextFormField(
+                        onChanged: (value) {
+                          username = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.person,
                           ),
-                          onPressed: () {
-                            //  Navigator.pushNamed(context, lgin.id);
-                          },
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                          labelText: 'Username',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      //email
+                      TextFormField(
+                        onChanged: (value) {
+                          email = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.email,
+                          ),
+                          labelText: 'Email',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      //mobile
+                      TextFormField(
+                        onChanged: (value) {
+                          mobile = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.phone,
+                          ),
+                          labelText: 'Mobile',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      //address
+                      TextFormField(
+                        onChanged: (value) {
+                          address = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.location_city,
+                          ),
+                          labelText: 'Address',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      //birthday
+                      TextFormField(
+                        onChanged: (value) {
+                          dob = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: IconButton(
+                            onPressed: null,
+                            icon: Icon(Icons.calendar_today),
+                          ),
+                          labelText: 'Date of Birth',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+
+                      //password
+                      TextFormField(
+                        controller: _passwordController,
+                        onChanged: (value) {
+                          pw = value;
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.key,
+                          ),
+                          labelText: 'Password',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      //confirm Password
+                      TextFormField(
+                        controller: _confirmPasswordController,
+                        onChanged: (value) {
+                          pw2 = value;
+                          //_validatePassword(value);
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.key,
+                          ),
+                          labelText: 'Confirm Password',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      //to add social media icons
+
+                      SizedBox(
+                        height: 32.0,
+                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.black)),
+                        onPressed: () {
+                          if (pw == pw2) {
+                            createuser();
+                          } else {
+                            _passwordController.clear();
+                            _confirmPasswordController.clear();
+                            AlertDialog alert = AlertDialog(
+                              title: Text("Error"),
+                              content: Text("Password doesn't match."),
+                              actions: [
+                                TextButton(
+                                  child: Text("OK"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
+                          }
+
+                          //adduser(username, email, mobile, address, dob);
+                        },
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(right: 50),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            ElevatedButton(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(left: 50),
+                            child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.purple.shade200,
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, signup.id);
+                                //  Navigator.pushNamed(context, lgin.id);
                               },
                               child: Text(
-                                'SIGNUP',
+                                'Login',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -226,170 +377,34 @@ class _signupState extends State<signup> {
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 50),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.purple.shade200,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, signup.id);
+                                  },
+                                  child: Text(
+                                    'SIGNUP',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-
-                  ////for the image adding button
-
-                  ////image adding button end
-
-                  //// sign up and login labels
-
-                  ////sign up and login labels end
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  //username
-                  TextFormField(
-                    onChanged: (value) {
-                      username = value;
-                    },
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.person,
-                      ),
-                      labelText: 'Username',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  //email
-                  TextFormField(
-                    onChanged: (value) {
-                      email = value;
-                    },
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.email,
-                      ),
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-//mobile
-                  TextFormField(
-                    onChanged: (value) {
-                      mobile = value;
-                    },
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.phone,
-                      ),
-                      labelText: 'Mobile',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  //address
-                  TextFormField(
-                    onChanged: (value) {
-                      address = value;
-                    },
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.location_city,
-                      ),
-                      labelText: 'Address',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  //birthday
-                  TextFormField(
-                    onChanged: (value) {
-                      dob = value;
-                    },
-                    decoration: InputDecoration(
-                      prefixIcon: IconButton(
-                        onPressed: null,
-                        icon: Icon(Icons.calendar_today),
-                      ),
-                      labelText: 'Date of Birth',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-
-                  //password
-                  TextFormField(
-                    controller: _passwordController,
-                    onChanged: (value) {
-                      pw = value;
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.key,
-                      ),
-                      labelText: 'Password',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  //confirm Password
-                  TextFormField(
-                    controller: _confirmPasswordController,
-                    onChanged: (value) {
-                      pw2 = value;
-                      //_validatePassword(value);
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.key,
-                      ),
-                      labelText: 'Confirm Password',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  //to add social media icons
-
-                  SizedBox(
-                    height: 32.0,
-                  ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.deepPurple)),
-                    onPressed: () {
-                      if (pw == pw2) {
-                        createuser();
-                      } else {
-                        _passwordController.clear();
-                        _confirmPasswordController.clear();
-                        AlertDialog alert = AlertDialog(
-                          title: Text("Error"),
-                          content: Text("Password doesn't match."),
-                          actions: [
-                            TextButton(
-                              child: Text("OK"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return alert;
-                          },
-                        );
-                      }
-
-                      //adduser(username, email, mobile, address, dob);
-                    },
-                    child: Text(
-                      'Sign up',
-                      style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                 ],
               ),
