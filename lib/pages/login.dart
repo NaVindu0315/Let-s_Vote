@@ -9,20 +9,22 @@ void main() {
 }
 
 class lgin extends StatefulWidget {
-  static String id = 'loginscreen';
-
   @override
   State<lgin> createState() => _lginState();
 }
 
 class _lginState extends State<lgin> {
+  ///controller for email and pwd
   TextEditingController emailcontroller = TextEditingController();
-
   TextEditingController pwcontroller = TextEditingController();
 
+  ///controller end
+  ///initialzing
   final _auth = FirebaseAuth.instance;
   late String email;
   late String pw;
+
+  ///initializing end
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,18 +35,13 @@ class _lginState extends State<lgin> {
           child: Column(
             children: <Widget>[
               Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("images/loginbackground.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                decoration: BoxDecoration(),
               ),
               Column(
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 50),
-                    child: Image.asset('images/login.png'),
+                    child: Icon(Icons.ice_skating),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,9 +52,7 @@ class _lginState extends State<lgin> {
                           style: ElevatedButton.styleFrom(
                             primary: Colors.purple.shade200,
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, lgin.id);
-                          },
+                          onPressed: () {},
                           child: Text(
                             'Login',
                             style: TextStyle(
@@ -102,7 +97,7 @@ class _lginState extends State<lgin> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     child: Text(
-                      'Gemifyy', // Add this new Text widget
+                      'Lets Vote Login', // Add this new Text widget
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -182,7 +177,7 @@ class _lginState extends State<lgin> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "New To Gemifyy ? ",
+                          "New To Lets vote ? ",
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -260,39 +255,6 @@ class _lginState extends State<lgin> {
                     ),
                   ),
                   //to add social media icons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: Image(
-                          image: AssetImage('images/f.png'),
-                          height: 60.0,
-                          width: 30.0,
-                        ),
-                      ),
-                      Expanded(
-                        child: Image(
-                          image: AssetImage('images/g.png'),
-                          height: 60.0,
-                          width: 40.0,
-                        ),
-                      ),
-                      Expanded(
-                        child: Image(
-                          image: AssetImage('images/t.png'),
-                          height: 60.0,
-                          width: 30.0,
-                        ),
-                      ),
-                      Expanded(
-                        child: Image(
-                          image: AssetImage('images/m.png'),
-                          height: 60.0,
-                          width: 30.0,
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ],
