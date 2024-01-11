@@ -190,6 +190,31 @@ class _signupState extends State<signup> {
                       child: CameraPreview(controller!),
                     ),
                   ),
+                  Row(
+                    children: [
+                      SizedBox(),
+                      ElevatedButton(
+                          onPressed: () async {
+                            propicurlcontroller.clear();
+                            try {
+                              final image = await controller!.takePicture();
+                              setState(() {
+                                imagePath = image.path;
+                              });
+                              propicupload();
+                            } catch (e) {
+                              print(e);
+                            }
+                          },
+                          child: Text("Capture")),
+                      ElevatedButton(
+                          onPressed: () {
+                            propicurlcontroller.clear();
+                          },
+                          child: Text('Clear'))
+                    ],
+                  ),
+
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
