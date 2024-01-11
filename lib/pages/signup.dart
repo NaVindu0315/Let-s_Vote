@@ -16,6 +16,8 @@ void main() {
   runApp(signup());
 }
 
+List<CameraDescription>? cameras;
+
 class signup extends StatefulWidget {
   static String id = 'signup';
 
@@ -147,6 +149,24 @@ class _signupState extends State<signup> {
         return alert;
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller = CameraController(cameras![1], ResolutionPreset.max);
+    controller?.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 
   @override
