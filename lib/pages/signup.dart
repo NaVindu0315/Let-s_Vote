@@ -384,7 +384,8 @@ class _signupState extends State<signup> {
                             );
                           }
 
-                          //adduser(username, email, mobile, address, dob);
+                          adduser(
+                              username, email, mobile, address, dob, propicurl);
                         },
                         child: Text(
                           'Sign up',
