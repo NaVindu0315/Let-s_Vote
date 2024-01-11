@@ -275,6 +275,20 @@ class _signupState extends State<signup> {
                           border: OutlineInputBorder(),
                         ),
                       ),
+                      //url
+                      TextFormField(
+                        controller: propicurlcontroller,
+                        readOnly: true,
+                        enabled: false,
+                        decoration: InputDecoration(
+                          prefixIcon: IconButton(
+                            onPressed: null,
+                            icon: Icon(Icons.web),
+                          ),
+                          labelText: 'url',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
 
                       //password
                       TextFormField(
