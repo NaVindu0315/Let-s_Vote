@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "976930978751",
-    "project_id": "let-s-vote-fab75",
-    "storage_bucket": "let-s-vote-fab75.appspot.com"
+    "project_number": "79896944647",
+    "firebase_url": "https://lets-vote-2-bff4b-default-rtdb.firebaseio.com",
+    "project_id": "lets-vote-2-bff4b",
+    "storage_bucket": "lets-vote-2-bff4b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:976930978751:android:db8ca3019cdb322c19bf0a",
+        "mobilesdk_app_id": "1:79896944647:android:569f0cb7d9835a69bacaa2",
         "android_client_info": {
           "package_name": "com.navindu.lets_vote"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAJDKdyGWdjqWHcGfE8cEukDyBVzUXPUN8"
+          "current_key": "AIzaSyD_d9SZWOtXK6GlZLd5CsRHBxQZWSGsBts"
         }
       ],
       "services": {
