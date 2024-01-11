@@ -7,6 +7,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+///for camera
+import 'package:camera/camera.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 //void main() => runApp(gemifysign());
 void main() {
   runApp(signup());
@@ -36,6 +40,32 @@ class _signupState extends State<signup> {
 
   ///variales end
   ///
+  /// for the image capturing
+  TextEditingController propicurlcontroller = TextEditingController();
+
+  CameraController? controller;
+  late String imagePath = "";
+  late String propicurl = "";
+
+  /// image cpaturing end
+  /// to capture the image and get the url
+  Future<void> propicupload() async {
+    final ref =
+        storage.ref().child('images/propics/${DateTime.now().toString()}.jpg');
+    final metadata = SettableMetadata(
+        contentType: 'image/jpeg'); // Set content type explicitly
+
+    final uploadTask = ref.putFile(
+        File(imagePath), metadata); // Pass metadata along with the file
+    final snapshot = await uploadTask.whenComplete(() {});
+    final imageUrl = await snapshot.ref.getDownloadURL();
+    propicurl = imageUrl;
+    propicurlcontroller.text = propicurl;
+    print(propicurl);
+  }
+
+  ///capture and retrieving url end
+
   ///function to set data to userfield
   Future<void> adduser(
     String username,
@@ -56,7 +86,7 @@ class _signupState extends State<signup> {
       'dob': dob,
 
       ///meka cut krpn
-      'url': thisurl,
+      'url': propicurl,
     });
   }
 
@@ -75,7 +105,7 @@ class _signupState extends State<signup> {
           dob,
 
           ///meka cut krpn
-          iurl);
+          propicurl);
 
       if (newuser != null) {
         //Navigator.pushNamed(context, lgin.id);
@@ -86,27 +116,6 @@ class _signupState extends State<signup> {
   }
 
   ///creating users end
-
-  File? _image;
-  Image myIcon = Image.asset('assets/ad.png');
-
-  Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      ///meke tyyna hamahuttama kapapan
-      final ref = storage.ref().child('images/${DateTime.now().toString()}');
-      final uploadTask = ref.putFile(File(pickedImage.path));
-      final snapshot = await uploadTask.whenComplete(() {});
-      final imageUrl = await snapshot.ref.getDownloadURL();
-      iurl = imageUrl;
-      _image = File(pickedImage.path);
-
-      setState(() {
-        myIcon = Image.asset('pickedImage');
-      });
-    }
-  }
 
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
@@ -207,33 +216,7 @@ class _signupState extends State<signup> {
                   ),
 
                   ////for the image adding button
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 135.0,
-                      ),
-                      InkWell(
-                        onTap: _pickImage,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.deepPurpleAccent,
-                          radius: 50.0,
-                          backgroundImage:
-                              _image != null ? FileImage(_image!) : null,
-                          child: /*Image(
-                            image: AssetImage('images/ad.png'),
-                          ),*/
-                              _image == null
-                                  ? Image.asset('images/ad.png')
-                                  : Image.file(_image!),
 
-                          /*IconButton(
-                              icon: myIcon,
-                              onPressed: null,
-                            ),*/
-                        ),
-                      )
-                    ],
-                  ),
                   ////image adding button end
 
                   //// sign up and login labels
@@ -344,39 +327,6 @@ class _signupState extends State<signup> {
                     height: 20.0,
                   ),
                   //to add social media icons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: Image(
-                          image: AssetImage('images/f.png'),
-                          height: 60.0,
-                          width: 30.0,
-                        ),
-                      ),
-                      Expanded(
-                        child: Image(
-                          image: AssetImage('images/g.png'),
-                          height: 60.0,
-                          width: 40.0,
-                        ),
-                      ),
-                      Expanded(
-                        child: Image(
-                          image: AssetImage('images/t.png'),
-                          height: 60.0,
-                          width: 30.0,
-                        ),
-                      ),
-                      Expanded(
-                        child: Image(
-                          image: AssetImage('images/m.png'),
-                          height: 60.0,
-                          width: 30.0,
-                        ),
-                      ),
-                    ],
-                  ),
 
                   SizedBox(
                     height: 32.0,
