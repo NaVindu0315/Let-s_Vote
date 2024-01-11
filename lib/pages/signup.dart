@@ -190,6 +190,31 @@ class _signupState extends State<signup> {
                       child: CameraPreview(controller!),
                     ),
                   ),
+                  Row(
+                    children: [
+                      SizedBox(),
+                      ElevatedButton(
+                          onPressed: () async {
+                            propicurlcontroller.clear();
+                            try {
+                              final image = await controller!.takePicture();
+                              setState(() {
+                                imagePath = image.path;
+                              });
+                              propicupload();
+                            } catch (e) {
+                              print(e);
+                            }
+                          },
+                          child: Text("Capture")),
+                      ElevatedButton(
+                          onPressed: () {
+                            propicurlcontroller.clear();
+                          },
+                          child: Text('Clear'))
+                    ],
+                  ),
+
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -275,6 +300,20 @@ class _signupState extends State<signup> {
                           border: OutlineInputBorder(),
                         ),
                       ),
+                      //url
+                      TextFormField(
+                        controller: propicurlcontroller,
+                        readOnly: true,
+                        enabled: false,
+                        decoration: InputDecoration(
+                          prefixIcon: IconButton(
+                            onPressed: null,
+                            icon: Icon(Icons.web),
+                          ),
+                          labelText: 'url',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
 
                       //password
                       TextFormField(
@@ -345,7 +384,8 @@ class _signupState extends State<signup> {
                             );
                           }
 
-                          //adduser(username, email, mobile, address, dob);
+                          adduser(
+                              username, email, mobile, address, dob, propicurl);
                         },
                         child: Text(
                           'Sign up',
