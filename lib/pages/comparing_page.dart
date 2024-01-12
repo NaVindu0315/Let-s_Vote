@@ -1,31 +1,152 @@
 import 'package:flutter/material.dart';
 import 'package:lets_vote/cam.dart';
-import 'package:lets_vote/pages/comparing_page.dart';
+import 'package:lets_vote/pages/Voting_home.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:camera/camera.dart';
+import 'dart:io';
+
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
+import 'package:quickalert/quickalert.dart';
 
 late User loggedinuser;
 late String client;
 
-class DashBoard extends StatefulWidget {
-  const DashBoard({Key? key}) : super(key: key);
+class Compare_page extends StatefulWidget {
+  const Compare_page({Key? key}) : super(key: key);
 
   @override
-  State<DashBoard> createState() => _DashBoardState();
+  State<Compare_page> createState() => _Compare_pageState();
 }
 
-class _DashBoardState extends State<DashBoard> {
+class _Compare_pageState extends State<Compare_page> {
+  TextEditingController url1controller = TextEditingController();
+  TextEditingController capturedimageurlcontroller = TextEditingController();
+  late String url1img;
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   TextEditingController loggedinusercontroller = TextEditingController();
   TextEditingController imageurlcontroller = TextEditingController();
+
+  ///firebase storage
+  final storage = FirebaseStorage.instance;
+  CameraController? controller;
+  late String imagePath = "";
+  late String uploadedimageurl = "";
+
+  ///capturing and storing function
+  Future<void> uploadimage() async {
+    final ref = storage
+        .ref()
+        .child('images/comparingimages/${DateTime.now().toString()}.jpg');
+    final metadata = SettableMetadata(
+        contentType: 'image/jpeg'); // Set content type explicitly
+
+    final uploadTask = ref.putFile(
+        File(imagePath), metadata); // Pass metadata along with the file
+    final snapshot = await uploadTask.whenComplete(() {});
+    final imageUrl = await snapshot.ref.getDownloadURL();
+    uploadedimageurl = imageUrl;
+    capturedimageurlcontroller.text = uploadedimageurl;
+    print(uploadedimageurl);
+  }
+
+  ///capturing and storing function end
+  ///
+  /// function to paste urls and then compare
+  Future<void> comaprewithurl(String imageurl1, String imageurl2) async {
+    try {
+      // Replace with your actual Face++ API keys
+      final apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+      final apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
+
+      final url =
+          Uri.parse('https://api-us.faceplusplus.com/facepp/v3/compare');
+      final request = http.MultipartRequest('POST', url);
+
+      request.fields['api_key'] = apiKey;
+      request.fields['api_secret'] = apiSecret;
+      request.fields['image_url1'] = imageurl1;
+      request.fields['image_url2'] = imageurl2;
+
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        final responseData = await response.stream.bytesToString();
+        //print(responseData);
+        ///trying to get the confidence value extracted
+        try {
+          final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
+          final confidence = responseJson['confidence'] as double;
+          print('Confidence: $confidence');
+          if (confidence > 85.00) {
+            QuickAlert.show(
+                context: context,
+                type: QuickAlertType.success,
+                title: 'Same Person',
+                text: 'Same Person! confidence =  $confidence',
+                autoCloseDuration: const Duration(seconds: 4),
+                showConfirmBtn: false,
+                onConfirmBtnTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => voting_home()),
+                  );
+                });
+          } else {
+            QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Not the same person',
+              text: 'person doesnt match confidence:  $confidence',
+              backgroundColor: Colors.black,
+              titleColor: Colors.white,
+              textColor: Colors.white,
+            );
+          }
+
+          // Store the confidence value in a variable for further use
+          double storedConfidence = confidence;
+
+          // Use the storedConfidence variable as needed in your application
+        } catch (error) {
+          print('Error parsing JSON response: $error');
+        }
+
+        ///end
+        // Handle the successful response data
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        // Handle the error response
+      }
+    } catch (error) {
+      print('Error: $error');
+      // Handle other errors
+    }
+  }
+
+  /// url paste compare end
 
   ///to get the current user
   @override
   void initState() {
     super.initState();
     getcurrentuser();
+    controller = CameraController(cameras![1], ResolutionPreset.max);
+    controller?.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
   }
 
   void getcurrentuser() async {
@@ -44,6 +165,12 @@ class _DashBoardState extends State<DashBoard> {
     } catch (e) {
       print(e);
     }
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 
   @override
@@ -118,10 +245,10 @@ class _DashBoardState extends State<DashBoard> {
                                   color: Colors.indigo, fontSize: 17)),
                           onTap: () {
                             /** Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => gemlist()),
-                            );*/
+                                    context,
+                                    MaterialPageRoute(
+                                    builder: (context) => gemlist()),
+                                    );*/
                           },
                         ),
                         //Announcement
@@ -171,7 +298,7 @@ class _DashBoardState extends State<DashBoard> {
                       bottomRight: Radius.circular(30),
                     ),
                   ),
-                  title: Text('Welcome To Lets Vote'),
+                  title: Text('Validate to Continue'),
 
                   //centerTitle: true,
                 ),
@@ -223,21 +350,92 @@ class _DashBoardState extends State<DashBoard> {
                       Text(client),
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => myapp()),
-                            );
+                            print(data!['url']);
+                            print(client);
+                            print(data!['username']);
                           },
-                          child: Text('Cam page')),
+                          child: Text('Test')),
+
+                      ///adding camer preview
+                      ///camera prview
+                      Container(
+                        width: 200,
+                        height: 200,
+                        child: AspectRatio(
+                          aspectRatio: controller!.value.aspectRatio,
+                          child: CameraPreview(controller!),
+                        ),
+                      ),
+
+                      ///camera preview end
+                      ///uploaded image link
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex:
+                                2, // Set the width of the SizedBox to 300 pixels
+                            child: Card(
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: TextFormField(
+                                controller: capturedimageurlcontroller,
+                                readOnly: true,
+                                enabled: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Image url1',
+                                  labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10.0),
+                                  border: OutlineInputBorder(),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      ///uploaded image link end
+                      ///button
+                      Row(
+                        children: [
+                          TextButton(
+                              onPressed: () async {
+                                capturedimageurlcontroller.clear();
+                                try {
+                                  final image = await controller!.takePicture();
+                                  setState(() {
+                                    imagePath = image.path;
+                                  });
+                                  uploadimage();
+                                } catch (e) {
+                                  print(e);
+                                }
+                              },
+                              child: Text("Capture image 1")),
+                          ElevatedButton(
+                              onPressed: () {
+                                capturedimageurlcontroller.clear();
+                              },
+                              child: Text('Clear'))
+                        ],
+                      ),
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Compare_page()),
-                            );
+                            comaprewithurl(data!['url'], uploadedimageurl);
+                            capturedimageurlcontroller.clear();
                           },
-                          child: Text('Validate page'))
+                          child: Text('Compare and Enter'))
+
+                      ///button end
+
+                      ///camer end
                     ],
                   ),
                 ),
