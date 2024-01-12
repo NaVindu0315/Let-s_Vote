@@ -170,7 +170,7 @@ class _Compare_pageState extends State<Compare_page> {
                       bottomRight: Radius.circular(30),
                     ),
                   ),
-                  title: Text('Welcome To Lets Vote'),
+                  title: Text('Validate to Continue'),
 
                   //centerTitle: true,
                 ),
@@ -220,14 +220,6 @@ class _Compare_pageState extends State<Compare_page> {
                       ),
                       Text('${data!['url']}'),
                       Text(client),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => myapp()),
-                            );
-                          },
-                          child: Text('Cam page'))
                     ],
                   ),
                 ),
