@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -227,7 +228,16 @@ class _DashBoardState extends State<DashBoard> {
                               MaterialPageRoute(builder: (context) => myapp()),
                             );
                           },
-                          child: Text('Cam page'))
+                          child: Text('Cam page')),
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Compare_page()),
+                            );
+                          },
+                          child: Text('Validate page'))
                     ],
                   ),
                 ),
