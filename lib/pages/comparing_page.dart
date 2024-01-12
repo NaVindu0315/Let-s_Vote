@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/pages/Voting_home.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -88,13 +89,18 @@ class _Compare_pageState extends State<Compare_page> {
           print('Confidence: $confidence');
           if (confidence > 85.00) {
             QuickAlert.show(
-              context: context,
-              type: QuickAlertType.success,
-              title: 'Same Person',
-              text: 'Same Person! confidence =  $confidence',
-              autoCloseDuration: const Duration(seconds: 4),
-              showConfirmBtn: false,
-            );
+                context: context,
+                type: QuickAlertType.success,
+                title: 'Same Person',
+                text: 'Same Person! confidence =  $confidence',
+                autoCloseDuration: const Duration(seconds: 4),
+                showConfirmBtn: false,
+                onConfirmBtnTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => voting_home()),
+                  );
+                });
           } else {
             QuickAlert.show(
               context: context,
@@ -421,7 +427,11 @@ class _Compare_pageState extends State<Compare_page> {
                         ],
                       ),
                       ElevatedButton(
-                          onPressed: () {}, child: Text('Compare and Enter'))
+                          onPressed: () {
+                            comaprewithurl(data!['url'], uploadedimageurl);
+                            capturedimageurlcontroller.clear();
+                          },
+                          child: Text('Compare and Enter'))
 
                       ///button end
 
