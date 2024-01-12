@@ -344,8 +344,9 @@ class _signupState extends State<signup> {
                               QuickAlert.show(
                                   context: context,
                                   type: QuickAlertType.success,
-                                  title: 'Same Person',
-                                  text: 'Same Person! ',
+                                  title: 'Signed Up',
+                                  text:
+                                      '$username Your account created Succesfully  ',
                                   onConfirmBtnTap: () {
                                     Navigator.push(
                                       context,
