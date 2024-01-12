@@ -3,17 +3,16 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-//import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 ///for camera
 import 'package:camera/camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
+import 'package:lets_vote/pages/login.dart';
 import '../cam.dart';
+import 'package:quickalert/quickalert.dart';
 
-//void main() => runApp(gemifysign());
 void main() {
   runApp(signup());
 }
@@ -118,38 +117,13 @@ class _signupState extends State<signup> {
   }
 
   ///creating users end
-
+  TextEditingController usernamecontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController mobilecontroller = TextEditingController();
+  TextEditingController adrscontroller = TextEditingController();
+  TextEditingController bdaycontroller = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
-  late String _passwordError;
-
-  void _validatePassword(pw2) {
-    if (pw2 == pw) {
-    } else {
-      showAlertDialog(context);
-    }
-  }
-
-  showAlertDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      title: Text("Error"),
-      content: Text("Password doesn't match."),
-      actions: [
-        TextButton(
-          child: Text("OK"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   @override
   void initState() {
@@ -192,7 +166,9 @@ class _signupState extends State<signup> {
                   ),
                   Row(
                     children: [
-                      SizedBox(),
+                      SizedBox(
+                        width: 80.0,
+                      ),
                       ElevatedButton(
                           onPressed: () async {
                             propicurlcontroller.clear();
@@ -354,69 +330,92 @@ class _signupState extends State<signup> {
                       SizedBox(
                         height: 32.0,
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.black)),
-                        onPressed: () {
-                          if (pw == pw2) {
-                            createuser();
-                          } else {
-                            _passwordController.clear();
-                            _confirmPasswordController.clear();
-                            AlertDialog alert = AlertDialog(
-                              title: Text("Error"),
-                              content: Text("Password doesn't match."),
-                              actions: [
-                                TextButton(
-                                  child: Text("OK"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return alert;
-                              },
-                            );
-                          }
+                      Builder(builder: (context) {
+                        return ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.black)),
+                          onPressed: () {
+                            if (pw == pw2) {
+                              createuser();
+                              /* adduser(username, email, mobile, address, dob,
+                                    propicurl);*/
+                              QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.success,
+                                  title: 'Signed Up',
+                                  text:
+                                      '$username Your account created Succesfully  ',
+                                  onConfirmBtnTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => lgin()),
+                                    );
+                                  });
 
-                          adduser(
-                              username, email, mobile, address, dob, propicurl);
-                        },
-                        child: Text(
-                          'Sign up',
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                              usernamecontroller.clear();
+                              emailcontroller.clear();
+                              mobilecontroller.clear();
+                              adrscontroller.clear();
+                              bdaycontroller.clear();
+                              _passwordController.clear();
+                              _confirmPasswordController.clear();
+                            } else {
+                              _passwordController.clear();
+                              _confirmPasswordController.clear();
+                              //alert
+                              QuickAlert.show(
+                                context: context,
+                                type: QuickAlertType.error,
+                                title: 'Passwords doesnt match',
+                                text: 'Please enter password again ',
+                                backgroundColor: Colors.black,
+                                titleColor: Colors.white,
+                                textColor: Colors.white,
+                                autoCloseDuration: const Duration(seconds: 4),
+                                showConfirmBtn: false,
+                              );
+                            }
+                          },
+                          child: Text(
+                            'Sign up',
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.only(left: 50),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.purple.shade200,
-                              ),
-                              onPressed: () {
-                                //  Navigator.pushNamed(context, lgin.id);
-                              },
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                            child: Builder(builder: (context) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.purple.shade200,
                                 ),
-                              ),
-                            ),
+                                onPressed: () {
+                                  //  Navigator.pushNamed(context, lgin.id);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => lgin()),
+                                  );
+                                },
+                                child: Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              );
+                            }),
                           ),
                           Container(
                             margin: EdgeInsets.only(right: 50),
