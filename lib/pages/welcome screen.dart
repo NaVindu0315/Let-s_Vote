@@ -36,7 +36,7 @@ class _DashBoardState extends State<DashBoard> {
         client = loggedinuser.email!;
 
         ///i have to call the getdatafrm the function here and parse client as a parameter
-
+        loggedinusercontroller.text = loggedinuser.email!;
         print(loggedinuser.email);
       }
     } catch (e) {
@@ -46,6 +46,223 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+        home: SafeArea(
+      child: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(client)
+              .snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (snapshot.hasData) {
+              var data = snapshot.data;
+              return Scaffold(
+                resizeToAvoidBottomInset: false,
+
+                ///navigation bar eka iwrii
+                ///drawer
+                drawer: Drawer(
+                  width: 300,
+                  child: Container(
+                    color: Color(0xDBD6E5FF), //color of list tiles
+                    // Add a ListView to ensures the user can scroll
+                    child: ListView(
+                      // Remove if there are any padding from the ListView.
+                      padding: EdgeInsets.zero,
+                      children: <Widget>[
+                        UserAccountsDrawerHeader(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFD1D3FF), //color of drawer header
+                          ),
+                          accountName: Text(
+                            '${data!['username']}',
+                            style: TextStyle(
+                              color: Colors.indigo,
+                              fontSize: 20,
+                            ),
+                          ),
+                          accountEmail: Text(
+                            client,
+                            style:
+                                TextStyle(color: Colors.indigo, fontSize: 17),
+                          ),
+                          currentAccountPicture: CircleAvatar(
+                            radius: 50,
+                            backgroundImage: NetworkImage('${data!['url']}'),
+                          ),
+                        ),
+
+                        //Home
+                        ListTile(
+                          leading: Icon(Icons.ice_skating),
+                          title: const Text('Home',
+                              style: TextStyle(
+                                  color: Colors.indigo, fontSize: 17)),
+                          onTap: () {
+                            /*
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => dashboard()),
+                            );*/
+                          },
+                        ),
+                        //Inventory
+                        ListTile(
+                          leading: Icon(Icons.ice_skating),
+                          title: const Text('Inventory',
+                              style: TextStyle(
+                                  color: Colors.indigo, fontSize: 17)),
+                          onTap: () {
+                            /** Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => gemlist()),
+                            );*/
+                          },
+                        ),
+                        //Announcement
+                        ListTile(
+                          leading: Icon(Icons.ice_skating),
+                          title: const Text('Announcement',
+                              style: TextStyle(
+                                  color: Colors.indigo, fontSize: 17)),
+                          onTap: () {},
+                        ),
+                        //messages
+                        ListTile(
+                          leading: Icon(Icons.ice_skating),
+                          title: const Text('Messeges',
+                              style: TextStyle(
+                                  color: Colors.indigo, fontSize: 17)),
+                          onTap: () {},
+                        ),
+                        //Profile
+                        ListTile(
+                          leading: Icon(Icons.ice_skating),
+                          title: const Text('Profile',
+                              style: TextStyle(
+                                  color: Colors.indigo, fontSize: 17)),
+                          onTap: () {},
+                        ),
+                        //Dark mode
+                        ListTile(
+                          trailing: Icon(Icons.ice_skating),
+                          title: const Text('        Dark Mode',
+                              style: TextStyle(
+                                  color: Colors.indigo, fontSize: 17)),
+                          onTap: () {},
+                        ),
+                        //Invite friends
+                      ],
+                    ),
+                  ),
+                ),
+
+                ///drawwe end
+                appBar: AppBar(
+                  backgroundColor: Color(0xFFA888EB),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  title: Text('Welcome To Lets Vote'),
+
+                  //centerTitle: true,
+                ),
+                body: SafeArea(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        height: 100, // Set the desired height
+                        decoration: BoxDecoration(
+                          color: Color(0xFFA888EB),
+                          borderRadius: BorderRadius.circular(
+                              50), // Set the desired color
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Welcome, ${data!['username']}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 170.0,
+                            ),
+                            Expanded(
+                              child: CircleAvatar(
+                                backgroundColor: Colors.purple,
+                                minRadius: 70.5,
+                                child: CircleAvatar(
+                                    radius: 70,
+                                    backgroundImage:
+                                        //AssetImage('images/g.png'),
+                                        NetworkImage('${data!['url']}')),
+                              ),
+                              /*
+                              CircleAvatar(
+                                radius: 50.0,
+                                child: Image(
+                                  image: NetworkImage('${data!['url']}'),
+                                ),
+                              ),*/
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Expanded(
+                                  flex:
+                                      2, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      controller: imageurlcontroller,
+                                      readOnly: true,
+                                      enabled: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Image url1',
+                                        labelStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10.0),
+                                        border: OutlineInputBorder(),
+                                        contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 8,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+            return CircularProgressIndicator();
+          }),
+    ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_vote/pages/welcome%20screen.dart';
 
 import '../main.dart';
 import 'signup.dart';
@@ -230,11 +231,11 @@ class _lginState extends State<lgin> {
                                 email: email, password: pw);
 
                             if (user != null) {
-                              /*  Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => dashboard()),
-                              );*/
+                                    builder: (context) => DashBoard()),
+                              );
                             }
                           } catch (e) {
                             print(e);
