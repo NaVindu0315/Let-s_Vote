@@ -28,7 +28,7 @@ class Compare_page extends StatefulWidget {
 
 class _Compare_pageState extends State<Compare_page> {
   TextEditingController url1controller = TextEditingController();
-  TextEditingController uploadedurl1controller = TextEditingController();
+  TextEditingController capturedimageurlcontroller = TextEditingController();
   late String url1img;
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
@@ -39,11 +39,13 @@ class _Compare_pageState extends State<Compare_page> {
   final storage = FirebaseStorage.instance;
   CameraController? controller;
   late String imagePath = "";
-  late String uploadedurl1 = "";
+  late String uploadedimageurl = "";
 
   ///capturing and storing function
-  Future<void> upload1() async {
-    final ref = storage.ref().child('images/${DateTime.now().toString()}.jpg');
+  Future<void> uploadimage() async {
+    final ref = storage
+        .ref()
+        .child('images/comparingimages/${DateTime.now().toString()}.jpg');
     final metadata = SettableMetadata(
         contentType: 'image/jpeg'); // Set content type explicitly
 
@@ -51,9 +53,9 @@ class _Compare_pageState extends State<Compare_page> {
         File(imagePath), metadata); // Pass metadata along with the file
     final snapshot = await uploadTask.whenComplete(() {});
     final imageUrl = await snapshot.ref.getDownloadURL();
-    uploadedurl1 = imageUrl;
-    uploadedurl1controller.text = uploadedurl1;
-    print(uploadedurl1);
+    uploadedimageurl = imageUrl;
+    capturedimageurlcontroller.text = uploadedimageurl;
+    print(uploadedimageurl);
   }
 
   ///capturing and storing function end
@@ -292,6 +294,67 @@ class _Compare_pageState extends State<Compare_page> {
 
                       ///camera preview end
                       ///uploaded image link
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex:
+                                2, // Set the width of the SizedBox to 300 pixels
+                            child: Card(
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: TextFormField(
+                                controller: capturedimageurlcontroller,
+                                readOnly: true,
+                                enabled: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Image url1',
+                                  labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10.0),
+                                  border: OutlineInputBorder(),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      ///uploaded image link end
+                      ///button
+                      Row(
+                        children: [
+                          TextButton(
+                              onPressed: () async {
+                                capturedimageurlcontroller.clear();
+                                try {
+                                  final image = await controller!.takePicture();
+                                  setState(() {
+                                    imagePath = image.path;
+                                  });
+                                  uploadimage();
+                                } catch (e) {
+                                  print(e);
+                                }
+                              },
+                              child: Text("Capture image 1")),
+                          ElevatedButton(
+                              onPressed: () {
+                                capturedimageurlcontroller.clear();
+                              },
+                              child: Text('Clear'))
+                        ],
+                      ),
+                      ElevatedButton(
+                          onPressed: () {}, child: Text('Compare and Enter'))
+
+                      ///button end
 
                       ///camer end
                     ],
