@@ -1,65 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:lets_vote/pages/signup.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+late User loggedinuser;
+late String client;
+
+class DashBoard extends StatefulWidget {
+  const DashBoard({Key? key}) : super(key: key);
+
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  TextEditingController loggedinusercontroller = TextEditingController();
+  TextEditingController imageurlcontroller = TextEditingController();
+
+  ///to get the current user
+  @override
+  void initState() {
+    super.initState();
+    getcurrentuser();
+  }
+
+  void getcurrentuser() async {
+    try {
+      // final user = await _auth.currentUser();
+      ///yata line eka chatgpt code ekk meka gatte uda line eke error ekk ena hinda hrytama scene eka terenne na
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        loggedinuser = user;
+        client = loggedinuser.email!;
+
+        ///i have to call the getdatafrm the function here and parse client as a parameter
+
+        print(loggedinuser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome to MyApp',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Your gateway to a seamless experience.',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                /*Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ()),
-                );*/
-              },
-              child: const Text('Login'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.blue.shade900,
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => signup()),
-                );
-              },
-              child: const Text('Sign Up'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue.shade900,
-                onPrimary: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return const Placeholder();
   }
 }
