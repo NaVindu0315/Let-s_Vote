@@ -220,6 +220,13 @@ class _Compare_pageState extends State<Compare_page> {
                       ),
                       Text('${data!['url']}'),
                       Text(client),
+                      ElevatedButton(
+                          onPressed: () {
+                            print(data!['url']);
+                            print(client);
+                            print(data!['username']);
+                          },
+                          child: Text('Test'))
                     ],
                   ),
                 ),
