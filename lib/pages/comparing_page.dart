@@ -63,6 +63,13 @@ class _Compare_pageState extends State<Compare_page> {
   void initState() {
     super.initState();
     getcurrentuser();
+    controller = CameraController(cameras![1], ResolutionPreset.max);
+    controller?.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
   }
 
   void getcurrentuser() async {
@@ -81,6 +88,12 @@ class _Compare_pageState extends State<Compare_page> {
     } catch (e) {
       print(e);
     }
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 
   @override
@@ -264,7 +277,23 @@ class _Compare_pageState extends State<Compare_page> {
                             print(client);
                             print(data!['username']);
                           },
-                          child: Text('Test'))
+                          child: Text('Test')),
+
+                      ///adding camer preview
+                      ///camera prview
+                      Container(
+                        width: 200,
+                        height: 200,
+                        child: AspectRatio(
+                          aspectRatio: controller!.value.aspectRatio,
+                          child: CameraPreview(controller!),
+                        ),
+                      ),
+
+                      ///camera preview end
+                      ///uploaded image link
+
+                      ///camer end
                     ],
                   ),
                 ),
