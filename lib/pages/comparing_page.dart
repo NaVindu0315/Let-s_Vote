@@ -3,6 +3,18 @@ import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:camera/camera.dart';
+import 'dart:io';
+
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
+import 'package:quickalert/quickalert.dart';
 
 late User loggedinuser;
 late String client;
@@ -15,10 +27,36 @@ class Compare_page extends StatefulWidget {
 }
 
 class _Compare_pageState extends State<Compare_page> {
+  TextEditingController url1controller = TextEditingController();
+  TextEditingController uploadedurl1controller = TextEditingController();
+  late String url1img;
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   TextEditingController loggedinusercontroller = TextEditingController();
   TextEditingController imageurlcontroller = TextEditingController();
+
+  ///firebase storage
+  final storage = FirebaseStorage.instance;
+  CameraController? controller;
+  late String imagePath = "";
+  late String uploadedurl1 = "";
+
+  ///capturing and storing function
+  Future<void> upload1() async {
+    final ref = storage.ref().child('images/${DateTime.now().toString()}.jpg');
+    final metadata = SettableMetadata(
+        contentType: 'image/jpeg'); // Set content type explicitly
+
+    final uploadTask = ref.putFile(
+        File(imagePath), metadata); // Pass metadata along with the file
+    final snapshot = await uploadTask.whenComplete(() {});
+    final imageUrl = await snapshot.ref.getDownloadURL();
+    uploadedurl1 = imageUrl;
+    uploadedurl1controller.text = uploadedurl1;
+    print(uploadedurl1);
+  }
+
+  ///capturing and storing function end
 
   ///to get the current user
   @override
