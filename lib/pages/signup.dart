@@ -3,17 +3,14 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-//import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 ///for camera
 import 'package:camera/camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
 import '../cam.dart';
 
-//void main() => runApp(gemifysign());
 void main() {
   runApp(signup());
 }
@@ -118,7 +115,11 @@ class _signupState extends State<signup> {
   }
 
   ///creating users end
-
+  TextEditingController usernamecontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController mobilecontroller = TextEditingController();
+  TextEditingController adrscontroller = TextEditingController();
+  TextEditingController bdaycontroller = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
   late String _passwordError;
