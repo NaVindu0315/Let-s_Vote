@@ -9,7 +9,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 ///for camera
 import 'package:camera/camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:lets_vote/pages/login.dart';
 import '../cam.dart';
+import 'package:quickalert/quickalert.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 void main() {
   runApp(signup());
@@ -122,35 +125,6 @@ class _signupState extends State<signup> {
   TextEditingController bdaycontroller = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
-  late String _passwordError;
-
-  void _validatePassword(pw2) {
-    if (pw2 == pw) {
-    } else {
-      showAlertDialog(context);
-    }
-  }
-
-  showAlertDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      title: Text("Error"),
-      content: Text("Password doesn't match."),
-      actions: [
-        TextButton(
-          child: Text("OK"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   @override
   void initState() {
@@ -355,48 +329,63 @@ class _signupState extends State<signup> {
                       SizedBox(
                         height: 32.0,
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.black)),
-                        onPressed: () {
-                          if (pw == pw2) {
-                            createuser();
-                          } else {
-                            _passwordController.clear();
-                            _confirmPasswordController.clear();
-                            AlertDialog alert = AlertDialog(
-                              title: Text("Error"),
-                              content: Text("Password doesn't match."),
-                              actions: [
-                                TextButton(
-                                  child: Text("OK"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return alert;
-                              },
-                            );
-                          }
+                      Builder(builder: (context) {
+                        return ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.black)),
+                          onPressed: () {
+                            if (pw == pw2) {
+                              createuser();
+                              /* adduser(username, email, mobile, address, dob,
+                                    propicurl);*/
+                              QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.success,
+                                  title: 'Same Person',
+                                  text: 'Same Person! ',
+                                  onConfirmBtnTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => lgin()),
+                                    );
+                                  });
 
-                          adduser(
-                              username, email, mobile, address, dob, propicurl);
-                        },
-                        child: Text(
-                          'Sign up',
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                              /*usernamecontroller.clear();
+                              emailcontroller.clear();
+                              mobilecontroller.clear();
+                              adrscontroller.clear();
+                              bdaycontroller.clear();
+                              _passwordController.clear();
+                              _confirmPasswordController.clear();*/
+                            } else {
+                              _passwordController.clear();
+                              _confirmPasswordController.clear();
+                              //alert
+                              QuickAlert.show(
+                                context: context,
+                                type: QuickAlertType.error,
+                                title: 'Passwords doesnt match',
+                                text: 'Please enter password again ',
+                                backgroundColor: Colors.black,
+                                titleColor: Colors.white,
+                                textColor: Colors.white,
+                                autoCloseDuration: const Duration(seconds: 4),
+                                showConfirmBtn: false,
+                              );
+                            }
+                          },
+                          child: Text(
+                            'Sign up',
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[

@@ -73,11 +73,11 @@ class _lginState extends State<lgin> {
                                 primary: Colors.purple.shade200,
                               ),
                               onPressed: () {
-                                /*  Navigator.push(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => gemifysign()),
-                                );*/
+                                      builder: (context) => signup()),
+                                );
                               },
                               child: Text(
                                 'SIGNUP',
