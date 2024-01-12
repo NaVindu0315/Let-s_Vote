@@ -50,7 +50,7 @@ class _lginState extends State<lgin> {
                         margin: EdgeInsets.only(left: 50),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.purple.shade200,
+                            primary: Colors.black,
                           ),
                           onPressed: () {},
                           child: Text(
@@ -58,7 +58,7 @@ class _lginState extends State<lgin> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -70,7 +70,7 @@ class _lginState extends State<lgin> {
                           children: <Widget>[
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.purple.shade200,
+                                primary: Colors.black,
                               ),
                               onPressed: () {
                                 Navigator.push(
@@ -84,7 +84,7 @@ class _lginState extends State<lgin> {
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -186,11 +186,10 @@ class _lginState extends State<lgin> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            /*Navigator.push(
+                            Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => gemifysign()),
-                            );*/
+                              MaterialPageRoute(builder: (context) => signup()),
+                            );
                             // Add your sign up button onPressed code here
                           },
                           child: Text(
@@ -246,7 +245,7 @@ class _lginState extends State<lgin> {
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.purpleAccent,
+                          backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
