@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,7 +37,7 @@ class _DashBoardState extends State<DashBoard> {
         client = loggedinuser.email!;
 
         ///i have to call the getdatafrm the function here and parse client as a parameter
-        loggedinusercontroller.text = loggedinuser.email!;
+
         print(loggedinuser.email);
       }
     } catch (e) {
@@ -193,11 +194,10 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                             Expanded(
                               child: Text(
-                                'Welcome, ${data!['username']}',
+                                '${data!['username']}',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.indigo,
                                   fontSize: 20,
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -214,48 +214,20 @@ class _DashBoardState extends State<DashBoard> {
                                         //AssetImage('images/g.png'),
                                         NetworkImage('${data!['url']}')),
                               ),
-                              /*
-                              CircleAvatar(
-                                radius: 50.0,
-                                child: Image(
-                                  image: NetworkImage('${data!['url']}'),
-                                ),
-                              ),*/
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Expanded(
-                                  flex:
-                                      2, // Set the width of the SizedBox to 300 pixels
-                                  child: Card(
-                                    elevation: 10,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: TextFormField(
-                                      controller: imageurlcontroller,
-                                      readOnly: true,
-                                      enabled: false,
-                                      decoration: InputDecoration(
-                                        labelText: 'Image url1',
-                                        labelStyle: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10.0),
-                                        border: OutlineInputBorder(),
-                                        contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 8,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ],
                         ),
                       ),
+                      Text('${data!['url']}'),
+                      Text(client),
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => myapp()),
+                            );
+                          },
+                          child: Text('Cam page'))
                     ],
                   ),
                 ),

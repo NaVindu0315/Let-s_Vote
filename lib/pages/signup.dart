@@ -12,7 +12,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lets_vote/pages/login.dart';
 import '../cam.dart';
 import 'package:quickalert/quickalert.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
 void main() {
   runApp(signup());
@@ -394,22 +393,29 @@ class _signupState extends State<signup> {
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.only(left: 50),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.purple.shade200,
-                              ),
-                              onPressed: () {
-                                //  Navigator.pushNamed(context, lgin.id);
-                              },
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                            child: Builder(builder: (context) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.purple.shade200,
                                 ),
-                              ),
-                            ),
+                                onPressed: () {
+                                  //  Navigator.pushNamed(context, lgin.id);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => lgin()),
+                                  );
+                                },
+                                child: Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              );
+                            }),
                           ),
                           Container(
                             margin: EdgeInsets.only(right: 50),
