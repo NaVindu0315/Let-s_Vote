@@ -167,7 +167,9 @@ class _signupState extends State<signup> {
                   ),
                   Row(
                     children: [
-                      SizedBox(),
+                      SizedBox(
+                        width: 80.0,
+                      ),
                       ElevatedButton(
                           onPressed: () async {
                             propicurlcontroller.clear();
@@ -352,13 +354,13 @@ class _signupState extends State<signup> {
                                     );
                                   });
 
-                              /*usernamecontroller.clear();
+                              usernamecontroller.clear();
                               emailcontroller.clear();
                               mobilecontroller.clear();
                               adrscontroller.clear();
                               bdaycontroller.clear();
                               _passwordController.clear();
-                              _confirmPasswordController.clear();*/
+                              _confirmPasswordController.clear();
                             } else {
                               _passwordController.clear();
                               _confirmPasswordController.clear();
