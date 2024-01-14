@@ -24,3 +24,6 @@ const imageurl2 = 'https://firebasestorage.googleapis.com/v0/b/cam-test-2-78bd3.
 
 //heroku
 https://dashboard.heroku.com/account/billing
+
+//heroku didnt work
+//vercel didnt work
