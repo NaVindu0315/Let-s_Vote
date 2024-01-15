@@ -46,6 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   TextEditingController faceexpressionurlcontroller = TextEditingController();
 
+  TextEditingController textboxcontroller = TextEditingController();
+
   late String url1img;
   late String url2img;
   late String urlexpressionimg;
@@ -527,21 +529,128 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 ///url 2 end
                 ///button row
+                ElevatedButton(
+                    // onPressed: () => comaprewithurl(url1img, url2img),
+                    onPressed: () async {
+                      comaprewithurl(url1img, url2img);
+                      url1controller.clear();
+                      url2controller.clear();
+                    },
+                    child: Text('compare two images')),
+
+                ///button end
+                ///new text field for comparing
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TextButton(
-                        // onPressed: () => comaprewithurl(url1img, url2img),
-                        onPressed: () async {
-                          comaprewithurl(url1img, url2img);
-                          url1controller.clear();
-                          url2controller.clear();
-                        },
-                        child: Text('compare two images'))
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // Set the width of the SizedBox to 300 pixels
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          controller: textboxcontroller,
+                          readOnly: false,
+                          enabled: true,
+                          onChanged: (value) {
+                            urlexpressionimg = value;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'facial expression image',
+                            labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0),
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
 
+                ///text feild end
+                ///button for the field
+                ElevatedButton(
+                    // onPressed: () => comaprewithurl(url1img, url2img),
+                    onPressed: () async {
+                      getfacialdetials(urlexpressionimg);
+                      textboxcontroller.clear();
+                    },
+                    child: Text('compare two images')),
+
                 ///button end
+                ///
+                /// upload and test
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // Set the width of the SizedBox to 300 pixels
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          controller: textboxcontroller,
+                          readOnly: false,
+                          enabled: true,
+                          onChanged: (value) {
+                            urlexpressionimg = value;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'facial expression image',
+                            labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0),
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                ///text feild end
+                ///button for the field
+                Row(
+                  children: [
+                    ElevatedButton(
+                        // onPressed: () => comaprewithurl(url1img, url2img),
+                        onPressed: () async {
+                          getfacialdetials(urlexpressionimg);
+                          textboxcontroller.clear();
+                        },
+                        child: Text('Upload')),
+                    ElevatedButton(
+                        // onPressed: () => comaprewithurl(url1img, url2img),
+                        onPressed: () async {
+                          getfacialdetials(urlexpressionimg);
+                          textboxcontroller.clear();
+                        },
+                        child: Text('clear')),
+                    ElevatedButton(
+                        // onPressed: () => comaprewithurl(url1img, url2img),
+                        onPressed: () async {
+                          getfacialdetials(urlexpressionimg);
+                          textboxcontroller.clear();
+                        },
+                        child: Text('Test')),
+                  ],
+                )
+
+                ///button end
+                /// upload and test end
               ],
             ),
           ),
