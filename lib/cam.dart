@@ -228,7 +228,22 @@ class _MyHomePageState extends State<MyHomePage> {
   /// frebase uploading function end
   ///
   /// function to check the smile of the captured phot
-  Future<dynamic> getfacialdetials(String img1url) async {}
+  Future<dynamic> getfacialdetials(String img1url) async {
+    try {
+      ///apikey and secret
+      final apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+      final apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
+
+      ///
+      final url = Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
+      final request = http.MultipartRequest('POST', url);
+    } catch (error) {
+      print('Error: $error');
+      // Handle other errors
+    }
+    final url = Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
+    final request = http.MultipartRequest('POST', url);
+  }
 
   /// end of smile checking function
   @override
