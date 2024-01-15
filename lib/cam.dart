@@ -223,8 +223,14 @@ class _MyHomePageState extends State<MyHomePage> {
   /// url paste compare end
   ///controller
   ///
+  ///
 
   /// frebase uploading function end
+  ///
+  /// function to check the smile of the captured phot
+  Future<dynamic> getfacialdetials(String img1url) async {}
+
+  /// end of smile checking function
   @override
   void initState() {
     super.initState();
