@@ -325,7 +325,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> expressionimgupload() async {
     final ref = storage
         .ref()
-        .child('images/expressionimg/${DateTime.now().toString()}.jpg');
+        .child('images/faceexpress/${DateTime.now().toString()}.jpg');
     final metadata = SettableMetadata(
         contentType: 'image/jpeg'); // Set content type explicitly
 
@@ -676,15 +676,32 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     ElevatedButton(
                         // onPressed: () => comaprewithurl(url1img, url2img),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          // expressionimgupload();
+                          faceexpressionurlcontroller.clear();
+                          try {
+                            final image = await controller!.takePicture();
+                            setState(() {
+                              imagePath = image.path;
+                            });
+                            expressionimgupload();
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
                         child: Text('Upload')),
                     ElevatedButton(
                         // onPressed: () => comaprewithurl(url1img, url2img),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          faceexpressionurlcontroller.clear();
+                        },
                         child: Text('clear')),
                     ElevatedButton(
                         // onPressed: () => comaprewithurl(url1img, url2img),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          getfacialdetials(uploadedexpressionurl);
+                          faceexpressionurlcontroller.clear();
+                        },
                         child: Text('Test')),
                   ],
                 )
