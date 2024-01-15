@@ -222,36 +222,39 @@ class _lginState extends State<lgin> {
                       height: 50,
                       margin:
                           EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          emailcontroller.clear();
-                          pwcontroller.clear();
-                          try {
-                            final user = await _auth.signInWithEmailAndPassword(
-                                email: email, password: pw);
+                      child: Builder(builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () async {
+                            emailcontroller.clear();
+                            pwcontroller.clear();
+                            try {
+                              final user =
+                                  await _auth.signInWithEmailAndPassword(
+                                      email: email, password: pw);
 
-                            if (user != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DashBoard()),
-                              );
+                              if (user != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DashBoard()),
+                                );
+                              }
+                            } catch (e) {
+                              print(e);
                             }
-                          } catch (e) {
-                            print(e);
-                          }
-                        },
-                        child: Text(
-                          'Log in',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                          },
+                          child: Text(
+                            'Log in',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           ),
-                        ),
-                      ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                        );
+                      }),
                     ),
                   ),
                   //to add social media icons

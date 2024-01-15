@@ -44,8 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   TextEditingController uploadedurl2controller = TextEditingController();
 
+  TextEditingController faceexpressionurlcontroller = TextEditingController();
+
+  TextEditingController textboxcontroller = TextEditingController();
+
   late String url1img;
   late String url2img;
+  late String urlexpressionimg;
 
   ///firebase storage
   final storage = FirebaseStorage.instance;
@@ -53,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late String imagePath = "";
   late String uploadedurl1 = "";
   late String uploadedurl2 = "";
+  late String uploadedexpressionurl = "";
 
   ///firebase upload function begin
   /*
@@ -223,8 +229,116 @@ class _MyHomePageState extends State<MyHomePage> {
   /// url paste compare end
   ///controller
   ///
+  ///
 
   /// frebase uploading function end
+  ///
+  /// function to check the smile of the captured phot
+  Future<dynamic> getfacialdetials(String img1url) async {
+    try {
+      ///apikey and secret
+      final apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+      final apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
+
+      ///
+      final url = Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
+      final request = http.MultipartRequest('POST', url);
+
+      request.fields['api_key'] = apiKey;
+      request.fields['api_secret'] = apiSecret;
+      //  request.fields['return_landmark'] = '0';
+
+      ///first testing gender &age
+      request.fields['return_attributes'] = 'emotion,eyestatus';
+      request.fields['image_url'] = img1url;
+
+      ///sending the request
+      try {
+        final response = await request.send();
+        final responseData =
+            await response.stream.transform(utf8.decoder).join();
+        //print(responseData);
+        ///to get the values for each attritbute seperately
+        final parsedData = jsonDecode(responseData) as Map<String, dynamic>;
+        final faces = parsedData['faces'] as List;
+        if (faces.isNotEmpty) {
+          final firstFace = faces[0];
+          final attributes = firstFace['attributes'] as Map<String, dynamic>;
+
+          // Extract emotion values
+          final anger = attributes['emotion']['anger'] as double;
+          final fear = attributes['emotion']['fear'] as double;
+          final sadness = attributes['emotion']['sadness'] as double;
+
+          // Extract eye status values
+          final leftEyeStatus = attributes['eyestatus']['left_eye_status']
+              as Map<String, dynamic>;
+          final rightEyeStatus = attributes['eyestatus']['right_eye_status']
+              as Map<String, dynamic>;
+          final leftNoGlassEyeOpen =
+              leftEyeStatus['no_glass_eye_open'] as double;
+          final leftNormalGlassEyeOpen =
+              leftEyeStatus['normal_glass_eye_open'] as double;
+          final rightNoGlassEyeOpen =
+              rightEyeStatus['no_glass_eye_open'] as double;
+          final rightNormalGlassEyeOpen =
+              rightEyeStatus['normal_glass_eye_open'] as double;
+
+          // Store the values as needed
+          // Example:
+          /* print('Anger: $anger');
+          print('Fear: $fear');
+          print('Sadness: $sadness');
+          print('Left No Glass Eye Open: $leftNoGlassEyeOpen');
+          print('Left Normal Glass Eye Open: $leftNormalGlassEyeOpen');
+          print('Right No Glass Eye Open: $rightNoGlassEyeOpen');
+          print('Right Normal Glass Eye Open: $rightNormalGlassEyeOpen');*/
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.success,
+            title: 'Details',
+            text: 'Anger: $anger\n'
+                'Fear: $fear\n'
+                'Sadness: $sadness\n'
+                'Left No Glass Eye Open: $leftNoGlassEyeOpen\n'
+                'Left Normal Glass Eye Open: $leftNormalGlassEyeOpen\n'
+                'Right No Glass Eye Open: $rightNoGlassEyeOpen\n'
+                'Right Normal Glass Eye Open: $rightNormalGlassEyeOpen',
+            autoCloseDuration: const Duration(seconds: 8),
+            showConfirmBtn: false,
+          );
+
+          // You can store these values in variables or a data model as required
+        }
+      } catch (error) {
+        print('Error during face detection: $error');
+        return null;
+      }
+    } catch (error) {
+      print('Error: $error');
+      // Handle other errors
+    }
+  }
+
+  /// end of smile checking function
+  /// function to capture the image for facial expression
+  Future<void> expressionimgupload() async {
+    final ref = storage
+        .ref()
+        .child('images/faceexpress/${DateTime.now().toString()}.jpg');
+    final metadata = SettableMetadata(
+        contentType: 'image/jpeg'); // Set content type explicitly
+
+    final uploadTask = ref.putFile(
+        File(imagePath), metadata); // Pass metadata along with the file
+    final snapshot = await uploadTask.whenComplete(() {});
+    final imageUrl = await snapshot.ref.getDownloadURL();
+    uploadedexpressionurl = imageUrl;
+    faceexpressionurlcontroller.text = uploadedexpressionurl;
+    print(uploadedexpressionurl);
+  }
+
+  /// function faceexpression end
   @override
   void initState() {
     super.initState();
@@ -255,7 +369,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
 
                 ///camera prview
@@ -467,21 +581,133 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 ///url 2 end
                 ///button row
+                ElevatedButton(
+                    // onPressed: () => comaprewithurl(url1img, url2img),
+                    onPressed: () async {
+                      comaprewithurl(url1img, url2img);
+                      url1controller.clear();
+                      url2controller.clear();
+                    },
+                    child: Text('compare two images')),
+
+                ///button end
+                ///new text field for comparing
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TextButton(
-                        // onPressed: () => comaprewithurl(url1img, url2img),
-                        onPressed: () async {
-                          comaprewithurl(url1img, url2img);
-                          url1controller.clear();
-                          url2controller.clear();
-                        },
-                        child: Text('compare two images'))
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // Set the width of the SizedBox to 300 pixels
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          controller: textboxcontroller,
+                          readOnly: false,
+                          enabled: true,
+                          onChanged: (value) {
+                            urlexpressionimg = value;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'facial expression image',
+                            labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0),
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
 
+                ///text feild end
+                ///button for the field
+                ElevatedButton(
+                    // onPressed: () => comaprewithurl(url1img, url2img),
+                    onPressed: () async {
+                      getfacialdetials(urlexpressionimg);
+                      textboxcontroller.clear();
+                    },
+                    child: Text('compare two images')),
+
                 ///button end
+                ///
+                /// upload and test
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // Set the width of the SizedBox to 300 pixels
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          controller: faceexpressionurlcontroller,
+                          readOnly: false,
+                          enabled: true,
+                          decoration: InputDecoration(
+                            labelText: 'facial expression uploaded url',
+                            labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0),
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                ///text feild end
+                ///button for the field
+                Row(
+                  children: [
+                    ElevatedButton(
+                        // onPressed: () => comaprewithurl(url1img, url2img),
+                        onPressed: () async {
+                          // expressionimgupload();
+                          faceexpressionurlcontroller.clear();
+                          try {
+                            final image = await controller!.takePicture();
+                            setState(() {
+                              imagePath = image.path;
+                            });
+                            expressionimgupload();
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        child: Text('Upload')),
+                    ElevatedButton(
+                        // onPressed: () => comaprewithurl(url1img, url2img),
+                        onPressed: () async {
+                          faceexpressionurlcontroller.clear();
+                        },
+                        child: Text('clear')),
+                    ElevatedButton(
+                        // onPressed: () => comaprewithurl(url1img, url2img),
+                        onPressed: () async {
+                          getfacialdetials(uploadedexpressionurl);
+                          faceexpressionurlcontroller.clear();
+                        },
+                        child: Text('Test')),
+                  ],
+                )
+
+                ///button end
+                /// upload and test end
               ],
             ),
           ),
