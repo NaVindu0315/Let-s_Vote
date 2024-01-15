@@ -44,8 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   TextEditingController uploadedurl2controller = TextEditingController();
 
+  TextEditingController faceexpressionurlcontroller = TextEditingController();
+
   late String url1img;
   late String url2img;
+  late String urlexpressionimg;
 
   ///firebase storage
   final storage = FirebaseStorage.instance;
@@ -53,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late String imagePath = "";
   late String uploadedurl1 = "";
   late String uploadedurl2 = "";
+  late String uploadedexpressionurl = "";
 
   ///firebase upload function begin
   /*
@@ -263,6 +267,24 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// end of smile checking function
+  /// function to capture the image for facial expression
+  Future<void> expressionimgupload() async {
+    final ref = storage
+        .ref()
+        .child('images/expressionimg/${DateTime.now().toString()}.jpg');
+    final metadata = SettableMetadata(
+        contentType: 'image/jpeg'); // Set content type explicitly
+
+    final uploadTask = ref.putFile(
+        File(imagePath), metadata); // Pass metadata along with the file
+    final snapshot = await uploadTask.whenComplete(() {});
+    final imageUrl = await snapshot.ref.getDownloadURL();
+    uploadedexpressionurl = imageUrl;
+    faceexpressionurlcontroller.text = uploadedexpressionurl;
+    print(uploadedexpressionurl);
+  }
+
+  /// function faceexpression end
   @override
   void initState() {
     super.initState();
