@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:lets_vote/pages/login.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'cam.dart';
 import 'package:path/path.dart';
@@ -16,5 +17,5 @@ Future<void> main() async {
   //for the camera
   cameras = await availableCameras();
   //runApp(myapp());
-  runApp(signup());
+  runApp(lgin());
 }
