@@ -257,7 +257,7 @@ class _MyHomePageState extends State<MyHomePage> {
         final response = await request.send();
         final responseData =
             await response.stream.transform(utf8.decoder).join();
-        return responseData;
+        print(responseData);
       } catch (error) {
         print('Error during face detection: $error');
         return null;
@@ -317,7 +317,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
 
                 ///camera prview
@@ -597,14 +597,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
-                          controller: textboxcontroller,
+                          controller: faceexpressionurlcontroller,
                           readOnly: false,
                           enabled: true,
-                          onChanged: (value) {
-                            urlexpressionimg = value;
-                          },
                           decoration: InputDecoration(
-                            labelText: 'facial expression image',
+                            labelText: 'facial expression uploaded url',
                             labelStyle: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -627,24 +624,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     ElevatedButton(
                         // onPressed: () => comaprewithurl(url1img, url2img),
-                        onPressed: () async {
-                          getfacialdetials(urlexpressionimg);
-                          textboxcontroller.clear();
-                        },
+                        onPressed: () async {},
                         child: Text('Upload')),
                     ElevatedButton(
                         // onPressed: () => comaprewithurl(url1img, url2img),
-                        onPressed: () async {
-                          getfacialdetials(urlexpressionimg);
-                          textboxcontroller.clear();
-                        },
+                        onPressed: () async {},
                         child: Text('clear')),
                     ElevatedButton(
                         // onPressed: () => comaprewithurl(url1img, url2img),
-                        onPressed: () async {
-                          getfacialdetials(urlexpressionimg);
-                          textboxcontroller.clear();
-                        },
+                        onPressed: () async {},
                         child: Text('Test')),
                   ],
                 )
