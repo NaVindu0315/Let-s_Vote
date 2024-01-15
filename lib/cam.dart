@@ -249,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //  request.fields['return_landmark'] = '0';
 
       ///first testing gender &age
-      request.fields['return_attributes'] = 'eyestatus';
+      request.fields['return_attributes'] = 'emotion,eyestatus';
       request.fields['image_url'] = img1url;
 
       ///sending the request
@@ -257,7 +257,45 @@ class _MyHomePageState extends State<MyHomePage> {
         final response = await request.send();
         final responseData =
             await response.stream.transform(utf8.decoder).join();
-        print(responseData);
+        //print(responseData);
+        ///to get the values for each attritbute seperately
+        final parsedData = jsonDecode(responseData) as Map<String, dynamic>;
+        final faces = parsedData['faces'] as List;
+        if (faces.isNotEmpty) {
+          final firstFace = faces[0];
+          final attributes = firstFace['attributes'] as Map<String, dynamic>;
+
+          // Extract emotion values
+          final anger = attributes['emotion']['anger'] as double;
+          final fear = attributes['emotion']['fear'] as double;
+          final sadness = attributes['emotion']['sadness'] as double;
+
+          // Extract eye status values
+          final leftEyeStatus = attributes['eyestatus']['left_eye_status']
+              as Map<String, dynamic>;
+          final rightEyeStatus = attributes['eyestatus']['right_eye_status']
+              as Map<String, dynamic>;
+          final leftNoGlassEyeOpen =
+              leftEyeStatus['no_glass_eye_open'] as double;
+          final leftNormalGlassEyeOpen =
+              leftEyeStatus['normal_glass_eye_open'] as double;
+          final rightNoGlassEyeOpen =
+              rightEyeStatus['no_glass_eye_open'] as double;
+          final rightNormalGlassEyeOpen =
+              rightEyeStatus['normal_glass_eye_open'] as double;
+
+          // Store the values as needed
+          // Example:
+          print('Anger: $anger');
+          print('Fear: $fear');
+          print('Sadness: $sadness');
+          print('Left No Glass Eye Open: $leftNoGlassEyeOpen');
+          print('Left Normal Glass Eye Open: $leftNormalGlassEyeOpen');
+          print('Right No Glass Eye Open: $rightNoGlassEyeOpen');
+          print('Right Normal Glass Eye Open: $rightNormalGlassEyeOpen');
+
+          // You can store these values in variables or a data model as required
+        }
       } catch (error) {
         print('Error during face detection: $error');
         return null;
