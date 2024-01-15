@@ -237,6 +237,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ///
       final url = Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
       final request = http.MultipartRequest('POST', url);
+
+      request.fields['api_key'] = apiKey;
+      request.fields['api_secret'] = apiSecret;
+      request.fields['return_landmark'] = '0';
+
+      ///first testing gender &age
+      request.fields['return_attributes'] = 'gender,age';
     } catch (error) {
       print('Error: $error');
       // Handle other errors
