@@ -286,13 +286,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
           // Store the values as needed
           // Example:
-          print('Anger: $anger');
+          /* print('Anger: $anger');
           print('Fear: $fear');
           print('Sadness: $sadness');
           print('Left No Glass Eye Open: $leftNoGlassEyeOpen');
           print('Left Normal Glass Eye Open: $leftNormalGlassEyeOpen');
           print('Right No Glass Eye Open: $rightNoGlassEyeOpen');
-          print('Right Normal Glass Eye Open: $rightNormalGlassEyeOpen');
+          print('Right Normal Glass Eye Open: $rightNormalGlassEyeOpen');*/
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.success,
+            title: 'Details',
+            text: 'Anger: $anger\n'
+                'Fear: $fear\n'
+                'Sadness: $sadness\n'
+                'Left No Glass Eye Open: $leftNoGlassEyeOpen\n'
+                'Left Normal Glass Eye Open: $leftNormalGlassEyeOpen\n'
+                'Right No Glass Eye Open: $rightNoGlassEyeOpen\n'
+                'Right Normal Glass Eye Open: $rightNormalGlassEyeOpen',
+            autoCloseDuration: const Duration(seconds: 8),
+            showConfirmBtn: false,
+          );
 
           // You can store these values in variables or a data model as required
         }
