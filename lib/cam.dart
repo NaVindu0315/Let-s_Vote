@@ -246,10 +246,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
       request.fields['api_key'] = apiKey;
       request.fields['api_secret'] = apiSecret;
-      request.fields['return_landmark'] = '0';
+      //  request.fields['return_landmark'] = '0';
 
       ///first testing gender &age
-      request.fields['return_attributes'] = 'gender,age';
+      request.fields['return_attributes'] = 'eyestatus';
       request.fields['image_url'] = img1url;
 
       ///sending the request
