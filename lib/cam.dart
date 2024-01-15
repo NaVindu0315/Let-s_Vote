@@ -244,12 +244,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ///first testing gender &age
       request.fields['return_attributes'] = 'gender,age';
+      request.fields['image_url'] = img1url;
+
+      ///sending the request
+      try {
+        final response = await request.send();
+        final responseData =
+            await response.stream.transform(utf8.decoder).join();
+        return responseData;
+      } catch (error) {
+        print('Error during face detection: $error');
+        return null;
+      }
     } catch (error) {
       print('Error: $error');
       // Handle other errors
     }
-    final url = Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
-    final request = http.MultipartRequest('POST', url);
   }
 
   /// end of smile checking function
