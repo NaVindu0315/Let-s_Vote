@@ -743,7 +743,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       getfacialdetials(urlexpressionimg);
                       textboxcontroller.clear();
                     },
-                    child: Text('compare two images')),
+                    child: Text('Get Facial Expressions')),
 
                 ///button end
                 ///
@@ -798,7 +798,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             print(e);
                           }
                         },
-                        child: Text('Upload')),
+                        child: Text('Capture')),
                     ElevatedButton(
                         // onPressed: () => comaprewithurl(url1img, url2img),
                         onPressed: () async {
@@ -811,7 +811,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           getfacialdetials(uploadedexpressionurl);
                           faceexpressionurlcontroller.clear();
                         },
-                        child: Text('Test')),
+                        child: Text('Check')),
                   ],
                 )
 
