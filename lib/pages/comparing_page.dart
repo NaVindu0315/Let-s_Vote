@@ -348,7 +348,7 @@ class _Compare_pageState extends State<Compare_page> {
                           ],
                         ),
                       ),
-                      Text('${data!['url']}'),
+                      /*   Text('${data!['url']}'),
                       Text(client),
                       ElevatedButton(
                           onPressed: () {
@@ -356,7 +356,7 @@ class _Compare_pageState extends State<Compare_page> {
                             print(client);
                             print(data!['username']);
                           },
-                          child: Text('Test')),
+                          child: Text('Test')),*/
 
                       ///adding camer preview
                       ///camera prview
@@ -407,6 +407,9 @@ class _Compare_pageState extends State<Compare_page> {
                       ///button
                       Row(
                         children: [
+                          SizedBox(
+                            width: 90.0,
+                          ),
                           ElevatedButton(
                               onPressed: () async {
                                 capturedimageurlcontroller.clear();
@@ -420,7 +423,7 @@ class _Compare_pageState extends State<Compare_page> {
                                   print(e);
                                 }
                               },
-                              child: Text("Capture image 1")),
+                              child: Text("Capture image ")),
                           ElevatedButton(
                               onPressed: () {
                                 capturedimageurlcontroller.clear();
@@ -434,8 +437,12 @@ class _Compare_pageState extends State<Compare_page> {
                               comaprewithurl(data!['url'], uploadedimageurl);
                               capturedimageurlcontroller.clear();
                             },
-                            child: Text('Compare and Enter'));
-                      })
+                            child: Text('Compare and Enter Face compare only'));
+                      }),
+                      ElevatedButton(
+                          onPressed: () {},
+                          child:
+                              Text('Compare and Enter with Facial Expressions'))
 
                       ///button end
 
