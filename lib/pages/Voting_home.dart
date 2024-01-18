@@ -163,14 +163,17 @@ class _voting_homeState extends State<voting_home> {
 
                 ///drawwe end
                 appBar: AppBar(
-                  backgroundColor: Color(0xFFA888EB),
+                  backgroundColor: Colors.black,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
                       bottomRight: Radius.circular(30),
                     ),
                   ),
-                  title: Text('Welcome To Lets Vote'),
+                  title: Text(
+                    'Voting Home',
+                    style: TextStyle(color: Colors.white),
+                  ),
 
                   //centerTitle: true,
                 ),
@@ -183,7 +186,7 @@ class _voting_homeState extends State<voting_home> {
                       Container(
                         height: 100, // Set the desired height
                         decoration: BoxDecoration(
-                          color: Color(0xFFA888EB),
+                          color: Colors.black12,
                           borderRadius: BorderRadius.circular(
                               50), // Set the desired color
                         ),
@@ -196,7 +199,7 @@ class _voting_homeState extends State<voting_home> {
                               child: Text(
                                 '${data!['username']}',
                                 style: TextStyle(
-                                  color: Colors.indigo,
+                                  color: Colors.black,
                                   fontSize: 20,
                                 ),
                               ),
@@ -206,7 +209,7 @@ class _voting_homeState extends State<voting_home> {
                             ),
                             Expanded(
                               child: CircleAvatar(
-                                backgroundColor: Colors.purple,
+                                backgroundColor: Colors.black,
                                 minRadius: 70.5,
                                 child: CircleAvatar(
                                     radius: 70,
@@ -218,25 +221,6 @@ class _voting_homeState extends State<voting_home> {
                           ],
                         ),
                       ),
-                      Text('${data!['url']}'),
-                      Text(client),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => myapp()),
-                            );
-                          },
-                          child: Text('Cam page')),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Compare_page()),
-                            );
-                          },
-                          child: Text('Validate page'))
                     ],
                   ),
                 ),
