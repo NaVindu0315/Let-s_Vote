@@ -8,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
+import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
 
 List<CameraDescription>? cameras;
@@ -395,19 +396,19 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
 
               //Home
-              ListTile(
-                leading: Icon(Icons.ice_skating),
-                title: const Text('Home',
-                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
-                onTap: () {
-                  /*
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => dashboard()),
-                            );*/
-                },
-              ),
+              Builder(builder: (context) {
+                return ListTile(
+                  leading: Icon(Icons.home),
+                  title: const Text('Home',
+                      style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DashBoard()),
+                    );
+                  },
+                );
+              }),
               //Inventory
               ListTile(
                 leading: Icon(Icons.ice_skating),
