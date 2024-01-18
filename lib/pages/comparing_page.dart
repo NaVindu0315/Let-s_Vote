@@ -405,7 +405,7 @@ class _Compare_pageState extends State<Compare_page> {
                       ///button
                       Row(
                         children: [
-                          TextButton(
+                          ElevatedButton(
                               onPressed: () async {
                                 capturedimageurlcontroller.clear();
                                 try {
@@ -426,12 +426,14 @@ class _Compare_pageState extends State<Compare_page> {
                               child: Text('Clear'))
                         ],
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            comaprewithurl(data!['url'], uploadedimageurl);
-                            capturedimageurlcontroller.clear();
-                          },
-                          child: Text('Compare and Enter'))
+                      Builder(builder: (context) {
+                        return ElevatedButton(
+                            onPressed: () {
+                              comaprewithurl(data!['url'], uploadedimageurl);
+                              capturedimageurlcontroller.clear();
+                            },
+                            child: Text('Compare and Enter'));
+                      })
 
                       ///button end
 

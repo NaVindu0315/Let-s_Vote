@@ -363,6 +363,111 @@ class _MyHomePageState extends State<MyHomePage> {
       return Container();
     }
     return Scaffold(
+      ///drawer
+      drawer: Drawer(
+        width: 300,
+        child: Container(
+          color: Color(0xDBD6E5FF), //color of list tiles
+          // Add a ListView to ensures the user can scroll
+          child: ListView(
+            // Remove if there are any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color(0xFFD1D3FF), //color of drawer header
+                ),
+                accountName: Text(
+                  'hello',
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 20,
+                  ),
+                ),
+                accountEmail: Text(
+                  '',
+                  style: TextStyle(color: Colors.indigo, fontSize: 17),
+                ),
+                currentAccountPicture: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(''),
+                ),
+              ),
+
+              //Home
+              ListTile(
+                leading: Icon(Icons.ice_skating),
+                title: const Text('Home',
+                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                onTap: () {
+                  /*
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => dashboard()),
+                            );*/
+                },
+              ),
+              //Inventory
+              ListTile(
+                leading: Icon(Icons.ice_skating),
+                title: const Text('Inventory',
+                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                onTap: () {
+                  /** Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => gemlist()),
+                      );*/
+                },
+              ),
+              //Announcement
+              ListTile(
+                leading: Icon(Icons.ice_skating),
+                title: const Text('Announcement',
+                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                onTap: () {},
+              ),
+              //messages
+              ListTile(
+                leading: Icon(Icons.ice_skating),
+                title: const Text('Messeges',
+                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                onTap: () {},
+              ),
+              //Profile
+              ListTile(
+                leading: Icon(Icons.ice_skating),
+                title: const Text('Profile',
+                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                onTap: () {},
+              ),
+              //Dark mode
+              ListTile(
+                trailing: Icon(Icons.ice_skating),
+                title: const Text('        Dark Mode',
+                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                onTap: () {},
+              ),
+              //Invite friends
+            ],
+          ),
+        ),
+      ),
+
+      ///drawwe end
+      appBar: AppBar(
+        backgroundColor: Color(0xFFA888EB),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+        ),
+        title: Text('Welcome To Lets Vote'),
+
+        //centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
