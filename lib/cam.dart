@@ -468,7 +468,7 @@ class _MyHomePageState extends State<MyHomePage> {
             bottomRight: Radius.circular(30),
           ),
         ),
-        title: Text('Welcome To Lets Vote'),
+        title: Text('Camera Testing Page'),
 
         //centerTitle: true,
       ),
