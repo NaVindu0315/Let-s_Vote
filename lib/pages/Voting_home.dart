@@ -17,6 +17,34 @@ class voting_home extends StatefulWidget {
 }
 
 class _voting_homeState extends State<voting_home> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+
+  ///to get the current user
+  @override
+  void initState() {
+    super.initState();
+    getcurrentuser();
+  }
+
+  void getcurrentuser() async {
+    try {
+      // final user = await _auth.currentUser();
+      ///yata line eka chatgpt code ekk meka gatte uda line eke error ekk ena hinda hrytama scene eka terenne na
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        loggedinuser = user;
+        client = loggedinuser.email!;
+
+        ///i have to call the getdatafrm the function here and parse client as a parameter
+
+        print(loggedinuser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
