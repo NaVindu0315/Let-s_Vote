@@ -8,6 +8,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
+import 'package:lets_vote/pages/Voting_home.dart';
+import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
 
@@ -409,26 +411,49 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 );
               }),
-              //Inventory
-              ListTile(
-                leading: Icon(Icons.ice_skating),
-                title: const Text('Inventory',
-                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
-                onTap: () {
-                  /** Navigator.push(
+              //Cam page
+              Builder(builder: (context) {
+                return ListTile(
+                  leading: Icon(Icons.camera_alt),
+                  title: const Text('Image Testing Page',
+                      style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(
-                      builder: (context) => gemlist()),
-                      );*/
-                },
-              ),
+                      MaterialPageRoute(builder: (context) => myapp()),
+                    );
+                  },
+                );
+              }),
               //Announcement
-              ListTile(
-                leading: Icon(Icons.ice_skating),
-                title: const Text('Announcement',
-                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
-                onTap: () {},
-              ),
+              Builder(builder: (context) {
+                return ListTile(
+                  leading: Icon(Icons.face),
+                  title: const Text('Face Comparing',
+                      style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Compare_page()),
+                    );
+                  },
+                );
+              }),
+
+              ///voting home
+              Builder(builder: (context) {
+                return ListTile(
+                  leading: Icon(Icons.how_to_vote),
+                  title: const Text('Voting Home',
+                      style: TextStyle(color: Colors.indigo, fontSize: 17)),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => voting_home()),
+                    );
+                  },
+                );
+              }),
             ],
           ),
         ),
