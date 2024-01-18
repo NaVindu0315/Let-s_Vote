@@ -15,6 +15,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
+import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
 
 late User loggedinuser;
@@ -221,69 +222,70 @@ class _Compare_pageState extends State<Compare_page> {
                             backgroundImage: NetworkImage('${data!['url']}'),
                           ),
                         ),
-
-                        //Home
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Home',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {
-                            /*
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => dashboard()),
-                            );*/
-                          },
-                        ),
-                        //Inventory
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Inventory',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {
-                            /** Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                    builder: (context) => gemlist()),
-                                    );*/
-                          },
-                        ),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.home),
+                            title: const Text('Home',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()),
+                              );
+                            },
+                          );
+                        }),
+                        //Cam page
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.camera_alt),
+                            title: const Text('Image Testing Page',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => myapp()),
+                              );
+                            },
+                          );
+                        }),
                         //Announcement
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Announcement',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //messages
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Messeges',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Profile
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Profile',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Dark mode
-                        ListTile(
-                          trailing: Icon(Icons.ice_skating),
-                          title: const Text('        Dark Mode',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Invite friends
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.face),
+                            title: const Text('Face Comparing',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Compare_page()),
+                              );
+                            },
+                          );
+                        }),
+
+                        ///voting home
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.how_to_vote),
+                            title: const Text('Voting Home',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => voting_home()),
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),
