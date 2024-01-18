@@ -327,8 +327,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         'Left Normal Glass Eye Open: $leftNormalGlassEyeOpen\n'
                         'Right No Glass Eye Open: $rightNoGlassEyeOpen\n'
                         'Right Normal Glass Eye Open: $rightNormalGlassEyeOpen',
-                    autoCloseDuration: const Duration(seconds: 4),
-                    showConfirmBtn: false,
+                    // autoCloseDuration: const Duration(seconds: 4),
+                    showConfirmBtn: true,
                     onConfirmBtnTap: () {
                       Navigator.push(
                         context,
