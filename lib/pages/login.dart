@@ -49,19 +49,23 @@ class _lginState extends State<lgin> {
                     children: <Widget>[
                       Container(
                         margin: EdgeInsets.only(left: 50),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
+                        child: Builder(
+                          builder: (context) {
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.black,
+                              ),
+                              onPressed: () {},
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }
                         ),
                       ),
                       Container(
@@ -69,25 +73,29 @@ class _lginState extends State<lgin> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.black,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => signup()),
+                            Builder(
+                              builder: (context) {
+                                return ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.black,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => signup()),
+                                    );
+                                  },
+                                  child: Text(
+                                    'SIGNUP',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 );
-                              },
-                              child: Text(
-                                'SIGNUP',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
+                              }
                             ),
                           ],
                         ),
@@ -185,23 +193,27 @@ class _lginState extends State<lgin> {
                             fontSize: 16.0,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => signup()),
+                        Builder(
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => signup()),
+                                );
+                                // Add your sign up button onPressed code here
+                              },
+                              child: Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                  //decoration: TextDecoration.underline,
+                                ),
+                              ),
                             );
-                            // Add your sign up button onPressed code here
-                          },
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              //decoration: TextDecoration.underline,
-                            ),
-                          ),
+                          }
                         ),
                         Text(
                           " Now ",

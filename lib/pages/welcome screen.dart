@@ -5,6 +5,8 @@ import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'Voting_home.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -96,67 +98,70 @@ class _DashBoardState extends State<DashBoard> {
                         ),
 
                         //Home
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Home',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {
-                            /*
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => dashboard()),
-                            );*/
-                          },
-                        ),
-                        //Inventory
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Inventory',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {
-                            /** Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => gemlist()),
-                            );*/
-                          },
-                        ),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.home),
+                            title: const Text('Home',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              /*   Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()),
+                              );*/
+                            },
+                          );
+                        }),
+                        //Cam page
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.camera_alt),
+                            title: const Text('Image Testing Page',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => myapp()),
+                              );
+                            },
+                          );
+                        }),
                         //Announcement
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Announcement',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //messages
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Messeges',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Profile
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Profile',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Dark mode
-                        ListTile(
-                          trailing: Icon(Icons.ice_skating),
-                          title: const Text('        Dark Mode',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Invite friends
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.face),
+                            title: const Text('Face Comparing',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Compare_page()),
+                              );
+                            },
+                          );
+                        }),
+
+                        ///voting home
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.how_to_vote),
+                            title: const Text('Voting Home',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => voting_home()),
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),

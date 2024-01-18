@@ -15,6 +15,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
+import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
 
 late User loggedinuser;
@@ -93,8 +94,8 @@ class _Compare_pageState extends State<Compare_page> {
                 type: QuickAlertType.success,
                 title: 'Same Person',
                 text: 'Same Person! confidence =  $confidence',
-                autoCloseDuration: const Duration(seconds: 4),
-                showConfirmBtn: false,
+                //autoCloseDuration: const Duration(seconds: 4),
+                showConfirmBtn: true,
                 onConfirmBtnTap: () {
                   Navigator.push(
                     context,
@@ -134,6 +135,146 @@ class _Compare_pageState extends State<Compare_page> {
   }
 
   /// url paste compare end
+  /// new function to get face comparing and expression
+  Future<dynamic> compareandexpression(
+      String imageurl1, String imageurl2) async {
+    try {
+      // Replace with your actual Face++ API keys
+      final apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
+      final apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
+
+      final url =
+          Uri.parse('https://api-us.faceplusplus.com/facepp/v3/compare');
+      final request = http.MultipartRequest('POST', url);
+
+      request.fields['api_key'] = apiKey;
+      request.fields['api_secret'] = apiSecret;
+      request.fields['image_url1'] = imageurl1;
+      request.fields['image_url2'] = imageurl2;
+
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        final responseData = await response.stream.bytesToString();
+        //print(responseData);
+        ///trying to get the confidence value extracted
+        try {
+          final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
+          final confidence = responseJson['confidence'] as double;
+          print('Confidence: $confidence');
+          if (confidence > 85.00) {
+            final url2 =
+                Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
+            final request2 = http.MultipartRequest('POST', url2);
+            request2.fields['api_key'] = apiKey;
+            request2.fields['api_secret'] = apiSecret;
+            //  request.fields['return_landmark'] = '0';
+
+            ///first testing gender &age
+            request2.fields['return_attributes'] = 'emotion,eyestatus';
+            request2.fields['image_url'] = imageurl2;
+            try {
+              final response2 = await request2.send();
+              final responseData2 =
+                  await response2.stream.transform(utf8.decoder).join();
+              //print(responseData);
+              ///to get the values for each attritbute seperately
+              final parsedData =
+                  jsonDecode(responseData2) as Map<String, dynamic>;
+              final faces = parsedData['faces'] as List;
+              if (faces.isNotEmpty) {
+                final firstFace = faces[0];
+                final attributes =
+                    firstFace['attributes'] as Map<String, dynamic>;
+
+                // Extract emotion values
+                final anger = attributes['emotion']['anger'] as double;
+                final fear = attributes['emotion']['fear'] as double;
+                final sadness = attributes['emotion']['sadness'] as double;
+
+                // Extract eye status values
+                final leftEyeStatus = attributes['eyestatus']['left_eye_status']
+                    as Map<String, dynamic>;
+                final rightEyeStatus = attributes['eyestatus']
+                    ['right_eye_status'] as Map<String, dynamic>;
+                final leftNoGlassEyeOpen =
+                    leftEyeStatus['no_glass_eye_open'] as double;
+                final leftNormalGlassEyeOpen =
+                    leftEyeStatus['normal_glass_eye_open'] as double;
+                final rightNoGlassEyeOpen =
+                    rightEyeStatus['no_glass_eye_open'] as double;
+                final rightNormalGlassEyeOpen =
+                    rightEyeStatus['normal_glass_eye_open'] as double;
+                // Store the values as needed
+                // Example:
+                /* print('Anger: $anger');
+          print('Fear: $fear');
+          print('Sadness: $sadness');
+          print('Left No Glass Eye Open: $leftNoGlassEyeOpen');
+          print('Left Normal Glass Eye Open: $leftNormalGlassEyeOpen');
+          print('Right No Glass Eye Open: $rightNoGlassEyeOpen');
+          print('Right Normal Glass Eye Open: $rightNormalGlassEyeOpen');*/
+                QuickAlert.show(
+                    context: context,
+                    type: QuickAlertType.success,
+                    title: 'Success',
+                    text: 'Anger: $anger\n'
+                        'Fear: $fear\n'
+                        'Sadness: $sadness\n'
+                        'Left No Glass Eye Open: $leftNoGlassEyeOpen\n'
+                        'Left Normal Glass Eye Open: $leftNormalGlassEyeOpen\n'
+                        'Right No Glass Eye Open: $rightNoGlassEyeOpen\n'
+                        'Right Normal Glass Eye Open: $rightNormalGlassEyeOpen',
+                    // autoCloseDuration: const Duration(seconds: 4),
+                    showConfirmBtn: true,
+                    onConfirmBtnTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => voting_home()),
+                      );
+                    });
+
+                // You can store these values in variables or a data model as required
+              }
+            } catch (error) {
+              print('Error during face detection: $error');
+              return null;
+            }
+
+            ///end
+          } else {
+            QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Not the same person',
+              text: 'person doesnt match confidence:  $confidence',
+              backgroundColor: Colors.black,
+              titleColor: Colors.white,
+              textColor: Colors.white,
+            );
+          }
+
+          // Store the confidence value in a variable for further use
+          double storedConfidence = confidence;
+
+          // Use the storedConfidence variable as needed in your application
+        } catch (error) {
+          print('Error parsing JSON response: $error');
+        }
+
+        ///end
+        // Handle the successful response data
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        // Handle the error response
+      }
+    } catch (error) {
+      print('Error: $error');
+      // Handle other errors
+    }
+  }
+
+  /// end
 
   ///to get the current user
   @override
@@ -221,69 +362,70 @@ class _Compare_pageState extends State<Compare_page> {
                             backgroundImage: NetworkImage('${data!['url']}'),
                           ),
                         ),
-
-                        //Home
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Home',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {
-                            /*
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => dashboard()),
-                            );*/
-                          },
-                        ),
-                        //Inventory
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Inventory',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {
-                            /** Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                    builder: (context) => gemlist()),
-                                    );*/
-                          },
-                        ),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.home),
+                            title: const Text('Home',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()),
+                              );
+                            },
+                          );
+                        }),
+                        //Cam page
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.camera_alt),
+                            title: const Text('Image Testing Page',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => myapp()),
+                              );
+                            },
+                          );
+                        }),
                         //Announcement
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Announcement',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //messages
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Messeges',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Profile
-                        ListTile(
-                          leading: Icon(Icons.ice_skating),
-                          title: const Text('Profile',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Dark mode
-                        ListTile(
-                          trailing: Icon(Icons.ice_skating),
-                          title: const Text('        Dark Mode',
-                              style: TextStyle(
-                                  color: Colors.indigo, fontSize: 17)),
-                          onTap: () {},
-                        ),
-                        //Invite friends
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.face),
+                            title: const Text('Face Comparing',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Compare_page()),
+                              );
+                            },
+                          );
+                        }),
+
+                        ///voting home
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.how_to_vote),
+                            title: const Text('Voting Home',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => voting_home()),
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -346,7 +488,7 @@ class _Compare_pageState extends State<Compare_page> {
                           ],
                         ),
                       ),
-                      Text('${data!['url']}'),
+                      /*   Text('${data!['url']}'),
                       Text(client),
                       ElevatedButton(
                           onPressed: () {
@@ -354,7 +496,7 @@ class _Compare_pageState extends State<Compare_page> {
                             print(client);
                             print(data!['username']);
                           },
-                          child: Text('Test')),
+                          child: Text('Test')),*/
 
                       ///adding camer preview
                       ///camera prview
@@ -405,7 +547,10 @@ class _Compare_pageState extends State<Compare_page> {
                       ///button
                       Row(
                         children: [
-                          TextButton(
+                          SizedBox(
+                            width: 90.0,
+                          ),
+                          ElevatedButton(
                               onPressed: () async {
                                 capturedimageurlcontroller.clear();
                                 try {
@@ -418,7 +563,7 @@ class _Compare_pageState extends State<Compare_page> {
                                   print(e);
                                 }
                               },
-                              child: Text("Capture image 1")),
+                              child: Text("Capture image ")),
                           ElevatedButton(
                               onPressed: () {
                                 capturedimageurlcontroller.clear();
@@ -426,12 +571,22 @@ class _Compare_pageState extends State<Compare_page> {
                               child: Text('Clear'))
                         ],
                       ),
+                      Builder(builder: (context) {
+                        return ElevatedButton(
+                            onPressed: () async {
+                              comaprewithurl(data!['url'], uploadedimageurl);
+                              capturedimageurlcontroller.clear();
+                            },
+                            child: Text('Compare and Enter Face compare only'));
+                      }),
                       ElevatedButton(
-                          onPressed: () {
-                            comaprewithurl(data!['url'], uploadedimageurl);
+                          onPressed: () async {
+                            compareandexpression(
+                                data!['url'], uploadedimageurl);
                             capturedimageurlcontroller.clear();
                           },
-                          child: Text('Compare and Enter'))
+                          child:
+                              Text('Compare and Enter with Facial Expressions'))
 
                       ///button end
 
