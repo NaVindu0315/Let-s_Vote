@@ -5,6 +5,8 @@ import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'Voting_home.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -96,7 +98,70 @@ class _DashBoardState extends State<DashBoard> {
                         ),
 
                         //Home
-                        //Invite friends
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.home),
+                            title: const Text('Home',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              /*   Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()),
+                              );*/
+                            },
+                          );
+                        }),
+                        //Cam page
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.camera_alt),
+                            title: const Text('Image Testing Page',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => myapp()),
+                              );
+                            },
+                          );
+                        }),
+                        //Announcement
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.face),
+                            title: const Text('Face Comparing',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Compare_page()),
+                              );
+                            },
+                          );
+                        }),
+
+                        ///voting home
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(Icons.how_to_vote),
+                            title: const Text('Voting Home',
+                                style: TextStyle(
+                                    color: Colors.indigo, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => voting_home()),
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),
