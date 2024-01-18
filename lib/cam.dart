@@ -428,28 +428,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(color: Colors.indigo, fontSize: 17)),
                 onTap: () {},
               ),
-              //messages
-              ListTile(
-                leading: Icon(Icons.ice_skating),
-                title: const Text('Messeges',
-                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
-                onTap: () {},
-              ),
-              //Profile
-              ListTile(
-                leading: Icon(Icons.ice_skating),
-                title: const Text('Profile',
-                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
-                onTap: () {},
-              ),
-              //Dark mode
-              ListTile(
-                trailing: Icon(Icons.ice_skating),
-                title: const Text('        Dark Mode',
-                    style: TextStyle(color: Colors.indigo, fontSize: 17)),
-                onTap: () {},
-              ),
-              //Invite friends
             ],
           ),
         ),
