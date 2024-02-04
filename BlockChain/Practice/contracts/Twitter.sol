@@ -1,8 +1,10 @@
 //SPDX-License-Identifier: MIT
 //tp dp :
-//pragma solidity ^0.8.22;
+pragma solidity ^0.8.22;
 
 contract Twitter {
+
+    uint16 constant MAX_TWEET_Length = 280;
 
     ///struct for the tweets
     struct Tweet{
@@ -21,7 +23,9 @@ contract Twitter {
 
     
         function createTweet(string memory _tweet) public {
-
+                ///  condintional 
+                /// legth <=280
+                require(bytes(_tweet).length<=MAX_TWEET_Length,"Tweet is too Long");
 
             Tweet memory newTweet = Tweet({
                 author : msg.sender,
@@ -39,8 +43,8 @@ contract Twitter {
         //uint i added in get tweet function
 
     //to get the specific tweet
-        function getTweet(address _owner,uint _i) public view returns (Tweet memory){
-            return tweets[_owner][_i];
+        function getTweet(uint _i) public view returns (Tweet memory){
+            return tweets[msg.sender][_i];
 
         }
         
@@ -53,3 +57,4 @@ contract Twitter {
 
 
 }
+
