@@ -89,7 +89,7 @@ class _lginState extends State<lgin> {
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                    color: AppColors.buttontextcolor,
                                   ),
                                 ),
                               );
