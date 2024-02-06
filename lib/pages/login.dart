@@ -53,7 +53,7 @@ class _lginState extends State<lgin> {
                         child: Builder(builder: (context) {
                           return ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
+                              primary: AppColors.buttoncolor,
                             ),
                             onPressed: () {},
                             child: Text(
@@ -61,7 +61,7 @@ class _lginState extends State<lgin> {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: AppColors.buttontextcolor,
                               ),
                             ),
                           );
