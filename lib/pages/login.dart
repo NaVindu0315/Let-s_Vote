@@ -4,6 +4,7 @@ import 'package:lets_vote/pages/welcome%20screen.dart';
 import '../main.dart';
 import 'signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lets_vote/Colors/colors.dart';
 
 void main() {
   runApp(lgin());
@@ -30,7 +31,7 @@ class _lginState extends State<lgin> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.purple.shade100,
+        backgroundColor: AppColors.backgroundcolor,
         body: SingleChildScrollView(
           reverse: true,
           child: Column(
@@ -49,54 +50,50 @@ class _lginState extends State<lgin> {
                     children: <Widget>[
                       Container(
                         margin: EdgeInsets.only(left: 50),
-                        child: Builder(
-                          builder: (context) {
-                            return ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.black,
+                        child: Builder(builder: (context) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
-                              onPressed: () {},
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            );
-                          }
-                        ),
+                            ),
+                          );
+                        }),
                       ),
                       Container(
                         margin: EdgeInsets.only(right: 50),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            Builder(
-                              builder: (context) {
-                                return ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
+                            Builder(builder: (context) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.black,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => signup()),
+                                  );
+                                },
+                                child: Text(
+                                  'SIGNUP',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => signup()),
-                                    );
-                                  },
-                                  child: Text(
-                                    'SIGNUP',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                );
-                              }
-                            ),
+                                ),
+                              );
+                            }),
                           ],
                         ),
                       ),
@@ -193,28 +190,27 @@ class _lginState extends State<lgin> {
                             fontSize: 16.0,
                           ),
                         ),
-                        Builder(
-                          builder: (context) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => signup()),
-                                );
-                                // Add your sign up button onPressed code here
-                              },
-                              child: Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  //decoration: TextDecoration.underline,
-                                ),
+                        Builder(builder: (context) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => signup()),
+                              );
+                              // Add your sign up button onPressed code here
+                            },
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                //decoration: TextDecoration.underline,
                               ),
-                            );
-                          }
-                        ),
+                            ),
+                          );
+                        }),
                         Text(
                           " Now ",
                           style: TextStyle(
