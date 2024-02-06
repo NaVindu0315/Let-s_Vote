@@ -4,6 +4,7 @@ import 'package:lets_vote/pages/welcome%20screen.dart';
 import '../main.dart';
 import 'signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lets_vote/Colors/colors.dart';
 
 void main() {
   runApp(lgin());
@@ -30,7 +31,7 @@ class _lginState extends State<lgin> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.purple.shade100,
+        backgroundColor: AppColors.backgroundcolor,
         body: SingleChildScrollView(
           reverse: true,
           child: Column(
@@ -49,54 +50,50 @@ class _lginState extends State<lgin> {
                     children: <Widget>[
                       Container(
                         margin: EdgeInsets.only(left: 50),
-                        child: Builder(
-                          builder: (context) {
-                            return ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.black,
+                        child: Builder(builder: (context) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: AppColors.buttoncolor,
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.buttontextcolor,
                               ),
-                              onPressed: () {},
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            );
-                          }
-                        ),
+                            ),
+                          );
+                        }),
                       ),
                       Container(
                         margin: EdgeInsets.only(right: 50),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            Builder(
-                              builder: (context) {
-                                return ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
+                            Builder(builder: (context) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: AppColors.buttoncolor,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => signup()),
+                                  );
+                                },
+                                child: Text(
+                                  'SIGNUP',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.buttontextcolor,
                                   ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => signup()),
-                                    );
-                                  },
-                                  child: Text(
-                                    'SIGNUP',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                );
-                              }
-                            ),
+                                ),
+                              );
+                            }),
                           ],
                         ),
                       ),
@@ -110,7 +107,7 @@ class _lginState extends State<lgin> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF3F3D56),
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -121,7 +118,7 @@ class _lginState extends State<lgin> {
                       'Sign in to your account',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Color(0xFF3F3D56),
+                        color: Colors.white54,
                       ),
                     ),
                   ),
@@ -179,7 +176,7 @@ class _lginState extends State<lgin> {
                     padding:
                         EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                     decoration: BoxDecoration(
-                      color: Colors.purple.shade100,
+                      color: AppColors.backgroundcolor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Row(
@@ -188,37 +185,36 @@ class _lginState extends State<lgin> {
                         Text(
                           "New To Lets vote ? ",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
                           ),
                         ),
-                        Builder(
-                          builder: (context) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => signup()),
-                                );
-                                // Add your sign up button onPressed code here
-                              },
-                              child: Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  //decoration: TextDecoration.underline,
-                                ),
+                        Builder(builder: (context) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => signup()),
+                              );
+                              // Add your sign up button onPressed code here
+                            },
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                color: AppColors.buttoncolor,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                //decoration: TextDecoration.underline,
                               ),
-                            );
-                          }
-                        ),
+                            ),
+                          );
+                        }),
                         Text(
                           " Now ",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
                           ),
