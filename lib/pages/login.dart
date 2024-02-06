@@ -107,7 +107,7 @@ class _lginState extends State<lgin> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF3F3D56),
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -176,7 +176,7 @@ class _lginState extends State<lgin> {
                     padding:
                         EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                     decoration: BoxDecoration(
-                      color: Colors.purple.shade100,
+                      color: AppColors.backgroundcolor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Row(
