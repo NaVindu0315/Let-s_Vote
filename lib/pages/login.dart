@@ -118,7 +118,7 @@ class _lginState extends State<lgin> {
                       'Sign in to your account',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Color(0xFF3F3D56),
+                        color: Colors.white54,
                       ),
                     ),
                   ),
@@ -185,7 +185,7 @@ class _lginState extends State<lgin> {
                         Text(
                           "New To Lets vote ? ",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
                           ),
@@ -203,7 +203,7 @@ class _lginState extends State<lgin> {
                             child: Text(
                               'Sign Up',
                               style: TextStyle(
-                                color: Colors.blue,
+                                color: AppColors.buttoncolor,
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
                                 //decoration: TextDecoration.underline,
@@ -214,7 +214,7 @@ class _lginState extends State<lgin> {
                         Text(
                           " Now ",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
                           ),
