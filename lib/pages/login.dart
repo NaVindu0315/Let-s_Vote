@@ -75,7 +75,7 @@ class _lginState extends State<lgin> {
                             Builder(builder: (context) {
                               return ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Colors.black,
+                                  primary: AppColors.buttoncolor,
                                 ),
                                 onPressed: () {
                                   Navigator.push(
