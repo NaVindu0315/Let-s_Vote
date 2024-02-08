@@ -12,6 +12,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lets_vote/pages/login.dart';
 import '../cam.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:lets_vote/Colors/colors.dart';
 
 void main() {
   runApp(signup());
@@ -147,7 +148,7 @@ class _signupState extends State<signup> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.purple.shade100,
+        backgroundColor: AppColors.backgroundcolor,
         body: SingleChildScrollView(
           reverse: true,
           child: SafeArea(
@@ -157,18 +158,19 @@ class _signupState extends State<signup> {
                 children: [
                   ///camera prview
                   Container(
-                    width: 100,
-                    height: 150,
+                    width: 90,
+                    height: 140,
                     child: AspectRatio(
                       aspectRatio: controller!.value.aspectRatio,
                       child: CameraPreview(controller!),
                     ),
                   ),
+                  SizedBox(
+                    height: 7.0,
+                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        width: 80.0,
-                      ),
                       ElevatedButton(
                           onPressed: () async {
                             propicurlcontroller.clear();
@@ -182,12 +184,31 @@ class _signupState extends State<signup> {
                               print(e);
                             }
                           },
-                          child: Text("Capture")),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                          ),
+                          child: Text(
+                            "Capture",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          )),
+                      SizedBox(
+                        width: 10.0,
+                      ),
                       ElevatedButton(
                           onPressed: () {
                             propicurlcontroller.clear();
                           },
-                          child: Text('Clear'))
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                          ),
+                          child: Text(
+                            'Clear',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ))
                     ],
                   ),
 
@@ -195,9 +216,7 @@ class _signupState extends State<signup> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      //
 
                       ////for the image adding button
 
@@ -208,7 +227,7 @@ class _signupState extends State<signup> {
                       ////sign up and login labels end
 
                       SizedBox(
-                        height: 15.0,
+                        height: 11.0,
                       ),
                       //username
                       TextFormField(
@@ -218,11 +237,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.person,
+                            color:
+                                Colors.white, // Set prefix icon color to white
                           ),
                           labelText: 'Username',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintText: 'Enter your username',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // Set hint text color to white with opacity for better visibility
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width for better feedback
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // Set typed text color to white
                       ),
+
                       //email
                       TextFormField(
                         onChanged: (value) {
@@ -231,11 +273,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.email,
+                            color:
+                                Colors.white, // set prefix icon color to white
                           ),
                           labelText: 'Email',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // set label text color to white
+                          hintText: 'Enter your email',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // set hint text color to white with opacity
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // set focused border color and width
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // set typed text color to white
                       ),
+
                       //mobile
                       TextFormField(
                         onChanged: (value) {
@@ -244,11 +309,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.phone,
+                            color:
+                                Colors.white, // Set prefix icon color to white
                           ),
                           labelText: 'Mobile',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintText: 'Enter your mobile number',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // Set hint text color to white with opacity
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // Set typed text color to white
                       ),
+
                       //address
                       TextFormField(
                         onChanged: (value) {
@@ -257,12 +345,36 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.location_city,
+                            color:
+                                Colors.white, // Set prefix icon color to white
                           ),
                           labelText: 'Address',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintText: 'Enter your address',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // Set hint text color with opacity
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // Set typed text color to white
                       ),
+
                       //birthday
+
                       TextFormField(
                         onChanged: (value) {
                           dob = value;
@@ -270,12 +382,37 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: IconButton(
                             onPressed: null,
-                            icon: Icon(Icons.calendar_today),
+                            icon: Icon(
+                              Icons.calendar_today,
+                              color: Colors
+                                  .white, // Set prefix icon color to white
+                            ),
                           ),
                           labelText: 'Date of Birth',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintText: 'Select your date of birth',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // Set hint text color with opacity
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // Set typed text color to white
                       ),
+
                       //url
                       TextFormField(
                         controller: propicurlcontroller,
@@ -284,11 +421,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: IconButton(
                             onPressed: null,
-                            icon: Icon(Icons.web),
+                            icon: Icon(
+                              Icons.web,
+                              color: Colors
+                                  .white, // Set prefix icon color to white
+                            ),
                           ),
                           labelText: 'url',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintStyle: const TextStyle(
+                              color:
+                                  Colors.white), // Remove hint since read-only
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width (not applicable)
+                          ),
                         ),
+                        style: const TextStyle(
+                            color: Colors
+                                .white), // Set typed text color to white (not applicable)
                       ),
 
                       //password
@@ -301,11 +461,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.key,
+                            color:
+                                Colors.white, // Set prefix icon color to white
                           ),
                           labelText: 'Password',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintText: 'Enter your password',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // Set hint text color with opacity
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // Set typed text color to white
                       ),
+
                       //confirm Password
                       TextFormField(
                         controller: _confirmPasswordController,
@@ -317,19 +500,42 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.key,
+                            color:
+                                Colors.white, // Set prefix icon color to white
                           ),
                           labelText: 'Confirm Password',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintText: 'Confirm your password',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // Set hint text color with opacity
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // Set typed text color to white
                       ),
-                      SizedBox(
+
+                      /*  SizedBox(
                         height: 20.0,
-                      ),
+                      ),*/
                       //to add social media icons
 
-                      SizedBox(
+                      /* SizedBox(
                         height: 32.0,
-                      ),
+                      )*/
                       Builder(builder: (context) {
                         return ElevatedButton(
                           style: ButtonStyle(
@@ -388,60 +594,47 @@ class _signupState extends State<signup> {
                           ),
                         );
                       }),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(left: 50),
-                            child: Builder(builder: (context) {
-                              return ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.purple.shade200,
-                                ),
-                                onPressed: () {
-                                  //  Navigator.pushNamed(context, lgin.id);
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 32.0),
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundcolor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Already Signed up ? ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            Builder(builder: (context) {
+                              return GestureDetector(
+                                onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => lgin()),
                                   );
+                                  // Add your sign up button onPressed code here
                                 },
                                 child: Text(
                                   'Login',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    color: AppColors.buttoncolor,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                    //decoration: TextDecoration.underline,
                                   ),
                                 ),
                               );
                             }),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 50),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.purple.shade200,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, signup.id);
-                                  },
-                                  child: Text(
-                                    'SIGNUP',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
