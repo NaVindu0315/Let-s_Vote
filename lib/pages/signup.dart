@@ -216,9 +216,7 @@ class _signupState extends State<signup> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      //
 
                       ////for the image adding button
 
