@@ -594,60 +594,47 @@ class _signupState extends State<signup> {
                           ),
                         );
                       }),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(left: 50),
-                            child: Builder(builder: (context) {
-                              return ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.purple.shade200,
-                                ),
-                                onPressed: () {
-                                  //  Navigator.pushNamed(context, lgin.id);
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 32.0),
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundcolor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Already Signed up ? ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            Builder(builder: (context) {
+                              return GestureDetector(
+                                onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => lgin()),
                                   );
+                                  // Add your sign up button onPressed code here
                                 },
                                 child: Text(
                                   'Login',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    color: AppColors.buttoncolor,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                    //decoration: TextDecoration.underline,
                                   ),
                                 ),
                               );
                             }),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 50),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.purple.shade200,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, signup.id);
-                                  },
-                                  child: Text(
-                                    'SIGNUP',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
