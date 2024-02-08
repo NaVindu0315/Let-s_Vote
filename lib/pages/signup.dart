@@ -165,6 +165,9 @@ class _signupState extends State<signup> {
                       child: CameraPreview(controller!),
                     ),
                   ),
+                  SizedBox(
+                    height: 7.0,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -197,7 +200,15 @@ class _signupState extends State<signup> {
                           onPressed: () {
                             propicurlcontroller.clear();
                           },
-                          child: Text('Clear'))
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                          ),
+                          child: Text(
+                            'Clear',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ))
                     ],
                   ),
 
