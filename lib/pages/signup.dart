@@ -273,11 +273,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.email,
+                            color:
+                                Colors.white, // set prefix icon color to white
                           ),
                           labelText: 'Email',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // set label text color to white
+                          hintText: 'Enter your email',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // set hint text color to white with opacity
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // set focused border color and width
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // set typed text color to white
                       ),
+
                       //mobile
                       TextFormField(
                         onChanged: (value) {
