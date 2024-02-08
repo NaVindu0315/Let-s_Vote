@@ -237,11 +237,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.person,
+                            color:
+                                Colors.white, // Set prefix icon color to white
                           ),
                           labelText: 'Username',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintText: 'Enter your username',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // Set hint text color to white with opacity for better visibility
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width for better feedback
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // Set typed text color to white
                       ),
+
                       //email
                       TextFormField(
                         onChanged: (value) {
