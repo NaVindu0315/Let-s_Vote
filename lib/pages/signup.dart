@@ -166,10 +166,8 @@ class _signupState extends State<signup> {
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        width: 100.0,
-                      ),
                       ElevatedButton(
                           onPressed: () async {
                             propicurlcontroller.clear();
@@ -184,6 +182,9 @@ class _signupState extends State<signup> {
                             }
                           },
                           child: Text("Capture")),
+                      SizedBox(
+                        width: 10.0,
+                      ),
                       ElevatedButton(
                           onPressed: () {
                             propicurlcontroller.clear();
