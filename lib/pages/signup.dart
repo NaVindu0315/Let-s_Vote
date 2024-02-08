@@ -500,11 +500,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.key,
+                            color:
+                                Colors.white, // Set prefix icon color to white
                           ),
                           labelText: 'Confirm Password',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintText: 'Confirm your password',
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(
+                                  0.6)), // Set hint text color with opacity
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width
+                          ),
                         ),
+                        style: const TextStyle(
+                            color:
+                                Colors.white), // Set typed text color to white
                       ),
+
                       SizedBox(
                         height: 20.0,
                       ),
