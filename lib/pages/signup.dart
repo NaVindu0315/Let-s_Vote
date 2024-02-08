@@ -181,7 +181,15 @@ class _signupState extends State<signup> {
                               print(e);
                             }
                           },
-                          child: Text("Capture")),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                          ),
+                          child: Text(
+                            "Capture",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          )),
                       SizedBox(
                         width: 10.0,
                       ),
