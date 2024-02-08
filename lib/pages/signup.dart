@@ -12,6 +12,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lets_vote/pages/login.dart';
 import '../cam.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:lets_vote/Colors/colors.dart';
 
 void main() {
   runApp(signup());
@@ -147,7 +148,7 @@ class _signupState extends State<signup> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.purple.shade100,
+        backgroundColor: AppColors.backgroundcolor,
         body: SingleChildScrollView(
           reverse: true,
           child: SafeArea(
@@ -167,7 +168,7 @@ class _signupState extends State<signup> {
                   Row(
                     children: [
                       SizedBox(
-                        width: 80.0,
+                        width: 100.0,
                       ),
                       ElevatedButton(
                           onPressed: () async {
