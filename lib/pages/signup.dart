@@ -421,11 +421,34 @@ class _signupState extends State<signup> {
                         decoration: InputDecoration(
                           prefixIcon: IconButton(
                             onPressed: null,
-                            icon: Icon(Icons.web),
+                            icon: Icon(
+                              Icons.web,
+                              color: Colors
+                                  .white, // Set prefix icon color to white
+                            ),
                           ),
                           labelText: 'url',
-                          border: OutlineInputBorder(),
+                          labelStyle: TextStyle(
+                              color: Colors
+                                  .white), // Set label text color to white
+                          hintStyle: const TextStyle(
+                              color:
+                                  Colors.white), // Remove hint since read-only
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:
+                                    Colors.white), // Set border color to white
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                                width:
+                                    2.0), // Set focused border color and width (not applicable)
+                          ),
                         ),
+                        style: const TextStyle(
+                            color: Colors
+                                .white), // Set typed text color to white (not applicable)
                       ),
 
                       //password
