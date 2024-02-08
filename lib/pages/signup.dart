@@ -158,8 +158,8 @@ class _signupState extends State<signup> {
                 children: [
                   ///camera prview
                   Container(
-                    width: 100,
-                    height: 150,
+                    width: 90,
+                    height: 140,
                     child: AspectRatio(
                       aspectRatio: controller!.value.aspectRatio,
                       child: CameraPreview(controller!),
@@ -227,7 +227,7 @@ class _signupState extends State<signup> {
                       ////sign up and login labels end
 
                       SizedBox(
-                        height: 15.0,
+                        height: 11.0,
                       ),
                       //username
                       TextFormField(
@@ -528,14 +528,14 @@ class _signupState extends State<signup> {
                                 Colors.white), // Set typed text color to white
                       ),
 
-                      SizedBox(
+                      /*  SizedBox(
                         height: 20.0,
-                      ),
+                      ),*/
                       //to add social media icons
 
-                      SizedBox(
+                      /* SizedBox(
                         height: 32.0,
-                      ),
+                      )*/
                       Builder(builder: (context) {
                         return ElevatedButton(
                           style: ButtonStyle(
