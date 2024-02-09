@@ -185,12 +185,12 @@ class _signupState extends State<signup> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: AppColors.buttoncolor,
                           ),
                           child: Text(
                             "Capture",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.backgroundcolor,
                             ),
                           )),
                       SizedBox(
