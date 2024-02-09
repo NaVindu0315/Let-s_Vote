@@ -202,63 +202,14 @@ class _DashBoardState extends State<DashBoard> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Container(
-                        height: 100, // Set the desired height
-                        decoration: BoxDecoration(
-                          color: Color(0xFFA888EB),
-                          borderRadius: BorderRadius.circular(
-                              50), // Set the desired color
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            Expanded(
-                              child: Text(
-                                '${data!['username']}',
-                                style: TextStyle(
-                                  color: Colors.indigo,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 170.0,
-                            ),
-                            Expanded(
-                              child: CircleAvatar(
-                                backgroundColor: Colors.purple,
-                                minRadius: 70.5,
-                                child: CircleAvatar(
-                                    radius: 70,
-                                    backgroundImage:
-                                        //AssetImage('images/g.png'),
-                                        NetworkImage('${data!['url']}')),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text('${data!['url']}'),
-                      Text(client),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => myapp()),
-                            );
-                          },
-                          child: Text('Cam page')),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Compare_page()),
-                            );
-                          },
-                          child: Text('Validate page'))
+                      CircleAvatar(
+                          backgroundColor: AppColors.backgroundcolor,
+                          minRadius: 70.5,
+                          child: CircleAvatar(
+                              radius: 70,
+                              backgroundImage:
+                                  //AssetImage('images/g.png'),
+                                  NetworkImage('${data!['url']}'))),
                     ],
                   ),
                 ),
