@@ -201,12 +201,12 @@ class _signupState extends State<signup> {
                             propicurlcontroller.clear();
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: AppColors.buttoncolor,
                           ),
                           child: Text(
                             'Clear',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.backgroundcolor,
                             ),
                           ))
                     ],
@@ -256,7 +256,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width for better feedback
                           ),
