@@ -142,10 +142,13 @@ class _DashBoardState extends State<DashBoard> {
                         //Announcement
                         Builder(builder: (context) {
                           return ListTile(
-                            leading: Icon(Icons.face),
+                            leading: Icon(
+                              Icons.face,
+                              color: Colors.white,
+                            ),
                             title: const Text('Face Comparing Test',
                                 style: TextStyle(
-                                    color: Colors.indigo, fontSize: 17)),
+                                    color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -159,10 +162,13 @@ class _DashBoardState extends State<DashBoard> {
                         ///voting home
                         Builder(builder: (context) {
                           return ListTile(
-                            leading: Icon(Icons.how_to_vote),
+                            leading: Icon(
+                              Icons.how_to_vote,
+                              color: Colors.white,
+                            ),
                             title: const Text('Voting Home',
                                 style: TextStyle(
-                                    color: Colors.indigo, fontSize: 17)),
+                                    color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
