@@ -231,6 +231,7 @@ class _signupState extends State<signup> {
                       ),
                       //username
                       TextFormField(
+                        controller: usernamecontroller,
                         onChanged: (value) {
                           username = value;
                         },
@@ -267,9 +268,11 @@ class _signupState extends State<signup> {
 
                       //email
                       TextFormField(
+                        controller: emailcontroller,
                         onChanged: (value) {
                           email = value;
                         },
+
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.email,
@@ -303,6 +306,7 @@ class _signupState extends State<signup> {
 
                       //mobile
                       TextFormField(
+                        controller: mobilecontroller,
                         onChanged: (value) {
                           mobile = value;
                         },
@@ -339,6 +343,7 @@ class _signupState extends State<signup> {
 
                       //address
                       TextFormField(
+                        controller: adrscontroller,
                         onChanged: (value) {
                           address = value;
                         },
@@ -376,6 +381,7 @@ class _signupState extends State<signup> {
                       //birthday
 
                       TextFormField(
+                        controller: bdaycontroller,
                         onChanged: (value) {
                           dob = value;
                         },
