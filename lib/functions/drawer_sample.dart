@@ -6,19 +6,19 @@ import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'Voting_home.dart';
+import '../pages/Voting_home.dart';
 
 late User loggedinuser;
 late String client;
 
-class DashBoard extends StatefulWidget {
-  const DashBoard({Key? key}) : super(key: key);
+class sample_drawer extends StatefulWidget {
+  const sample_drawer({Key? key}) : super(key: key);
 
   @override
-  State<DashBoard> createState() => _DashBoardState();
+  State<sample_drawer> createState() => _sample_drawerState();
 }
 
-class _DashBoardState extends State<DashBoard> {
+class _sample_drawerState extends State<sample_drawer> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   TextEditingController loggedinusercontroller = TextEditingController();
@@ -185,39 +185,16 @@ class _DashBoardState extends State<DashBoard> {
 
                 ///drawwe end
                 appBar: AppBar(
-                  // preferredSize: Size.fromHeight(kToolbarHeight + 20),
-                  backgroundColor: AppColors.backgroundcolor,
+                  backgroundColor: Color(0xFFA888EB),
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
                       bottomRight: Radius.circular(30),
                     ),
                   ),
-
-                  title: Text(
-                    'Welcome To Lets Vote',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  iconTheme: IconThemeData(color: Colors.white),
+                  title: Text('Welcome To Lets Vote'),
 
                   //centerTitle: true,
-                ),
-                body: SafeArea(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      CircleAvatar(
-                          backgroundColor: AppColors.backgroundcolor,
-                          minRadius: 70.5,
-                          child: CircleAvatar(
-                              radius: 70,
-                              backgroundImage:
-                                  //AssetImage('images/g.png'),
-                                  NetworkImage('${data!['url']}'))),
-                    ],
-                  ),
                 ),
               );
             }
