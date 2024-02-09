@@ -70,7 +70,7 @@ class _DashBoardState extends State<DashBoard> {
                 drawer: Drawer(
                   width: 300,
                   child: Container(
-                    color: Color(0xDBD6E5FF), //color of list tiles
+                    color: AppColors.backgroundcolor, //color of list tiles
                     // Add a ListView to ensures the user can scroll
                     child: ListView(
                       // Remove if there are any padding from the ListView.
@@ -104,10 +104,13 @@ class _DashBoardState extends State<DashBoard> {
                         //Home
                         Builder(builder: (context) {
                           return ListTile(
-                            leading: Icon(Icons.home),
+                            leading: Icon(
+                              Icons.home,
+                              color: Colors.white,
+                            ),
                             title: const Text('Home',
                                 style: TextStyle(
-                                    color: Colors.indigo, fontSize: 17)),
+                                    color: Colors.white, fontSize: 17)),
                             onTap: () {
                               /*   Navigator.push(
                                 context,
