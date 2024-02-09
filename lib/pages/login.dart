@@ -45,60 +45,7 @@ class _lginState extends State<lgin> {
                     margin: EdgeInsets.only(top: 50),
                     child: Icon(Icons.ice_skating),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(left: 50),
-                        child: Builder(builder: (context) {
-                          return ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
-                            ),
-                            onPressed: () {},
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 50),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Builder(builder: (context) {
-                              return ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.black,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => signup()),
-                                  );
-                                },
-                                child: Text(
-                                  'SIGNUP',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+
                   SizedBox(height: 20),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
