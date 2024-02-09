@@ -41,65 +41,7 @@ class _lginState extends State<lgin> {
               ),
               Column(
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 50),
-                    child: Icon(Icons.ice_skating),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(left: 50),
-                        child: Builder(builder: (context) {
-                          return ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
-                            ),
-                            onPressed: () {},
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 50),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Builder(builder: (context) {
-                              return ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.black,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => signup()),
-                                  );
-                                },
-                                child: Text(
-                                  'SIGNUP',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 200),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     child: Text(
@@ -171,10 +113,53 @@ class _lginState extends State<lgin> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: 350,
+                      height: 50,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                      child: Builder(builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () async {
+                            emailcontroller.clear();
+                            pwcontroller.clear();
+                            try {
+                              final user =
+                                  await _auth.signInWithEmailAndPassword(
+                                      email: email, password: pw);
+
+                              if (user != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DashBoard()),
+                                );
+                              }
+                            } catch (e) {
+                              print(e);
+                            }
+                          },
+                          child: Text(
+                            'Log in',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                  //SizedBox(height: 5),
                   Container(
                     padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                        EdgeInsets.symmetric(vertical: 2.0, horizontal: 32.0),
                     decoration: BoxDecoration(
                       color: AppColors.backgroundcolor,
                       borderRadius: BorderRadius.circular(10.0),
@@ -223,48 +208,6 @@ class _lginState extends State<lgin> {
                     ),
                   ),
 
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      width: 350,
-                      height: 50,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-                      child: Builder(builder: (context) {
-                        return ElevatedButton(
-                          onPressed: () async {
-                            emailcontroller.clear();
-                            pwcontroller.clear();
-                            try {
-                              final user =
-                                  await _auth.signInWithEmailAndPassword(
-                                      email: email, password: pw);
-
-                              if (user != null) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DashBoard()),
-                                );
-                              }
-                            } catch (e) {
-                              print(e);
-                            }
-                          },
-                          child: Text(
-                            'Log in',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
                   //to add social media icons
                 ],
               ),
