@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/signup.dart';
@@ -82,14 +83,17 @@ class _DashBoardState extends State<DashBoard> {
                           accountName: Text(
                             '${data!['username']}',
                             style: TextStyle(
-                              color: Colors.indigo,
-                              fontSize: 20,
-                            ),
+                                color: AppColors.backgroundcolor,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Roboto"),
                           ),
                           accountEmail: Text(
                             client,
-                            style:
-                                TextStyle(color: Colors.indigo, fontSize: 17),
+                            style: TextStyle(
+                                color: AppColors.backgroundcolor,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold),
                           ),
                           currentAccountPicture: CircleAvatar(
                             radius: 50,
