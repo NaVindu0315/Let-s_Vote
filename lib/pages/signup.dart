@@ -294,7 +294,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // set focused border color and width
                           ),
@@ -331,7 +331,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -368,7 +368,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -409,7 +409,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -433,7 +433,7 @@ class _signupState extends State<signup> {
                                   .white, // Set prefix icon color to white
                             ),
                           ),
-                          labelText: 'url',
+                          labelText: 'Image URL',
                           labelStyle: TextStyle(
                               color: Colors
                                   .white), // Set label text color to white
@@ -447,7 +447,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width (not applicable)
                           ),
@@ -485,7 +485,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -524,7 +524,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
