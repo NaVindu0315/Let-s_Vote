@@ -41,7 +41,7 @@ class _lginState extends State<lgin> {
               ),
               Column(
                 children: <Widget>[
-                  SizedBox(height: 20),
+                  SizedBox(height: 200),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     child: Text(
