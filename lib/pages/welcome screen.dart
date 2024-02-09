@@ -185,6 +185,7 @@ class _DashBoardState extends State<DashBoard> {
 
                 ///drawwe end
                 appBar: AppBar(
+                  // preferredSize: Size.fromHeight(kToolbarHeight + 20),
                   backgroundColor: AppColors.backgroundcolor,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
@@ -192,6 +193,7 @@ class _DashBoardState extends State<DashBoard> {
                       bottomRight: Radius.circular(30),
                     ),
                   ),
+
                   title: Text(
                     'Welcome To Lets Vote',
                     style: TextStyle(color: Colors.white),
