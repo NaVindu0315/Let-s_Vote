@@ -185,14 +185,18 @@ class _DashBoardState extends State<DashBoard> {
 
                 ///drawwe end
                 appBar: AppBar(
-                  backgroundColor: Color(0xFFA888EB),
+                  backgroundColor: AppColors.backgroundcolor,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
                       bottomRight: Radius.circular(30),
                     ),
                   ),
-                  title: Text('Welcome To Lets Vote'),
+                  title: Text(
+                    'Welcome To Lets Vote',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  iconTheme: IconThemeData(color: Colors.white),
 
                   //centerTitle: true,
                 ),
