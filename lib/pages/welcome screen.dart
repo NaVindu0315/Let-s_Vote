@@ -77,7 +77,7 @@ class _DashBoardState extends State<DashBoard> {
                       children: <Widget>[
                         UserAccountsDrawerHeader(
                           decoration: BoxDecoration(
-                            color: Color(0xFFD1D3FF), //color of drawer header
+                            color: Color(0xFFFEB3DE), //color of drawer header
                           ),
                           accountName: Text(
                             '${data!['username']}',
@@ -133,7 +133,7 @@ class _DashBoardState extends State<DashBoard> {
                         Builder(builder: (context) {
                           return ListTile(
                             leading: Icon(Icons.face),
-                            title: const Text('Face Comparing',
+                            title: const Text('Face Comparing Test',
                                 style: TextStyle(
                                     color: Colors.indigo, fontSize: 17)),
                             onTap: () {
