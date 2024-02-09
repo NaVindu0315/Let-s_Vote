@@ -123,10 +123,13 @@ class _DashBoardState extends State<DashBoard> {
                         //Cam page
                         Builder(builder: (context) {
                           return ListTile(
-                            leading: Icon(Icons.camera_alt),
+                            leading: Icon(
+                              Icons.camera_alt,
+                              color: Colors.white,
+                            ),
                             title: const Text('Image Testing Page',
                                 style: TextStyle(
-                                    color: Colors.indigo, fontSize: 17)),
+                                    color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
