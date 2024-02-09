@@ -41,11 +41,6 @@ class _lginState extends State<lgin> {
               ),
               Column(
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 50),
-                    child: Icon(Icons.ice_skating),
-                  ),
-
                   SizedBox(height: 20),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
