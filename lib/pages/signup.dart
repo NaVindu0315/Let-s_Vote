@@ -546,7 +546,7 @@ class _signupState extends State<signup> {
                         return ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.black)),
+                                  AppColors.buttoncolor)),
                           onPressed: () {
                             if (pw == pw2) {
                               createuser();
@@ -594,7 +594,7 @@ class _signupState extends State<signup> {
                             'Sign up',
                             style: TextStyle(
                               fontSize: 25.0,
-                              color: Colors.white,
+                              color: AppColors.backgroundcolor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
