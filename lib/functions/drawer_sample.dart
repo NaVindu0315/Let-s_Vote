@@ -83,10 +83,10 @@ class _sample_drawerState extends State<sample_drawer> {
                           accountName: Text(
                             '${data!['username']}',
                             style: TextStyle(
-                                color: AppColors.backgroundcolor,
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Roboto"),
+                              color: AppColors.backgroundcolor,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           accountEmail: Text(
                             client,

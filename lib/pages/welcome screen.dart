@@ -83,10 +83,10 @@ class _DashBoardState extends State<DashBoard> {
                           accountName: Text(
                             '${data!['username']}',
                             style: TextStyle(
-                                color: AppColors.backgroundcolor,
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Roboto"),
+                              color: AppColors.backgroundcolor,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           accountEmail: Text(
                             client,
