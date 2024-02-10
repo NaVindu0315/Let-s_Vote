@@ -229,7 +229,24 @@ class _DashBoardState extends State<DashBoard> {
                           children: [
                             ///Row for the text field
                             Row(
-                              children: [Spacer(), Text('Navindu'), Spacer()],
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Ponnaya',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
+                                ),
+                                Spacer()
+                              ],
+                            ),
+
+                            ///row for the designation
+
+                            ///row for the designation end
+                            SizedBox(
+                              height: 40.0,
                             ),
 
                             ///row end
