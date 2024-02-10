@@ -188,12 +188,6 @@ class _DashBoardState extends State<DashBoard> {
                 appBar: AppBar(
                   // preferredSize: Size.fromHeight(kToolbarHeight + 20),
                   backgroundColor: AppColors.backgroundcolor,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                  ),
 
                   title: Text(
                     'Welcome To Lets Vote',
@@ -203,23 +197,169 @@ class _DashBoardState extends State<DashBoard> {
 
                   //centerTitle: true,
                 ),
-                body: SafeArea(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 20.0,
+                body: Stack(children: [
+                  // Background image container
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                            'assets/bg_image.jpg'), // Replace with your image path
+                        fit: BoxFit.cover,
                       ),
-                      CircleAvatar(
-                          backgroundColor: AppColors.backgroundcolor,
-                          minRadius: 70.5,
-                          child: CircleAvatar(
-                              radius: 70,
-                              backgroundImage:
-                                  //AssetImage('images/g.png'),
-                                  NetworkImage('${data!['url']}'))),
-                    ],
+                    ),
                   ),
-                ),
+                  SafeArea(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        CircleAvatar(
+                            backgroundColor: AppColors.backgroundcolor,
+                            minRadius: 70.5,
+                            child: CircleAvatar(
+                                radius: 70,
+                                backgroundImage:
+                                    //AssetImage('images/g.png'),
+                                    NetworkImage('${data!['url']}'))),
+
+                        ///main
+                        Column(
+                          //first row
+                          children: [
+                            ///Row for the text field
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  '${data!['username']}',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
+                                ),
+                                Spacer()
+                              ],
+                            ),
+
+                            ///row for the designation
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Designation',
+                                  style: TextStyle(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.0),
+                                ),
+                                Spacer()
+                              ],
+                            ),
+
+                            ///row for the designation end
+                            SizedBox(
+                              height: 40.0,
+                            ),
+
+                            ///row end
+                            Row(
+                              children: [
+                                //first box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: null,
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: Colors.blue,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                //second box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: null,
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: Colors.blue,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                              ],
+                            ),
+
+                            ///second row
+                            Row(
+                              children: [
+                                //first box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: null,
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: Colors.blue,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                              ],
+                            ),
+
+                            ///third row
+                            Row(
+                              children: [
+                                //first box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: null,
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: Colors.blue,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                //second box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: null,
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: Colors.blue,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ]),
               );
             }
             return CircularProgressIndicator();
