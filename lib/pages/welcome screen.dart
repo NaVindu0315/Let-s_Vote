@@ -227,9 +227,12 @@ class _DashBoardState extends State<DashBoard> {
                         Column(
                           //first row
                           children: [
-                            SizedBox(
-                              ,
+                            ///Row for the text field
+                            Row(
+                              children: [Spacer(), Text('Navindu'), Spacer()],
                             ),
+
+                            ///row end
                             Row(
                               children: [
                                 //first box
