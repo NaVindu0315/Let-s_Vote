@@ -78,7 +78,8 @@ class _DashBoardState extends State<DashBoard> {
                       children: <Widget>[
                         UserAccountsDrawerHeader(
                           decoration: BoxDecoration(
-                            color: Color(0xFFFEB3DE), //color of drawer header
+                            color:
+                                AppColors.buttoncolor, //color of drawer header
                           ),
                           accountName: Text(
                             '${data!['username']}',
