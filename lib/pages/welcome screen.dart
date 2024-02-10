@@ -207,7 +207,7 @@ class _DashBoardState extends State<DashBoard> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(
-                        height: 20.0,
+                        height: 120.0,
                       ),
                       CircleAvatar(
                           backgroundColor: AppColors.backgroundcolor,
