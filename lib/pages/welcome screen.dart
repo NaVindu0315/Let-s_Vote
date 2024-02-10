@@ -237,6 +237,19 @@ class _DashBoardState extends State<DashBoard> {
                                       borderRadius: BorderRadius.circular(10.0),
                                     )),
                               )),
+                              //second box
+                              Expanded(
+                                  child: GestureDetector(
+                                onTap: null,
+                                child: Container(
+                                    child: Card(),
+                                    margin: EdgeInsets.all(15.0),
+                                    decoration: BoxDecoration(
+                                      //color: Color(0xFF101E33),
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    )),
+                              )),
                             ],
                           )
                         ],
