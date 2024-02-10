@@ -78,7 +78,7 @@ class _sample_drawerState extends State<sample_drawer> {
                       children: <Widget>[
                         UserAccountsDrawerHeader(
                           decoration: BoxDecoration(
-                            color: Color(0xFFFEB3DE), //color of drawer header
+                            color: Colors.amber, //color of drawer header
                           ),
                           accountName: Text(
                             '${data!['username']}',
@@ -108,7 +108,7 @@ class _sample_drawerState extends State<sample_drawer> {
                               Icons.home,
                               color: Colors.white,
                             ),
-                            title: const Text('Home',
+                            title: const Text('Homee',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
