@@ -232,7 +232,7 @@ class _DashBoardState extends State<DashBoard> {
                               children: [
                                 Spacer(),
                                 Text(
-                                  'Ponnaya',
+                                  '${data!['username']}',
                                   style: TextStyle(
                                       color: AppColors.backgroundcolor,
                                       fontWeight: FontWeight.bold,
