@@ -243,6 +243,19 @@ class _DashBoardState extends State<DashBoard> {
                             ),
 
                             ///row for the designation
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Designation',
+                                  style: TextStyle(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.0),
+                                ),
+                                Spacer()
+                              ],
+                            ),
 
                             ///row for the designation end
                             SizedBox(
