@@ -275,7 +275,7 @@ class _DashBoardState extends State<DashBoard> {
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/logo.png'),
+                                        child: Image.asset('assets/empmg.png'),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -293,7 +293,7 @@ class _DashBoardState extends State<DashBoard> {
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/logo.png'),
+                                        child: Image.asset('assets/msg.png'),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -317,7 +317,7 @@ class _DashBoardState extends State<DashBoard> {
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/logo.png'),
+                                        child: Image.asset('assets/vote.png'),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -341,7 +341,7 @@ class _DashBoardState extends State<DashBoard> {
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/logo.png'),
+                                        child: Image.asset('assets/create.png'),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -359,7 +359,7 @@ class _DashBoardState extends State<DashBoard> {
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/logo.png'),
+                                        child: Image.asset('assets/post.png'),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
