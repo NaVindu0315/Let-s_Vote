@@ -314,7 +314,9 @@ class _DashBoardState extends State<DashBoard> {
                                   onTap: null,
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(),
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                      ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
                                         //color: Color(0xFF101E33),
