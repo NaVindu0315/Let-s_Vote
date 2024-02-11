@@ -379,7 +379,6 @@ class _signupState extends State<signup> {
                       ),
 
                       //birthday
-
                       TextFormField(
                         controller: bdaycontroller,
                         onChanged: (value) {
@@ -418,6 +417,8 @@ class _signupState extends State<signup> {
                             color:
                                 Colors.white), // Set typed text color to white
                       ),
+
+                      //birthday end
 
                       //url
                       TextFormField(
