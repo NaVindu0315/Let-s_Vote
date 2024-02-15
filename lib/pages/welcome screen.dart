@@ -143,6 +143,8 @@ class _DashBoardState extends State<DashBoard> {
   Future<dynamic> compareandexpression(
       String imageurl1, String imageurl2) async {
     try {
+      print('new upload');
+      print(imageurl2);
       // Replace with your actual Face++ API keys
       final apiKey = 'Ihp7UgfV3b7KH-aAyQl5EiStwGX5ch1B';
       final apiSecret = '_kjlV-L5QjSYp9vQVP9a4VHosyehnbJ7';
@@ -548,7 +550,7 @@ class _DashBoardState extends State<DashBoard> {
                                     child: GestureDetector(
                                   onTap: () async {
                                     String up = await newupload();
-                                    print(up);
+                                    // print(up);
                                     /*  capturedimageurlcontroller.clear();
                                     uploadimage();*/
                                     await compareandexpression(
