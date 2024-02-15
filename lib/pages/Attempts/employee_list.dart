@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_vote/pages/Attempts/detiled_other_Attempt.dart';
+import 'package:lets_vote/pages/Attempts/employee_details.dart';
 
 import '../../Colors/colors.dart';
 import '../../firebase_options.dart';
@@ -170,14 +171,12 @@ class em_list extends State<employee_list> {
                             ),
                             title: GestureDetector(
                               onTap: () {
-                                /* Navigator.push(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          Detailed_other_error(
-                                              unknownid:
-                                                  '${data['unknownid']}')),
-                                );*/
+                                      builder: (context) => detailed_employee(
+                                          selectedusser: client)),
+                                );
                                 print(client);
                               },
                               child: Ink(
