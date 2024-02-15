@@ -9,6 +9,7 @@ import 'package:camera/camera.dart';
 import 'dart:io';
 
 import 'Voting_home.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 late User loggedinuser;
 late String client;
@@ -26,11 +27,31 @@ class _DashBoardState extends State<DashBoard> {
   TextEditingController loggedinusercontroller = TextEditingController();
   TextEditingController imageurlcontroller = TextEditingController();
 
+  ///for camera
+  TextEditingController url1controller = TextEditingController();
+  TextEditingController capturedimageurlcontroller = TextEditingController();
+  late String url1img;
+
+  ///camera end
+  ///
+  ///firebase storage
+  final storage = FirebaseStorage.instance;
+  CameraController? controller;
+  late String imagePath = "";
+  late String uploadedimageurl = "";
+
   ///to get the current user
   @override
   void initState() {
     super.initState();
     getcurrentuser();
+    controller = CameraController(cameras![1], ResolutionPreset.max);
+    controller?.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
   }
 
   void getcurrentuser() async {
