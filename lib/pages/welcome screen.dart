@@ -40,6 +40,25 @@ class _DashBoardState extends State<DashBoard> {
   late String imagePath = "";
   late String uploadedimageurl = "";
 
+  ///capturing and storing function
+  Future<void> uploadimage() async {
+    final ref = storage
+        .ref()
+        .child('images/comparingimages/${DateTime.now().toString()}.jpg');
+    final metadata = SettableMetadata(
+        contentType: 'image/jpeg'); // Set content type explicitly
+
+    final uploadTask = ref.putFile(
+        File(imagePath), metadata); // Pass metadata along with the file
+    final snapshot = await uploadTask.whenComplete(() {});
+    final imageUrl = await snapshot.ref.getDownloadURL();
+    uploadedimageurl = imageUrl;
+    capturedimageurlcontroller.text = uploadedimageurl;
+    print(uploadedimageurl);
+  }
+
+  ///capturing and storing function end
+
   ///to get the current user
   @override
   void initState() {
