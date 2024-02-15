@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lets_vote/pages/Attempts/detiled_other_Attempt.dart';
 
 import '../../firebase_options.dart';
 
@@ -134,13 +135,13 @@ class gemlistview extends State<other_errors_list> {
                           leading: Icon(Icons.add),
                           title: GestureDetector(
                             onTap: () {
-                              /*  Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => NextPage(
-                                        gemcode: '${data['gem code']}')),
-                              );*/
-                              print('${data['gem code']}');
+                                    builder: (context) => Detailed_other_error(
+                                        unknownid: '${data['unknownid']}')),
+                              );
+                              print('${data['unknownid']}');
                             },
                             child: Ink(
                               child: Text(

@@ -212,7 +212,7 @@ class _Detailed_other_errorState extends State<Detailed_other_error> {
                       ///gem variety
 
                       ///total cost end
-                      Row(
+                      /* Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           ElevatedButton(
@@ -258,7 +258,7 @@ class _Detailed_other_errorState extends State<Detailed_other_error> {
                             child: Text('sold'),
                           ),
                         ],
-                      ),
+                      ),*/
                     ],
                   ),
                 ),
