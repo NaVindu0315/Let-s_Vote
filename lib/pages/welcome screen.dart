@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
+import 'package:lets_vote/pages/management_dashboard.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -414,6 +415,28 @@ class _DashBoardState extends State<DashBoard> {
                             },
                           );
                         }),
+
+                        ///management dashboard
+                        //Home
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.manage_accounts,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Management dashboard',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Management_Dashboard()),
+                              );
+                            },
+                          );
+                        }),
                         //Cam page
                         Builder(builder: (context) {
                           return ListTile(
@@ -562,7 +585,12 @@ class _DashBoardState extends State<DashBoard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
-                                    print('fuck');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Management_Dashboard()),
+                                    );
                                   },
                                   child: Container(
                                       height: 120.0,
