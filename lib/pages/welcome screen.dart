@@ -313,7 +313,7 @@ class _DashBoardState extends State<DashBoard> {
                             ///row end
                             Row(
                               children: [
-                                //first box
+                                ///for the employee management
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
@@ -333,24 +333,19 @@ class _DashBoardState extends State<DashBoard> {
                                             BorderRadius.circular(10.0),
                                       )),
                                 )),
-                                //second box
+
+                                ///for the camera preview
                                 Expanded(
-                                    child: GestureDetector(
-                                  onTap: null,
                                   child: Container(
-                                      height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/msg.png'),
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
+                                    width: 150,
+                                    height: 120,
+                                    child: AspectRatio(
+                                      aspectRatio:
+                                          controller!.value.aspectRatio,
+                                      child: CameraPreview(controller!),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
 
