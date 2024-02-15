@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lets_vote/pages/Attempts/detailed_failed.dart';
 import 'package:lets_vote/pages/Attempts/detailed_success_attempts.dart';
 import 'package:lets_vote/pages/Attempts/detiled_other_Attempt.dart';
 
@@ -171,12 +172,12 @@ class fail_attempt extends State<failed_Attempt_list> {
                             ),
                             title: GestureDetector(
                               onTap: () {
-                                /*   Navigator.push(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Detailed_Sucs(
-                                          successid: '${data['failedid']}')),
-                                );*/
+                                      builder: (context) => Detailed_Fails(
+                                          failedid: '${data['failedid']}')),
+                                );
                                 print('${data['failedid']}');
                               },
                               child: Ink(
