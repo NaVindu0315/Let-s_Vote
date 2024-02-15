@@ -73,6 +73,12 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: SafeArea(
