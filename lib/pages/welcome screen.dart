@@ -42,19 +42,28 @@ class _DashBoardState extends State<DashBoard> {
 
   ///capturing and storing function
   Future<void> uploadimage() async {
-    final ref = storage
-        .ref()
-        .child('images/comparingimages/${DateTime.now().toString()}.jpg');
-    final metadata = SettableMetadata(
-        contentType: 'image/jpeg'); // Set content type explicitly
+    capturedimageurlcontroller.clear();
+    try {
+      final image = await controller!.takePicture();
+      setState(() {
+        imagePath = image.path;
+      });
+      final ref = storage
+          .ref()
+          .child('images/comparingimages/${DateTime.now().toString()}.jpg');
+      final metadata = SettableMetadata(
+          contentType: 'image/jpeg'); // Set content type explicitly
 
-    final uploadTask = ref.putFile(
-        File(imagePath), metadata); // Pass metadata along with the file
-    final snapshot = await uploadTask.whenComplete(() {});
-    final imageUrl = await snapshot.ref.getDownloadURL();
-    uploadedimageurl = imageUrl;
-    capturedimageurlcontroller.text = uploadedimageurl;
-    print(uploadedimageurl);
+      final uploadTask = ref.putFile(
+          File(imagePath), metadata); // Pass metadata along with the file
+      final snapshot = await uploadTask.whenComplete(() {});
+      final imageUrl = await snapshot.ref.getDownloadURL();
+      uploadedimageurl = imageUrl;
+      capturedimageurlcontroller.text = uploadedimageurl;
+      print(uploadedimageurl);
+    } catch (e) {
+      print(e);
+    }
   }
 
   ///capturing and storing function end
@@ -356,17 +365,7 @@ class _DashBoardState extends State<DashBoard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () async {
-                                    capturedimageurlcontroller.clear();
-                                    try {
-                                      final image =
-                                          await controller!.takePicture();
-                                      setState(() {
-                                        imagePath = image.path;
-                                      });
-                                      uploadimage();
-                                    } catch (e) {
-                                      print(e);
-                                    }
+                                    uploadimage();
                                   },
                                   child: Container(
                                       height: 120.0,
