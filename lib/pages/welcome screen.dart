@@ -16,6 +16,7 @@ import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 late User loggedinuser;
 late String client;
@@ -45,6 +46,7 @@ class _DashBoardState extends State<DashBoard> {
   CameraController? controller;
   late String imagePath = "";
   late String uploadedimageurl = "";
+  DateTime now = DateTime.now();
 
   ///capturing and storing function
   Future<void> uploadimage() async {
@@ -265,17 +267,32 @@ class _DashBoardState extends State<DashBoard> {
 
           // Use the storedConfidence variable as needed in your application
         } catch (error) {
+          ///here the uploading shold be done
+          ///firestore upload
+          ///
+          ///
+          final unknwerror =
+              _firestore.collection("unknown Errors").doc('$client $now');
+          unknwerror.set({
+            'profilepic': imageurl1,
+            'capturedimage': imageurl2,
+            'email': client,
+            'date & time': now,
+          });
+
+          /// firestore upload end
+          print(now);
           print('Error parsing JSON response: $error');
         }
 
         ///end
         // Handle the successful response data
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        print(' Request failed with status: ${response.statusCode}');
         // Handle the error response
       }
     } catch (error) {
-      print('Error: $error');
+      print(' Error: $error');
       // Handle other errors
     }
   }
