@@ -260,6 +260,21 @@ class _DashBoardState extends State<DashBoard> {
               titleColor: Colors.white,
               textColor: Colors.white,
             );
+
+            ///firestore upload failed attempt
+            ///
+            ///
+            String failedid = "$client$now";
+            final failedattempt = _firestore.collection("failed").doc(failedid);
+            failedattempt.set({
+              'failedid': failedid,
+              'profilepic': imageurl1,
+              'capturedimage': imageurl2,
+              'email': client,
+              'date & time': now,
+            });
+
+            /// firestore upload end
           }
 
           // Store the confidence value in a variable for further use
@@ -271,9 +286,11 @@ class _DashBoardState extends State<DashBoard> {
           ///firestore upload
           ///
           ///
+          String unknownid = "$client$now";
           final unknwerror =
-              _firestore.collection("unknown Errors").doc('$client $now');
+              _firestore.collection("unknown Errors").doc(unknownid);
           unknwerror.set({
+            'unknownid': unknownid,
             'profilepic': imageurl1,
             'capturedimage': imageurl2,
             'email': client,
