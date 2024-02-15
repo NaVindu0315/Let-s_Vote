@@ -352,10 +352,22 @@ class _DashBoardState extends State<DashBoard> {
                             ///second row
                             Row(
                               children: [
-                                //first box
+                                ///to compare the face and navigate to the votig home
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: null,
+                                  onTap: () async {
+                                    capturedimageurlcontroller.clear();
+                                    try {
+                                      final image =
+                                          await controller!.takePicture();
+                                      setState(() {
+                                        imagePath = image.path;
+                                      });
+                                      uploadimage();
+                                    } catch (e) {
+                                      print(e);
+                                    }
+                                  },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
