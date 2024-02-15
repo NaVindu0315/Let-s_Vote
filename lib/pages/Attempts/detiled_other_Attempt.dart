@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../Colors/colors.dart';
+import 'package:intl/intl.dart';
 
 late User loggedinuser;
 late String client;
@@ -46,6 +47,20 @@ class _Detailed_other_errorState extends State<Detailed_other_error> {
       print(e);
     }
   }
+
+  ///timestamp
+  String _formatDateAndTime(Timestamp timestamp) {
+    try {
+      final dateTime = timestamp.toDate(); // Convert Timestamp to DateTime
+      final dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss'); // Customize format
+      return dateFormat.format(dateTime);
+    } catch (error) {
+      print('Error converting timestamp: $error');
+      return '';
+    }
+  }
+
+  ///
 
   @override
   Widget build(BuildContext context) {
@@ -213,29 +228,29 @@ class _Detailed_other_errorState extends State<Detailed_other_error> {
                               padding: EdgeInsets.only(left: 20),
                               height: 60,
                               width: double.infinity,
-                              color: Color(0xD1D3FCFF),
+                              color: AppColors.backgroundcolor,
                               child: Row(
                                 children: <Widget>[
                                   Expanded(
                                     child: Text(
                                       'Date & Time :',
                                       style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 18,
-                                        height: 2,
-                                      ),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
                                     ),
                                   ),
 
                                   ///place the gem name variable here
                                   Expanded(
                                     child: Text(
-                                      '${data?['date & time']}',
+                                      '${_formatDateAndTime(data?['date & time'])}',
                                       style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 22,
-                                        height: 2,
-                                      ),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          // height: 6,
+                                          color: Colors.white),
                                     ),
                                   ),
                                 ],
