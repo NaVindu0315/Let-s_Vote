@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/pages/Attempts/List_other_errors.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -383,7 +384,12 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
-                                    print('fuck');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              other_errors_list()),
+                                    );
                                   },
                                   child: Container(
                                       height: 120.0,
