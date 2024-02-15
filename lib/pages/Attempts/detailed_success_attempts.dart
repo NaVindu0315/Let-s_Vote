@@ -256,6 +256,114 @@ class _Detailed_SucsState extends State<Detailed_Sucs> {
                                 ],
                               ),
                             ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      'Fear :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['fear']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      'Anger :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['anger']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      'sadness :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['sadness']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
 
                             ///gem name end
                             ///gem name end
