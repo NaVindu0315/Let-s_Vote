@@ -175,7 +175,7 @@ class em_list extends State<employee_list> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => detailed_employee(
-                                          selectedusser: client)),
+                                          selectedusser: '${data['email']}')),
                                 );
                                 print(client);
                               },

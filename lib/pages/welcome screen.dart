@@ -642,13 +642,50 @@ class _DashBoardState extends State<DashBoard> {
                                     // print(up);
                                     /*  capturedimageurlcontroller.clear();
                                     uploadimage();*/
+
                                     await compareandexpression(
                                         data!['url'], up);
+
                                     //print('profile pic');
                                     //  print(data!['url']);
                                     //print('now image');
                                     //print(uploadedimageurl);
                                   },
+                                  /*  onTap: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible:
+                                          false, // Prevent user from dismissing while loading
+                                      builder: (context) => Center(
+                                        child: SpinKitSpinningCircle(
+                                          color: Colors
+                                              .white, // Customize loading indicator color
+                                          size: 50.0,
+                                          controller: AnimationController(
+                                              vsync: this,
+                                              duration: const Duration(
+                                                  milliseconds:
+                                                      1200)), // Adjust size as needed
+                                        ),
+                                      ),
+                                    );
+
+                                    try {
+                                      String up = await newupload();
+
+                                      // Additional actions (if needed)
+
+                                      await compareandexpression(
+                                          data!['url'], up);
+                                    } catch (error) {
+                                      // Handle errors gracefully
+                                      print(error);
+                                      // Show an error message or retry option
+                                    } finally {
+                                      // Always close the loading dialog
+                                      Navigator.pop(context);
+                                    }
+                                  },*/
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
