@@ -227,9 +227,9 @@ class _DashBoardState extends State<DashBoard> {
                 ///
                 ///
                 String successid = "$client$now";
-                final failedattempt =
-                    _firestore.collection("failed").doc(successid);
-                failedattempt.set({
+                final sucessattempt =
+                    _firestore.collection("success").doc(successid);
+                sucessattempt.set({
                   'successid': successid,
                   'profilepic': imageurl1,
                   'capturedimage': imageurl2,
@@ -315,6 +315,15 @@ class _DashBoardState extends State<DashBoard> {
             'email': client,
             'date & time': now,
           });
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.error,
+            title: 'Unknown Error',
+            text: 'please Try Again',
+            backgroundColor: Colors.black,
+            titleColor: Colors.white,
+            textColor: Colors.white,
+          );
 
           /// firestore upload end
           print(now);

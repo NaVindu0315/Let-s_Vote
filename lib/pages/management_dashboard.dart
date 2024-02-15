@@ -6,6 +6,7 @@ import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lets_vote/pages/welcome%20screen.dart';
 
 import 'Voting_home.dart';
 
@@ -114,11 +115,11 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              /*   Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DashBoard()),
-                              );*/
+                              );
                             },
                           );
                         }),
