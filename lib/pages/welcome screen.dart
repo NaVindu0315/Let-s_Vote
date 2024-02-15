@@ -222,6 +222,24 @@ class _DashBoardState extends State<DashBoard> {
           print('Left Normal Glass Eye Open: $leftNormalGlassEyeOpen');
           print('Right No Glass Eye Open: $rightNoGlassEyeOpen');
           print('Right Normal Glass Eye Open: $rightNormalGlassEyeOpen');*/
+                ///firestore upload failed attempt
+                ///
+                ///
+                String successid = "$client$now";
+                final failedattempt =
+                    _firestore.collection("failed").doc(successid);
+                failedattempt.set({
+                  'successid': successid,
+                  'profilepic': imageurl1,
+                  'capturedimage': imageurl2,
+                  'email': client,
+                  'date & time': now,
+                  'anger': anger,
+                  'fear': fear,
+                  'sadness': sadness,
+                });
+
+                /// firestore upload end
                 QuickAlert.show(
                     context: context,
                     type: QuickAlertType.success,
