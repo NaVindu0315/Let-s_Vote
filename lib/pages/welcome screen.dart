@@ -74,7 +74,37 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   ///capturing and storing function end
-  ///
+  ///new returing function
+  Future<String> newupload() async {
+    String uploadedImageUrl = ""; // Initialize the variable to an empty string
+    try {
+      capturedimageurlcontroller
+          .clear(); // Clear the controller before uploading
+
+      final image = await controller!.takePicture();
+      setState(() {
+        imagePath = image.path;
+      });
+
+      final ref = storage
+          .ref()
+          .child('images/comparingimages/${DateTime.now().toString()}.jpg');
+      final metadata = SettableMetadata(contentType: 'image/jpeg');
+
+      final uploadTask = ref.putFile(File(imagePath), metadata);
+      final snapshot = await uploadTask.whenComplete(() {});
+
+      uploadedImageUrl = await snapshot.ref.getDownloadURL(); // Assign the URL
+
+      return uploadedImageUrl; // Return the uploaded image URL
+    } catch (e) {
+      // Handle errors appropriately (e.g., display error messages)
+      print(e);
+      return ""; // Return an empty string in case of errors
+    }
+  }
+
+  ///returning function end
 
   ///to get the current user
   @override
@@ -517,14 +547,16 @@ class _DashBoardState extends State<DashBoard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () async {
-                                    capturedimageurlcontroller.clear();
-                                    uploadimage();
+                                    String up = await newupload();
+                                    print(up);
+                                    /*  capturedimageurlcontroller.clear();
+                                    uploadimage();*/
                                     await compareandexpression(
-                                        data!['url'], uploadedimageurl);
-                                    print('profile pic');
-                                    print(data!['url']);
-                                    print('now image');
-                                    print(uploadedimageurl);
+                                        data!['url'], up);
+                                    //print('profile pic');
+                                    //  print(data!['url']);
+                                    //print('now image');
+                                    //print(uploadedimageurl);
                                   },
                                   child: Container(
                                       height: 120.0,
