@@ -49,6 +49,8 @@ class _DashBoardState extends State<DashBoard> {
   late String uploadedimageurl = "";
   DateTime now = DateTime.now();
 
+  Color clickcolor = AppColors.backgroundcolor;
+
   ///capturing and storing function
   Future<void> uploadimage() async {
     //uploadedimageurl = "";
