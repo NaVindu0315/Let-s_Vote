@@ -5,6 +5,8 @@ import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:camera/camera.dart';
+import 'dart:io';
 
 import 'Voting_home.dart';
 
