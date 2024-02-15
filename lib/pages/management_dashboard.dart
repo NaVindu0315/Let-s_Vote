@@ -190,7 +190,7 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'Welcome To Lets Vote',
+                    'Employee Management',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -273,9 +273,17 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                   },
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/empmg.png'),
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Employees',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -286,7 +294,7 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                       )),
                                 )),
                                 //second box
-                                Expanded(
+                                /*  Expanded(
                                     child: GestureDetector(
                                   onTap: null,
                                   child: Container(
@@ -302,7 +310,7 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       )),
-                                )),
+                                )),*/
                               ],
                             ),
 
@@ -312,12 +320,22 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: null,
+                                  onTap: () {
+                                    print('fuck');
+                                  },
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/vote.png'),
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Successful Attempts',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -336,12 +354,22 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: null,
+                                  onTap: () {
+                                    print('fuck');
+                                  },
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/create.png'),
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Failed Attempts',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -354,12 +382,22 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                 //second box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: null,
+                                  onTap: () {
+                                    print('fuck');
+                                  },
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/post.png'),
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Other Attempets',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
