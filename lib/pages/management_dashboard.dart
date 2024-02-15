@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 
+import 'Attempts/List_Succesful_attempts.dart';
 import 'Voting_home.dart';
 
 late User loggedinuser;
@@ -323,7 +324,12 @@ class _Management_DashboardState extends State<Management_Dashboard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
-                                    print('fuck');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              sucs_Attempt_list()),
+                                    );
                                   },
                                   child: Container(
                                       height: 120.0,
