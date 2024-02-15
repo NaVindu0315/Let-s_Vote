@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lets_vote/pages/Attempts/detailed_success_attempts.dart';
 import 'package:lets_vote/pages/Attempts/detiled_other_Attempt.dart';
 
 import '../../Colors/colors.dart';
@@ -170,14 +171,12 @@ class suc_attempt extends State<sucs_Attempt_list> {
                             ),
                             title: GestureDetector(
                               onTap: () {
-                                /* Navigator.push(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          Detailed_other_error(
-                                              unknownid:
-                                              '${data['unknownid']}')),
-                                );*/
+                                      builder: (context) => Detailed_Sucs(
+                                          successid: '${data['successid']}')),
+                                );
                                 print('${data['successid']}');
                               },
                               child: Ink(
