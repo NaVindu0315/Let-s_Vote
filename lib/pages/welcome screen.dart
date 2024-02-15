@@ -48,6 +48,7 @@ class _DashBoardState extends State<DashBoard> {
 
   ///capturing and storing function
   Future<void> uploadimage() async {
+    //uploadedimageurl = "";
     capturedimageurlcontroller.clear();
     try {
       final image = await controller!.takePicture();
@@ -73,6 +74,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   ///capturing and storing function end
+  ///
 
   ///to get the current user
   @override
