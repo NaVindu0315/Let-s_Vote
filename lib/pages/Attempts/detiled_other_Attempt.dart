@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../Colors/colors.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -67,199 +69,235 @@ class _Detailed_other_errorState extends State<Detailed_other_error> {
             home:
 
                 ///should be cut out from here
-                Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-
-                toolbarHeight: 70,
-                centerTitle: true,
-                backgroundColor: const Color(0xFFACAFF2),
-                // The title text which will be shown on the action bar
-                title: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Text(
-                        'Attempt Detials',
-                        style: TextStyle(
-                          fontSize: 31,
-                          color: Colors.indigo,
-                        ),
-                      ),
-                    )
-                  ],
+                Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/bg_image.jpg'),
+                  fit: BoxFit.cover, // Adjust fit as needed (cover, fill, etc.)
                 ),
               ),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          ///Gem picture
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 20),
-                              height: 200,
-                              width: double.infinity,
-                              color: Color(0xDBD6EFFF),
-                              child: Image(
-                                image: NetworkImage('${data!['profilepic']}'),
-                              ),
-                            ),
-                          ),
+              child: Scaffold(
+                appBar: AppBar(
+                  // preferredSize: Size.fromHeight(kToolbarHeight + 20),
+                  backgroundColor: AppColors.backgroundcolor,
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_new_outlined,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
 
-                          ///gem pic end
-                          ///qr
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 20),
-                              height: 200,
-                              width: double.infinity,
-                              color: Color(0xDBD6EFFF),
-                              child: Image(
-                                image:
-                                    NetworkImage('${data!['capturedimage']}'),
-                              ),
-                            ),
-                          ),
+                  title: Text(
+                    'Attempt Details',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  iconTheme: IconThemeData(color: Colors.white),
 
-                          ///qr end
-                        ],
-                      ),
-
-                      ///gem code
-                      Container(
-                        padding: EdgeInsets.only(left: 20),
-                        height: 60,
-                        width: double.infinity,
-                        color: Color(0xD1D3FCFF),
-                        child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //centerTitle: true,
+                ),
+                body: Container(
+                  child: SafeArea(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        child: Column(
                           children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                'Email :',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
-                                  height: 2,
-                                ),
+                            SizedBox(
+                              height: 30.0,
+                            ),
+                            Row(
+                              children: [
+                                ///Gem picture
+                                ///circle avatar
+                                Spacer(),
+                                CircleAvatar(
+                                    backgroundColor: AppColors.backgroundcolor,
+                                    minRadius: 73,
+                                    child: CircleAvatar(
+                                        radius: 70,
+                                        backgroundImage:
+                                            //AssetImage('images/g.png'),
+                                            NetworkImage(
+                                                '${data!['profilepic']}'))),
+                                Spacer(),
+                                CircleAvatar(
+                                    backgroundColor: Colors.red,
+                                    minRadius: 73,
+                                    child: CircleAvatar(
+                                        radius: 70,
+                                        backgroundImage:
+                                            //AssetImage('images/g.png'),
+                                            NetworkImage(
+                                                '${data!['capturedimage']}'))),
+                                Spacer(),
+
+                                ///end
+                                /* Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.only(left: 20),
+                                    height: 200,
+                                    width: double.infinity,
+                                    color: Color(0xDBD6EFFF),
+                                    child: Image(
+                                      image: NetworkImage('${data!['profilepic']}'),
+                                    ),
+                                  ),
+                                ),*/
+
+                                ///gem pic end
+                                ///qr
+                                /*   Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.only(left: 20),
+                                    height: 200,
+                                    width: double.infinity,
+                                    color: Color(0xDBD6EFFF),
+                                    child: Image(
+                                      image:
+                                          NetworkImage('${data!['capturedimage']}'),
+                                    ),
+                                  ),
+                                ),*/
+
+                                ///qr end
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30.0,
+                            ),
+
+                            ///gem code
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      'Email :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['email']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+
+                            ///gem code end
+                            ///gem name
+                            ///gem name
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: Color(0xD1D3FCFF),
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      'Date & Time :',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 18,
+                                        height: 2,
+                                      ),
+                                    ),
+                                  ),
+
+                                  ///place the gem name variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['date & time']}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 22,
+                                        height: 2,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
 
-                            ///place the gemcode variable here
-                            Expanded(
-                              child: Text(
-                                '${data?['email']}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 22,
-                                  height: 2,
+                            ///gem name end
+                            ///gem name end
+                            ///gem variety
+
+                            ///total cost end
+                            /* Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xFF43468E),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 12.0),
+                                    textStyle: TextStyle(
+                                        fontSize: 20.0, color: Color(0xFF43468E)),
+                                  ),
+                                  child: Text('Back'),
                                 ),
-                              ),
-                            ),
+                                SizedBox(width: 8.0),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    /*
+                                    FirebaseFirestore.instance
+                                        .collection(client)
+                                        .doc(selectedattempt)
+                                        .delete();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => gemlist()),
+                                    );*/
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xFF43468E),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 12.0),
+                                    textStyle: TextStyle(
+                                        fontSize: 20.0, color: Colors.white),
+                                  ),
+                                  child: Text('sold'),
+                                ),
+                              ],
+                            ),*/
                           ],
                         ),
                       ),
-
-                      ///gem code end
-                      ///gem name
-                      ///gem name
-                      Container(
-                        padding: EdgeInsets.only(left: 20),
-                        height: 60,
-                        width: double.infinity,
-                        color: Color(0xD1D3FCFF),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                'Date & Time :',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
-                                  height: 2,
-                                ),
-                              ),
-                            ),
-
-                            ///place the gem name variable here
-                            Expanded(
-                              child: Text(
-                                '${data?['date & time']}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 22,
-                                  height: 2,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      ///gem name end
-                      ///gem name end
-                      ///gem variety
-
-                      ///total cost end
-                      /* Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF43468E),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 12.0),
-                              textStyle: TextStyle(
-                                  fontSize: 20.0, color: Color(0xFF43468E)),
-                            ),
-                            child: Text('Back'),
-                          ),
-                          SizedBox(width: 8.0),
-                          ElevatedButton(
-                            onPressed: () {
-                              /*
-                              FirebaseFirestore.instance
-                                  .collection(client)
-                                  .doc(selectedattempt)
-                                  .delete();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => gemlist()),
-                              );*/
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF43468E),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 12.0),
-                              textStyle: TextStyle(
-                                  fontSize: 20.0, color: Colors.white),
-                            ),
-                            child: Text('sold'),
-                          ),
-                        ],
-                      ),*/
-                    ],
+                    ),
                   ),
                 ),
               ),
