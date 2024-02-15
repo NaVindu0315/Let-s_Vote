@@ -16,19 +16,19 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(sucs_Attempt_list());
+  runApp(failed_Attempt_list());
 }
 
-class sucs_Attempt_list extends StatefulWidget {
+class failed_Attempt_list extends StatefulWidget {
   @override
-  suc_attempt createState() => suc_attempt();
+  fail_attempt createState() => fail_attempt();
 }
 
-class suc_attempt extends State<sucs_Attempt_list> {
+class fail_attempt extends State<failed_Attempt_list> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   final CollectionReference postsRef =
-      FirebaseFirestore.instance.collection('success');
+      FirebaseFirestore.instance.collection('failed');
 
   String searchValue = ''; // Track the search value
 
@@ -95,7 +95,7 @@ class suc_attempt extends State<sucs_Attempt_list> {
           ),
 
           title: Text(
-            'sucessful Attempt Details',
+            'Failed Attempt Details',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: IconThemeData(color: Colors.white),
@@ -140,7 +140,7 @@ class suc_attempt extends State<sucs_Attempt_list> {
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
-                      .collection('success')
+                      .collection('failed')
                       .snapshots(),
                   //postsRef.snapshots(),
                   builder: (context, snapshot) {
@@ -166,18 +166,18 @@ class suc_attempt extends State<sucs_Attempt_list> {
                           color: AppColors.backgroundcolor,
                           child: ListTile(
                             leading: Icon(
-                              Icons.done,
+                              Icons.not_interested,
                               color: Colors.white,
                             ),
                             title: GestureDetector(
                               onTap: () {
-                                Navigator.push(
+                                /*   Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Detailed_Sucs(
-                                          successid: '${data['successid']}')),
-                                );
-                                print('${data['successid']}');
+                                          successid: '${data['failedid']}')),
+                                );*/
+                                print('${data['failedid']}');
                               },
                               child: Ink(
                                 child: Text(
