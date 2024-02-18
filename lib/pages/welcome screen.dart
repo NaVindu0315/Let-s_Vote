@@ -260,6 +260,7 @@ class _DashBoardState extends State<DashBoard> {
                 ///firestore upload failed attempt
                 ///
                 ///
+                String ip = await getIpAddress();
                 String successid = "$client$now";
                 final sucessattempt =
                     _firestore.collection("success").doc(successid);
@@ -272,6 +273,7 @@ class _DashBoardState extends State<DashBoard> {
                   'anger': anger,
                   'fear': fear,
                   'sadness': sadness,
+                  'ip': ip,
                 });
 
                 /// firestore upload end
@@ -317,6 +319,7 @@ class _DashBoardState extends State<DashBoard> {
             ///firestore upload failed attempt
             ///
             ///
+            String ip = await getIpAddress();
             String failedid = "$client$now";
             final failedattempt = _firestore.collection("failed").doc(failedid);
             failedattempt.set({
@@ -325,6 +328,7 @@ class _DashBoardState extends State<DashBoard> {
               'capturedimage': imageurl2,
               'email': client,
               'date & time': now,
+              'ip': ip,
             });
 
             /// firestore upload end
