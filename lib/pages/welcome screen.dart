@@ -18,6 +18,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:network_info_plus/network_info_plus.dart';
 
 late User loggedinuser;
 late String client;
