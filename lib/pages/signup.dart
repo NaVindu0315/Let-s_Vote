@@ -185,12 +185,12 @@ class _signupState extends State<signup> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: AppColors.buttoncolor,
                           ),
                           child: Text(
                             "Capture",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.backgroundcolor,
                             ),
                           )),
                       SizedBox(
@@ -201,12 +201,12 @@ class _signupState extends State<signup> {
                             propicurlcontroller.clear();
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: AppColors.buttoncolor,
                           ),
                           child: Text(
                             'Clear',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.backgroundcolor,
                             ),
                           ))
                     ],
@@ -231,6 +231,7 @@ class _signupState extends State<signup> {
                       ),
                       //username
                       TextFormField(
+                        controller: usernamecontroller,
                         onChanged: (value) {
                           username = value;
                         },
@@ -255,7 +256,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width for better feedback
                           ),
@@ -267,9 +268,11 @@ class _signupState extends State<signup> {
 
                       //email
                       TextFormField(
+                        controller: emailcontroller,
                         onChanged: (value) {
                           email = value;
                         },
+
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.email,
@@ -291,7 +294,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // set focused border color and width
                           ),
@@ -303,6 +306,7 @@ class _signupState extends State<signup> {
 
                       //mobile
                       TextFormField(
+                        controller: mobilecontroller,
                         onChanged: (value) {
                           mobile = value;
                         },
@@ -327,7 +331,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -339,6 +343,7 @@ class _signupState extends State<signup> {
 
                       //address
                       TextFormField(
+                        controller: adrscontroller,
                         onChanged: (value) {
                           address = value;
                         },
@@ -363,7 +368,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -374,8 +379,8 @@ class _signupState extends State<signup> {
                       ),
 
                       //birthday
-
                       TextFormField(
+                        controller: bdaycontroller,
                         onChanged: (value) {
                           dob = value;
                         },
@@ -403,7 +408,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -412,6 +417,8 @@ class _signupState extends State<signup> {
                             color:
                                 Colors.white), // Set typed text color to white
                       ),
+
+                      //birthday end
 
                       //url
                       TextFormField(
@@ -427,7 +434,7 @@ class _signupState extends State<signup> {
                                   .white, // Set prefix icon color to white
                             ),
                           ),
-                          labelText: 'url',
+                          labelText: 'Image URL',
                           labelStyle: TextStyle(
                               color: Colors
                                   .white), // Set label text color to white
@@ -441,7 +448,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width (not applicable)
                           ),
@@ -479,7 +486,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -518,7 +525,7 @@ class _signupState extends State<signup> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                                color: AppColors.buttoncolor,
                                 width:
                                     2.0), // Set focused border color and width
                           ),
@@ -540,7 +547,7 @@ class _signupState extends State<signup> {
                         return ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.black)),
+                                  AppColors.buttoncolor)),
                           onPressed: () {
                             if (pw == pw2) {
                               createuser();
@@ -588,7 +595,7 @@ class _signupState extends State<signup> {
                             'Sign up',
                             style: TextStyle(
                               fontSize: 25.0,
-                              color: Colors.white,
+                              color: AppColors.backgroundcolor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
