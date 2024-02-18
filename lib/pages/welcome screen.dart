@@ -711,7 +711,9 @@ class _DashBoardState extends State<DashBoard> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: null,
+                                  onTap: () {
+                                    print("fuck");
+                                  },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
