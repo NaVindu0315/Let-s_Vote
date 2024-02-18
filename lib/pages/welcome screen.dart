@@ -731,6 +731,19 @@ class _DashBoardState extends State<DashBoard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () async {
+                                    try {
+                                      /// Initialize Ip Address
+                                      var ipAddress =
+                                          IpAddress(type: RequestType.json);
+
+                                      /// Get the IpAddress based on requestType.
+                                      dynamic data =
+                                          await ipAddress.getIpAddress();
+                                      print(data.toString());
+                                    } on IpAddressException catch (exception) {
+                                      /// Handle the exception.
+                                      print(exception.message);
+                                    }
                                     //printIps();
                                     //   print(_connectionStatus);
                                   },
