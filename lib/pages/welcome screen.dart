@@ -19,6 +19,11 @@ import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'dart:async';
+
+import 'dart:io';
+import 'package:get_ip_address/get_ip_address.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -109,7 +114,20 @@ class _DashBoardState extends State<DashBoard> {
     }
   }
 
+/*
+//thhis worked
+  Future printIps() async {
+    for (var interface in await NetworkInterface.list()) {
+      print('== Interface: ${interface.name} ==');
+      for (var addr in interface.addresses) {
+        print(
+            '${addr.address} ${addr.host} ${addr.isLoopback} ${addr.rawAddress} ${addr.type.name}');
+      }
+    }
+  }*/
+
   ///returning function end
+  ///for the ip address
 
   ///to get the current user
   @override
@@ -123,6 +141,7 @@ class _DashBoardState extends State<DashBoard> {
       }
       setState(() {});
     });
+    //_initNetworkInfo();
   }
 
   void getcurrentuser() async {
@@ -140,6 +159,19 @@ class _DashBoardState extends State<DashBoard> {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<String> getIpAddress() async {
+    try {
+      var ipAddress = IpAddress(type: RequestType.json);
+      var data = await ipAddress.getIpAddress();
+      return data["ip"];
+    } on IpAddressException catch (exception) {
+      // Handle error and potentially return a default value or throw an error
+      print(exception.message);
+      // Replace with your error handling logic (e.g., return "")
+      throw Exception("Failed to get IP address");
     }
   }
 
@@ -228,6 +260,7 @@ class _DashBoardState extends State<DashBoard> {
                 ///firestore upload failed attempt
                 ///
                 ///
+                String ip = await getIpAddress();
                 String successid = "$client$now";
                 final sucessattempt =
                     _firestore.collection("success").doc(successid);
@@ -240,6 +273,7 @@ class _DashBoardState extends State<DashBoard> {
                   'anger': anger,
                   'fear': fear,
                   'sadness': sadness,
+                  'ip': ip,
                 });
 
                 /// firestore upload end
@@ -285,6 +319,7 @@ class _DashBoardState extends State<DashBoard> {
             ///firestore upload failed attempt
             ///
             ///
+            String ip = await getIpAddress();
             String failedid = "$client$now";
             final failedattempt = _firestore.collection("failed").doc(failedid);
             failedattempt.set({
@@ -293,6 +328,7 @@ class _DashBoardState extends State<DashBoard> {
               'capturedimage': imageurl2,
               'email': client,
               'date & time': now,
+              'ip': ip,
             });
 
             /// firestore upload end
@@ -307,6 +343,7 @@ class _DashBoardState extends State<DashBoard> {
           ///firestore upload
           ///
           ///
+          String ip = await getIpAddress();
           String unknownid = "$client$now";
           final unknwerror =
               _firestore.collection("unknown Errors").doc(unknownid);
@@ -316,6 +353,7 @@ class _DashBoardState extends State<DashBoard> {
             'capturedimage': imageurl2,
             'email': client,
             'date & time': now,
+            'ip': ip,
           });
           QuickAlert.show(
             context: context,
@@ -711,7 +749,10 @@ class _DashBoardState extends State<DashBoard> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: null,
+                                  onTap: () async {
+                                    //printIps();
+                                    //   print(_connectionStatus);
+                                  },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
