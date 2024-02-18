@@ -162,6 +162,19 @@ class _DashBoardState extends State<DashBoard> {
     }
   }
 
+  Future<String> getIpAddress() async {
+    try {
+      var ipAddress = IpAddress(type: RequestType.json);
+      var data = await ipAddress.getIpAddress();
+      return data["ip"];
+    } on IpAddressException catch (exception) {
+      // Handle error and potentially return a default value or throw an error
+      print(exception.message);
+      // Replace with your error handling logic (e.g., return "")
+      throw Exception("Failed to get IP address");
+    }
+  }
+
   ///this is the function to compare and get the results for face comparing without the captuing and storing
   ///funtion begin
   Future<dynamic> compareandexpression(
@@ -326,6 +339,7 @@ class _DashBoardState extends State<DashBoard> {
           ///firestore upload
           ///
           ///
+          String ip = await getIpAddress();
           String unknownid = "$client$now";
           final unknwerror =
               _firestore.collection("unknown Errors").doc(unknownid);
@@ -335,6 +349,7 @@ class _DashBoardState extends State<DashBoard> {
             'capturedimage': imageurl2,
             'email': client,
             'date & time': now,
+            'ip': ip,
           });
           QuickAlert.show(
             context: context,
@@ -731,19 +746,6 @@ class _DashBoardState extends State<DashBoard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () async {
-                                    try {
-                                      /// Initialize Ip Address
-                                      var ipAddress =
-                                          IpAddress(type: RequestType.json);
-
-                                      /// Get the IpAddress based on requestType.
-                                      dynamic data =
-                                          await ipAddress.getIpAddress();
-                                      print(data.toString());
-                                    } on IpAddressException catch (exception) {
-                                      /// Handle the exception.
-                                      print(exception.message);
-                                    }
                                     //printIps();
                                     //   print(_connectionStatus);
                                   },
