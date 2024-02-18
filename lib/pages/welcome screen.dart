@@ -22,7 +22,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
 import 'dart:io';
-import 'package:wifi/wifi.dart';
 
 late User loggedinuser;
 late String client;
@@ -114,6 +113,8 @@ class _DashBoardState extends State<DashBoard> {
     }
   }
 
+/*
+//thhis worked
   Future printIps() async {
     for (var interface in await NetworkInterface.list()) {
       print('== Interface: ${interface.name} ==');
@@ -122,7 +123,7 @@ class _DashBoardState extends State<DashBoard> {
             '${addr.address} ${addr.host} ${addr.isLoopback} ${addr.rawAddress} ${addr.type.name}');
       }
     }
-  }
+  }*/
 
   ///returning function end
   ///for the ip address
@@ -728,8 +729,8 @@ class _DashBoardState extends State<DashBoard> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () {
-                                    printIps();
+                                  onTap: () async {
+                                    //printIps();
                                     //   print(_connectionStatus);
                                   },
                                   child: Container(
