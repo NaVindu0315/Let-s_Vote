@@ -364,6 +364,44 @@ class _Detailed_SucsState extends State<Detailed_Sucs> {
                                 ],
                               ),
                             ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+
+                            ///gem code
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      'IP :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['ip']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
 
                             ///gem name end
                             ///gem name end
