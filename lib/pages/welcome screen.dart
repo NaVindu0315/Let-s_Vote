@@ -22,6 +22,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
 import 'dart:io';
+import 'package:wifi/wifi.dart';
 
 late User loggedinuser;
 late String client;
