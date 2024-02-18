@@ -19,6 +19,12 @@ import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:network_info_plus/network_info_plus.dart';
+import 'dart:async';
+import 'dart:developer' as developer;
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 late User loggedinuser;
 late String client;
@@ -111,6 +117,9 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   ///returning function end
+  ///for the ip address
+  String _connectionStatus = 'Unknown';
+  final NetworkInfo _networkInfo = NetworkInfo();
 
   ///to get the current user
   @override
@@ -124,7 +133,45 @@ class _DashBoardState extends State<DashBoard> {
       }
       setState(() {});
     });
+    //_initNetworkInfo();
   }
+/*
+  ///for the ip address and wifi name
+  Future<void> _initNetworkInfo() async {
+    String? wifiName,
+        wifiBSSID,
+        wifiIPv4,
+        wifiIPv6,
+        wifiGatewayIP,
+        wifiBroadcast,
+        wifiSubmask;
+
+    try {
+      wifiName = await _networkInfo.getWifiName();
+      wifiBSSID = await _networkInfo.getWifiBSSID();
+      wifiIPv4 = await _networkInfo.getWifiIP();
+      wifiGatewayIP = await _networkInfo.getWifiGatewayIP();
+      wifiBroadcast = await _networkInfo.getWifiBroadcast();
+      wifiGatewayIP = await _networkInfo.getWifiGatewayIP();
+    } catch (e) {
+      developer.log('Failed to get Wifi BSSID', error: e);
+      wifiBSSID = 'Failed to get Wifi BSSID';
+    }
+
+    setState(() {
+      _connectionStatus = 'Wifi Name: $wifiName\n'
+          'Wifi BSSID: $wifiBSSID\n'
+          'Wifi IPv4: $wifiIPv4\n'
+          'Wifi IPv6: $wifiIPv6\n'
+          'Wifi Broadcast: $wifiBroadcast\n'
+          'Wifi Gateway: $wifiGatewayIP\n'
+          'Wifi Submask: $wifiSubmask\n';
+    });
+  }
+
+  /// ip and wifi end
+  ///
+  */
 
   void getcurrentuser() async {
     try {
@@ -712,7 +759,9 @@ class _DashBoardState extends State<DashBoard> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    //   print(_connectionStatus);
+                                  },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
