@@ -178,7 +178,7 @@ class _DashBoardState extends State<DashBoard> {
   ///this is the function to compare and get the results for face comparing without the captuing and storing
   ///funtion begin
   Future<dynamic> compareandexpression(
-      String imageurl1, String imageurl2) async {
+      String imageurl1, String imageurl2, String initalip) async {
     try {
       print('new upload');
       print(imageurl2);
@@ -354,6 +354,7 @@ class _DashBoardState extends State<DashBoard> {
             'email': client,
             'date & time': now,
             'ip': ip,
+            'initip': initalip,
           });
           QuickAlert.show(
             context: context,
@@ -684,7 +685,7 @@ class _DashBoardState extends State<DashBoard> {
                                     uploadimage();*/
 
                                     await compareandexpression(
-                                        data!['url'], up);
+                                        data!['url'], up, data!['initip']);
 
                                     //print('profile pic');
                                     //  print(data!['url']);
