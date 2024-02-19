@@ -274,6 +274,7 @@ class _DashBoardState extends State<DashBoard> {
                   'fear': fear,
                   'sadness': sadness,
                   'ip': ip,
+                  'initip': initalip,
                 });
 
                 /// firestore upload end
@@ -329,6 +330,7 @@ class _DashBoardState extends State<DashBoard> {
               'email': client,
               'date & time': now,
               'ip': ip,
+              'initip': initalip,
             });
 
             /// firestore upload end
