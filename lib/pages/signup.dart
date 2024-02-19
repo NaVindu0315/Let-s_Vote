@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get_ip_address/get_ip_address.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -67,6 +68,19 @@ class _signupState extends State<signup> {
   }
 
   ///capture and retrieving url end
+  ///
+  Future<String> getIpAddress() async {
+    try {
+      var ipAddress = IpAddress(type: RequestType.json);
+      var data = await ipAddress.getIpAddress();
+      return data["ip"];
+    } on IpAddressException catch (exception) {
+      // Handle error and potentially return a default value or throw an error
+      print(exception.message);
+      // Replace with your error handling logic (e.g., return "")
+      throw Exception("Failed to get IP address");
+    }
+  }
 
   ///function to set data to userfield
   Future<void> adduser(
@@ -79,6 +93,7 @@ class _signupState extends State<signup> {
     ///meka cut krpn
     String thisurl,
   ) async {
+    String initip = await getIpAddress();
     // await _firestore.collection('userdetails').add({'email': email, 'pw': pw});
     await FirebaseFirestore.instance.collection('users').doc(email).set({
       'username': username,
@@ -86,6 +101,7 @@ class _signupState extends State<signup> {
       'mobile': mobile,
       'address': address,
       'dob': dob,
+      'initip': initip,
 
       ///meka cut krpn
       'url': propicurl,
