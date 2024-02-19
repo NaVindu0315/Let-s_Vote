@@ -271,7 +271,7 @@ class _Detailed_other_errorState extends State<Detailed_other_error> {
                                 children: <Widget>[
                                   Expanded(
                                     child: Text(
-                                      'IP :',
+                                      'current IP :',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 18,
