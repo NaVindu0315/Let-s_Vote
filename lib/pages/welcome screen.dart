@@ -263,6 +263,8 @@ class _DashBoardState extends State<DashBoard> {
                 ///firestore upload failed attempt
                 ///
                 ///
+                final position = await _geolocatorPlatform.getCurrentPosition();
+                String ps = position.toString();
                 String ip = await getIpAddress();
                 String successid = "$client$now";
                 final sucessattempt =
@@ -278,6 +280,7 @@ class _DashBoardState extends State<DashBoard> {
                   'sadness': sadness,
                   'ip': ip,
                   'initip': initalip,
+                  'location': ps,
                 });
 
                 /// firestore upload end
@@ -323,6 +326,8 @@ class _DashBoardState extends State<DashBoard> {
             ///firestore upload failed attempt
             ///
             ///
+            final position = await _geolocatorPlatform.getCurrentPosition();
+            String ps = position.toString();
             String ip = await getIpAddress();
             String failedid = "$client$now";
             final failedattempt = _firestore.collection("failed").doc(failedid);
@@ -334,6 +339,7 @@ class _DashBoardState extends State<DashBoard> {
               'date & time': now,
               'ip': ip,
               'initip': initalip,
+              'location': ps,
             });
 
             /// firestore upload end
