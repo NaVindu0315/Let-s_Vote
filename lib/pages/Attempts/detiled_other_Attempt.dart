@@ -271,7 +271,46 @@ class _Detailed_other_errorState extends State<Detailed_other_error> {
                                 children: <Widget>[
                                   Expanded(
                                     child: Text(
-                                      'IP :',
+                                      'IP when signed up :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['initip']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(
+                              height: 10.0,
+                            ),
+
+                            ///gem code
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      'IP when attempted :',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 18,
