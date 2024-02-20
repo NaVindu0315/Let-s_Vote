@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
@@ -23,6 +24,8 @@ import 'dart:async';
 
 import 'dart:io';
 import 'package:get_ip_address/get_ip_address.dart';
+
+import 'package:geolocator/geolocator.dart';
 
 late User loggedinuser;
 late String client;
@@ -130,6 +133,7 @@ class _DashBoardState extends State<DashBoard> {
   ///for the ip address
 
   ///to get the current user
+  final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
   @override
   void initState() {
     super.initState();
@@ -260,6 +264,8 @@ class _DashBoardState extends State<DashBoard> {
                 ///firestore upload failed attempt
                 ///
                 ///
+                final position = await _geolocatorPlatform.getCurrentPosition();
+                String ps = position.toString();
                 String ip = await getIpAddress();
                 String successid = "$client$now";
                 final sucessattempt =
@@ -275,6 +281,7 @@ class _DashBoardState extends State<DashBoard> {
                   'sadness': sadness,
                   'ip': ip,
                   'initip': initalip,
+                  'location': ps,
                 });
 
                 /// firestore upload end
@@ -320,6 +327,8 @@ class _DashBoardState extends State<DashBoard> {
             ///firestore upload failed attempt
             ///
             ///
+            final position = await _geolocatorPlatform.getCurrentPosition();
+            String ps = position.toString();
             String ip = await getIpAddress();
             String failedid = "$client$now";
             final failedattempt = _firestore.collection("failed").doc(failedid);
@@ -331,6 +340,7 @@ class _DashBoardState extends State<DashBoard> {
               'date & time': now,
               'ip': ip,
               'initip': initalip,
+              'location': ps,
             });
 
             /// firestore upload end
@@ -345,6 +355,8 @@ class _DashBoardState extends State<DashBoard> {
           ///firestore upload
           ///
           ///
+          final position = await _geolocatorPlatform.getCurrentPosition();
+          String ps = position.toString();
           String ip = await getIpAddress();
           String unknownid = "$client$now";
           final unknwerror =
@@ -357,6 +369,7 @@ class _DashBoardState extends State<DashBoard> {
             'date & time': now,
             'ip': ip,
             'initip': initalip,
+            'location': ps,
           });
           QuickAlert.show(
             context: context,
@@ -660,7 +673,7 @@ class _DashBoardState extends State<DashBoard> {
                                 )),
 
                                 ///for the camera preview
-                                Expanded(
+                                /*      Expanded(
                                   child: Container(
                                     width: 150,
                                     height: 120,
@@ -670,7 +683,7 @@ class _DashBoardState extends State<DashBoard> {
                                       child: CameraPreview(controller!),
                                     ),
                                   ),
-                                ),
+                                ),*/
                               ],
                             ),
 
@@ -681,6 +694,7 @@ class _DashBoardState extends State<DashBoard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () async {
+                                    HapticFeedback.mediumImpact();
                                     String up = await newupload();
                                     // print(up);
                                     /*  capturedimageurlcontroller.clear();
@@ -753,6 +767,9 @@ class _DashBoardState extends State<DashBoard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () async {
+                                    final position = await _geolocatorPlatform
+                                        .getCurrentPosition();
+                                    print(position);
                                     //printIps();
                                     //   print(_connectionStatus);
                                   },
@@ -773,7 +790,9 @@ class _DashBoardState extends State<DashBoard> {
                                 //second box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: null,
+                                  onTap: () async {
+                                    print('fuck');
+                                  },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
