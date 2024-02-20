@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
@@ -693,6 +694,7 @@ class _DashBoardState extends State<DashBoard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () async {
+                                    HapticFeedback.mediumImpact();
                                     String up = await newupload();
                                     // print(up);
                                     /*  capturedimageurlcontroller.clear();
