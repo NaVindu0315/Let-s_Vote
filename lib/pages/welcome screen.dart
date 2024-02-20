@@ -672,7 +672,7 @@ class _DashBoardState extends State<DashBoard> {
                                 )),
 
                                 ///for the camera preview
-                                Expanded(
+                                /*      Expanded(
                                   child: Container(
                                     width: 150,
                                     height: 120,
@@ -682,7 +682,7 @@ class _DashBoardState extends State<DashBoard> {
                                       child: CameraPreview(controller!),
                                     ),
                                   ),
-                                ),
+                                ),*/
                               ],
                             ),
 
