@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lets_vote/Colors/colors.dart';
 
 const kSendButtonTextStyle = TextStyle(
-  color: kWhatsAppGreen,
+  color: AppColors.backgroundcolor,
   fontWeight: FontWeight.bold,
   fontSize: 18.0,
 );
