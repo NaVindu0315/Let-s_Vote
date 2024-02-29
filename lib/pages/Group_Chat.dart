@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../Colors/constants.dart';
+
 late User loggedinuser;
 
-class ChatScreen extends StatefulWidget {
+class GroupChat extends StatefulWidget {
   static String id = 'chat_screen';
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _GroupChatState createState() => _GroupChatState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _GroupChatState extends State<GroupChat> {
   DateTime timestamp = DateTime.now();
 
   final messageTextController = TextEditingController();
