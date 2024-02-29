@@ -333,167 +333,31 @@ class _Detailed_FailsState extends State<Detailed_Fails> {
                                 ],
                               ),
                             ),
-
-                            ///gem code
-
-                            /*  Container(
-                                padding: EdgeInsets.only(left: 20),
-                                height: 60,
-                                width: double.infinity,
-                                color: AppColors.backgroundcolor,
-                                child: Row(
-                                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Text(
-                                        'Fear :',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 18,
-                                            height: 2,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-
-                                    ///place the gemcode variable here
-                                    Expanded(
-                                      child: Text(
-                                        '${data?['fear']}',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 22,
-                                            height: 2,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(left: 20),
-                                height: 60,
-                                width: double.infinity,
-                                color: AppColors.backgroundcolor,
-                                child: Row(
-                                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Text(
-                                        'Anger :',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 18,
-                                            height: 2,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-
-                                    ///place the gemcode variable here
-                                    Expanded(
-                                      child: Text(
-                                        '${data?['anger']}',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 22,
-                                            height: 2,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(left: 20),
-                                height: 60,
-                                width: double.infinity,
-                                color: AppColors.backgroundcolor,
-                                child: Row(
-                                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Text(
-                                        'sadness :',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 18,
-                                            height: 2,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-
-                                    ///place the gemcode variable here
-                                    Expanded(
-                                      child: Text(
-                                        '${data?['sadness']}',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 22,
-                                            height: 2,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),*/
-
-                            ///gem name end
-                            ///gem name end
-                            ///gem variety
-
-                            ///total cost end
-                            /* Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFF43468E),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20.0, vertical: 12.0),
-                                    textStyle: TextStyle(
-                                        fontSize: 20.0, color: Color(0xFF43468E)),
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Spacer(),
+                                  Text(
+                                    '${data?['location']}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 18,
+                                        height: 2,
+                                        color: Colors.white),
                                   ),
-                                  child: Text('Back'),
-                                ),
-                                SizedBox(width: 8.0),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    /*
-                                    FirebaseFirestore.instance
-                                        .collection(client)
-                                        .doc(selectedattempt)
-                                        .delete();
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => gemlist()),
-                                    );*/
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFF43468E),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20.0, vertical: 12.0),
-                                    textStyle: TextStyle(
-                                        fontSize: 20.0, color: Colors.white),
+                                  IconButton(
+                                    icon: const Icon(Icons.content_copy,
+                                        color: Colors.white),
+                                    onPressed: () async {},
                                   ),
-                                  child: Text('sold'),
-                                ),
-                              ],
-                            ),*/
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
