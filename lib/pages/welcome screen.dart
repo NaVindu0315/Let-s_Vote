@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/pages/Group_Chat.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/management_dashboard.dart';
 import 'package:lets_vote/pages/signup.dart';
@@ -792,6 +793,11 @@ class _DashBoardState extends State<DashBoard> {
                                     child: GestureDetector(
                                   onTap: () async {
                                     print('fuck');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => GroupChat()),
+                                    );
                                   },
                                   child: Container(
                                       height: 120.0,

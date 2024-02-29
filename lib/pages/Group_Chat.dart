@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lets_vote/Colors/colors.dart';
 
 import '../Colors/constants.dart';
 
@@ -99,7 +100,10 @@ class _GroupChatState extends State<GroupChat> {
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.logout_outlined),
+              icon: Icon(
+                Icons.logout_outlined,
+                color: Colors.white,
+              ),
               onPressed: () {
                 _auth.signOut();
                 Navigator.pop(context);
@@ -108,13 +112,11 @@ class _GroupChatState extends State<GroupChat> {
               }),
         ],
         title: Text(
-          '    Gemify Connect',
+          '    Group Chat',
           style: TextStyle(
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundcolor,
       ),
       body: SafeArea(
         child: Column(
