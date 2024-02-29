@@ -300,7 +300,7 @@ class messagebuble extends StatelessWidget {
                     topRight: Radius.circular(30.0),
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0)),
-            color: isme ? kSenderChatBubbleColor : kReceiverChatBubbleColor,
+            color: isme ? AppColors.backgroundcolor : AppColors.buttoncolor,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Text(
