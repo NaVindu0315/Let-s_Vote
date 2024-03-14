@@ -326,11 +326,11 @@ class _voting_homeState extends State<voting_home> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              /*   Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DashBoard()),
-                              );*/
+                              );
                             },
                           );
                         }),
@@ -501,6 +501,9 @@ class _voting_homeState extends State<voting_home> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              SizedBox(
+                                height: 70.0,
+                              ),
                               // Spacer(),
                               Row(
                                 children: [
@@ -515,6 +518,9 @@ class _voting_homeState extends State<voting_home> {
                                   Spacer(),
                                 ],
                               ),
+                              SizedBox(
+                                height: 30.0,
+                              ),
                               Row(
                                 children: [
                                   Spacer(),
@@ -525,6 +531,9 @@ class _voting_homeState extends State<voting_home> {
                                       child: Text('Name')),
                                   Spacer(),
                                 ],
+                              ),
+                              SizedBox(
+                                height: 30.0,
                               ),
                               Row(
                                 children: [
@@ -545,6 +554,9 @@ class _voting_homeState extends State<voting_home> {
                                   Spacer(),
                                 ],
                               ),
+                              SizedBox(
+                                height: 30.0,
+                              ),
                               Row(
                                 children: [
                                   Spacer(),
@@ -562,6 +574,9 @@ class _voting_homeState extends State<voting_home> {
                                       child: Text('alert test')),
                                   Spacer(),
                                 ],
+                              ),
+                              SizedBox(
+                                height: 30.0,
                               ),
                               Row(
                                 children: [
