@@ -6,6 +6,9 @@ import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
+import 'package:lets_vote/pages/management_dashboard.dart';
+
+import '../Colors/colors.dart';
 
 late User loggedinuser;
 late String client;
@@ -67,7 +70,7 @@ class _voting_homeState extends State<voting_home> {
                 drawer: Drawer(
                   width: 300,
                   child: Container(
-                    color: Color(0xDBD6E5FF), //color of list tiles
+                    color: AppColors.backgroundcolor, //color of list tiles
                     // Add a ListView to ensures the user can scroll
                     child: ListView(
                       // Remove if there are any padding from the ListView.
@@ -75,19 +78,23 @@ class _voting_homeState extends State<voting_home> {
                       children: <Widget>[
                         UserAccountsDrawerHeader(
                           decoration: BoxDecoration(
-                            color: Color(0xFFD1D3FF), //color of drawer header
+                            color:
+                                AppColors.buttoncolor, //color of drawer header
                           ),
                           accountName: Text(
                             '${data!['username']}',
                             style: TextStyle(
-                              color: Colors.indigo,
-                              fontSize: 20,
+                              color: AppColors.backgroundcolor,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           accountEmail: Text(
                             client,
-                            style:
-                                TextStyle(color: Colors.indigo, fontSize: 17),
+                            style: TextStyle(
+                                color: AppColors.backgroundcolor,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold),
                           ),
                           currentAccountPicture: CircleAvatar(
                             radius: 50,
@@ -95,17 +102,43 @@ class _voting_homeState extends State<voting_home> {
                           ),
                         ),
 
+                        //Home
                         Builder(builder: (context) {
                           return ListTile(
-                            leading: Icon(Icons.home),
+                            leading: Icon(
+                              Icons.home,
+                              color: Colors.white,
+                            ),
                             title: const Text('Home',
                                 style: TextStyle(
-                                    color: Colors.indigo, fontSize: 17)),
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              /*   Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()),
+                              );*/
+                            },
+                          );
+                        }),
+
+                        ///management dashboard
+                        //Home
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.manage_accounts,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Management dashboard',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DashBoard()),
+                                    builder: (context) =>
+                                        Management_Dashboard()),
                               );
                             },
                           );
@@ -113,10 +146,13 @@ class _voting_homeState extends State<voting_home> {
                         //Cam page
                         Builder(builder: (context) {
                           return ListTile(
-                            leading: Icon(Icons.camera_alt),
+                            leading: Icon(
+                              Icons.camera_alt,
+                              color: Colors.white,
+                            ),
                             title: const Text('Image Testing Page',
                                 style: TextStyle(
-                                    color: Colors.indigo, fontSize: 17)),
+                                    color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -129,10 +165,13 @@ class _voting_homeState extends State<voting_home> {
                         //Announcement
                         Builder(builder: (context) {
                           return ListTile(
-                            leading: Icon(Icons.face),
-                            title: const Text('Face Comparing',
+                            leading: Icon(
+                              Icons.face,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Face Comparing Test',
                                 style: TextStyle(
-                                    color: Colors.indigo, fontSize: 17)),
+                                    color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -146,10 +185,13 @@ class _voting_homeState extends State<voting_home> {
                         ///voting home
                         Builder(builder: (context) {
                           return ListTile(
-                            leading: Icon(Icons.how_to_vote),
+                            leading: Icon(
+                              Icons.how_to_vote,
+                              color: Colors.white,
+                            ),
                             title: const Text('Voting Home',
                                 style: TextStyle(
-                                    color: Colors.indigo, fontSize: 17)),
+                                    color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
