@@ -138,7 +138,7 @@ class _Detailed_SucsState extends State<Detailed_Sucs> {
                                                 '${data!['profilepic']}'))),
                                 Spacer(),
                                 CircleAvatar(
-                                    backgroundColor: Colors.red,
+                                    backgroundColor: Colors.green,
                                     minRadius: 73,
                                     child: CircleAvatar(
                                         radius: 70,
@@ -454,7 +454,7 @@ class _Detailed_SucsState extends State<Detailed_Sucs> {
                                     '${data?['location']}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 18,
+                                        fontSize: 15,
                                         height: 2,
                                         color: Colors.white),
                                   ),
