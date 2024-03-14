@@ -540,7 +540,7 @@ class _voting_homeState extends State<voting_home> {
                                         callnameFunction("getname");
                                       },
                                       child: Text(
-                                        'Name',
+                                        'Get Name',
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   Spacer(),
@@ -562,9 +562,12 @@ class _voting_homeState extends State<voting_home> {
                                         callagefunction("getname");
                                       },
                                       child: Text(
-                                        'Name ',
+                                        'Get Name ',
                                         style: TextStyle(color: Colors.white),
                                       )),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
                                   ElevatedButton(
                                       style: ButtonStyle(
                                           backgroundColor:
@@ -576,7 +579,7 @@ class _voting_homeState extends State<voting_home> {
                                         callagefunction("getdob");
                                       },
                                       child: Text(
-                                        ' Birthday',
+                                        'Get  Birthday',
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   Spacer(),
