@@ -208,66 +208,76 @@ class _voting_homeState extends State<voting_home> {
 
                 ///drawwe end
                 appBar: AppBar(
-                  backgroundColor: Colors.black,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                  ),
+                  // preferredSize: Size.fromHeight(kToolbarHeight + 20),
+                  backgroundColor: AppColors.backgroundcolor,
+
                   title: Text(
                     'Voting Home',
                     style: TextStyle(color: Colors.white),
                   ),
+                  iconTheme: IconThemeData(color: Colors.white),
 
                   //centerTitle: true,
                 ),
-                body: SafeArea(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Container(
-                        height: 100, // Set the desired height
-                        decoration: BoxDecoration(
-                          color: Colors.black12,
-                          borderRadius: BorderRadius.circular(
-                              50), // Set the desired color
+                body: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'assets/bg_image.jpg'), // Replace with your image path
+                          fit: BoxFit.cover,
                         ),
-                        child: Row(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 20.0,
+                      ),
+                    ),
+                    SafeArea(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Container(
+                            height: 100, // Set the desired height
+                            decoration: BoxDecoration(
+                              color: Colors.black12,
+                              borderRadius: BorderRadius.circular(
+                                  50), // Set the desired color
                             ),
-                            Expanded(
-                              child: Text(
-                                '${data!['username']}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 20.0,
                                 ),
-                              ),
+                                Expanded(
+                                  child: Text(
+                                    '${data!['username']}',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 170.0,
+                                ),
+                                Expanded(
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    minRadius: 70.5,
+                                    child: CircleAvatar(
+                                        radius: 70,
+                                        backgroundImage:
+                                            //AssetImage('images/g.png'),
+                                            NetworkImage('${data!['url']}')),
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: 170.0,
-                            ),
-                            Expanded(
-                              child: CircleAvatar(
-                                backgroundColor: Colors.black,
-                                minRadius: 70.5,
-                                child: CircleAvatar(
-                                    radius: 70,
-                                    backgroundImage:
-                                        //AssetImage('images/g.png'),
-                                        NetworkImage('${data!['url']}')),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               );
             }
