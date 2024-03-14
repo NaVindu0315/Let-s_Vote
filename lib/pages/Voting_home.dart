@@ -90,21 +90,21 @@ class _voting_homeState extends State<voting_home> {
   ///to get json from firebase
 
   Future<String> getnamejson() async {
-    final ref = FirebaseStorage.instance.ref('c/namecontract.json');
+    final ref = FirebaseStorage.instance.ref('jsons/namecontract.json');
     final bytes = await ref.getData();
     final jsonString = utf8.decode(bytes!);
     return (jsonString);
   }
 
   Future<String> nameagejson() async {
-    final ref = FirebaseStorage.instance.ref('c/agecontract.json');
+    final ref = FirebaseStorage.instance.ref('jsons/agecontract.json');
     final bytes = await ref.getData();
     final jsonString = utf8.decode(bytes!);
     return (jsonString);
   }
 
   Future<String> getmyjson() async {
-    final ref = FirebaseStorage.instance.ref('c/contract.json');
+    final ref = FirebaseStorage.instance.ref('jsons/contract.json');
     final bytes = await ref.getData();
     final jsonString = utf8.decode(bytes!);
     return (jsonString);
