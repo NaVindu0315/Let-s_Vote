@@ -234,9 +234,9 @@ class _voting_homeState extends State<voting_home> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(
-                            height: 20.0,
+                            height: 32.0,
                           ),
-                          Container(
+                          /*    Container(
                             height: 100, // Set the desired height
                             decoration: BoxDecoration(
                               color: Colors.black12,
@@ -273,7 +273,20 @@ class _voting_homeState extends State<voting_home> {
                                 ),
                               ],
                             ),
-                          ),
+                          ),*/
+
+                          CircleAvatar(
+                              backgroundColor: AppColors.backgroundcolor,
+                              minRadius: 70.5,
+                              child: CircleAvatar(
+                                  radius: 70,
+                                  backgroundImage:
+                                      //AssetImage('images/g.png'),
+                                      NetworkImage('${data!['url']}'))),
+                          Column(
+                              //to add buttons
+
+                              ),
                         ],
                       ),
                     )
