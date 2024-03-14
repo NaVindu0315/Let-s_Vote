@@ -496,10 +496,87 @@ class _voting_homeState extends State<voting_home> {
                                   backgroundImage:
                                       //AssetImage('images/g.png'),
                                       NetworkImage('${data!['url']}'))),
-                          Column(
-                              //to add buttons
 
+                          ///column
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              // Spacer(),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        getbalance();
+
+                                        callfirstfunction("get_output");
+                                      },
+                                      child: Text('First Function')),
+                                  Spacer(),
+                                ],
                               ),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        callnameFunction("getname");
+                                      },
+                                      child: Text('Name')),
+                                  Spacer(),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        //  agefunction("getname");
+                                        callagefunction("getname");
+                                      },
+                                      child: Text('Name ')),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        //  agefunction("getdob");
+
+                                        callagefunction("getdob");
+                                      },
+                                      child: Text(' Birthday')),
+                                  Spacer(),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        QuickAlert.show(
+                                          context: context,
+                                          type: QuickAlertType.success,
+                                          text: 'working!',
+                                          autoCloseDuration:
+                                              const Duration(seconds: 4),
+                                          showConfirmBtn: false,
+                                        );
+                                      },
+                                      child: Text('alert test')),
+                                  Spacer(),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        loadJsonFromFirebase();
+                                      },
+                                      child: Text('Json Test')),
+                                  Spacer(),
+                                ],
+                              ),
+                              //   Spacer(),
+                            ],
+                          ),
                         ],
                       ),
                     )
