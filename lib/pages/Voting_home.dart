@@ -509,12 +509,19 @@ class _voting_homeState extends State<voting_home> {
                                 children: [
                                   Spacer(),
                                   ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  AppColors.backgroundcolor)),
                                       onPressed: () {
                                         getbalance();
 
                                         callfirstfunction("get_output");
                                       },
-                                      child: Text('First Function')),
+                                      child: Text(
+                                        'First Function',
+                                        style: TextStyle(color: Colors.white),
+                                      )),
                                   Spacer(),
                                 ],
                               ),
@@ -525,10 +532,17 @@ class _voting_homeState extends State<voting_home> {
                                 children: [
                                   Spacer(),
                                   ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  AppColors.backgroundcolor)),
                                       onPressed: () {
                                         callnameFunction("getname");
                                       },
-                                      child: Text('Name')),
+                                      child: Text(
+                                        'Name',
+                                        style: TextStyle(color: Colors.white),
+                                      )),
                                   Spacer(),
                                 ],
                               ),
@@ -539,18 +553,32 @@ class _voting_homeState extends State<voting_home> {
                                 children: [
                                   Spacer(),
                                   ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  AppColors.backgroundcolor)),
                                       onPressed: () {
                                         //  agefunction("getname");
                                         callagefunction("getname");
                                       },
-                                      child: Text('Name ')),
+                                      child: Text(
+                                        'Name ',
+                                        style: TextStyle(color: Colors.white),
+                                      )),
                                   ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  AppColors.backgroundcolor)),
                                       onPressed: () {
                                         //  agefunction("getdob");
 
                                         callagefunction("getdob");
                                       },
-                                      child: Text(' Birthday')),
+                                      child: Text(
+                                        ' Birthday',
+                                        style: TextStyle(color: Colors.white),
+                                      )),
                                   Spacer(),
                                 ],
                               ),
@@ -561,17 +589,24 @@ class _voting_homeState extends State<voting_home> {
                                 children: [
                                   Spacer(),
                                   ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  AppColors.backgroundcolor)),
                                       onPressed: () {
                                         QuickAlert.show(
                                           context: context,
                                           type: QuickAlertType.success,
-                                          text: 'working!',
+                                          text: 'ALert BOX!',
                                           autoCloseDuration:
                                               const Duration(seconds: 4),
                                           showConfirmBtn: false,
                                         );
                                       },
-                                      child: Text('alert test')),
+                                      child: Text(
+                                        'alert test',
+                                        style: TextStyle(color: Colors.white),
+                                      )),
                                   Spacer(),
                                 ],
                               ),
@@ -582,10 +617,17 @@ class _voting_homeState extends State<voting_home> {
                                 children: [
                                   Spacer(),
                                   ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  AppColors.backgroundcolor)),
                                       onPressed: () {
                                         loadJsonFromFirebase();
                                       },
-                                      child: Text('Json Test')),
+                                      child: Text(
+                                        'Json Test',
+                                        style: TextStyle(color: Colors.white),
+                                      )),
                                   Spacer(),
                                 ],
                               ),
