@@ -231,6 +231,7 @@ class _TestContractState extends State<TestContract> {
                             getbalance();
 
                             ///call the function to retreve from the smart contract
+                            calltestfunction("viewtext");
                           },
                           child: Text(
                             'Get Saved Text',
