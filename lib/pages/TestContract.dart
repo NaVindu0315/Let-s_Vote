@@ -11,6 +11,8 @@ class TestContract extends StatefulWidget {
 }
 
 class _TestContractState extends State<TestContract> {
+  TextEditingController txtcontroller = new TextEditingController();
+  String txt = "";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,44 +23,6 @@ class _TestContractState extends State<TestContract> {
               SizedBox(
                 height: 32.0,
               ),
-              /*    Container(
-                            height: 100, // Set the desired height
-                            decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius: BorderRadius.circular(
-                                  50), // Set the desired color
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 20.0,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    '${data!['username']}',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 170.0,
-                                ),
-                                Expanded(
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.black,
-                                    minRadius: 70.5,
-                                    child: CircleAvatar(
-                                        radius: 70,
-                                        backgroundImage:
-                                            //AssetImage('images/g.png'),
-                                            NetworkImage('${data!['url']}')),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),*/
 
               ///column
               Column(
@@ -103,7 +67,7 @@ class _TestContractState extends State<TestContract> {
                             //  callnameFunction("getname");
                           },
                           child: Text(
-                            'Get Name',
+                            'Test Funcion',
                             style: TextStyle(color: Colors.white),
                           )),
                       Spacer(),
@@ -114,33 +78,44 @@ class _TestContractState extends State<TestContract> {
                   ),
                   Row(
                     children: [
-                      Spacer(),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  AppColors.backgroundcolor)),
-                          onPressed: () {
-                            //  agefunction("getname");
-                            //    callagefunction("getname");
-                          },
-                          child: Text(
-                            'Get Name ',
-                            style: TextStyle(color: Colors.white),
-                          )),
                       SizedBox(
-                        width: 10.0,
+                        height: 70,
+                        width:
+                            350, // Set the width of the SizedBox to 300 pixels
+                        child: Card(
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: TextFormField(
+                            controller: txtcontroller,
+                            onChanged: (value) {
+                              txt = value;
+                            },
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.text_fields,
+                              ),
+                              labelText: 'Text',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
                       ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Spacer(),
                       ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   AppColors.backgroundcolor)),
                           onPressed: () {
-                            //  agefunction("getdob");
-
-                            //  callagefunction("getdob");
+                            ///function to send text to smart contract
                           },
                           child: Text(
-                            'Get  Birthday',
+                            'SEND',
                             style: TextStyle(color: Colors.white),
                           )),
                       Spacer(),
@@ -156,9 +131,11 @@ class _TestContractState extends State<TestContract> {
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   AppColors.backgroundcolor)),
-                          onPressed: () {},
+                          onPressed: () {
+                            ///call the function to retreve from the smart contract
+                          },
                           child: Text(
-                            'Next Page',
+                            'Get Saved Text',
                             style: TextStyle(color: Colors.white),
                           )),
                       Spacer(),
@@ -167,7 +144,7 @@ class _TestContractState extends State<TestContract> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  Row(
+                  /*  Row(
                     children: [
                       Spacer(),
                       ElevatedButton(
@@ -183,7 +160,7 @@ class _TestContractState extends State<TestContract> {
                           )),
                       Spacer(),
                     ],
-                  ),
+                  ),*/
                   //   Spacer(),
                 ],
               ),
