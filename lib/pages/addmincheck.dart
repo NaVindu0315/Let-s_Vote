@@ -48,6 +48,7 @@ class _admincheckState extends State<admincheck> {
   TextEditingController url1controller = TextEditingController();
   TextEditingController capturedimageurlcontroller = TextEditingController();
   late String url1img;
+  String? videoPath;
 
   ///camera end
   ///
@@ -135,11 +136,77 @@ class _admincheckState extends State<admincheck> {
 
   ///to get the current user
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
+
+  ///for recording
+
+  onPressedStart() async {
+    if (controller!.value.isRecordingVideo) {
+      return;
+    }
+
+    try {
+      await controller!.startVideoRecording();
+      setState(() {});
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  onPressedStop() async {
+    if (!controller!.value.isRecordingVideo) {
+      return;
+    }
+
+    try {
+      final video = await controller!.stopVideoRecording();
+      setState(() {
+        videoPath = video.path;
+      });
+      print(videoPath);
+
+      // Upload the video to Firebase Storage
+      await vupld();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> vupld() async {
+    if (videoPath == null) return;
+
+    final ref = storage.ref().child('videos/${DateTime.now().toString()}.mp4');
+    final uploadTask = ref.putFile(
+      File(videoPath!),
+      SettableMetadata(
+        contentType: 'video/mp4',
+      ),
+    );
+
+    final snapshot = await uploadTask.whenComplete(() {});
+    final videoUrl = await snapshot.ref.getDownloadURL();
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.success,
+      text: '$videoUrl',
+      autoCloseDuration: const Duration(seconds: 4),
+      showConfirmBtn: false,
+    );
+
+    final vattempt = _firestore.collection("attempt videos").doc(client);
+    vattempt.set({
+      'successid': videoUrl,
+    });
+
+    print(videoUrl);
+  }
+
+  /// recording end
+
   @override
   void initState() {
     super.initState();
     getcurrentuser();
-    controller = CameraController(cameras![1], ResolutionPreset.max);
+    controller = CameraController(cameras![1], ResolutionPreset.medium);
     controller?.initialize().then((_) {
       if (!mounted) {
         return;
@@ -846,6 +913,7 @@ class _admincheckState extends State<admincheck> {
                                               builder: (context) =>
                                                   sucs_Attempt_list()),
                                         );*/
+                                    onPressedStart();
                                   },
                                   child: Container(
                                       height: 30.0,
@@ -874,11 +942,7 @@ class _admincheckState extends State<admincheck> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DashBoard()),
-                                    );
+                                    onPressedStop();
                                   },
                                   child: Container(
                                       height: 30.0,
