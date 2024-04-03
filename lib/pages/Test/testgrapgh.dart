@@ -13,6 +13,16 @@ class testgraph extends StatefulWidget {
 }
 
 class _testgraphState extends State<testgraph> {
+  TextEditingController d1controller = TextEditingController();
+  TextEditingController d2controller = TextEditingController();
+  TextEditingController d3controller = TextEditingController();
+  TextEditingController d4controller = TextEditingController();
+
+  double dtt1 = 0.0;
+  double dtt2 = 0.0;
+  double dtt3 = 0.0;
+  double dtt4 = 0.0;
+
   FirebaseDatabase database = FirebaseDatabase.instance;
   final storage = FirebaseStorage.instance;
 
@@ -129,6 +139,22 @@ class _testgraphState extends State<testgraph> {
     });
 
     /// Initialize the camera controller
+  }
+
+  Future<void> dt1set(double lvl) async {
+    await _databaseReference11.set(lvl);
+  }
+
+  Future<void> dt2set(double lvl) async {
+    await _databaseReference12.set(lvl);
+  }
+
+  Future<void> dt3set(double lvl) async {
+    await _databaseReference13.set(lvl);
+  }
+
+  Future<void> dt4set(double lvl) async {
+    await _databaseReference4.set(lvl);
   }
 
   Widget chartToRun() {
