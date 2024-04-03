@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
+import 'package:lets_vote/pages/addmincheck.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/management_dashboard.dart';
 import 'package:lets_vote/pages/signup.dart';
@@ -557,6 +558,24 @@ class _DashBoardState extends State<DashBoard> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => voting_home()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.admin_panel_settings,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Admin Change compare level',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => admincheck()),
                               );
                             },
                           );
