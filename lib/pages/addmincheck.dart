@@ -191,11 +191,11 @@ class _admincheckState extends State<admincheck> {
       autoCloseDuration: const Duration(seconds: 4),
       showConfirmBtn: false,
     );
-    final vvid = "$client$now";
+    /*  final vvid = "$client$now";
     final vattempt = _firestore.collection("attemptvideos").doc(vvid);
     vattempt.set({
       'linkk': videoUrl,
-    });
+    });*/
 
     print(videoUrl);
   }
@@ -465,6 +465,7 @@ class _admincheckState extends State<admincheck> {
   @override
   void dispose() {
     controller?.dispose();
+
     super.dispose();
   }
 
