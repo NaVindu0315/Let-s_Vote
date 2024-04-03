@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/pages/TestContract.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -596,18 +597,9 @@ class _voting_homeState extends State<voting_home> {
                                           backgroundColor:
                                               MaterialStateProperty.all<Color>(
                                                   AppColors.backgroundcolor)),
-                                      onPressed: () {
-                                        QuickAlert.show(
-                                          context: context,
-                                          type: QuickAlertType.success,
-                                          text: 'ALert BOX!',
-                                          autoCloseDuration:
-                                              const Duration(seconds: 4),
-                                          showConfirmBtn: false,
-                                        );
-                                      },
+                                      onPressed: () {},
                                       child: Text(
-                                        'alert test',
+                                        'Next Page',
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   Spacer(),
@@ -625,10 +617,15 @@ class _voting_homeState extends State<voting_home> {
                                               MaterialStateProperty.all<Color>(
                                                   AppColors.backgroundcolor)),
                                       onPressed: () {
-                                        loadJsonFromFirebase();
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TestContract()),
+                                        );
                                       },
                                       child: Text(
-                                        'Json Test',
+                                        ' New Page',
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   Spacer(),
