@@ -564,7 +564,7 @@ class _admincheckState extends State<admincheck> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'Welcome To Lets Vote',
+                    ' Change similarity Level',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -621,7 +621,7 @@ class _admincheckState extends State<admincheck> {
                               children: [
                                 Spacer(),
                                 Text(
-                                  'Designation',
+                                  'Admin',
                                   style: TextStyle(
                                       color: Colors.black54,
                                       fontWeight: FontWeight.bold,
@@ -640,30 +640,38 @@ class _admincheckState extends State<admincheck> {
                             Row(
                               children: [
                                 ///for the employee management
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Management_Dashboard()),
-                                    );
-                                  },
-                                  child: Container(
-                                      height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/empmg.png'),
+                                ///here
+                                /* Expanded(
+                                  child: Row(
+                                    children: [],
+                                  ),
+                                    ),*/
+                                SizedBox(
+                                  height: 70,
+                                  width:
+                                      350, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      //  controller: emailcontroller,
+                                      onChanged: (value) {
+                                        //email = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.email,
+                                        ),
+                                        labelText: 'Email',
+                                        border: OutlineInputBorder(),
                                       ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
+                                    ),
+                                  ),
+                                ),
+
+                                ///end
 
                                 ///for the camera preview
                                 /*      Expanded(
@@ -679,6 +687,8 @@ class _admincheckState extends State<admincheck> {
                                 ),*/
                               ],
                             ),
+                            ElevatedButton(
+                                onPressed: () {}, child: Text('Set New Value')),
 
                             ///second row
                             Row(
@@ -759,18 +769,28 @@ class _admincheckState extends State<admincheck> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    final position = await _geolocatorPlatform
-                                        .getCurrentPosition();
-                                    print(position);
-                                    //printIps();
-                                    //   print(_connectionStatus);
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
                                   },
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/create.png'),
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            '85.5',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 30.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -783,19 +803,26 @@ class _admincheckState extends State<admincheck> {
                                 //second box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    print('fuck');
+                                  onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => GroupChat()),
+                                          builder: (context) => DashBoard()),
                                     );
                                   },
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/post.png'),
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Default Home',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
