@@ -1,9 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
-import 'package:lets_vote/pages/addmincheck.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/management_dashboard.dart';
 import 'package:lets_vote/pages/signup.dart';
@@ -32,14 +32,14 @@ import 'package:geolocator/geolocator.dart';
 late User loggedinuser;
 late String client;
 
-class DashBoard extends StatefulWidget {
-  const DashBoard({Key? key}) : super(key: key);
+class admincheck extends StatefulWidget {
+  const admincheck({Key? key}) : super(key: key);
 
   @override
-  State<DashBoard> createState() => _DashBoardState();
+  State<admincheck> createState() => _admincheckState();
 }
 
-class _DashBoardState extends State<DashBoard> {
+class _admincheckState extends State<admincheck> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   TextEditingController loggedinusercontroller = TextEditingController();
@@ -49,6 +49,7 @@ class _DashBoardState extends State<DashBoard> {
   TextEditingController url1controller = TextEditingController();
   TextEditingController capturedimageurlcontroller = TextEditingController();
   late String url1img;
+  String? videoPath;
 
   ///camera end
   ///
@@ -136,11 +137,100 @@ class _DashBoardState extends State<DashBoard> {
 
   ///to get the current user
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
+
+  ///for recording
+
+  onPressedStart() async {
+    if (controller!.value.isRecordingVideo) {
+      return;
+    }
+
+    try {
+      await controller!.startVideoRecording();
+      setState(() {});
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  onPressedStop() async {
+    if (!controller!.value.isRecordingVideo) {
+      return;
+    }
+
+    try {
+      final video = await controller!.stopVideoRecording();
+      setState(() {
+        videoPath = video.path;
+      });
+      print(videoPath);
+
+      // Upload the video to Firebase Storage
+      await vupld();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> vupld() async {
+    if (videoPath == null) return;
+
+    final ref = storage.ref().child('videos/${DateTime.now().toString()}.mp4');
+    final uploadTask = ref.putFile(
+      File(videoPath!),
+      SettableMetadata(
+        contentType: 'video/mp4',
+      ),
+    );
+
+    final snapshot = await uploadTask.whenComplete(() {});
+    final videoUrl = await snapshot.ref.getDownloadURL();
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.success,
+      text: '$videoUrl',
+      autoCloseDuration: const Duration(seconds: 4),
+      showConfirmBtn: false,
+    );
+    /*  final vvid = "$client$now";
+    final vattempt = _firestore.collection("attemptvideos").doc(vvid);
+    vattempt.set({
+      'linkk': videoUrl,
+    });*/
+
+    print(videoUrl);
+  }
+
+  /// recording end
+  ///data fetching
+
+  late DatabaseReference _databaseReference;
+
+  double level = 0.0;
+
+  FirebaseDatabase database = FirebaseDatabase.instance;
+
+  late double setlvl;
+
+  TextEditingController lvlcontroller = TextEditingController();
+
+  late DatabaseReference lvlsetref = FirebaseDatabase.instance.ref();
+
+  Future<void> levelset(double lvl) async {
+    await _databaseReference.set(lvl);
+  }
+
+  ///data fecthing and setting end
+
   @override
   void initState() {
     super.initState();
     getcurrentuser();
-    controller = CameraController(cameras![1], ResolutionPreset.max);
+
+    /// Initialize the FirebaseDatabase reference
+    _databaseReference = FirebaseDatabase.instance.reference().child('level');
+
+    controller = CameraController(cameras![1], ResolutionPreset.medium);
     controller?.initialize().then((_) {
       if (!mounted) {
         return;
@@ -148,6 +238,14 @@ class _DashBoardState extends State<DashBoard> {
       setState(() {});
     });
     //_initNetworkInfo();
+    _databaseReference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          level = snapshot.value as double;
+        });
+      }
+    });
   }
 
   void getcurrentuser() async {
@@ -183,7 +281,7 @@ class _DashBoardState extends State<DashBoard> {
 
   ///this is the function to compare and get the results for face comparing without the captuing and storing
   ///funtion begin
-  Future<dynamic> compareandexpression(
+  Future<dynamic> comparewithlevelfunction(
       String imageurl1, String imageurl2, String initalip) async {
     try {
       print('new upload');
@@ -211,7 +309,7 @@ class _DashBoardState extends State<DashBoard> {
           final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
           final confidence = responseJson['confidence'] as double;
           print('Confidence: $confidence');
-          if (confidence > 85.00) {
+          if (confidence > level) {
             final url2 =
                 Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
             final request2 = http.MultipartRequest('POST', url2);
@@ -254,15 +352,7 @@ class _DashBoardState extends State<DashBoard> {
                     rightEyeStatus['no_glass_eye_open'] as double;
                 final rightNormalGlassEyeOpen =
                     rightEyeStatus['normal_glass_eye_open'] as double;
-                // Store the values as needed
-                // Example:
-                /* print('Anger: $anger');
-          print('Fear: $fear');
-          print('Sadness: $sadness');
-          print('Left No Glass Eye Open: $leftNoGlassEyeOpen');
-          print('Left Normal Glass Eye Open: $leftNormalGlassEyeOpen');
-          print('Right No Glass Eye Open: $rightNoGlassEyeOpen');
-          print('Right Normal Glass Eye Open: $rightNormalGlassEyeOpen');*/
+
                 ///firestore upload failed attempt
                 ///
                 ///
@@ -407,6 +497,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void dispose() {
     controller?.dispose();
+
     super.dispose();
   }
 
@@ -562,24 +653,6 @@ class _DashBoardState extends State<DashBoard> {
                             },
                           );
                         }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.admin_panel_settings,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Admin Change compare level',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => admincheck()),
-                              );
-                            },
-                          );
-                        }),
                       ],
                     ),
                   ),
@@ -591,7 +664,7 @@ class _DashBoardState extends State<DashBoard> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'Welcome To Lets Vote',
+                    ' Change similarity Level',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -648,7 +721,7 @@ class _DashBoardState extends State<DashBoard> {
                               children: [
                                 Spacer(),
                                 Text(
-                                  'Designation',
+                                  'Admin',
                                   style: TextStyle(
                                       color: Colors.black54,
                                       fontWeight: FontWeight.bold,
@@ -660,37 +733,46 @@ class _DashBoardState extends State<DashBoard> {
 
                             ///row for the designation end
                             SizedBox(
-                              height: 40.0,
+                              height: 10.0,
                             ),
 
                             ///row end
                             Row(
                               children: [
                                 ///for the employee management
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Management_Dashboard()),
-                                    );
-                                  },
-                                  child: Container(
-                                      height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/empmg.png'),
+                                ///here
+                                /* Expanded(
+                                  child: Row(
+                                    children: [],
+                                  ),
+                                    ),*/
+                                SizedBox(
+                                  height: 70,
+                                  width:
+                                      350, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      controller: lvlcontroller,
+                                      onChanged: (value) {
+                                        //email = value;
+                                        setlvl = double.parse(value);
+                                      },
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.settings,
+                                        ),
+                                        labelText: 'Email',
+                                        border: OutlineInputBorder(),
                                       ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
+                                    ),
+                                  ),
+                                ),
+
+                                ///end
 
                                 ///for the camera preview
                                 /*      Expanded(
@@ -706,6 +788,13 @@ class _DashBoardState extends State<DashBoard> {
                                 ),*/
                               ],
                             ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  lvlcontroller.clear();
+                                  levelset(setlvl);
+                                  print(setlvl);
+                                },
+                                child: Text('Set New Value')),
 
                             ///second row
                             Row(
@@ -720,7 +809,7 @@ class _DashBoardState extends State<DashBoard> {
                                     /*  capturedimageurlcontroller.clear();
                                     uploadimage();*/
 
-                                    await compareandexpression(
+                                    await comparewithlevelfunction(
                                         data!['url'], up, data!['initip']);
 
                                     //print('profile pic');
@@ -786,18 +875,28 @@ class _DashBoardState extends State<DashBoard> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    final position = await _geolocatorPlatform
-                                        .getCurrentPosition();
-                                    print(position);
-                                    //printIps();
-                                    //   print(_connectionStatus);
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
                                   },
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/create.png'),
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            '$level',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 30.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -810,19 +909,93 @@ class _DashBoardState extends State<DashBoard> {
                                 //second box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    print('fuck');
+                                  onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => GroupChat()),
+                                          builder: (context) => DashBoard()),
                                     );
                                   },
                                   child: Container(
                                       height: 120.0,
-                                      child: Card(
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Default Home',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/post.png'),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                //first box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
+                                    onPressedStart();
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Start Recording',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                //second box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    onPressedStop();
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Stop Recording',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20.0),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
