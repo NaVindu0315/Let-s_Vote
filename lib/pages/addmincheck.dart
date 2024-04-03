@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
@@ -201,11 +202,34 @@ class _admincheckState extends State<admincheck> {
   }
 
   /// recording end
+  ///data fetching
+
+  late DatabaseReference _databaseReference;
+
+  double level = 0.0;
+
+  FirebaseDatabase database = FirebaseDatabase.instance;
+
+  late double setlvl;
+
+  TextEditingController lvlcontroller = TextEditingController();
+
+  late DatabaseReference lvlsetref = FirebaseDatabase.instance.ref();
+
+  Future<void> levelset(double lvl) async {
+    await _databaseReference.set(lvl);
+  }
+
+  ///data fecthing and setting end
 
   @override
   void initState() {
     super.initState();
     getcurrentuser();
+
+    /// Initialize the FirebaseDatabase reference
+    _databaseReference = FirebaseDatabase.instance.reference().child('level');
+
     controller = CameraController(cameras![1], ResolutionPreset.medium);
     controller?.initialize().then((_) {
       if (!mounted) {
@@ -214,6 +238,14 @@ class _admincheckState extends State<admincheck> {
       setState(() {});
     });
     //_initNetworkInfo();
+    _databaseReference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          level = snapshot.value as double;
+        });
+      }
+    });
   }
 
   void getcurrentuser() async {
@@ -277,7 +309,7 @@ class _admincheckState extends State<admincheck> {
           final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
           final confidence = responseJson['confidence'] as double;
           print('Confidence: $confidence');
-          if (confidence > 85.00) {
+          if (confidence > level) {
             final url2 =
                 Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
             final request2 = http.MultipartRequest('POST', url2);
@@ -724,13 +756,14 @@ class _admincheckState extends State<admincheck> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: TextFormField(
-                                      //  controller: emailcontroller,
+                                      controller: lvlcontroller,
                                       onChanged: (value) {
                                         //email = value;
+                                        setlvl = double.parse(value);
                                       },
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(
-                                          Icons.email,
+                                          Icons.settings,
                                         ),
                                         labelText: 'Email',
                                         border: OutlineInputBorder(),
@@ -756,7 +789,12 @@ class _admincheckState extends State<admincheck> {
                               ],
                             ),
                             ElevatedButton(
-                                onPressed: () {}, child: Text('Set New Value')),
+                                onPressed: () {
+                                  lvlcontroller.clear();
+                                  levelset(setlvl);
+                                  print(setlvl);
+                                },
+                                child: Text('Set New Value')),
 
                             ///second row
                             Row(
@@ -851,7 +889,7 @@ class _admincheckState extends State<admincheck> {
                                         children: [
                                           Spacer(),
                                           Text(
-                                            '85.5',
+                                            '$level',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 30.0,
