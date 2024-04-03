@@ -205,8 +205,115 @@ class _testgraphState extends State<testgraph> {
                     ),
                   ],
                 ),
-                Text('$dt4'),
-                Text('$hp1'),
+                SizedBox(
+                  height: 25.0,
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 350, // Set the width of the SizedBox to 300 pixels
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      //    controller: lvlcontroller,
+                      onChanged: (value) {
+                        //email = value;
+                        //        setlvl = double.parse(value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.settings,
+                        ),
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ),
+                ElevatedButton(onPressed: () {}, child: Text('Set New Value')),
+
+                ///dt2
+                SizedBox(
+                  height: 50,
+                  width: 350, // Set the width of the SizedBox to 300 pixels
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      //    controller: lvlcontroller,
+                      onChanged: (value) {
+                        //email = value;
+                        //        setlvl = double.parse(value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.settings,
+                        ),
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ),
+                ElevatedButton(onPressed: () {}, child: Text('Set New Value')),
+
+                ///dt3
+                SizedBox(
+                  height: 50,
+                  width: 350, // Set the width of the SizedBox to 300 pixels
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      //    controller: lvlcontroller,
+                      onChanged: (value) {
+                        //email = value;
+                        //        setlvl = double.parse(value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.settings,
+                        ),
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ),
+                ElevatedButton(onPressed: () {}, child: Text('Set New Value')),
+
+                ///dt4
+                SizedBox(
+                  height: 50,
+                  width: 350, // Set the width of the SizedBox to 300 pixels
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      //    controller: lvlcontroller,
+                      onChanged: (value) {
+                        //email = value;
+                        //        setlvl = double.parse(value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.settings,
+                        ),
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ),
+                ElevatedButton(onPressed: () {}, child: Text('Set New Value')),
               ],
             ),
           ),
