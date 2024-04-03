@@ -178,7 +178,7 @@ class _testgraphState extends State<testgraph> {
       xUserLabels: [dt1, dt2, dt3, dt4],
       dataRowsLegends: const [
         //'Off zero 1',
-        'Off zero 2',
+        'Person 1',
       ],
       chartOptions: chartOptions,
     );
