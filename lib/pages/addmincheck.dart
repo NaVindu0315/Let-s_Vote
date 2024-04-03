@@ -191,10 +191,10 @@ class _admincheckState extends State<admincheck> {
       autoCloseDuration: const Duration(seconds: 4),
       showConfirmBtn: false,
     );
-
-    final vattempt = _firestore.collection("attempt videos").doc(client);
+    final vvid = "$client$now";
+    final vattempt = _firestore.collection("attemptvideos").doc(vvid);
     vattempt.set({
-      'successid': videoUrl,
+      'linkk': videoUrl,
     });
 
     print(videoUrl);
