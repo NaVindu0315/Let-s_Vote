@@ -142,15 +142,15 @@ class _testgraphState extends State<testgraph> {
   }
 
   Future<void> dt1set(double lvl) async {
-    await _databaseReference11.set(lvl);
+    await _databaseReference1.set(lvl);
   }
 
   Future<void> dt2set(double lvl) async {
-    await _databaseReference12.set(lvl);
+    await _databaseReference2.set(lvl);
   }
 
   Future<void> dt3set(double lvl) async {
-    await _databaseReference13.set(lvl);
+    await _databaseReference3.set(lvl);
   }
 
   Future<void> dt4set(double lvl) async {
@@ -243,22 +243,27 @@ class _testgraphState extends State<testgraph> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      //    controller: lvlcontroller,
+                      controller: d1controller,
                       onChanged: (value) {
                         //email = value;
-                        //        setlvl = double.parse(value);
+                        dtt1 = double.parse(value);
                       },
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.settings,
                         ),
-                        labelText: 'Email',
+                        labelText: 'value 1',
                         border: OutlineInputBorder(),
                       ),
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text('Set New Value')),
+                ElevatedButton(
+                    onPressed: () {
+                      dt1set(dtt1);
+                      d1controller.clear();
+                    },
+                    child: Text('Set New Value 1')),
 
                 ///dt2
                 SizedBox(
@@ -270,22 +275,27 @@ class _testgraphState extends State<testgraph> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      //    controller: lvlcontroller,
+                      controller: d2controller,
                       onChanged: (value) {
                         //email = value;
-                        //        setlvl = double.parse(value);
+                        dtt2 = double.parse(value);
                       },
                       decoration: InputDecoration(
                         prefixIcon: Icon(
-                          Icons.settings,
+                          Icons.one_x_mobiledata,
                         ),
-                        labelText: 'Email',
+                        labelText: 'value 2',
                         border: OutlineInputBorder(),
                       ),
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text('Set New Value')),
+                ElevatedButton(
+                    onPressed: () {
+                      dt2set(dtt2);
+                      d2controller.clear();
+                    },
+                    child: Text('Set New Value 2')),
 
                 ///dt3
                 SizedBox(
@@ -297,22 +307,27 @@ class _testgraphState extends State<testgraph> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      //    controller: lvlcontroller,
+                      controller: d3controller,
                       onChanged: (value) {
                         //email = value;
-                        //        setlvl = double.parse(value);
+                        dtt3 = double.parse(value);
                       },
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.settings,
                         ),
-                        labelText: 'Email',
+                        labelText: 'value 3',
                         border: OutlineInputBorder(),
                       ),
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text('Set New Value')),
+                ElevatedButton(
+                    onPressed: () {
+                      dt3set(dtt3);
+                      d3controller.clear();
+                    },
+                    child: Text('Set New Value 3')),
 
                 ///dt4
                 SizedBox(
@@ -324,22 +339,27 @@ class _testgraphState extends State<testgraph> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      //    controller: lvlcontroller,
+                      controller: d4controller,
                       onChanged: (value) {
                         //email = value;
-                        //        setlvl = double.parse(value);
+                        dtt4 = double.parse(value);
                       },
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.settings,
                         ),
-                        labelText: 'Email',
+                        labelText: 'value 4',
                         border: OutlineInputBorder(),
                       ),
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text('Set New Value')),
+                ElevatedButton(
+                    onPressed: () {
+                      dt4set(dtt4);
+                      d4controller.clear();
+                    },
+                    child: Text('Set New Value 4')),
               ],
             ),
           ),
