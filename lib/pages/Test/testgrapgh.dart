@@ -1,6 +1,9 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_charts/flutter_charts.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
+
+import 'package:firebase_database/firebase_database.dart';
 
 class testgraph extends StatefulWidget {
   const testgraph({Key? key}) : super(key: key);
@@ -10,25 +13,146 @@ class testgraph extends StatefulWidget {
 }
 
 class _testgraphState extends State<testgraph> {
+  FirebaseDatabase database = FirebaseDatabase.instance;
+  final storage = FirebaseStorage.instance;
+
+  late DatabaseReference _databaseReference;
+  late DatabaseReference _databaseReference1;
+  late DatabaseReference _databaseReference2;
+  late DatabaseReference _databaseReference3;
+  late DatabaseReference _databaseReference4;
+  late DatabaseReference _databaseReference11;
+  late DatabaseReference _databaseReference12;
+  late DatabaseReference _databaseReference13;
+  late DatabaseReference _databaseReference14;
+
+  late String dt1;
+  late String dt2;
+  late String dt3;
+  late String dt4;
+
+  late double hp1;
+  late double hp2;
+  late double hp3;
+  late double hp4;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// Initialize the FirebaseDatabase reference
+    _databaseReference1 = FirebaseDatabase.instance.reference().child('hp1');
+    _databaseReference1.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          hp1 = snapshot.value as double;
+        });
+      }
+    });
+
+    _databaseReference2 = FirebaseDatabase.instance.reference().child('hp2');
+    _databaseReference2.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          hp2 = snapshot.value as double;
+        });
+      }
+    });
+
+    _databaseReference3 = FirebaseDatabase.instance.reference().child('hp3');
+    _databaseReference3.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          hp3 = snapshot.value as double;
+        });
+      }
+    });
+
+    _databaseReference4 = FirebaseDatabase.instance.reference().child('hp4');
+    _databaseReference4.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          hp4 = snapshot.value as double;
+        });
+      }
+    });
+
+    _databaseReference11 = FirebaseDatabase.instance.reference().child('dt1');
+    _databaseReference11.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          dt1 = snapshot.value.toString();
+        });
+      }
+    });
+    _databaseReference11 = FirebaseDatabase.instance.reference().child('dt1');
+    _databaseReference11.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          dt1 = snapshot.value.toString();
+        });
+      }
+    });
+    _databaseReference12 = FirebaseDatabase.instance.reference().child('dt2');
+    _databaseReference12.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          dt2 = snapshot.value.toString();
+        });
+      }
+    });
+    _databaseReference13 = FirebaseDatabase.instance.reference().child('dt3');
+    _databaseReference13.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          dt3 = snapshot.value.toString();
+        });
+      }
+    });
+
+    _databaseReference14 = FirebaseDatabase.instance.reference().child('dt4');
+    _databaseReference14.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          dt4 = snapshot.value.toString();
+        });
+      }
+    });
+
+    /// Initialize the camera controller
+  }
+
   Widget chartToRun() {
     LabelLayoutStrategy? xContainerLabelLayoutStrategy;
     ChartData chartData;
     ChartOptions chartOptions = const ChartOptions();
+    // Example shows how to create ChartOptions instance
+    //   which will request to start Y axis at data minimum.
+    // Even though startYAxisAtDataMinRequested is set to true, this will not be granted on bar chart,
+    //   as it does not make sense there.
     chartOptions = const ChartOptions(
       dataContainerOptions: DataContainerOptions(
-        yTransform: log10,
-        yInverseTransform: inverseLog10,
+        startYAxisAtDataMinRequested: true,
       ),
     );
     chartData = ChartData(
-      dataRows: const [
-        [10.0, 600.0, 1000000.0],
-        [20.0, 1000.0, 1500000.0],
+      dataRows: [
+        //[20.0, 25.0, 30.0, 35.0, 40.0, 20.0],
+        [hp1, hp2, hp3, hp4],
       ],
-      xUserLabels: const ['Wolf', 'Deer', 'Mouse'],
+      xUserLabels: [dt1, dt2, dt3, dt4],
       dataRowsLegends: const [
-        'Spring',
-        'Summer',
+        //'Off zero 1',
+        'Off zero 2',
       ],
       chartOptions: chartOptions,
     );
@@ -55,6 +179,9 @@ class _testgraphState extends State<testgraph> {
               children: [
                 Row(
                   children: [
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -65,7 +192,21 @@ class _testgraphState extends State<testgraph> {
                         },
                         child: Text('Home'))
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      height: 300, // specify a fixed height
+                      width: 400, // specify a fixed width
+                      child: chartToRun(),
+                    ),
+                  ],
+                ),
+                Text('$dt4'),
+                Text('$hp1'),
               ],
             ),
           ),
