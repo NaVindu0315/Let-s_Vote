@@ -633,7 +633,7 @@ class _admincheckState extends State<admincheck> {
 
                             ///row for the designation end
                             SizedBox(
-                              height: 40.0,
+                              height: 10.0,
                             ),
 
                             ///row end
@@ -820,6 +820,76 @@ class _admincheckState extends State<admincheck> {
                                             style: TextStyle(
                                               color: Colors.white,
                                             ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                //first box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Start Recording',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                //second box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DashBoard()),
+                                    );
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Stop Recording',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20.0),
                                           ),
                                           Spacer(),
                                         ],
