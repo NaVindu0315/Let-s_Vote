@@ -54,6 +54,7 @@ dependencies:
   geolocator: ^8.1.0
   web3dart: ^2.7.2
   firebase_database: ^10.1.1
+  flutter_charts: ^0.5.2
 
 
 
