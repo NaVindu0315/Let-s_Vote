@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
+import 'package:lets_vote/pages/Test/testgrapgh.dart';
 import 'package:lets_vote/pages/addmincheck.dart';
 import 'package:lets_vote/pages/comparing_page.dart';
 import 'package:lets_vote/pages/management_dashboard.dart';
@@ -576,6 +577,24 @@ class _DashBoardState extends State<DashBoard> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => admincheck()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.auto_graph,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Graph',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => testgraph()),
                               );
                             },
                           );

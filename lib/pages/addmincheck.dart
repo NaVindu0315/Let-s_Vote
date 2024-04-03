@@ -565,11 +565,11 @@ class _admincheckState extends State<admincheck> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              /*   Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DashBoard()),
-                              );*/
+                              );
                             },
                           );
                         }),
@@ -765,7 +765,7 @@ class _admincheckState extends State<admincheck> {
                                         prefixIcon: Icon(
                                           Icons.settings,
                                         ),
-                                        labelText: 'Email',
+                                        labelText: 'Set new Value',
                                         border: OutlineInputBorder(),
                                       ),
                                     ),
@@ -953,6 +953,7 @@ class _admincheckState extends State<admincheck> {
                                                   sucs_Attempt_list()),
                                         );*/
                                     onPressedStart();
+                                    HapticFeedback.mediumImpact();
                                   },
                                   child: Container(
                                       height: 30.0,
@@ -982,6 +983,7 @@ class _admincheckState extends State<admincheck> {
                                     child: GestureDetector(
                                   onTap: () {
                                     onPressedStop();
+                                    HapticFeedback.mediumImpact();
                                   },
                                   child: Container(
                                       height: 30.0,
