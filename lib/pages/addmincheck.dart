@@ -221,6 +221,23 @@ class _admincheckState extends State<admincheck> {
   }
 
   ///data fecthing and setting end
+  ///
+  late DatabaseReference _electionreference;
+  int election = 5;
+
+  Future<void> setelection1() async {
+    await _electionreference.set(1);
+
+    /* _electionreference.onDisconnect().set(8).then((_) {
+      Future.delayed(Duration(hours: 2), () {
+        database.goOffline();
+      });
+    });*/
+  }
+
+  Future<void> setelection0() async {
+    await _electionreference.set(0);
+  }
 
   @override
   void initState() {
@@ -229,6 +246,8 @@ class _admincheckState extends State<admincheck> {
 
     /// Initialize the FirebaseDatabase reference
     _databaseReference = FirebaseDatabase.instance.reference().child('level');
+    _electionreference =
+        FirebaseDatabase.instance.reference().child('election');
 
     controller = CameraController(cameras![1], ResolutionPreset.medium);
     controller?.initialize().then((_) {
