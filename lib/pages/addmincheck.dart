@@ -802,7 +802,10 @@ class _admincheckState extends State<admincheck> {
                                 ///to compare the face and navigate to the votig home
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
+                                  onTap:
+
+                                      ///this works
+                                      /*() async {
                                     HapticFeedback.mediumImpact();
                                     String up = await newupload();
                                     // print(up);
@@ -816,6 +819,17 @@ class _admincheckState extends State<admincheck> {
                                     //  print(data!['url']);
                                     //print('now image');
                                     //print(uploadedimageurl);
+                                  },*/
+                                      ///abive is the right one
+                                      () {
+                                    QuickAlert.show(
+                                      context: context,
+                                      type: QuickAlertType.info,
+                                      text: 'No Elections Right now',
+                                      autoCloseDuration:
+                                          const Duration(seconds: 4),
+                                      showConfirmBtn: false,
+                                    );
                                   },
                                   /*  onTap: () async {
                                     showDialog(
