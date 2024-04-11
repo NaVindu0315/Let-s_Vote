@@ -221,6 +221,49 @@ class _admincheckState extends State<admincheck> {
   }
 
   ///data fecthing and setting end
+  ///
+  late DatabaseReference _electionreference;
+  int election = 5;
+
+  Future<void> setelection1() async {
+    await _electionreference.set(1);
+
+    /* _electionreference.onDisconnect().set(8).then((_) {
+      Future.delayed(Duration(hours: 2), () {
+        database.goOffline();
+      });
+    });*/
+  }
+
+  Future<void> setauto0() async {
+    await _electionreference.set(1);
+
+    _electionreference.onDisconnect().set(0).then((_) {
+      Future.delayed(Duration(hours: 1), () {
+        database.goOffline();
+      });
+    });
+  }
+
+  Future<void> setschedule() async {
+    // await _electionreference.set(1);
+
+    _electionreference.onDisconnect().set(1).then((_) {
+      Future.delayed(Duration(hours: 1), () {
+        database.goOffline();
+      });
+    });
+
+    _electionreference.onDisconnect().set(0).then((_) {
+      Future.delayed(Duration(hours: 2), () {
+        database.goOffline();
+      });
+    });
+  }
+
+  Future<void> setelection0() async {
+    await _electionreference.set(0);
+  }
 
   @override
   void initState() {
@@ -229,6 +272,8 @@ class _admincheckState extends State<admincheck> {
 
     /// Initialize the FirebaseDatabase reference
     _databaseReference = FirebaseDatabase.instance.reference().child('level');
+    _electionreference =
+        FirebaseDatabase.instance.reference().child('election');
 
     controller = CameraController(cameras![1], ResolutionPreset.medium);
     controller?.initialize().then((_) {
@@ -243,6 +288,15 @@ class _admincheckState extends State<admincheck> {
       if (snapshot.value != null) {
         setState(() {
           level = snapshot.value as double;
+        });
+      }
+    });
+
+    _electionreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          election = snapshot.value as int;
         });
       }
     });
@@ -802,21 +856,40 @@ class _admincheckState extends State<admincheck> {
                                 ///to compare the face and navigate to the votig home
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    HapticFeedback.mediumImpact();
-                                    String up = await newupload();
-                                    // print(up);
-                                    /*  capturedimageurlcontroller.clear();
+                                  onTap: election == 1
+                                      ?
+
+                                      ///this works
+                                      () async {
+                                          HapticFeedback.mediumImpact();
+                                          String up = await newupload();
+                                          // print(up);
+                                          /*  capturedimageurlcontroller.clear();
                                     uploadimage();*/
 
-                                    await comparewithlevelfunction(
-                                        data!['url'], up, data!['initip']);
+                                          await comparewithlevelfunction(
+                                              data!['url'],
+                                              up,
+                                              data!['initip']);
 
-                                    //print('profile pic');
-                                    //  print(data!['url']);
-                                    //print('now image');
-                                    //print(uploadedimageurl);
-                                  },
+                                          //print('profile pic');
+                                          //  print(data!['url']);
+                                          //print('now image');
+                                          //print(uploadedimageurl);
+                                        }
+                                      :
+
+                                      ///abive is the right one
+                                      () {
+                                          QuickAlert.show(
+                                            context: context,
+                                            type: QuickAlertType.info,
+                                            text: 'No Elections Right now',
+                                            autoCloseDuration:
+                                                const Duration(seconds: 4),
+                                            showConfirmBtn: false,
+                                          );
+                                        },
                                   /*  onTap: () async {
                                     showDialog(
                                       context: context,
@@ -853,10 +926,155 @@ class _admincheckState extends State<admincheck> {
                                     }
                                   },*/
                                   child: Container(
-                                      height: 120.0,
+                                      height: 100.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
                                         child: Image.asset('assets/vote.png'),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                //first box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
+                                    //  onPressedStart();
+                                    setelection1();
+                                    HapticFeedback.mediumImpact();
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Enable Voting',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
+                                    //  onPressedStart();
+                                    // setelection1();
+                                    setauto0();
+                                    HapticFeedback.mediumImpact();
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Auto Disble',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
+                                    //  onPressedStart();
+                                    //  setelection1();
+                                    setschedule();
+                                    HapticFeedback.mediumImpact();
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Schedule ',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                //second box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    //onPressedStop();
+                                    setelection0();
+                                    HapticFeedback.mediumImpact();
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Disable Voting',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 10.0),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -884,12 +1102,13 @@ class _admincheckState extends State<admincheck> {
                                         );*/
                                   },
                                   child: Container(
-                                      height: 120.0,
+                                      height: 90.0,
                                       child: Row(
                                         children: [
                                           Spacer(),
                                           Text(
-                                            '$level',
+                                            '$level\n'
+                                            '$election',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 30.0,
@@ -917,7 +1136,7 @@ class _admincheckState extends State<admincheck> {
                                     );
                                   },
                                   child: Container(
-                                      height: 120.0,
+                                      height: 90.0,
                                       child: Row(
                                         children: [
                                           Spacer(),
