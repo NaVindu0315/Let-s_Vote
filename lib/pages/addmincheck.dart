@@ -265,6 +265,15 @@ class _admincheckState extends State<admincheck> {
         });
       }
     });
+
+    _electionreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          election = snapshot.value as int;
+        });
+      }
+    });
   }
 
   void getcurrentuser() async {
@@ -821,35 +830,40 @@ class _admincheckState extends State<admincheck> {
                                 ///to compare the face and navigate to the votig home
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap:
+                                  onTap: election == 1
+                                      ?
 
                                       ///this works
-                                      /*() async {
-                                    HapticFeedback.mediumImpact();
-                                    String up = await newupload();
-                                    // print(up);
-                                    /*  capturedimageurlcontroller.clear();
+                                      () async {
+                                          HapticFeedback.mediumImpact();
+                                          String up = await newupload();
+                                          // print(up);
+                                          /*  capturedimageurlcontroller.clear();
                                     uploadimage();*/
 
-                                    await comparewithlevelfunction(
-                                        data!['url'], up, data!['initip']);
+                                          await comparewithlevelfunction(
+                                              data!['url'],
+                                              up,
+                                              data!['initip']);
 
-                                    //print('profile pic');
-                                    //  print(data!['url']);
-                                    //print('now image');
-                                    //print(uploadedimageurl);
-                                  },*/
+                                          //print('profile pic');
+                                          //  print(data!['url']);
+                                          //print('now image');
+                                          //print(uploadedimageurl);
+                                        }
+                                      :
+
                                       ///abive is the right one
                                       () {
-                                    QuickAlert.show(
-                                      context: context,
-                                      type: QuickAlertType.info,
-                                      text: 'No Elections Right now',
-                                      autoCloseDuration:
-                                          const Duration(seconds: 4),
-                                      showConfirmBtn: false,
-                                    );
-                                  },
+                                          QuickAlert.show(
+                                            context: context,
+                                            type: QuickAlertType.info,
+                                            text: 'No Elections Right now',
+                                            autoCloseDuration:
+                                                const Duration(seconds: 4),
+                                            showConfirmBtn: false,
+                                          );
+                                        },
                                   /*  onTap: () async {
                                     showDialog(
                                       context: context,
@@ -993,7 +1007,8 @@ class _admincheckState extends State<admincheck> {
                                         children: [
                                           Spacer(),
                                           Text(
-                                            '$level',
+                                            '$level\n'
+                                            '$election',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 30.0,
