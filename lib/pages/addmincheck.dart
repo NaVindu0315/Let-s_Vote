@@ -235,6 +235,32 @@ class _admincheckState extends State<admincheck> {
     });*/
   }
 
+  Future<void> setauto0() async {
+    await _electionreference.set(1);
+
+    _electionreference.onDisconnect().set(0).then((_) {
+      Future.delayed(Duration(hours: 1), () {
+        database.goOffline();
+      });
+    });
+  }
+
+  Future<void> setschedule() async {
+    // await _electionreference.set(1);
+
+    _electionreference.onDisconnect().set(1).then((_) {
+      Future.delayed(Duration(hours: 1), () {
+        database.goOffline();
+      });
+    });
+
+    _electionreference.onDisconnect().set(0).then((_) {
+      Future.delayed(Duration(hours: 2), () {
+        database.goOffline();
+      });
+    });
+  }
+
   Future<void> setelection0() async {
     await _electionreference.set(0);
   }
@@ -940,7 +966,81 @@ class _admincheckState extends State<admincheck> {
                                             'Enable Voting',
                                             style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 20.0,
+                                              fontSize: 10.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
+                                    //  onPressedStart();
+                                    // setelection1();
+                                    setauto0();
+                                    HapticFeedback.mediumImpact();
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Auto Disble',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.0,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  sucs_Attempt_list()),
+                                        );*/
+                                    //  onPressedStart();
+                                    //  setelection1();
+                                    setschedule();
+                                    HapticFeedback.mediumImpact();
+                                  },
+                                  child: Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Schedule ',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.0,
                                             ),
                                           ),
                                           Spacer(),
@@ -971,7 +1071,7 @@ class _admincheckState extends State<admincheck> {
                                             'Disable Voting',
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 20.0),
+                                                fontSize: 10.0),
                                           ),
                                           Spacer(),
                                         ],
