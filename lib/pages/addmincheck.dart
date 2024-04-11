@@ -914,6 +914,7 @@ class _admincheckState extends State<admincheck> {
                                                   sucs_Attempt_list()),
                                         );*/
                                     //  onPressedStart();
+                                    setelection1();
                                     HapticFeedback.mediumImpact();
                                   },
                                   child: Container(
@@ -944,6 +945,7 @@ class _admincheckState extends State<admincheck> {
                                     child: GestureDetector(
                                   onTap: () {
                                     //onPressedStop();
+                                    setelection0();
                                     HapticFeedback.mediumImpact();
                                   },
                                   child: Container(
