@@ -336,7 +336,7 @@ class _test_election_setState extends State<test_election_set> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'test election Set',
+                    'test election Set $level ||  $election',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -447,6 +447,48 @@ class _test_election_setState extends State<test_election_set> {
                                 ///end
 
                                 ///for the camera preview
+                              ],
+                            ),
+
+                            Row(
+                              children: [
+                                ///to compare the face and navigate to the votig home
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {},
+                                  child: /*Slider(
+                                    value: 50.0,
+                                    min: 40.0,
+                                    max: 100.0,
+                                    activeColor: Colors.white,
+                                    inactiveColor: Color(0xFF8D8E98),
+                                    onChanged: (double newvalue) {
+                                      setState(() {
+                                        setlvl = newvalue.round() as double;
+                                      });
+                                    },
+                                  ),*/
+                                      SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      thumbShape: RoundSliderThumbShape(
+                                          enabledThumbRadius: 15.0),
+                                      overlayShape: RoundSliderOverlayShape(
+                                          overlayRadius: 30.0),
+                                    ),
+                                    child: Slider(
+                                      value: 150.0,
+                                      min: 120.0,
+                                      max: 220.0,
+                                      activeColor: Colors.red,
+                                      inactiveColor: Color(0xFF8D8E98),
+                                      onChanged: (double newvalue) {
+                                        setState(() {
+                                          setlvl = newvalue;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                )),
                               ],
                             ),
                             ElevatedButton(
@@ -654,63 +696,6 @@ class _test_election_setState extends State<test_election_set> {
                                             style: TextStyle(
                                               color: Colors.white,
                                             ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                //first box
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                      height: 30.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            'Start Recording',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20.0,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
-                                //second box
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                      height: 30.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            'Stop Recording',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20.0),
                                           ),
                                           Spacer(),
                                         ],
