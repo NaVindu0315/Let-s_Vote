@@ -59,6 +59,8 @@ class _test_election_setState extends State<test_election_set> {
 
   double level = 0.0;
 
+  String candidate_1 = "-";
+  String candidate_2 = "-";
   FirebaseDatabase database = FirebaseDatabase.instance;
 
   double setlvl = 70.6;
@@ -74,6 +76,9 @@ class _test_election_setState extends State<test_election_set> {
   ///data fecthing and setting end
   ///
   late DatabaseReference _electionreference;
+
+  late DatabaseReference _candidate_1;
+  late DatabaseReference _candidate_2;
   int election = 5;
 
   Future<void> setelection1() async {
@@ -141,6 +146,24 @@ class _test_election_setState extends State<test_election_set> {
       if (snapshot.value != null) {
         setState(() {
           election = snapshot.value as int;
+        });
+      }
+    });
+
+    _candidate_1.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidate_1 = snapshot.value.toString();
+        });
+      }
+    });
+
+    _candidate_2.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidate_2 = snapshot.value.toString();
         });
       }
     });
