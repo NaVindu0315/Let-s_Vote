@@ -130,6 +130,8 @@ class _test_election_setState extends State<test_election_set> {
     _databaseReference = FirebaseDatabase.instance.reference().child('level');
     _electionreference =
         FirebaseDatabase.instance.reference().child('election');
+    _candidate_1 = FirebaseDatabase.instance.reference().child('candi_1');
+    _candidate_2 = FirebaseDatabase.instance.reference().child('candi_2');
 
     //_initNetworkInfo();
     _databaseReference.onValue.listen((event) {
@@ -493,7 +495,13 @@ class _test_election_setState extends State<test_election_set> {
                                       height: 100.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/vote.png'),
+                                        child: Text(
+                                          '$candidate_1\n'
+                                          '$candidate_2',
+                                          style: TextStyle(
+                                              fontSize: 30.0,
+                                              color: Colors.white),
+                                        ),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
