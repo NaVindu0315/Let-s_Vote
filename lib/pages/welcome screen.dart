@@ -11,6 +11,8 @@ import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:camera/camera.dart';
+import 'package:lets_vote/test_voting/test_election_set.dart';
+import 'package:lets_vote/test_voting/vote_home_2.dart';
 import 'dart:io';
 
 import 'Voting_home.dart';
@@ -595,6 +597,42 @@ class _DashBoardState extends State<DashBoard> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => testgraph()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.how_to_vote,
+                              color: Colors.white,
+                            ),
+                            title: const Text('New Voting HOme',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Vote_Home_2()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.verified_user,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Test Election Set',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => test_election_set()),
                               );
                             },
                           );
