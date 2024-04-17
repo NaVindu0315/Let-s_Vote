@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart';
+import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:lets_vote/test_voting/test_functions.dart';
 
 import 'package:web3dart/web3dart.dart';
@@ -33,6 +34,15 @@ class _Vote_Home_2State extends State<Vote_Home_2> {
         appBar: AppBar(
           // preferredSize: Size.fromHeight(kToolbarHeight + 20),
           backgroundColor: AppColors.backgroundcolor,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DashBoard()),
+              ); // go back to the previous screen
+            },
+          ),
 
           title: Text(
             'Test Voting Home',
