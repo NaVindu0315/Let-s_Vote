@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 import 'package:lets_vote/test_voting/test_functions.dart';
 
 import 'package:web3dart/web3dart.dart';
+import '../Colors/colors.dart';
 import 'test_constants.dart';
 import 'package:quickalert/quickalert.dart';
 
@@ -29,6 +30,18 @@ class _Vote_Home_2State extends State<Vote_Home_2> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          // preferredSize: Size.fromHeight(kToolbarHeight + 20),
+          backgroundColor: AppColors.backgroundcolor,
+
+          title: Text(
+            'Test Voting Home',
+            style: TextStyle(color: Colors.white),
+          ),
+          iconTheme: IconThemeData(color: Colors.white),
+
+          //centerTitle: true,
+        ),
         body: SafeArea(
           child: Column(
             children: [
