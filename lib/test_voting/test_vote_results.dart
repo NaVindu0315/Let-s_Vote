@@ -10,6 +10,8 @@ import '../Colors/colors.dart';
 import 'test_constants.dart';
 import 'package:quickalert/quickalert.dart';
 
+import 'package:flutter_charts/flutter_charts.dart';
+
 class Test_vote_Results extends StatefulWidget {
   const Test_vote_Results({Key? key}) : super(key: key);
 
@@ -53,6 +55,44 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
     });
 
     super.initState();
+  }
+
+  Widget chartToRun() {
+    LabelLayoutStrategy? xContainerLabelLayoutStrategy;
+    ChartData chartData;
+    ChartOptions chartOptions = const ChartOptions();
+    chartOptions = const ChartOptions(
+      dataContainerOptions: DataContainerOptions(
+        yTransform: log10,
+        yInverseTransform: inverseLog10,
+      ),
+    );
+    chartData = ChartData(
+      dataRows: [
+        [10.0, 600.0, 1000000.0],
+        [20.0, 1000.0, 1500000.0],
+      ],
+      xUserLabels: [
+        '$candidate_1',
+        '$candidate_2',
+      ],
+      dataRowsLegends: const [
+        '',
+        '',
+      ],
+      chartOptions: chartOptions,
+    );
+    var verticalBarChartContainer = VerticalBarChartTopContainer(
+      chartData: chartData,
+      xContainerLabelLayoutStrategy: xContainerLabelLayoutStrategy,
+    );
+
+    var verticalBarChart = VerticalBarChart(
+      painter: VerticalBarChartPainter(
+        verticalBarChartContainer: verticalBarChartContainer,
+      ),
+    );
+    return verticalBarChart;
   }
 
   @override
@@ -170,74 +210,10 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
               Row(
                 children: [
                   Spacer(),
-                  Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          vote_1(context, ethClient!);
-                        },
-                        child: Text(
-                          'Vote 1',
-                          style: TextStyle(fontSize: 30.0),
-                        ),
-                      )
-                    ],
-                  ),
-                  Spacer(),
-                  Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          vote_2(context, ethClient!);
-                        },
-                        child: Text(
-                          'Vote 2',
-                          style: TextStyle(fontSize: 30.0),
-                        ),
-                      )
-                    ],
-                  ),
-                  Spacer(),
-                ],
-              ),
-              SizedBox(
-                height: 25.0,
-              ),
-
-              ///bbuttons row end
-              ///row for clear button
-              ///
-              Row(
-                children: [
-                  Spacer(),
-                  ElevatedButton(
-                      onPressed: () {
-                        clearall(context, ethClient!);
-                      },
-                      child: Text('Clear Vote Count')),
                   Spacer(),
                 ],
               ),
 
-              ///button row end
-              SizedBox(
-                height: 25.0,
-              ),
-
-              ///bbuttons row end
-              ///row for clear button
-              ///
-              Row(
-                children: [
-                  Spacer(),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {});
-                      },
-                      child: Text('Refresh')),
-                  Spacer(),
-                ],
-              ),
               Spacer(),
             ],
           ),
