@@ -50,6 +50,12 @@ class _test_election_setState extends State<test_election_set> {
   ///for camera
   TextEditingController url1controller = TextEditingController();
   TextEditingController capturedimageurlcontroller = TextEditingController();
+
+  TextEditingController candi1controllr = TextEditingController();
+  TextEditingController candi2controlr = TextEditingController();
+  late String cn1;
+  late String cn2;
+
   late String url1img;
   String? videoPath;
 
@@ -375,7 +381,7 @@ class _test_election_setState extends State<test_election_set> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'test election Set $level ||  $election',
+                    'test election Set ',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -432,7 +438,7 @@ class _test_election_setState extends State<test_election_set> {
                               children: [
                                 Spacer(),
                                 Text(
-                                  'Admin',
+                                  'CEO & HR Head',
                                   style: TextStyle(
                                       color: Colors.black54,
                                       fontWeight: FontWeight.bold,
@@ -445,6 +451,116 @@ class _test_election_setState extends State<test_election_set> {
                             ///row for the designation end
                             SizedBox(
                               height: 10.0,
+                            ),
+                            Row(
+                              children: [
+                                ///for the employee management
+                                ///here
+                                /* Expanded(
+                                  child: Row(
+                                    children: [],
+                                  ),
+                                    ),*/
+                                SizedBox(
+                                  height: 70,
+                                  width:
+                                      250, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      controller: candi1controllr,
+                                      onChanged: (value) {
+                                        //email = value;
+                                        cn1 = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.person,
+                                        ),
+                                        labelText: 'Candidate 1 Name',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        setcandidates(cn1, cn2);
+                                        candi1controllr.clear();
+                                        candi2controlr.clear();
+                                      },
+                                      child: Text('Set Candidates')),
+                                ),
+
+                                ///end
+
+                                ///for the camera preview
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                ///for the employee management
+                                ///here
+                                /* Expanded(
+                                  child: Row(
+                                    children: [],
+                                  ),
+                                    ),*/
+                                SizedBox(
+                                  height: 70,
+                                  width:
+                                      250, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      controller: candi2controlr,
+                                      onChanged: (value) {
+                                        //email = value;
+                                        cn2 = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.account_circle,
+                                        ),
+                                        labelText: 'Candidate 2 Name',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: ElevatedButton(
+                                      onPressed: () async {
+                                        await _candidate_1.set('TBD');
+                                        await _candidate_2.set('TBD');
+                                        clearall(context, ethClient!);
+                                      },
+                                      child: Text('Clear Current')),
+                                ),
+
+                                ///end
+
+                                ///for the camera preview
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Current similarity level -  $level',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontSize: 25.0),
+                                ),
+                                Spacer(),
+                              ],
                             ),
 
                             ///row end
@@ -474,7 +590,7 @@ class _test_election_setState extends State<test_election_set> {
                                       },
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(
-                                          Icons.settings,
+                                          Icons.account_circle,
                                         ),
                                         labelText: 'Set new Value',
                                         border: OutlineInputBorder(),
@@ -497,69 +613,157 @@ class _test_election_setState extends State<test_election_set> {
                                 ///for the camera preview
                               ],
                             ),
-                            /*
-                            *
-                              FutureBuilder<List>(
-                          future: getvotes_2(ethClient!),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            return Text(
-                              snapshot.data![0].toString(),
-                              style: TextStyle(
-                                  fontSize: 50, fontWeight: FontWeight.bold),
-                            );
-                          }),
-                            * */
 
                             ///second row
                             Row(
                               children: [
                                 ///to compare the face and navigate to the votig home
                                 Expanded(
+                                    flex: 3,
                                     child: GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                      height: 100.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Column(
-                                          children: [
-                                            Row(
+                                      onTap: () {},
+                                      child: Container(
+                                          height: 100.0,
+                                          child: Card(
+                                            color: AppColors.backgroundcolor,
+                                            child: Column(
                                               children: [
-                                                Text(
-                                                  '$candidate_1 ',
-                                                  style: TextStyle(
-                                                      fontSize: 30.0,
-                                                      color: Colors.white),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      '$candidate_1 ',
+                                                      style: TextStyle(
+                                                          fontSize: 30.0,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      '$candidate_2',
+                                                      style: TextStyle(
+                                                          fontSize: 30.0,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                            Row(
+                                          ),
+                                          margin: EdgeInsets.all(15.0),
+                                          decoration: BoxDecoration(
+                                            //color: Color(0xFF101E33),
+                                            color: AppColors.backgroundcolor,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          )),
+                                    )),
+
+                                ///second
+                                Expanded(
+                                    flex: 1,
+                                    child: GestureDetector(
+                                      onTap: () {},
+                                      child: Container(
+                                          height: 100.0,
+                                          child: Card(
+                                            color: AppColors.backgroundcolor,
+                                            child: Column(
                                               children: [
-                                                Text(
-                                                  '$candidate_2',
-                                                  style: TextStyle(
-                                                      fontSize: 30.0,
-                                                      color: Colors.white),
+                                                Row(
+                                                  children: [
+                                                    FutureBuilder<List>(
+                                                        future: getvotes_1(
+                                                            ethClient!),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .waiting) {
+                                                            return Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            );
+                                                          }
+                                                          return Text(
+                                                            snapshot.data![0]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 30,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          );
+                                                        }),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    FutureBuilder<List>(
+                                                        future: getvotes_2(
+                                                            ethClient!),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .waiting) {
+                                                            return Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            );
+                                                          }
+                                                          return Text(
+                                                            snapshot.data![0]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 30,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          );
+                                                        }),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
+                                          ),
+                                          margin: EdgeInsets.all(15.0),
+                                          decoration: BoxDecoration(
+                                            //color: Color(0xFF101E33),
+                                            color: AppColors.backgroundcolor,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          )),
+                                    )),
+                              ],
+                            ),
+
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Election - ',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontSize: 20.0),
+                                ),
+                                Text(
+                                  election == 1
+                                      ? 'Available Now'
+                                      : 'Not Available Right Now',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25.0),
+                                ),
+                                Spacer(),
                               ],
                             ),
                             Row(
@@ -572,7 +776,7 @@ class _test_election_setState extends State<test_election_set> {
                                     HapticFeedback.mediumImpact();
                                   },
                                   child: Container(
-                                      height: 30.0,
+                                      height: 50.0,
                                       child: Row(
                                         children: [
                                           Spacer(),
@@ -580,7 +784,7 @@ class _test_election_setState extends State<test_election_set> {
                                             'Enable Voting',
                                             style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 10.0,
+                                              fontSize: 25.0,
                                             ),
                                           ),
                                           Spacer(),
@@ -594,64 +798,7 @@ class _test_election_setState extends State<test_election_set> {
                                             BorderRadius.circular(10.0),
                                       )),
                                 )),
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {
-                                    setauto0();
-                                    HapticFeedback.mediumImpact();
-                                  },
-                                  child: Container(
-                                      height: 30.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            'Auto Disble',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10.0,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {
-                                    setschedule();
-                                    HapticFeedback.mediumImpact();
-                                  },
-                                  child: Container(
-                                      height: 30.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            'Schedule ',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10.0,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
+
                                 //second box
                                 Expanded(
                                     child: GestureDetector(
@@ -661,7 +808,7 @@ class _test_election_setState extends State<test_election_set> {
                                     HapticFeedback.mediumImpact();
                                   },
                                   child: Container(
-                                      height: 30.0,
+                                      height: 50.0,
                                       child: Row(
                                         children: [
                                           Spacer(),
@@ -669,7 +816,7 @@ class _test_election_setState extends State<test_election_set> {
                                             'Disable Voting',
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 10.0),
+                                                fontSize: 25.0),
                                           ),
                                           Spacer(),
                                         ],
@@ -686,70 +833,6 @@ class _test_election_setState extends State<test_election_set> {
                             ),
 
                             ///third row
-                            Row(
-                              children: [
-                                //first box
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                      height: 90.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            '$level\n'
-                                            '$election',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 30.0,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
-                                //second box
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DashBoard()),
-                                    );
-                                  },
-                                  child: Container(
-                                      height: 90.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            'Default Home',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
-                              ],
-                            ),
                           ],
                         )
                       ],
