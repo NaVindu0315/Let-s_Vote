@@ -61,7 +61,7 @@ class _test_election_setState extends State<test_election_set> {
 
   FirebaseDatabase database = FirebaseDatabase.instance;
 
-  late double setlvl;
+  double setlvl = 70.6;
 
   TextEditingController lvlcontroller = TextEditingController();
 
@@ -421,7 +421,7 @@ class _test_election_setState extends State<test_election_set> {
                                 SizedBox(
                                   height: 70,
                                   width:
-                                      350, // Set the width of the SizedBox to 300 pixels
+                                      250, // Set the width of the SizedBox to 300 pixels
                                   child: Card(
                                     elevation: 10,
                                     shape: RoundedRectangleBorder(
@@ -443,61 +443,21 @@ class _test_election_setState extends State<test_election_set> {
                                     ),
                                   ),
                                 ),
+                                SizedBox(
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        lvlcontroller.clear();
+                                        levelset(setlvl);
+                                        print(setlvl);
+                                      },
+                                      child: Text('Set New Value')),
+                                ),
 
                                 ///end
 
                                 ///for the camera preview
                               ],
                             ),
-
-                            Row(
-                              children: [
-                                ///to compare the face and navigate to the votig home
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {},
-                                  child: /*Slider(
-                                    value: 50.0,
-                                    min: 40.0,
-                                    max: 100.0,
-                                    activeColor: Colors.white,
-                                    inactiveColor: Color(0xFF8D8E98),
-                                    onChanged: (double newvalue) {
-                                      setState(() {
-                                        setlvl = newvalue.round() as double;
-                                      });
-                                    },
-                                  ),*/
-                                      SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      thumbShape: RoundSliderThumbShape(
-                                          enabledThumbRadius: 15.0),
-                                      overlayShape: RoundSliderOverlayShape(
-                                          overlayRadius: 30.0),
-                                    ),
-                                    child: Slider(
-                                      value: 150.0,
-                                      min: 120.0,
-                                      max: 220.0,
-                                      activeColor: Colors.red,
-                                      inactiveColor: Color(0xFF8D8E98),
-                                      onChanged: (double newvalue) {
-                                        setState(() {
-                                          setlvl = newvalue;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                )),
-                              ],
-                            ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  lvlcontroller.clear();
-                                  levelset(setlvl);
-                                  print(setlvl);
-                                },
-                                child: Text('Set New Value')),
 
                             ///second row
                             Row(
