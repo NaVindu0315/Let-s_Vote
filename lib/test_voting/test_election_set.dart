@@ -474,7 +474,7 @@ class _test_election_setState extends State<test_election_set> {
                                       },
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(
-                                          Icons.settings,
+                                          Icons.account_circle,
                                         ),
                                         labelText: 'Set new Value',
                                         border: OutlineInputBorder(),
@@ -521,45 +521,139 @@ class _test_election_setState extends State<test_election_set> {
                               children: [
                                 ///to compare the face and navigate to the votig home
                                 Expanded(
+                                    flex: 3,
                                     child: GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                      height: 100.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Column(
-                                          children: [
-                                            Row(
+                                      onTap: () {},
+                                      child: Container(
+                                          height: 100.0,
+                                          child: Card(
+                                            color: AppColors.backgroundcolor,
+                                            child: Column(
                                               children: [
-                                                Text(
-                                                  '$candidate_1 ',
-                                                  style: TextStyle(
-                                                      fontSize: 30.0,
-                                                      color: Colors.white),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      '$candidate_1 ',
+                                                      style: TextStyle(
+                                                          fontSize: 30.0,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      '$candidate_2',
+                                                      style: TextStyle(
+                                                          fontSize: 30.0,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                            Row(
+                                          ),
+                                          margin: EdgeInsets.all(15.0),
+                                          decoration: BoxDecoration(
+                                            //color: Color(0xFF101E33),
+                                            color: AppColors.backgroundcolor,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          )),
+                                    )),
+
+                                ///second
+                                Expanded(
+                                    flex: 1,
+                                    child: GestureDetector(
+                                      onTap: () {},
+                                      child: Container(
+                                          height: 100.0,
+                                          child: Card(
+                                            color: AppColors.backgroundcolor,
+                                            child: Column(
                                               children: [
-                                                Text(
-                                                  '$candidate_2',
-                                                  style: TextStyle(
-                                                      fontSize: 30.0,
-                                                      color: Colors.white),
+                                                Row(
+                                                  children: [
+                                                    FutureBuilder<List>(
+                                                        future: getvotes_1(
+                                                            ethClient!),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .waiting) {
+                                                            return Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            );
+                                                          }
+                                                          return Text(
+                                                            snapshot.data![0]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 30,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          );
+                                                        }),
+                                                  ],
                                                 ),
+                                                Row(
+                                                  children: [
+                                                    FutureBuilder<List>(
+                                                        future: getvotes_2(
+                                                            ethClient!),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .waiting) {
+                                                            return Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            );
+                                                          }
+                                                          return Text(
+                                                            snapshot.data![0]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 30,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          );
+                                                        }),
+                                                  ],
+                                                ),
+                                                /* Row(
+                                                  children: [
+                                                    Text(
+                                                      '0',
+                                                      style: TextStyle(
+                                                          fontSize: 30.0,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),*/
                                               ],
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
+                                          ),
+                                          margin: EdgeInsets.all(15.0),
+                                          decoration: BoxDecoration(
+                                            //color: Color(0xFF101E33),
+                                            color: AppColors.backgroundcolor,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          )),
+                                    )),
                               ],
                             ),
                             Row(
