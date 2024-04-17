@@ -50,6 +50,12 @@ class _test_election_setState extends State<test_election_set> {
   ///for camera
   TextEditingController url1controller = TextEditingController();
   TextEditingController capturedimageurlcontroller = TextEditingController();
+
+  TextEditingController candi1controllr = TextEditingController();
+  TextEditingController candi2controlr = TextEditingController();
+  late String cn1;
+  late String cn2;
+
   late String url1img;
   String? videoPath;
 
@@ -375,7 +381,7 @@ class _test_election_setState extends State<test_election_set> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'test election Set $level ||  $election',
+                    'test election Set ',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -727,72 +733,106 @@ class _test_election_setState extends State<test_election_set> {
                                 )),
                               ],
                             ),
-
-                            ///third row
                             Row(
                               children: [
-                                //first box
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                      height: 90.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            '$level\n'
-                                            '$election',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 30.0,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
+                                ///for the employee management
+                                ///here
+                                /* Expanded(
+                                  child: Row(
+                                    children: [],
+                                  ),
+                                    ),*/
+                                SizedBox(
+                                  height: 70,
+                                  width:
+                                      250, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      controller: candi1controllr,
+                                      onChanged: (value) {
+                                        //email = value;
+                                        cn1 = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.person,
+                                        ),
+                                        labelText: 'Candidate 1 Name',
+                                        border: OutlineInputBorder(),
                                       ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
-                                //second box
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DashBoard()),
-                                    );
-                                  },
-                                  child: Container(
-                                      height: 90.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            'Default Home',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        setcandidates(cn1, cn2);
+                                        candi1controllr.clear();
+                                        candi2controlr.clear();
+                                      },
+                                      child: Text('Set Candidates')),
+                                ),
+
+                                ///end
+
+                                ///for the camera preview
                               ],
                             ),
+                            Row(
+                              children: [
+                                ///for the employee management
+                                ///here
+                                /* Expanded(
+                                  child: Row(
+                                    children: [],
+                                  ),
+                                    ),*/
+                                SizedBox(
+                                  height: 70,
+                                  width:
+                                      250, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      controller: candi2controlr,
+                                      onChanged: (value) {
+                                        //email = value;
+                                        cn2 = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.account_circle,
+                                        ),
+                                        labelText: 'Candidate 2 Name',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: ElevatedButton(
+                                      onPressed: () async {
+                                        await _candidate_1.set('TBD');
+                                        await _candidate_2.set('TBD');
+                                        clearall(context, ethClient!);
+                                      },
+                                      child: Text('Clear Current')),
+                                ),
+
+                                ///end
+
+                                ///for the camera preview
+                              ],
+                            ),
+
+                            ///third row
                           ],
                         )
                       ],
