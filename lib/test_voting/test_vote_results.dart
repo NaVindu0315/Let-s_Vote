@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:lets_vote/test_voting/test_functions.dart';
+import 'package:path/path.dart';
 
 import 'package:web3dart/web3dart.dart';
 import '../Colors/colors.dart';
@@ -11,6 +12,8 @@ import 'test_constants.dart';
 import 'package:quickalert/quickalert.dart';
 
 import 'package:flutter_charts/flutter_charts.dart';
+
+import 'package:flutter_graph/flutter_graph.dart';
 
 class Test_vote_Results extends StatefulWidget {
   const Test_vote_Results({Key? key}) : super(key: key);
@@ -27,6 +30,9 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
 
   late DatabaseReference _candidate_1;
   late DatabaseReference _candidate_2;
+
+  double votesCandidate1 = 0;
+  double votesCandidate2 = 0;
 
   @override
   void initState() {
@@ -57,43 +63,8 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
     super.initState();
   }
 
-  Widget chartToRun() {
-    LabelLayoutStrategy? xContainerLabelLayoutStrategy;
-    ChartData chartData;
-    ChartOptions chartOptions = const ChartOptions();
-    chartOptions = const ChartOptions(
-      dataContainerOptions: DataContainerOptions(
-        yTransform: log10,
-        yInverseTransform: inverseLog10,
-      ),
-    );
-    chartData = ChartData(
-      dataRows: [
-        [10.0, 600.0, 1000000.0],
-        [20.0, 1000.0, 1500000.0],
-      ],
-      xUserLabels: [
-        '$candidate_1',
-        '$candidate_2',
-      ],
-      dataRowsLegends: const [
-        '',
-        '',
-      ],
-      chartOptions: chartOptions,
-    );
-    var verticalBarChartContainer = VerticalBarChartTopContainer(
-      chartData: chartData,
-      xContainerLabelLayoutStrategy: xContainerLabelLayoutStrategy,
-    );
-
-    var verticalBarChart = VerticalBarChart(
-      painter: VerticalBarChartPainter(
-        verticalBarChartContainer: verticalBarChartContainer,
-      ),
-    );
-    return verticalBarChart;
-  }
+  double cnn1 = 0;
+  int cnn2 = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -140,6 +111,8 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                                 child: CircularProgressIndicator(),
                               );
                             }
+                            votesCandidate1 =
+                                double.parse(snapshot.data![0].toString());
                             return Text(
                               snapshot.data![0].toString(),
                               style: TextStyle(
@@ -160,6 +133,8 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                                 child: CircularProgressIndicator(),
                               );
                             }
+                            votesCandidate2 =
+                                double.parse(snapshot.data![0].toString());
                             return Text(
                               snapshot.data![0].toString(),
                               style: TextStyle(
@@ -210,6 +185,17 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
               Row(
                 children: [
                   Spacer(),
+                  BarChartWidget(
+                    bars: [votesCandidate1, votesCandidate2],
+                    labels: [
+                      '$candidate_1',
+                      '$candidate_2',
+                    ],
+                    barColor: Colors.blueAccent,
+                    axisLineColor: Colors.red,
+                    barGap: 4.0,
+                    size: Size(300, 400),
+                  ),
                   Spacer(),
                 ],
               ),

@@ -334,6 +334,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.2"
+  flutter_graph:
+    dependency: "direct main"
+    description:
+      name: flutter_graph
+      sha256: "5e8449184e94985111a63ba561e943fb5deec765e417971f7e3f5a587c0d9179"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   flutter_lints:
     dependency: "direct dev"
     description:
