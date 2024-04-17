@@ -454,6 +454,104 @@ class _test_election_setState extends State<test_election_set> {
                             ),
                             Row(
                               children: [
+                                ///for the employee management
+                                ///here
+                                /* Expanded(
+                                  child: Row(
+                                    children: [],
+                                  ),
+                                    ),*/
+                                SizedBox(
+                                  height: 70,
+                                  width:
+                                      250, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      controller: candi1controllr,
+                                      onChanged: (value) {
+                                        //email = value;
+                                        cn1 = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.person,
+                                        ),
+                                        labelText: 'Candidate 1 Name',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        setcandidates(cn1, cn2);
+                                        candi1controllr.clear();
+                                        candi2controlr.clear();
+                                      },
+                                      child: Text('Set Candidates')),
+                                ),
+
+                                ///end
+
+                                ///for the camera preview
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                ///for the employee management
+                                ///here
+                                /* Expanded(
+                                  child: Row(
+                                    children: [],
+                                  ),
+                                    ),*/
+                                SizedBox(
+                                  height: 70,
+                                  width:
+                                      250, // Set the width of the SizedBox to 300 pixels
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      controller: candi2controlr,
+                                      onChanged: (value) {
+                                        //email = value;
+                                        cn2 = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(
+                                          Icons.account_circle,
+                                        ),
+                                        labelText: 'Candidate 2 Name',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: ElevatedButton(
+                                      onPressed: () async {
+                                        await _candidate_1.set('TBD');
+                                        await _candidate_2.set('TBD');
+                                        clearall(context, ethClient!);
+                                      },
+                                      child: Text('Clear Current')),
+                                ),
+
+                                ///end
+
+                                ///for the camera preview
+                              ],
+                            ),
+                            Row(
+                              children: [
                                 Spacer(),
                                 Text(
                                   'Current similarity level -  $level',
@@ -731,104 +829,6 @@ class _test_election_setState extends State<test_election_set> {
                                             BorderRadius.circular(10.0),
                                       )),
                                 )),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                ///for the employee management
-                                ///here
-                                /* Expanded(
-                                  child: Row(
-                                    children: [],
-                                  ),
-                                    ),*/
-                                SizedBox(
-                                  height: 70,
-                                  width:
-                                      250, // Set the width of the SizedBox to 300 pixels
-                                  child: Card(
-                                    elevation: 10,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: TextFormField(
-                                      controller: candi1controllr,
-                                      onChanged: (value) {
-                                        //email = value;
-                                        cn1 = value;
-                                      },
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.person,
-                                        ),
-                                        labelText: 'Candidate 1 Name',
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        setcandidates(cn1, cn2);
-                                        candi1controllr.clear();
-                                        candi2controlr.clear();
-                                      },
-                                      child: Text('Set Candidates')),
-                                ),
-
-                                ///end
-
-                                ///for the camera preview
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                ///for the employee management
-                                ///here
-                                /* Expanded(
-                                  child: Row(
-                                    children: [],
-                                  ),
-                                    ),*/
-                                SizedBox(
-                                  height: 70,
-                                  width:
-                                      250, // Set the width of the SizedBox to 300 pixels
-                                  child: Card(
-                                    elevation: 10,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: TextFormField(
-                                      controller: candi2controlr,
-                                      onChanged: (value) {
-                                        //email = value;
-                                        cn2 = value;
-                                      },
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.account_circle,
-                                        ),
-                                        labelText: 'Candidate 2 Name',
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        await _candidate_1.set('TBD');
-                                        await _candidate_2.set('TBD');
-                                        clearall(context, ethClient!);
-                                      },
-                                      child: Text('Clear Current')),
-                                ),
-
-                                ///end
-
-                                ///for the camera preview
                               ],
                             ),
 
