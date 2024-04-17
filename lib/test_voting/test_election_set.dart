@@ -10,6 +10,9 @@ import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:camera/camera.dart';
+import 'package:lets_vote/test_voting/test_constants.dart';
+import 'package:lets_vote/test_voting/test_functions.dart';
+import 'package:web3dart/web3dart.dart';
 import 'dart:io';
 
 import '../pages/Voting_home.dart';
@@ -21,6 +24,7 @@ import 'package:http/http.dart' as http;
 import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart';
 
 import 'dart:async';
 
@@ -35,6 +39,9 @@ class test_election_set extends StatefulWidget {
 }
 
 class _test_election_setState extends State<test_election_set> {
+  Client? httpClient;
+  Web3Client? ethClient;
+
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   TextEditingController loggedinusercontroller = TextEditingController();
@@ -121,10 +128,17 @@ class _test_election_setState extends State<test_election_set> {
     await _electionreference.set(0);
   }
 
+  Future<void> setcandidates(String nm1, String nm2) async {
+    await _candidate_1.set(nm1);
+    await _candidate_2.set(nm2);
+  }
+
   @override
   void initState() {
     super.initState();
     getcurrentuser();
+    httpClient = Client();
+    ethClient = Web3Client(infura_url, httpClient!);
 
     /// Initialize the FirebaseDatabase reference
     _databaseReference = FirebaseDatabase.instance.reference().child('level');
@@ -483,6 +497,24 @@ class _test_election_setState extends State<test_election_set> {
                                 ///for the camera preview
                               ],
                             ),
+                            /*
+                            *
+                              FutureBuilder<List>(
+                          future: getvotes_2(ethClient!),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return Text(
+                              snapshot.data![0].toString(),
+                              style: TextStyle(
+                                  fontSize: 50, fontWeight: FontWeight.bold),
+                            );
+                          }),
+                            * */
 
                             ///second row
                             Row(
@@ -495,12 +527,29 @@ class _test_election_setState extends State<test_election_set> {
                                       height: 100.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Text(
-                                          '$candidate_1\n'
-                                          '$candidate_2',
-                                          style: TextStyle(
-                                              fontSize: 30.0,
-                                              color: Colors.white),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  '$candidate_1 ',
+                                                  style: TextStyle(
+                                                      fontSize: 30.0,
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  '$candidate_2',
+                                                  style: TextStyle(
+                                                      fontSize: 30.0,
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       margin: EdgeInsets.all(15.0),
