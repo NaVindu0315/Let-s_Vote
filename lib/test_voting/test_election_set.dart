@@ -432,7 +432,7 @@ class _test_election_setState extends State<test_election_set> {
                               children: [
                                 Spacer(),
                                 Text(
-                                  'Admin',
+                                  'CEO & HR Head',
                                   style: TextStyle(
                                       color: Colors.black54,
                                       fontWeight: FontWeight.bold,
@@ -445,6 +445,18 @@ class _test_election_setState extends State<test_election_set> {
                             ///row for the designation end
                             SizedBox(
                               height: 10.0,
+                            ),
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Current similarity level -  $level',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontSize: 25.0),
+                                ),
+                                Spacer(),
+                              ],
                             ),
 
                             ///row end
@@ -497,24 +509,6 @@ class _test_election_setState extends State<test_election_set> {
                                 ///for the camera preview
                               ],
                             ),
-                            /*
-                            *
-                              FutureBuilder<List>(
-                          future: getvotes_2(ethClient!),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            return Text(
-                              snapshot.data![0].toString(),
-                              style: TextStyle(
-                                  fontSize: 50, fontWeight: FontWeight.bold),
-                            );
-                          }),
-                            * */
 
                             ///second row
                             Row(
@@ -633,16 +627,6 @@ class _test_election_setState extends State<test_election_set> {
                                                         }),
                                                   ],
                                                 ),
-                                                /* Row(
-                                                  children: [
-                                                    Text(
-                                                      '0',
-                                                      style: TextStyle(
-                                                          fontSize: 30.0,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ],
-                                                ),*/
                                               ],
                                             ),
                                           ),
@@ -656,6 +640,28 @@ class _test_election_setState extends State<test_election_set> {
                                     )),
                               ],
                             ),
+
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Election - ',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontSize: 20.0),
+                                ),
+                                Text(
+                                  election == 1
+                                      ? 'Available Now'
+                                      : 'Not Available Right Now',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25.0),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
                             Row(
                               children: [
                                 //first box
@@ -666,7 +672,7 @@ class _test_election_setState extends State<test_election_set> {
                                     HapticFeedback.mediumImpact();
                                   },
                                   child: Container(
-                                      height: 30.0,
+                                      height: 50.0,
                                       child: Row(
                                         children: [
                                           Spacer(),
@@ -674,7 +680,7 @@ class _test_election_setState extends State<test_election_set> {
                                             'Enable Voting',
                                             style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 10.0,
+                                              fontSize: 25.0,
                                             ),
                                           ),
                                           Spacer(),
@@ -688,64 +694,7 @@ class _test_election_setState extends State<test_election_set> {
                                             BorderRadius.circular(10.0),
                                       )),
                                 )),
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {
-                                    setauto0();
-                                    HapticFeedback.mediumImpact();
-                                  },
-                                  child: Container(
-                                      height: 30.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            'Auto Disble',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10.0,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
-                                Expanded(
-                                    child: GestureDetector(
-                                  onTap: () {
-                                    setschedule();
-                                    HapticFeedback.mediumImpact();
-                                  },
-                                  child: Container(
-                                      height: 30.0,
-                                      child: Row(
-                                        children: [
-                                          Spacer(),
-                                          Text(
-                                            'Schedule ',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10.0,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
+
                                 //second box
                                 Expanded(
                                     child: GestureDetector(
@@ -755,7 +704,7 @@ class _test_election_setState extends State<test_election_set> {
                                     HapticFeedback.mediumImpact();
                                   },
                                   child: Container(
-                                      height: 30.0,
+                                      height: 50.0,
                                       child: Row(
                                         children: [
                                           Spacer(),
@@ -763,7 +712,7 @@ class _test_election_setState extends State<test_election_set> {
                                             'Disable Voting',
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 10.0),
+                                                fontSize: 25.0),
                                           ),
                                           Spacer(),
                                         ],
