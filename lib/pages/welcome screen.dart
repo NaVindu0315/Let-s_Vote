@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:camera/camera.dart';
 import 'package:lets_vote/test_voting/test_election_set.dart';
+import 'package:lets_vote/test_voting/test_email.dart';
 import 'package:lets_vote/test_voting/test_vote_results.dart';
 import 'package:lets_vote/test_voting/vote_home_2.dart';
 import 'dart:io';
@@ -652,6 +653,24 @@ class _DashBoardState extends State<DashBoard> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Test_vote_Results()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.email,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Test Email',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Test_Email()),
                               );
                             },
                           );
