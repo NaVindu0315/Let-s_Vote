@@ -22,6 +22,12 @@ class _Test_EmailState extends State<Test_Email> {
   final smtpServer = gmail('nmails6969@gmail.com', 'huujfezvmgbhmnmz');
 
   TextEditingController rcvercontroller = TextEditingController();
+  TextEditingController titlecontroller = TextEditingController();
+  TextEditingController msgcontrller = TextEditingController();
+
+  String reciverr = "";
+  String titlee = "";
+  String msgg = "";
 
   Future<void> SenDMail() async {
     final message = Message()
@@ -123,25 +129,88 @@ class _Test_EmailState extends State<Test_Email> {
               ///row to display name of the candidates
               Row(
                 children: [
-                  Spacer(),
-                  Column(
-                    children: [
-                      Text(
-                        'paka',
-                        style: TextStyle(fontSize: 30.0),
+                  SizedBox(
+                    height: 70,
+                    width: 400, // Set the width of the SizedBox to 300 pixels
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ],
-                  ),
-                  Spacer(),
-                  Column(
-                    children: [
-                      Text(
-                        'paka',
-                        style: TextStyle(fontSize: 30.0),
+                      child: TextFormField(
+                        controller: rcvercontroller,
+                        onChanged: (value) {
+                          //email = value;
+                          reciverr = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.receipt,
+                          ),
+                          labelText: 'Reciver',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
-                    ],
+                    ),
                   ),
-                  Spacer(),
+                ],
+              ),
+              //title
+              Row(
+                children: [
+                  SizedBox(
+                    height: 70,
+                    width: 400, // Set the width of the SizedBox to 300 pixels
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: titlecontroller,
+                        onChanged: (value) {
+                          //email = value;
+                          titlee = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.title,
+                          ),
+                          labelText: 'Title',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              //msg
+              Row(
+                children: [
+                  SizedBox(
+                    height: 70,
+                    width: 400, // Set the width of the SizedBox to 300 pixels
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: msgcontrller,
+                        onChanged: (value) {
+                          //email = value;
+                          msgg = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.message,
+                          ),
+                          labelText: 'Message',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
 
@@ -153,6 +222,14 @@ class _Test_EmailState extends State<Test_Email> {
               Row(
                 children: [
                   Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        MailSend(reciverr, titlee, msgg);
+                        rcvercontroller.clear();
+                        titlecontroller.clear();
+                        msgcontrller.clear();
+                      },
+                      child: Text('Send')),
                   Spacer(),
                 ],
               ),
