@@ -5,6 +5,9 @@ import 'package:lets_vote/pages/welcome%20screen.dart';
 
 import '../Colors/colors.dart';
 
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+
 class Test_Email extends StatefulWidget {
   const Test_Email({Key? key}) : super(key: key);
 
@@ -13,13 +16,33 @@ class Test_Email extends StatefulWidget {
 }
 
 class _Test_EmailState extends State<Test_Email> {
+  String username = 'nmails6969@gmail.com';
+  String password = 'huujfezvmgbhmnmz';
+
+  final smtpServer = gmail('nmails6969@gmail.com', 'huujfezvmgbhmnmz');
+
+  Future<void> SenDMail() async {
+    final message = Message()
+      ..from = Address(username, 'Your name')
+      ..recipients.add('navindulakshan99@gmail.com')
+      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+      ..text = 'This is the plain text.\nThis is line 2 of the text part.';
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
   }
-
-  double cnn1 = 0;
-  int cnn2 = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +79,13 @@ class _Test_EmailState extends State<Test_Email> {
                 children: [
                   Spacer(),
                   Column(
-                    children: [],
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            SenDMail();
+                          },
+                          child: Text('Mail'))
+                    ],
                   ),
                   Spacer(),
                   Column(
