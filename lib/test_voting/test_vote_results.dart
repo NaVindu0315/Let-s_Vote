@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:lets_vote/test_voting/test_functions.dart';
+import 'package:path/path.dart';
 
 import 'package:web3dart/web3dart.dart';
 import '../Colors/colors.dart';
@@ -11,6 +12,8 @@ import 'test_constants.dart';
 import 'package:quickalert/quickalert.dart';
 
 import 'package:flutter_charts/flutter_charts.dart';
+
+import 'package:flutter_graph/flutter_graph.dart';
 
 class Test_vote_Results extends StatefulWidget {
   const Test_vote_Results({Key? key}) : super(key: key);
@@ -28,6 +31,16 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
   late DatabaseReference _candidate_1;
   late DatabaseReference _candidate_2;
 
+  double votesCandidate1 = 0;
+  double votesCandidate2 = 0;
+
+  int cn1 = 0;
+  int cn2 = 0;
+  late Future<List> _cndi2future;
+
+  late Future<List> _cndi1future;
+  int _displayText2 = 0; // Variable to store the value obtained from the future
+  int _displayText1 = 0;
   @override
   void initState() {
     httpClient = Client();
@@ -54,46 +67,32 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
       }
     });
 
+    _cndi2future =
+        getvotes_2(ethClient!); // Assuming getvotes_2 returns a Future<List>
+
+    _cndi1future = getvotes_1(ethClient!);
+
+    _cndi2future.then((value) {
+      setState(() {
+        _displayText2 = int.parse(value[0].toString());
+        // Update the display text when future completes
+        votesCandidate2 = _displayText2.toDouble();
+      });
+    });
+
+    _cndi1future.then((value) {
+      setState(() {
+        _displayText1 = int.parse(value[0].toString());
+        // Update the display text when future completes
+        votesCandidate1 = _displayText1.toDouble();
+      });
+    });
+
     super.initState();
   }
 
-  Widget chartToRun() {
-    LabelLayoutStrategy? xContainerLabelLayoutStrategy;
-    ChartData chartData;
-    ChartOptions chartOptions = const ChartOptions();
-    chartOptions = const ChartOptions(
-      dataContainerOptions: DataContainerOptions(
-        yTransform: log10,
-        yInverseTransform: inverseLog10,
-      ),
-    );
-    chartData = ChartData(
-      dataRows: [
-        [10.0, 600.0, 1000000.0],
-        [20.0, 1000.0, 1500000.0],
-      ],
-      xUserLabels: [
-        '$candidate_1',
-        '$candidate_2',
-      ],
-      dataRowsLegends: const [
-        '',
-        '',
-      ],
-      chartOptions: chartOptions,
-    );
-    var verticalBarChartContainer = VerticalBarChartTopContainer(
-      chartData: chartData,
-      xContainerLabelLayoutStrategy: xContainerLabelLayoutStrategy,
-    );
-
-    var verticalBarChart = VerticalBarChart(
-      painter: VerticalBarChartPainter(
-        verticalBarChartContainer: verticalBarChartContainer,
-      ),
-    );
-    return verticalBarChart;
-  }
+  double cnn1 = 0;
+  int cnn2 = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -140,6 +139,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                                 child: CircularProgressIndicator(),
                               );
                             }
+
                             return Text(
                               snapshot.data![0].toString(),
                               style: TextStyle(
@@ -160,6 +160,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                                 child: CircularProgressIndicator(),
                               );
                             }
+
                             return Text(
                               snapshot.data![0].toString(),
                               style: TextStyle(
@@ -184,7 +185,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                   Column(
                     children: [
                       Text(
-                        '$candidate_1',
+                        '$candidate_1 & $votesCandidate1',
                         style: TextStyle(fontSize: 30.0),
                       ),
                     ],
@@ -193,7 +194,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                   Column(
                     children: [
                       Text(
-                        '$candidate_2',
+                        '$candidate_2 & $votesCandidate2',
                         style: TextStyle(fontSize: 30.0),
                       ),
                     ],
@@ -210,6 +211,17 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
               Row(
                 children: [
                   Spacer(),
+                  BarChartWidget(
+                    bars: [votesCandidate1, votesCandidate2],
+                    labels: [
+                      '$candidate_1',
+                      '$candidate_2',
+                    ],
+                    barColor: Colors.blueAccent,
+                    axisLineColor: Colors.red,
+                    barGap: 4.0,
+                    size: Size(300, 400),
+                  ),
                   Spacer(),
                 ],
               ),
