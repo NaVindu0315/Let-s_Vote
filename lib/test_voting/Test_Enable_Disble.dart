@@ -5,9 +5,6 @@ import 'package:lets_vote/pages/welcome%20screen.dart';
 
 import '../Colors/colors.dart';
 
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
-
 class Test_Enable_Disable extends StatefulWidget {
   const Test_Enable_Disable({Key? key}) : super(key: key);
 
@@ -16,55 +13,6 @@ class Test_Enable_Disable extends StatefulWidget {
 }
 
 class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
-  String username = 'nmails6969@gmail.com';
-  String password = 'huujfezvmgbhmnmz';
-
-  final smtpServer = gmail('nmails6969@gmail.com', 'huujfezvmgbhmnmz');
-
-  TextEditingController rcvercontroller = TextEditingController();
-  TextEditingController titlecontroller = TextEditingController();
-  TextEditingController msgcontrller = TextEditingController();
-
-  String reciverr = "";
-  String titlee = "";
-  String msgg = "";
-
-  Future<void> SenDMail() async {
-    final message = Message()
-      ..from = Address(username, 'Your name')
-      ..recipients.add('navindulakshan99@gmail.com')
-      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
-      ..text = 'This is the plain text.\nThis is line 2 of the text part.';
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-    } on MailerException catch (e) {
-      print('Message not sent.');
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
-    }
-  }
-
-  Future<void> MailSend(String recver, String title, String msg) async {
-    final message = Message()
-      ..from = Address(username)
-      ..recipients.add(recver)
-      ..subject = title
-      ..text = msg;
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-    } on MailerException catch (e) {
-      print('Message not sent.');
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -88,7 +36,7 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
           ),
 
           title: Text(
-            'Test Email',
+            'Test Enable Disable',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: IconThemeData(color: Colors.white),
@@ -104,19 +52,16 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               Row(
                 children: [
                   Spacer(),
-                  Column(
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            SenDMail();
-                          },
-                          child: Text('Mail'))
-                    ],
-                  ),
+                  ElevatedButton(onPressed: () {}, child: Text('Enable')),
+                  // Text('data'),
                   Spacer(),
-                  Column(
-                    children: [],
-                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(onPressed: () {}, child: Text('Disable')),
+                  // Text('data'),
                   Spacer(),
                 ],
               ),
@@ -127,92 +72,6 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               ),
 
               ///row to display name of the candidates
-              Row(
-                children: [
-                  SizedBox(
-                    height: 70,
-                    width: 400, // Set the width of the SizedBox to 300 pixels
-                    child: Card(
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        controller: rcvercontroller,
-                        onChanged: (value) {
-                          //email = value;
-                          reciverr = value;
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.receipt,
-                          ),
-                          labelText: 'Reciver',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              //title
-              Row(
-                children: [
-                  SizedBox(
-                    height: 70,
-                    width: 400, // Set the width of the SizedBox to 300 pixels
-                    child: Card(
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        controller: titlecontroller,
-                        onChanged: (value) {
-                          //email = value;
-                          titlee = value;
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.title,
-                          ),
-                          labelText: 'Title',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              //msg
-              Row(
-                children: [
-                  SizedBox(
-                    height: 70,
-                    width: 400, // Set the width of the SizedBox to 300 pixels
-                    child: Card(
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        controller: msgcontrller,
-                        onChanged: (value) {
-                          //email = value;
-                          msgg = value;
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.message,
-                          ),
-                          labelText: 'Message',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
 
               ///candidate display row end
 
@@ -222,14 +81,16 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(
-                      onPressed: () {
-                        MailSend(reciverr, titlee, msgg);
-                        rcvercontroller.clear();
-                        titlecontroller.clear();
-                        msgcontrller.clear();
-                      },
-                      child: Text('Send')),
+                  ElevatedButton(onPressed: () {}, child: Text('Send')),
+                  // Text('data'),
+                  Spacer(),
+                ],
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  // ElevatedButton(onPressed: () {}, child: Text('Send')),
+                  Text('data'),
                   Spacer(),
                 ],
               ),
