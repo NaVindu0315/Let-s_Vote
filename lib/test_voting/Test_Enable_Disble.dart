@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lets_vote/pages/welcome%20screen.dart';
 
 import '../Colors/colors.dart';
+
+late User loggedinuser;
+late String client;
 
 class Test_Enable_Disable extends StatefulWidget {
   const Test_Enable_Disable({Key? key}) : super(key: key);
@@ -13,9 +17,28 @@ class Test_Enable_Disable extends StatefulWidget {
 }
 
 class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
+  void getcurrentuser() async {
+    try {
+      // final user = await _auth.currentUser();
+      ///yata line eka chatgpt code ekk meka gatte uda line eke error ekk ena hinda hrytama scene eka terenne na
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        loggedinuser = user;
+        client = loggedinuser.email!;
+
+        ///i have to call the getdatafrm the function here and parse client as a parameter
+
+        print(loggedinuser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    getcurrentuser();
   }
 
   @override
