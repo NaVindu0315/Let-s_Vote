@@ -38,9 +38,9 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
   int cn2 = 0;
   late Future<List> _cndi2future;
 
-  late Future<List> _cndi2future;
-  int _displayText = 0; // Variable to store the value obtained from the future
-
+  late Future<List> _cndi1future;
+  int _displayText2 = 0; // Variable to store the value obtained from the future
+  int _displayText1 = 0;
   @override
   void initState() {
     httpClient = Client();
@@ -70,11 +70,21 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
     _cndi2future =
         getvotes_2(ethClient!); // Assuming getvotes_2 returns a Future<List>
 
+    _cndi1future = getvotes_1(ethClient!);
+
     _cndi2future.then((value) {
       setState(() {
-        _displayText = int.parse(value[0].toString());
+        _displayText2 = int.parse(value[0].toString());
         // Update the display text when future completes
-        votesCandidate2 = _displayText.toDouble();
+        votesCandidate2 = _displayText2.toDouble();
+      });
+    });
+
+    _cndi1future.then((value) {
+      setState(() {
+        _displayText1 = int.parse(value[0].toString());
+        // Update the display text when future completes
+        votesCandidate1 = _displayText1.toDouble();
       });
     });
 
