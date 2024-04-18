@@ -211,7 +211,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
               Row(
                 children: [
                   Spacer(),
-                  /*    BarChartWidget(
+                  BarChartWidget(
                     bars: [votesCandidate1, votesCandidate2],
                     labels: [
                       '$candidate_1',
@@ -221,7 +221,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                     axisLineColor: Colors.red,
                     barGap: 4.0,
                     size: Size(300, 400),
-                  ),*/
+                  ),
                   Spacer(),
                 ],
               ),
