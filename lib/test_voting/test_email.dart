@@ -21,12 +21,32 @@ class _Test_EmailState extends State<Test_Email> {
 
   final smtpServer = gmail('nmails6969@gmail.com', 'huujfezvmgbhmnmz');
 
+  TextEditingController rcvercontroller = TextEditingController();
+
   Future<void> SenDMail() async {
     final message = Message()
       ..from = Address(username, 'Your name')
       ..recipients.add('navindulakshan99@gmail.com')
       ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
       ..text = 'This is the plain text.\nThis is line 2 of the text part.';
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
+
+  Future<void> MailSend(String recver, String title, String msg) async {
+    final message = Message()
+      ..from = Address(username)
+      ..recipients.add(recver)
+      ..subject = title
+      ..text = msg;
 
     try {
       final sendReport = await send(message, smtpServer);
