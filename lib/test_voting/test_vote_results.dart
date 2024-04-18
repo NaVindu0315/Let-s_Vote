@@ -34,6 +34,13 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
   double votesCandidate1 = 0;
   double votesCandidate2 = 0;
 
+  int cn1 = 0;
+  int cn2 = 0;
+  late Future<List> _cndi2future;
+
+  late Future<List> _cndi2future;
+  int _displayText = 0; // Variable to store the value obtained from the future
+
   @override
   void initState() {
     httpClient = Client();
@@ -58,6 +65,17 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
           candidate_2 = snapshot.value.toString();
         });
       }
+    });
+
+    _cndi2future =
+        getvotes_2(ethClient!); // Assuming getvotes_2 returns a Future<List>
+
+    _cndi2future.then((value) {
+      setState(() {
+        _displayText = int.parse(value[0].toString());
+        // Update the display text when future completes
+        votesCandidate2 = _displayText.toDouble();
+      });
     });
 
     super.initState();
@@ -111,8 +129,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                                 child: CircularProgressIndicator(),
                               );
                             }
-                            votesCandidate1 =
-                                double.parse(snapshot.data![0].toString());
+
                             return Text(
                               snapshot.data![0].toString(),
                               style: TextStyle(
@@ -133,8 +150,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                                 child: CircularProgressIndicator(),
                               );
                             }
-                            votesCandidate2 =
-                                double.parse(snapshot.data![0].toString());
+
                             return Text(
                               snapshot.data![0].toString(),
                               style: TextStyle(
@@ -159,7 +175,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                   Column(
                     children: [
                       Text(
-                        '$candidate_1',
+                        '$candidate_1 & $votesCandidate1',
                         style: TextStyle(fontSize: 30.0),
                       ),
                     ],
@@ -168,7 +184,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                   Column(
                     children: [
                       Text(
-                        '$candidate_2',
+                        '$candidate_2 & $votesCandidate2',
                         style: TextStyle(fontSize: 30.0),
                       ),
                     ],
@@ -185,7 +201,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
               Row(
                 children: [
                   Spacer(),
-                  BarChartWidget(
+                  /*    BarChartWidget(
                     bars: [votesCandidate1, votesCandidate2],
                     labels: [
                       '$candidate_1',
@@ -195,7 +211,7 @@ class _Test_vote_ResultsState extends State<Test_vote_Results> {
                     axisLineColor: Colors.red,
                     barGap: 4.0,
                     size: Size(300, 400),
-                  ),
+                  ),*/
                   Spacer(),
                 ],
               ),
