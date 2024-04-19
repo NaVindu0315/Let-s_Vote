@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,10 @@ class Test_Set_Graph_Values extends StatefulWidget {
 }
 
 class _Test_Set_Graph_ValuesState extends State<Test_Set_Graph_Values> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+
+  DateTime now = DateTime.now();
   void getcurrentuser() async {
     try {
       // final user = await _auth.currentUser();
@@ -33,6 +38,18 @@ class _Test_Set_Graph_ValuesState extends State<Test_Set_Graph_Values> {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> setdata() async {
+    final unknwerror = _firestore.collection("test_emotions").doc(client);
+
+    unknwerror.set({
+      'anger': 45.5,
+      'sadness': 80.0,
+      'fear': 60.0,
+      'email': client,
+      'times': now,
+    }, SetOptions(merge: true));
   }
 
   @override
@@ -75,7 +92,11 @@ class _Test_Set_Graph_ValuesState extends State<Test_Set_Graph_Values> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(onPressed: () {}, child: Text('set')),
+                  ElevatedButton(
+                      onPressed: () {
+                        setdata();
+                      },
+                      child: Text('set')),
                   // Text('data'),
                   Spacer(),
                 ],
