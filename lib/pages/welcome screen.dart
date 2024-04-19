@@ -11,6 +11,7 @@ import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:camera/camera.dart';
+import 'package:lets_vote/test_voting/Test_Emotion_List.dart';
 import 'package:lets_vote/test_voting/Test_Enable_Disble.dart';
 import 'package:lets_vote/test_voting/Test_Set_Graph_Values.dart';
 import 'package:lets_vote/test_voting/test_election_set.dart';
@@ -711,6 +712,24 @@ class _DashBoardState extends State<DashBoard> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         Test_Set_Graph_Values()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.list,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Test Emotions List',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Test_Emotion_List()),
                               );
                             },
                           );
