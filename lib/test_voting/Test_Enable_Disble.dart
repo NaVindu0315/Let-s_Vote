@@ -117,7 +117,11 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(onPressed: () {}, child: Text('Enable')),
+                  ElevatedButton(
+                      onPressed: () {
+                        activatebutton();
+                      },
+                      child: Text('Enable')),
                   // Text('data'),
                   Spacer(),
                 ],
@@ -125,7 +129,11 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(onPressed: () {}, child: Text('Disable')),
+                  ElevatedButton(
+                      onPressed: () {
+                        deactivatebutton();
+                      },
+                      child: Text('Disable')),
                   // Text('data'),
                   Spacer(),
                 ],
