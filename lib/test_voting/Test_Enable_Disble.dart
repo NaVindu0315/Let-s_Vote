@@ -18,6 +18,8 @@ class Test_Enable_Disable extends StatefulWidget {
 
 class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
   late DatabaseReference uidref;
+
+  late DatabaseReference removeref;
   String uuiid = "";
   void getcurrentuser() async {
     try {
@@ -75,6 +77,7 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
     getcurrentuser();
 
     uidref = FirebaseDatabase.instance.reference().child('uuids/$uuiid/stat');
+    removeref = FirebaseDatabase.instance.reference().child('uuids');
 
     uidref.onValue.listen((event) {
       final snapshot = event.snapshot;
@@ -90,6 +93,10 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
         });
       }
     });
+  }
+
+  Future<void> resetall() async {
+    await removeref.remove();
   }
 
   @override
@@ -125,7 +132,12 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
                 children: [
                   Spacer(),
                   ElevatedButton(
-                      onPressed: uidf == 1 ? () {} : null, child: Text('Vote')),
+                      onPressed: uidf == 1
+                          ? () {
+                              deactivatebutton();
+                            }
+                          : null,
+                      child: Text('Vote')),
                   // Text('data'),
                   Spacer(),
                 ],
@@ -173,7 +185,10 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
                 children: [
                   Spacer(),
                   ElevatedButton(
-                      onPressed: () {}, child: Text('Activate Voting')),
+                      onPressed: () {
+                        resetall();
+                      },
+                      child: Text('Activate Voting')),
                   // Text('data'),
                   Spacer(),
                 ],
