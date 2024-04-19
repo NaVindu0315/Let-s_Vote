@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +10,18 @@ import '../Colors/colors.dart';
 late User loggedinuser;
 late String client;
 
-class Test_Enable_Disable extends StatefulWidget {
-  const Test_Enable_Disable({Key? key}) : super(key: key);
+class Test_Set_Graph_Values extends StatefulWidget {
+  const Test_Set_Graph_Values({Key? key}) : super(key: key);
 
   @override
-  State<Test_Enable_Disable> createState() => _Test_Enable_DisableState();
+  State<Test_Set_Graph_Values> createState() => _Test_Set_Graph_ValuesState();
 }
 
-class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
-  late DatabaseReference uidref;
-  String uuiid = "";
+class _Test_Set_Graph_ValuesState extends State<Test_Set_Graph_Values> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+
+  DateTime now = DateTime.now();
   void getcurrentuser() async {
     try {
       // final user = await _auth.currentUser();
@@ -31,48 +34,40 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
         ///i have to call the getdatafrm the function here and parse client as a parameter
 
         print(loggedinuser.email);
-        print(loggedinuser.uid);
-        uuiid = loggedinuser.uid;
       }
     } catch (e) {
       print(e);
     }
-
-    Future<String> uidreturn() async {
-      try {
-        // final user = await _auth.currentUser();
-        ///yata line eka chatgpt code ekk meka gatte uda line eke error ekk ena hinda hrytama scene eka terenne na
-        User? user = FirebaseAuth.instance.currentUser;
-        if (user != null) {
-          loggedinuser = user;
-          client = loggedinuser.email!;
-
-          ///i have to call the getdatafrm the function here and parse client as a parameter
-
-          print(loggedinuser.email);
-          print(loggedinuser.uid);
-        }
-      } catch (e) {
-        print(e);
-      }
-      return loggedinuser.uid;
-    }
   }
 
-  Future<void> deactivatebutton() async {
-    await uidref.set(0);
+  Future<void> setdata() async {
+    final unknwerror = _firestore.collection("test_emotions").doc(client);
+
+    unknwerror.set({
+      'anger': 45.5,
+      'sadness': 80.0,
+      'fear': 60.0,
+      'email': client,
+      'times': now,
+    }, SetOptions(merge: true));
   }
 
-  Future<void> activatebutton() async {
-    await uidref.set(1);
+  Future<void> updatedata() async {
+    final emotiionsave = _firestore.collection("test_emotions").doc(client);
+
+    emotiionsave.set({
+      'anger': 90.5,
+      'sadness': 40.0,
+      'fear': 10.0,
+      'email': client,
+      'times': now,
+    }, SetOptions(merge: true));
   }
 
   @override
   void initState() {
     super.initState();
     getcurrentuser();
-
-    uidref = FirebaseDatabase.instance.reference().child('uuids/$uuiid/stat');
   }
 
   @override
@@ -93,7 +88,7 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
           ),
 
           title: Text(
-            'Test Enable Disable',
+            'Test Graph value set',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: IconThemeData(color: Colors.white),
@@ -104,14 +99,6 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
           child: Column(
             children: [
               Spacer(),
-              Row(
-                children: [
-                  Spacer(),
-                  ElevatedButton(onPressed: () {}, child: Text('Vote')),
-                  // Text('data'),
-                  Spacer(),
-                ],
-              ),
 
               ///vote count display row
               Row(
@@ -119,9 +106,9 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
                   Spacer(),
                   ElevatedButton(
                       onPressed: () {
-                        activatebutton();
+                        setdata();
                       },
-                      child: Text('Enable')),
+                      child: Text('set')),
                   // Text('data'),
                   Spacer(),
                 ],
@@ -131,9 +118,9 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
                   Spacer(),
                   ElevatedButton(
                       onPressed: () {
-                        deactivatebutton();
+                        updatedata();
                       },
-                      child: Text('Disable')),
+                      child: Text('Update')),
                   // Text('data'),
                   Spacer(),
                 ],
@@ -154,8 +141,7 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(
-                      onPressed: () {}, child: Text('Activate Voting')),
+                  Text('data'),
                   // Text('data'),
                   Spacer(),
                 ],
@@ -165,6 +151,14 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
                   Spacer(),
                   // ElevatedButton(onPressed: () {}, child: Text('Send')),
                   Text('data'),
+                  Spacer(),
+                ],
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  Text('data'),
+                  // Text('data'),
                   Spacer(),
                 ],
               ),
