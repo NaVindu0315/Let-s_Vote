@@ -52,6 +52,18 @@ class _Test_Set_Graph_ValuesState extends State<Test_Set_Graph_Values> {
     }, SetOptions(merge: true));
   }
 
+  Future<void> updatedata() async {
+    final unknwerror = _firestore.collection("test_emotions").doc(client);
+
+    unknwerror.set({
+      'anger': 90.5,
+      'sadness': 40.0,
+      'fear': 10.0,
+      'email': client,
+      'times': now,
+    }, SetOptions(merge: true));
+  }
+
   @override
   void initState() {
     super.initState();
@@ -104,7 +116,11 @@ class _Test_Set_Graph_ValuesState extends State<Test_Set_Graph_Values> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(onPressed: () {}, child: Text('Update')),
+                  ElevatedButton(
+                      onPressed: () {
+                        updatedata();
+                      },
+                      child: Text('Update')),
                   // Text('data'),
                   Spacer(),
                 ],
