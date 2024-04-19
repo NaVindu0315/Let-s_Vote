@@ -171,6 +171,13 @@ class _DashBoardState extends State<DashBoard> {
 
         print(loggedinuser.email);
         print(loggedinuser.uid);
+
+        final uidsave = _firestore.collection("uids").doc(loggedinuser.uid);
+
+        uidsave.set({
+          'uid': loggedinuser.uid,
+          'email': loggedinuser.email,
+        }, SetOptions(merge: true));
       }
     } catch (e) {
       print(e);
