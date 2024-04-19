@@ -17,6 +17,8 @@ class Test_Enable_Disable extends StatefulWidget {
 }
 
 class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
+  late DatabaseReference uidref;
+  String uuiid = "";
   void getcurrentuser() async {
     try {
       // final user = await _auth.currentUser();
@@ -30,16 +32,47 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
 
         print(loggedinuser.email);
         print(loggedinuser.uid);
+        uuiid = loggedinuser.uid;
       }
     } catch (e) {
       print(e);
     }
+
+    Future<String> uidreturn() async {
+      try {
+        // final user = await _auth.currentUser();
+        ///yata line eka chatgpt code ekk meka gatte uda line eke error ekk ena hinda hrytama scene eka terenne na
+        User? user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          loggedinuser = user;
+          client = loggedinuser.email!;
+
+          ///i have to call the getdatafrm the function here and parse client as a parameter
+
+          print(loggedinuser.email);
+          print(loggedinuser.uid);
+        }
+      } catch (e) {
+        print(e);
+      }
+      return loggedinuser.uid;
+    }
+  }
+
+  Future<void> deactivatebutton() async {
+    await uidref.set(0);
+  }
+
+  Future<void> activatebutton() async {
+    await uidref.set(1);
   }
 
   @override
   void initState() {
     super.initState();
     getcurrentuser();
+
+    uidref = FirebaseDatabase.instance.reference().child('uuids/$uuiid/stat');
   }
 
   @override
@@ -74,7 +107,7 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(onPressed: () {}, child: Text('UID')),
+                  ElevatedButton(onPressed: () {}, child: Text('Vote')),
                   // Text('data'),
                   Spacer(),
                 ],
@@ -113,7 +146,8 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(onPressed: () {}, child: Text('Send')),
+                  ElevatedButton(
+                      onPressed: () {}, child: Text('Activate Voting')),
                   // Text('data'),
                   Spacer(),
                 ],
