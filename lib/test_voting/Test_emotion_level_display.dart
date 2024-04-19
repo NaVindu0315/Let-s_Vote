@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_graph/flutter_graph.dart';
 
 import '../../Colors/colors.dart';
 import 'package:intl/intl.dart';
@@ -62,6 +63,10 @@ class _Test_Emotion_level_DisplayState
     }
   }
 
+  double fear = 0.0;
+  double anger = 0.0;
+  double sadness = 0.0;
+
   ///
 
   @override
@@ -75,6 +80,10 @@ class _Test_Emotion_level_DisplayState
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasData) {
           var data = snapshot.data;
+
+          fear = data?['fear'] ?? 0.0;
+          anger = data?['anger'] ?? 0.0;
+          sadness = data?['sadness'] ?? 0.0;
 
           return
 
@@ -304,6 +313,19 @@ class _Test_Emotion_level_DisplayState
                             SizedBox(
                               height: 10.0,
                             ),
+
+                            Row(
+                              children: [
+                                BarChartWidget(
+                                  bars: [fear, anger, sadness],
+                                  labels: ['Fear', 'Anger', 'Sadness'],
+                                  barColor: Colors.blueAccent,
+                                  axisLineColor: Colors.red,
+                                  barGap: 4.0,
+                                  size: Size(300, 400),
+                                ),
+                              ],
+                            )
 
                             ///gem code
                           ],
