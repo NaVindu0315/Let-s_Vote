@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_vote/pages/Attempts/detailed_success_attempts.dart';
 import 'package:lets_vote/pages/Attempts/detiled_other_Attempt.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
+import 'package:lets_vote/test_voting/Test_emotion_level_display.dart';
 
 import '../../Colors/colors.dart';
 import '../../firebase_options.dart';
@@ -175,12 +176,13 @@ class suc_attempt extends State<Test_Emotion_List> {
                             ),
                             title: GestureDetector(
                               onTap: () {
-                                /* Navigator.push(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Detailed_Sucs(
-                                          successid: '${data['email']}')),
-                                );*/
+                                      builder: (context) =>
+                                          Test_Emotion_level_Display(
+                                              successid: '${data['email']}')),
+                                );
                                 print('${data['email']}');
                               },
                               child: Ink(
