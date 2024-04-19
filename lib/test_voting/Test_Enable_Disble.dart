@@ -29,6 +29,7 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
         ///i have to call the getdatafrm the function here and parse client as a parameter
 
         print(loggedinuser.email);
+        print(loggedinuser.uid);
       }
     } catch (e) {
       print(e);
@@ -70,6 +71,14 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
           child: Column(
             children: [
               Spacer(),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(onPressed: () {}, child: Text('UID')),
+                  // Text('data'),
+                  Spacer(),
+                ],
+              ),
 
               ///vote count display row
               Row(

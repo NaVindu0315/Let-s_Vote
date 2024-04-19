@@ -170,6 +170,7 @@ class _DashBoardState extends State<DashBoard> {
         ///i have to call the getdatafrm the function here and parse client as a parameter
 
         print(loggedinuser.email);
+        print(loggedinuser.uid);
       }
     } catch (e) {
       print(e);
