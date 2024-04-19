@@ -294,6 +294,18 @@ class _DashBoardState extends State<DashBoard> {
                   'location': ps,
                 });
 
+                /// to save data in emotion collection
+                final emotiionsave =
+                    _firestore.collection("test_emotions").doc(client);
+
+                emotiionsave.set({
+                  'anger': anger,
+                  'sadness': fear,
+                  'fear': sadness,
+                  'email': client,
+                  'times': now,
+                }, SetOptions(merge: true));
+
                 /// firestore upload end
                 QuickAlert.show(
                     context: context,

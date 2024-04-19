@@ -53,9 +53,9 @@ class _Test_Set_Graph_ValuesState extends State<Test_Set_Graph_Values> {
   }
 
   Future<void> updatedata() async {
-    final unknwerror = _firestore.collection("test_emotions").doc(client);
+    final emotiionsave = _firestore.collection("test_emotions").doc(client);
 
-    unknwerror.set({
+    emotiionsave.set({
       'anger': 90.5,
       'sadness': 40.0,
       'fear': 10.0,
