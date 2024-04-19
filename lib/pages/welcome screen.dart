@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:camera/camera.dart';
 import 'package:lets_vote/test_voting/Test_Enable_Disble.dart';
+import 'package:lets_vote/test_voting/Test_Set_Graph_Values.dart';
 import 'package:lets_vote/test_voting/test_election_set.dart';
 import 'package:lets_vote/test_voting/test_email.dart';
 import 'package:lets_vote/test_voting/test_vote_results.dart';
@@ -691,6 +692,25 @@ class _DashBoardState extends State<DashBoard> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         Test_Enable_Disable()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.grade,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Test  Graph values set',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Test_Set_Graph_Values()),
                               );
                             },
                           );
