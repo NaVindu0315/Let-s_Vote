@@ -93,6 +93,35 @@ class _Test_EmailState extends State<Test_Email> {
     }
   }
 
+  int otp = 1011;
+  int newotp = 0;
+  Future openDialog() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text('your name'),
+            content: TextField(
+              decoration: InputDecoration(hintText: 'Enter urt mae'),
+              onChanged: (value) {
+                newotp = int.parse(value);
+              },
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    if (newotp == otp) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DashBoard()),
+                      );
+                    } else {
+                      print("hukapn poonnaya");
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Text('Submit'))
+            ],
+          ));
+
   @override
   void initState() {
     super.initState();
@@ -274,6 +303,17 @@ class _Test_EmailState extends State<Test_Email> {
                         msgcontrller.clear();
                       },
                       child: Text('Auto Send')),
+                  Spacer(),
+                ],
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () async {
+                        openDialog();
+                      },
+                      child: Text('Prompt Box')),
                   Spacer(),
                 ],
               ),
