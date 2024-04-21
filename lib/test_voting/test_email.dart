@@ -30,6 +30,8 @@ class _Test_EmailState extends State<Test_Email> {
   String titlee = "";
   String msgg = "";
 
+  DateTime? _startDate;
+
   Future<void> SenDMail() async {
     final message = Message()
       ..from = Address(username, 'Your name')
@@ -272,6 +274,32 @@ class _Test_EmailState extends State<Test_Email> {
                         msgcontrller.clear();
                       },
                       child: Text('Auto Send')),
+                  Spacer(),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final selectedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(DateTime.now().year + 1),
+                      );
+                      if (selectedDate != null) {
+                        setState(() {
+                          _startDate = selectedDate;
+                          print(_startDate);
+                        });
+                      }
+                    },
+                    child: Text(_startDate != null
+                        ? '${_startDate!.day}/${_startDate!.month}/${_startDate!.year}'
+                        : 'Select Start Date'),
+                  ),
                   Spacer(),
                 ],
               ),
