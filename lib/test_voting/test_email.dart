@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +40,31 @@ class _Test_EmailState extends State<Test_Email> {
     try {
       final sendReport = await send(message, smtpServer);
       print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
+
+  Future<void> Autosend() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('useremails').get();
+    List<String> emailList = [];
+    for (var doc in querySnapshot.docs) {
+      emailList.add(doc['umail']);
+    }
+    final message = Message()
+      ..from = Address(username)
+      ..subject = 'Your subject here'
+      ..text = 'Your message here';
+    try {
+      for (var email in emailList) {
+        message.recipients.add(email);
+        final sendReport = await send(message, smtpServer);
+        print('Message sent to $email: ' + sendReport.toString());
+      }
     } on MailerException catch (e) {
       print('Message not sent.');
       for (var p in e.problems) {
@@ -230,6 +256,22 @@ class _Test_EmailState extends State<Test_Email> {
                         msgcontrller.clear();
                       },
                       child: Text('Send')),
+                  Spacer(),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        Autosend();
+                        //MailSend(reciverr, titlee, msgg);
+                        rcvercontroller.clear();
+                        titlecontroller.clear();
+                        msgcontrller.clear();
+                      },
+                      child: Text('Auto Send')),
                   Spacer(),
                 ],
               ),
