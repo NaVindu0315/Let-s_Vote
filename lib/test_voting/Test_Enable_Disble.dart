@@ -18,6 +18,8 @@ class Test_Enable_Disable extends StatefulWidget {
 
 class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
   late DatabaseReference uidref;
+
+  late DatabaseReference removeref;
   String uuiid = "";
   void getcurrentuser() async {
     try {
@@ -67,12 +69,34 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
     await uidref.set(1);
   }
 
+  String uiddisplay = "";
+  int uidf = 99;
   @override
   void initState() {
     super.initState();
     getcurrentuser();
 
     uidref = FirebaseDatabase.instance.reference().child('uuids/$uuiid/stat');
+    removeref = FirebaseDatabase.instance.reference().child('uuids');
+
+    uidref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          uiddisplay = snapshot.value.toString();
+          uidf = int.parse(uiddisplay);
+        });
+      } else {
+        setState(() {
+          uiddisplay = '1';
+          uidf = int.parse(uiddisplay);
+        });
+      }
+    });
+  }
+
+  Future<void> resetall() async {
+    await removeref.remove();
   }
 
   @override
@@ -107,7 +131,13 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
               Row(
                 children: [
                   Spacer(),
-                  ElevatedButton(onPressed: () {}, child: Text('Vote')),
+                  ElevatedButton(
+                      onPressed: uidf == 1
+                          ? () {
+                              deactivatebutton();
+                            }
+                          : null,
+                      child: Text('Vote')),
                   // Text('data'),
                   Spacer(),
                 ],
@@ -155,7 +185,10 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
                 children: [
                   Spacer(),
                   ElevatedButton(
-                      onPressed: () {}, child: Text('Activate Voting')),
+                      onPressed: () {
+                        resetall();
+                      },
+                      child: Text('Activate Voting')),
                   // Text('data'),
                   Spacer(),
                 ],
@@ -164,7 +197,10 @@ class _Test_Enable_DisableState extends State<Test_Enable_Disable> {
                 children: [
                   Spacer(),
                   // ElevatedButton(onPressed: () {}, child: Text('Send')),
-                  Text('data'),
+                  Text(
+                    '$uiddisplay & $uidf ',
+                    style: TextStyle(fontSize: 40.0),
+                  ),
                   Spacer(),
                 ],
               ),
