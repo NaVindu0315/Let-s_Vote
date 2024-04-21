@@ -11,7 +11,9 @@ import 'package:lets_vote/pages/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:camera/camera.dart';
+import 'package:lets_vote/test_voting/Test_Emotion_List.dart';
 import 'package:lets_vote/test_voting/Test_Enable_Disble.dart';
+import 'package:lets_vote/test_voting/Test_Set_Graph_Values.dart';
 import 'package:lets_vote/test_voting/test_election_set.dart';
 import 'package:lets_vote/test_voting/test_email.dart';
 import 'package:lets_vote/test_voting/test_vote_results.dart';
@@ -168,6 +170,14 @@ class _DashBoardState extends State<DashBoard> {
         ///i have to call the getdatafrm the function here and parse client as a parameter
 
         print(loggedinuser.email);
+        print(loggedinuser.uid);
+
+        final uidsave = _firestore.collection("uids").doc(loggedinuser.uid);
+
+        uidsave.set({
+          'uid': loggedinuser.uid,
+          'email': loggedinuser.email,
+        }, SetOptions(merge: true));
       }
     } catch (e) {
       print(e);
@@ -291,6 +301,18 @@ class _DashBoardState extends State<DashBoard> {
                   'initip': initalip,
                   'location': ps,
                 });
+
+                /// to save data in emotion collection
+                final emotiionsave =
+                    _firestore.collection("test_emotions").doc(client);
+
+                emotiionsave.set({
+                  'anger': anger,
+                  'sadness': fear,
+                  'fear': sadness,
+                  'email': client,
+                  'times': now,
+                }, SetOptions(merge: true));
 
                 /// firestore upload end
                 QuickAlert.show(
@@ -691,6 +713,43 @@ class _DashBoardState extends State<DashBoard> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         Test_Enable_Disable()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.grade,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Test  Graph values set',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Test_Set_Graph_Values()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.list,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Test Emotions List',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Test_Emotion_List()),
                               );
                             },
                           );
