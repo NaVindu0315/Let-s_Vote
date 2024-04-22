@@ -18,5 +18,5 @@ Future<void> main() async {
   //for the camera
   cameras = await availableCameras();
   //runApp(myapp());
-  runApp(Selection_page());
+  runApp(lgin());
 }
