@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/pages/login.dart';
 
 void main() {
@@ -13,20 +16,42 @@ class Selection_page extends StatefulWidget {
 }
 
 class _Selection_pageState extends State<Selection_page> {
+  late DatabaseReference _databaseReference;
+  int ootp = 0000;
+  int inotp = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _databaseReference = FirebaseDatabase.instance.reference().child('ootp');
+
+    _databaseReference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          ootp = snapshot.value as int;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.blue.shade50,
+        backgroundColor: Colors.white,
         //AppBar
         appBar: AppBar(
-          backgroundColor: Color(0xFF19589D),
+          backgroundColor: AppColors.backgroundcolor,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(30),
             bottomRight: Radius.circular(30),
           )),
-          title: const Text('Choose Your Role'),
+          title: const Text(
+            'Choose Your Role',
+            style: TextStyle(color: Colors.white),
+          ),
           centerTitle: true,
           actions: <Widget>[
             Padding(
@@ -49,7 +74,7 @@ class _Selection_pageState extends State<Selection_page> {
                 child: Container(
                   margin: EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
-                    color: Color(0xFFBFD8FF),
+                    color: AppColors.buttoncolor,
                     borderRadius: BorderRadius.circular(30.0),
                     boxShadow: const [
                       BoxShadow(
@@ -84,7 +109,7 @@ class _Selection_pageState extends State<Selection_page> {
                 child: Container(
                   margin: EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
-                    color: Color(0xFFBFD8FF),
+                    color: AppColors.buttoncolor,
                     borderRadius: BorderRadius.circular(30.0),
                     boxShadow: const [
                       BoxShadow(
