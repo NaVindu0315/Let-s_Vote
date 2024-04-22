@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +30,8 @@ class _Test_EmailState extends State<Test_Email> {
   String titlee = "";
   String msgg = "";
 
+  DateTime? _startDate;
+
   Future<void> SenDMail() async {
     final message = Message()
       ..from = Address(username, 'Your name')
@@ -39,6 +42,31 @@ class _Test_EmailState extends State<Test_Email> {
     try {
       final sendReport = await send(message, smtpServer);
       print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
+
+  Future<void> Autosend() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('useremails').get();
+    List<String> emailList = [];
+    for (var doc in querySnapshot.docs) {
+      emailList.add(doc['umail']);
+    }
+    final message = Message()
+      ..from = Address(username)
+      ..subject = 'Your subject here'
+      ..text = 'Your message here';
+    try {
+      for (var email in emailList) {
+        message.recipients.add(email);
+        final sendReport = await send(message, smtpServer);
+        print('Message sent to $email: ' + sendReport.toString());
+      }
     } on MailerException catch (e) {
       print('Message not sent.');
       for (var p in e.problems) {
@@ -64,6 +92,35 @@ class _Test_EmailState extends State<Test_Email> {
       }
     }
   }
+
+  int otp = 1011;
+  int newotp = 0;
+  Future openDialog() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text('your name'),
+            content: TextField(
+              decoration: InputDecoration(hintText: 'Enter urt mae'),
+              onChanged: (value) {
+                newotp = int.parse(value);
+              },
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    if (newotp == otp) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DashBoard()),
+                      );
+                    } else {
+                      print("hukapn poonnaya");
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Text('Submit'))
+            ],
+          ));
 
   @override
   void initState() {
@@ -230,6 +287,59 @@ class _Test_EmailState extends State<Test_Email> {
                         msgcontrller.clear();
                       },
                       child: Text('Send')),
+                  Spacer(),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        Autosend();
+                        //MailSend(reciverr, titlee, msgg);
+                        rcvercontroller.clear();
+                        titlecontroller.clear();
+                        msgcontrller.clear();
+                      },
+                      child: Text('Auto Send')),
+                  Spacer(),
+                ],
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () async {
+                        openDialog();
+                      },
+                      child: Text('Prompt Box')),
+                  Spacer(),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final selectedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(DateTime.now().year + 1),
+                      );
+                      if (selectedDate != null) {
+                        setState(() {
+                          _startDate = selectedDate;
+                          print(_startDate);
+                        });
+                      }
+                    },
+                    child: Text(_startDate != null
+                        ? '${_startDate!.day}/${_startDate!.month}/${_startDate!.year}'
+                        : 'Select Start Date'),
+                  ),
                   Spacer(),
                 ],
               ),
