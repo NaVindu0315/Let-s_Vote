@@ -10,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 ///for camera
 import 'package:camera/camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:lets_vote/lets_vote/management/mng_login.dart';
 import 'package:lets_vote/pages/login.dart';
 
 import 'package:quickalert/quickalert.dart';
@@ -578,11 +579,11 @@ class _Mng_signupState extends State<Mng_signup> {
                                   text:
                                       '$username Your account created Succesfully  ',
                                   onConfirmBtnTap: () {
-                                    /* Navigator.push(
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ()),
-                                    );*/
+                                          builder: (context) => Mng_Login()),
+                                    );
                                   });
 
                               usernamecontroller.clear();
@@ -640,11 +641,11 @@ class _Mng_signupState extends State<Mng_signup> {
                             Builder(builder: (context) {
                               return GestureDetector(
                                 onTap: () {
-                                  /*   Navigator.push(
+                                  Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => lgin()),
-                                  );*/
+                                        builder: (context) => Mng_signup()),
+                                  );
                                   // Add your sign up button onPressed code here
                                 },
                                 child: Text(
