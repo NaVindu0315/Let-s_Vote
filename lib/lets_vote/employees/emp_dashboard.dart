@@ -44,6 +44,8 @@ import '../../pages/Voting_home.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 
+import 'Emp_Election_Results.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -688,12 +690,12 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                     child: GestureDetector(
                                   onTap: isresults == 1
                                       ? () {
-                                          /*  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Management_Dashboard()),
-                                    );*/
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Em_Election_Results()),
+                                          );
                                           print("hukpm");
                                         }
                                       : () {
