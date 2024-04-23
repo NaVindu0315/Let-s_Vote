@@ -1,8 +1,10 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
-import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
+import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
 import 'package:lets_vote/pages/Test/testgrapgh.dart';
@@ -22,7 +24,6 @@ import 'package:lets_vote/test_voting/test_vote_results.dart';
 import 'package:lets_vote/test_voting/vote_home_2.dart';
 import 'dart:io';
 
-import 'Voting_home.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:http/http.dart' as http;
@@ -39,17 +40,29 @@ import 'package:get_ip_address/get_ip_address.dart';
 
 import 'package:geolocator/geolocator.dart';
 
+import '../../pages/Voting_home.dart';
+
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+
+import 'Emp_Election_Results.dart';
+
 late User loggedinuser;
 late String client;
 
-class DashBoard extends StatefulWidget {
-  const DashBoard({Key? key}) : super(key: key);
+class Emp_Dashboard extends StatefulWidget {
+  const Emp_Dashboard({Key? key}) : super(key: key);
 
   @override
-  State<DashBoard> createState() => _DashBoardState();
+  State<Emp_Dashboard> createState() => _Emp_DashboardState();
 }
 
-class _DashBoardState extends State<DashBoard> {
+class _Emp_DashboardState extends State<Emp_Dashboard> {
+  String username = 'letsvotelv2024@gmail.com';
+  String password = 'edpxfzzripyqjqms';
+
+  final smtpServer = gmail('letsvotelv2024@gmail.com', 'edpxfzzripyqjqms');
+
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   TextEditingController loggedinusercontroller = TextEditingController();
@@ -61,6 +74,27 @@ class _DashBoardState extends State<DashBoard> {
   late String url1img;
 
   ///camera end
+  ///Failed attempt email
+  Future<void> sendReport(String lnk) async {
+    final message = Message()
+      ..from = Address(username, 'Lets Vote ')
+      ..recipients.add('electionofficerletsvote@gmail.com')
+      ..subject = 'Someone Attempted to Vote as $client  ${DateTime.now()}'
+      ..text = 'image Link $lnk ';
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
+
+  ///end
+
   ///
   ///firebase storage
   final storage = FirebaseStorage.instance;
@@ -99,6 +133,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   ///capturing and storing function end
+  ///
   ///new returing function
   Future<String> newupload() async {
     String uploadedImageUrl = ""; // Initialize the variable to an empty string
@@ -129,23 +164,23 @@ class _DashBoardState extends State<DashBoard> {
     }
   }
 
-/*
-//thhis worked
-  Future printIps() async {
-    for (var interface in await NetworkInterface.list()) {
-      print('== Interface: ${interface.name} ==');
-      for (var addr in interface.addresses) {
-        print(
-            '${addr.address} ${addr.host} ${addr.isLoopback} ${addr.rawAddress} ${addr.type.name}');
-      }
-    }
-  }*/
-
   ///returning function end
   ///for the ip address
 
   ///to get the current user
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
+
+  late DatabaseReference _databaseReference;
+
+  late DatabaseReference _electionReference;
+
+  late DatabaseReference _resulreference;
+
+  int iselection = 0;
+  int isresults = 0;
+
+  double level = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -157,6 +192,43 @@ class _DashBoardState extends State<DashBoard> {
       }
       setState(() {});
     });
+    _databaseReference = FirebaseDatabase.instance.reference().child('level');
+
+    _electionReference =
+        FirebaseDatabase.instance.reference().child('election');
+
+    _resulreference = FirebaseDatabase.instance.reference().child('results');
+
+    _electionReference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          iselection = snapshot.value as int;
+          print(iselection);
+        });
+      }
+    });
+
+    _resulreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          isresults = snapshot.value as int;
+          print(isresults);
+        });
+      }
+    });
+
+    _databaseReference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          level = snapshot.value as double;
+          //print(level);
+        });
+      }
+    });
+
     //_initNetworkInfo();
   }
 
@@ -229,7 +301,7 @@ class _DashBoardState extends State<DashBoard> {
           final responseJson = jsonDecode(responseData) as Map<String, dynamic>;
           final confidence = responseJson['confidence'] as double;
           print('Confidence: $confidence');
-          if (confidence > 85.00) {
+          if (confidence > level) {
             final url2 =
                 Uri.parse('https://api-us.faceplusplus.com/facepp/v3/detect');
             final request2 = http.MultipartRequest('POST', url2);
@@ -272,15 +344,7 @@ class _DashBoardState extends State<DashBoard> {
                     rightEyeStatus['no_glass_eye_open'] as double;
                 final rightNormalGlassEyeOpen =
                     rightEyeStatus['normal_glass_eye_open'] as double;
-                // Store the values as needed
-                // Example:
-                /* print('Anger: $anger');
-          print('Fear: $fear');
-          print('Sadness: $sadness');
-          print('Left No Glass Eye Open: $leftNoGlassEyeOpen');
-          print('Left Normal Glass Eye Open: $leftNormalGlassEyeOpen');
-          print('Right No Glass Eye Open: $rightNoGlassEyeOpen');
-          print('Right Normal Glass Eye Open: $rightNormalGlassEyeOpen');*/
+
                 ///firestore upload failed attempt
                 ///
                 ///
@@ -333,7 +397,8 @@ class _DashBoardState extends State<DashBoard> {
                     onConfirmBtnTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => voting_home()),
+                        MaterialPageRoute(
+                            builder: (context) => Emp_Vote_Page()),
                       );
                     });
 
@@ -376,6 +441,7 @@ class _DashBoardState extends State<DashBoard> {
             });
 
             /// firestore upload end
+            sendReport(imageurl2);
           }
 
           // Store the confidence value in a variable for further use
@@ -412,6 +478,7 @@ class _DashBoardState extends State<DashBoard> {
             titleColor: Colors.white,
             textColor: Colors.white,
           );
+          //  sendReport(imageurl2);
 
           /// firestore upload end
           print(now);
@@ -521,145 +588,14 @@ class _DashBoardState extends State<DashBoard> {
                               Icons.manage_accounts,
                               color: Colors.white,
                             ),
-                            title: const Text('Management dashboard',
+                            title: const Text(' dashboard',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        Management_Dashboard()),
-                              );
-                            },
-                          );
-                        }),
-                        //Cam page
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.camera_alt,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Image Testing Page',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => myapp()),
-                              );
-                            },
-                          );
-                        }),
-                        //Announcement
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.face,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Face Comparing Test',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Compare_page()),
-                              );
-                            },
-                          );
-                        }),
-
-                        ///voting home
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.how_to_vote,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Voting Home',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => voting_home()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.admin_panel_settings,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Admin Change compare level',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => admincheck()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.auto_graph,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Graph',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => testgraph()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.how_to_vote,
-                              color: Colors.white,
-                            ),
-                            title: const Text('New Voting HOme',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Vote_Home_2()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.verified_user,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Test Election Set',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => test_election_set()),
+                                    builder: (context) => DashBoard()),
                               );
                             },
                           );
@@ -670,147 +606,19 @@ class _DashBoardState extends State<DashBoard> {
                               Icons.where_to_vote,
                               color: Colors.white,
                             ),
-                            title: const Text('Test Election Results',
+                            title: const Text(' Emp Voting Page',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Test_vote_Results()),
+                                    builder: (context) => Emp_Vote_Page()),
                               );
                             },
                           );
                         }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.email,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Test Email',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Test_Email()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.disabled_by_default,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Test Enable Disable',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Test_Enable_Disable()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.grade,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Test  Graph values set',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Test_Set_Graph_Values()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.list,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Test Emotions List',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Test_Emotion_List()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.select_all,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Selection Page',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Selection_page()),
-                              );
-                            },
-                          );
-                        }),
-
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.dashboard,
-                              color: Colors.white,
-                            ),
-                            title: const Text('Employee Dashboard',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Emp_Dashboard()),
-                              );
-                            },
-                          );
-                        }),
-                        Builder(builder: (context) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.dashboard,
-                              color: Colors.white,
-                            ),
-                            title: const Text('management Dashboard',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17)),
-                            onTap: () {
-                              /*   Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ()),
-                              );*/
-                            },
-                          );
-                        }),
+                        //Cam page
                       ],
                     ),
                   ),
@@ -822,7 +630,7 @@ class _DashBoardState extends State<DashBoard> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'Welcome To Lets Vote',
+                    'Employee Dashboard',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -879,7 +687,7 @@ class _DashBoardState extends State<DashBoard> {
                               children: [
                                 Spacer(),
                                 Text(
-                                  'Designation',
+                                  'Employee',
                                   style: TextStyle(
                                       color: Colors.black54,
                                       fontWeight: FontWeight.bold,
@@ -900,6 +708,48 @@ class _DashBoardState extends State<DashBoard> {
                                 ///for the employee management
                                 Expanded(
                                     child: GestureDetector(
+                                  onTap: isresults == 1
+                                      ? () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Em_Election_Results()),
+                                          );
+                                          print("hukpm");
+                                        }
+                                      : () {
+                                          QuickAlert.show(
+                                            context: context,
+                                            type: QuickAlertType.info,
+                                            text:
+                                                'ELection Results will be Displayed Later',
+                                            autoCloseDuration:
+                                                const Duration(seconds: 4),
+                                            showConfirmBtn: false,
+                                          );
+                                        },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Text(
+                                          "Election Results",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
@@ -912,7 +762,12 @@ class _DashBoardState extends State<DashBoard> {
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/empmg.png'),
+                                        child: Text(
+                                          "Report Something",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -924,17 +779,6 @@ class _DashBoardState extends State<DashBoard> {
                                 )),
 
                                 ///for the camera preview
-                                /*      Expanded(
-                                  child: Container(
-                                    width: 150,
-                                    height: 120,
-                                    child: AspectRatio(
-                                      aspectRatio:
-                                          controller!.value.aspectRatio,
-                                      child: CameraPreview(controller!),
-                                    ),
-                                  ),
-                                ),*/
                               ],
                             ),
 
@@ -944,56 +788,34 @@ class _DashBoardState extends State<DashBoard> {
                                 ///to compare the face and navigate to the votig home
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    HapticFeedback.mediumImpact();
-                                    String up = await newupload();
-                                    // print(up);
-                                    /*  capturedimageurlcontroller.clear();
+                                  onTap: iselection == 1
+                                      ? () async {
+                                          HapticFeedback.mediumImpact();
+                                          String up = await newupload();
+                                          // print(up);
+                                          /*  capturedimageurlcontroller.clear();
                                     uploadimage();*/
 
-                                    await compareandexpression(
-                                        data!['url'], up, data!['initip']);
+                                          await compareandexpression(
+                                              data!['url'],
+                                              up,
+                                              data!['initip']);
 
-                                    //print('profile pic');
-                                    //  print(data!['url']);
-                                    //print('now image');
-                                    //print(uploadedimageurl);
-                                  },
-                                  /*  onTap: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible:
-                                          false, // Prevent user from dismissing while loading
-                                      builder: (context) => Center(
-                                        child: SpinKitSpinningCircle(
-                                          color: Colors
-                                              .white, // Customize loading indicator color
-                                          size: 50.0,
-                                          controller: AnimationController(
-                                              vsync: this,
-                                              duration: const Duration(
-                                                  milliseconds:
-                                                      1200)), // Adjust size as needed
-                                        ),
-                                      ),
-                                    );
-
-                                    try {
-                                      String up = await newupload();
-
-                                      // Additional actions (if needed)
-
-                                      await compareandexpression(
-                                          data!['url'], up);
-                                    } catch (error) {
-                                      // Handle errors gracefully
-                                      print(error);
-                                      // Show an error message or retry option
-                                    } finally {
-                                      // Always close the loading dialog
-                                      Navigator.pop(context);
-                                    }
-                                  },*/
+                                          //print('profile pic');
+                                          //  print(data!['url']);
+                                          //print('now image');
+                                          //print(uploadedimageurl);
+                                        }
+                                      : () {
+                                          QuickAlert.show(
+                                            context: context,
+                                            type: QuickAlertType.info,
+                                            text: 'No Elections Right now',
+                                            autoCloseDuration:
+                                                const Duration(seconds: 4),
+                                            showConfirmBtn: false,
+                                          );
+                                        },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
