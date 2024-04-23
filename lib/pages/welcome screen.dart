@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
 import 'package:lets_vote/pages/Test/testgrapgh.dart';
@@ -769,6 +770,25 @@ class _DashBoardState extends State<DashBoard> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Selection_page()),
+                              );
+                            },
+                          );
+                        }),
+
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.dashboard,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Employee Dashboard',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Emp_Dashboard()),
                               );
                             },
                           );
