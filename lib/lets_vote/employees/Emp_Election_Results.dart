@@ -29,9 +29,11 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
   Web3Client? ethClient;
   String candidate_1 = "-";
   String candidate_2 = "-";
+  String election_name = "";
 
   late DatabaseReference _candidate_1;
   late DatabaseReference _candidate_2;
+  late DatabaseReference _election_name;
 
   double votesCandidate1 = 0;
   double votesCandidate2 = 0;
@@ -50,6 +52,16 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
 
     _candidate_1 = FirebaseDatabase.instance.reference().child('candi_1');
     _candidate_2 = FirebaseDatabase.instance.reference().child('candi_2');
+    _election_name = FirebaseDatabase.instance.reference().child('el_name');
+
+    _election_name.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          election_name = snapshot.value.toString();
+        });
+      }
+    });
 
     _candidate_1.onValue.listen((event) {
       final snapshot = event.snapshot;
@@ -125,6 +137,20 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
           child: Column(
             children: [
               Spacer(),
+              Row(
+                children: [
+                  Spacer(),
+                  Text(
+                    'data',
+                    style:
+                        TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                ],
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
 
               ///vote count display row
               Row(
