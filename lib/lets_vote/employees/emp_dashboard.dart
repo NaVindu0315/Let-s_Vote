@@ -169,6 +169,13 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
 
   late DatabaseReference _databaseReference;
 
+  late DatabaseReference _electionReference;
+
+  late DatabaseReference _resulreference;
+
+  int iselection = 0;
+  int isresults = 0;
+
   double level = 0.0;
 
   @override
@@ -184,12 +191,37 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
     });
     _databaseReference = FirebaseDatabase.instance.reference().child('level');
 
+    _electionReference =
+        FirebaseDatabase.instance.reference().child('election');
+
+    _resulreference = FirebaseDatabase.instance.reference().child('results');
+
+    _electionReference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          iselection = snapshot.value as int;
+          print(iselection);
+        });
+      }
+    });
+
+    _resulreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          isresults = snapshot.value as int;
+          print(isresults);
+        });
+      }
+    });
+
     _databaseReference.onValue.listen((event) {
       final snapshot = event.snapshot;
       if (snapshot.value != null) {
         setState(() {
           level = snapshot.value as double;
-          print(level);
+          //print(level);
         });
       }
     });
@@ -631,7 +663,7 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                               children: [
                                 Spacer(),
                                 Text(
-                                  'Designation',
+                                  'Employee',
                                   style: TextStyle(
                                       color: Colors.black54,
                                       fontWeight: FontWeight.bold,
@@ -652,6 +684,48 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                 ///for the employee management
                                 Expanded(
                                     child: GestureDetector(
+                                  onTap: isresults == 1
+                                      ? () {
+                                          /*  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Management_Dashboard()),
+                                    );*/
+                                          print("hukpm");
+                                        }
+                                      : () {
+                                          QuickAlert.show(
+                                            context: context,
+                                            type: QuickAlertType.info,
+                                            text:
+                                                'ELection Results will be Displayed Later',
+                                            autoCloseDuration:
+                                                const Duration(seconds: 4),
+                                            showConfirmBtn: false,
+                                          );
+                                        },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Text(
+                                          "Election Results",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
@@ -664,7 +738,12 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/empmg.png'),
+                                        child: Text(
+                                          "Report Something",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -676,17 +755,6 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                 )),
 
                                 ///for the camera preview
-                                /*      Expanded(
-                                  child: Container(
-                                    width: 150,
-                                    height: 120,
-                                    child: AspectRatio(
-                                      aspectRatio:
-                                          controller!.value.aspectRatio,
-                                      child: CameraPreview(controller!),
-                                    ),
-                                  ),
-                                ),*/
                               ],
                             ),
 
@@ -696,56 +764,34 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                 ///to compare the face and navigate to the votig home
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    HapticFeedback.mediumImpact();
-                                    String up = await newupload();
-                                    // print(up);
-                                    /*  capturedimageurlcontroller.clear();
+                                  onTap: iselection == 1
+                                      ? () async {
+                                          HapticFeedback.mediumImpact();
+                                          String up = await newupload();
+                                          // print(up);
+                                          /*  capturedimageurlcontroller.clear();
                                     uploadimage();*/
 
-                                    await compareandexpression(
-                                        data!['url'], up, data!['initip']);
+                                          await compareandexpression(
+                                              data!['url'],
+                                              up,
+                                              data!['initip']);
 
-                                    //print('profile pic');
-                                    //  print(data!['url']);
-                                    //print('now image');
-                                    //print(uploadedimageurl);
-                                  },
-                                  /*  onTap: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible:
-                                          false, // Prevent user from dismissing while loading
-                                      builder: (context) => Center(
-                                        child: SpinKitSpinningCircle(
-                                          color: Colors
-                                              .white, // Customize loading indicator color
-                                          size: 50.0,
-                                          controller: AnimationController(
-                                              vsync: this,
-                                              duration: const Duration(
-                                                  milliseconds:
-                                                      1200)), // Adjust size as needed
-                                        ),
-                                      ),
-                                    );
-
-                                    try {
-                                      String up = await newupload();
-
-                                      // Additional actions (if needed)
-
-                                      await compareandexpression(
-                                          data!['url'], up);
-                                    } catch (error) {
-                                      // Handle errors gracefully
-                                      print(error);
-                                      // Show an error message or retry option
-                                    } finally {
-                                      // Always close the loading dialog
-                                      Navigator.pop(context);
-                                    }
-                                  },*/
+                                          //print('profile pic');
+                                          //  print(data!['url']);
+                                          //print('now image');
+                                          //print(uploadedimageurl);
+                                        }
+                                      : () {
+                                          QuickAlert.show(
+                                            context: context,
+                                            type: QuickAlertType.info,
+                                            text: 'No Elections Right now',
+                                            autoCloseDuration:
+                                                const Duration(seconds: 4),
+                                            showConfirmBtn: false,
+                                          );
+                                        },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
