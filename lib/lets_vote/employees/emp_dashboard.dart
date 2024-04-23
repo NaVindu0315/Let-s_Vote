@@ -72,12 +72,12 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
 
   ///camera end
   ///Failed attempt email
-  Future<void> sendReport() async {
+  Future<void> sendReport(String lnk) async {
     final message = Message()
-      ..from = Address(username, 'Your name')
-      ..recipients.add('navindulakshan99@gmail.com')
-      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
-      ..text = 'This is the plain text.\nThis is line 2 of the text part.';
+      ..from = Address(username, 'Lets Vote ')
+      ..recipients.add('electionofficerletsvote@gmail.com')
+      ..subject = 'Someone Attempted to Vote as $client  ${DateTime.now()}'
+      ..text = 'image Link $lnk ';
 
     try {
       final sendReport = await send(message, smtpServer);
@@ -437,6 +437,7 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
             });
 
             /// firestore upload end
+            sendReport(imageurl2);
           }
 
           // Store the confidence value in a variable for further use
@@ -473,6 +474,7 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
             titleColor: Colors.white,
             textColor: Colors.white,
           );
+          //  sendReport(imageurl2);
 
           /// firestore upload end
           print(now);
