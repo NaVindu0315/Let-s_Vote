@@ -41,6 +41,9 @@ import 'package:geolocator/geolocator.dart';
 
 import '../../pages/Voting_home.dart';
 
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -52,6 +55,11 @@ class Emp_Dashboard extends StatefulWidget {
 }
 
 class _Emp_DashboardState extends State<Emp_Dashboard> {
+  String username = 'letsvotelv2024@gmail.com';
+  String password = 'edpxfzzripyqjqms';
+
+  final smtpServer = gmail('letsvotelv2024@gmail.com', 'edpxfzzripyqjqms');
+
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   TextEditingController loggedinusercontroller = TextEditingController();
@@ -63,6 +71,26 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
   late String url1img;
 
   ///camera end
+  ///Failed attempt email
+  Future<void> sendReport() async {
+    final message = Message()
+      ..from = Address(username, 'Your name')
+      ..recipients.add('navindulakshan99@gmail.com')
+      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+      ..text = 'This is the plain text.\nThis is line 2 of the text part.';
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
+
+  ///end
 
   ///
   ///firebase storage
@@ -444,13 +472,361 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Column(
-          children: [
-            Text('data'),
-          ],
-        ),
-      ),
-    );
+        home: SafeArea(
+      child: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(client)
+              .snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (snapshot.hasData) {
+              var data = snapshot.data;
+              return Scaffold(
+                resizeToAvoidBottomInset: false,
+
+                ///navigation bar eka iwrii
+                ///drawer
+                drawer: Drawer(
+                  width: 300,
+                  child: Container(
+                    color: AppColors.backgroundcolor, //color of list tiles
+                    // Add a ListView to ensures the user can scroll
+                    child: ListView(
+                      // Remove if there are any padding from the ListView.
+                      padding: EdgeInsets.zero,
+                      children: <Widget>[
+                        UserAccountsDrawerHeader(
+                          decoration: BoxDecoration(
+                            color:
+                                AppColors.buttoncolor, //color of drawer header
+                          ),
+                          accountName: Text(
+                            '${data!['username']}',
+                            style: TextStyle(
+                              color: AppColors.backgroundcolor,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          accountEmail: Text(
+                            client,
+                            style: TextStyle(
+                                color: AppColors.backgroundcolor,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          currentAccountPicture: CircleAvatar(
+                            radius: 50,
+                            backgroundImage: NetworkImage('${data!['url']}'),
+                          ),
+                        ),
+
+                        //Home
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.home,
+                              color: Colors.white,
+                            ),
+                            title: const Text('Home',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              /*   Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()),
+                              );*/
+                            },
+                          );
+                        }),
+
+                        ///management dashboard
+                        //Home
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.manage_accounts,
+                              color: Colors.white,
+                            ),
+                            title: const Text(' dashboard',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()),
+                              );
+                            },
+                          );
+                        }),
+                        //Cam page
+                      ],
+                    ),
+                  ),
+                ),
+
+                ///drawwe end
+                appBar: AppBar(
+                  // preferredSize: Size.fromHeight(kToolbarHeight + 20),
+                  backgroundColor: AppColors.backgroundcolor,
+
+                  title: Text(
+                    'Employee Dashboard',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  iconTheme: IconThemeData(color: Colors.white),
+
+                  //centerTitle: true,
+                ),
+                body: Stack(children: [
+                  // Background image container
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                            'assets/bg_image.jpg'), // Replace with your image path
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SafeArea(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        CircleAvatar(
+                            backgroundColor: AppColors.backgroundcolor,
+                            minRadius: 70.5,
+                            child: CircleAvatar(
+                                radius: 70,
+                                backgroundImage:
+                                    //AssetImage('images/g.png'),
+                                    NetworkImage('${data!['url']}'))),
+
+                        ///main
+                        Column(
+                          //first row
+                          children: [
+                            ///Row for the text field
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  '${data!['username']}',
+                                  style: TextStyle(
+                                      color: AppColors.backgroundcolor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
+                                ),
+                                Spacer()
+                              ],
+                            ),
+
+                            ///row for the designation
+                            Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Designation',
+                                  style: TextStyle(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.0),
+                                ),
+                                Spacer()
+                              ],
+                            ),
+
+                            ///row for the designation end
+                            SizedBox(
+                              height: 40.0,
+                            ),
+
+                            ///row end
+                            Row(
+                              children: [
+                                ///for the employee management
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Management_Dashboard()),
+                                    );
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Image.asset('assets/empmg.png'),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+
+                                ///for the camera preview
+                                /*      Expanded(
+                                  child: Container(
+                                    width: 150,
+                                    height: 120,
+                                    child: AspectRatio(
+                                      aspectRatio:
+                                          controller!.value.aspectRatio,
+                                      child: CameraPreview(controller!),
+                                    ),
+                                  ),
+                                ),*/
+                              ],
+                            ),
+
+                            ///second row
+                            Row(
+                              children: [
+                                ///to compare the face and navigate to the votig home
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () async {
+                                    HapticFeedback.mediumImpact();
+                                    String up = await newupload();
+                                    // print(up);
+                                    /*  capturedimageurlcontroller.clear();
+                                    uploadimage();*/
+
+                                    await compareandexpression(
+                                        data!['url'], up, data!['initip']);
+
+                                    //print('profile pic');
+                                    //  print(data!['url']);
+                                    //print('now image');
+                                    //print(uploadedimageurl);
+                                  },
+                                  /*  onTap: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible:
+                                          false, // Prevent user from dismissing while loading
+                                      builder: (context) => Center(
+                                        child: SpinKitSpinningCircle(
+                                          color: Colors
+                                              .white, // Customize loading indicator color
+                                          size: 50.0,
+                                          controller: AnimationController(
+                                              vsync: this,
+                                              duration: const Duration(
+                                                  milliseconds:
+                                                      1200)), // Adjust size as needed
+                                        ),
+                                      ),
+                                    );
+
+                                    try {
+                                      String up = await newupload();
+
+                                      // Additional actions (if needed)
+
+                                      await compareandexpression(
+                                          data!['url'], up);
+                                    } catch (error) {
+                                      // Handle errors gracefully
+                                      print(error);
+                                      // Show an error message or retry option
+                                    } finally {
+                                      // Always close the loading dialog
+                                      Navigator.pop(context);
+                                    }
+                                  },*/
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Image.asset('assets/vote.png'),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                              ],
+                            ),
+
+                            ///third row
+                            Row(
+                              children: [
+                                //first box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () async {
+                                    final position = await _geolocatorPlatform
+                                        .getCurrentPosition();
+                                    print(position);
+                                    //printIps();
+                                    //   print(_connectionStatus);
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Image.asset('assets/create.png'),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                //second box
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () async {
+                                    print('fuck');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => GroupChat()),
+                                    );
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Image.asset('assets/post.png'),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ]),
+              );
+            }
+            return CircularProgressIndicator();
+          }),
+    ));
   }
 }
