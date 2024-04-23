@@ -69,6 +69,110 @@ class _Emp_ComplaintsState extends State<Emp_Complaints> {
 
           //centerTitle: true,
         ),
+        body: Column(
+          children: [
+            SizedBox(
+              height: 50.0,
+            ),
+            Row(
+              children: [
+                Spacer(),
+                Text(
+                  'Submit Your Complains Here',
+                  style:
+                      TextStyle(fontSize: 30.0, color: AppColors.buttoncolor),
+                ),
+                Spacer(),
+              ],
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  height: 70,
+                  width: 400, // Set the width of the SizedBox to 300 pixels
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      controller: titlecontroller,
+                      onChanged: (value) {
+                        //email = value;
+                        titlee = value;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.title,
+                        ),
+                        labelText: 'Title',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  height: 70,
+                  width: 400, // Set the width of the SizedBox to 300 pixels
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      controller: msgcontrller,
+                      onChanged: (value) {
+                        //email = value;
+                        msgg = value;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.message,
+                        ),
+                        labelText: 'Message',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            Row(
+              children: [
+                Spacer(),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.buttoncolor,
+                    ),
+                    onPressed: () {
+                      MailSend(titlee, msgg);
+                      titlecontroller.clear();
+
+                      msgcontrller.clear();
+                    },
+                    child: Text(
+                      'Send',
+                      style: TextStyle(
+                          fontSize: 30.0, color: AppColors.backgroundcolor),
+                    )),
+                Spacer(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
