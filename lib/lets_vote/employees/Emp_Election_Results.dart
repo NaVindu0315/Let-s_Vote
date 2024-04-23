@@ -111,6 +111,9 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.backgroundcolor,
+      ),
       home: Scaffold(
         appBar: AppBar(
           // preferredSize: Size.fromHeight(kToolbarHeight + 20),
@@ -141,9 +144,11 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
                 children: [
                   Spacer(),
                   Text(
-                    'data',
-                    style:
-                        TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+                    '$election_name',
+                    style: TextStyle(
+                        fontSize: 35.0,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.buttoncolor),
                   ),
                   Spacer(),
                 ],
@@ -171,7 +176,9 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
                             return Text(
                               snapshot.data![0].toString(),
                               style: TextStyle(
-                                  fontSize: 50, fontWeight: FontWeight.bold),
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.buttoncolor),
                             );
                           }),
                     ],
@@ -192,7 +199,9 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
                             return Text(
                               snapshot.data![0].toString(),
                               style: TextStyle(
-                                  fontSize: 50, fontWeight: FontWeight.bold),
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.buttoncolor),
                             );
                           }),
                     ],
@@ -214,7 +223,8 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
                     children: [
                       Text(
                         '$candidate_1 ',
-                        style: TextStyle(fontSize: 30.0),
+                        style: TextStyle(
+                            fontSize: 30.0, color: AppColors.buttoncolor),
                       ),
                     ],
                   ),
@@ -223,7 +233,8 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
                     children: [
                       Text(
                         '$candidate_2',
-                        style: TextStyle(fontSize: 30.0),
+                        style: TextStyle(
+                            fontSize: 30.0, color: AppColors.buttoncolor),
                       ),
                     ],
                   ),
@@ -246,9 +257,9 @@ class _Em_Election_ResultsState extends State<Em_Election_Results> {
                       '$candidate_2',
                     ],
                     barColor: Colors.blueAccent,
-                    axisLineColor: Colors.red,
-                    barGap: 4.0,
-                    size: Size(300, 400),
+                    axisLineColor: AppColors.buttoncolor,
+                    barGap: 15.0,
+                    size: Size(260, 400),
                   ),
                   Spacer(),
                 ],
