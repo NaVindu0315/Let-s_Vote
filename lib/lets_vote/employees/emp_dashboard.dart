@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
 import 'package:lets_vote/pages/Test/testgrapgh.dart';
@@ -396,7 +397,8 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                     onConfirmBtnTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => voting_home()),
+                        MaterialPageRoute(
+                            builder: (context) => Emp_Vote_Page()),
                       );
                     });
 
@@ -594,6 +596,24 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DashBoard()),
+                              );
+                            },
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.where_to_vote,
+                              color: Colors.white,
+                            ),
+                            title: const Text(' Emp Voting Page',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Emp_Vote_Page()),
                               );
                             },
                           );
