@@ -92,6 +92,9 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      alermsg();
+    });
     httpClient = Client();
     ethClient = Web3Client(infura_url, httpClient!);
     super.initState();
