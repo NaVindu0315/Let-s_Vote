@@ -151,6 +151,16 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
     });
   }
 
+  void alermsg() {
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.warning,
+      text: 'Please Vote Carefully and wisely . You can only vote once',
+      autoCloseDuration: const Duration(seconds: 4),
+      showConfirmBtn: false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -190,8 +200,7 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
                   Spacer(),
                   Text(
                     'Please Vote Carefully',
-                    style:
-                        TextStyle(color: AppColors.buttoncolor, fontSize: 30.0),
+                    style: TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
                   Spacer(),
                 ],
@@ -204,7 +213,8 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
                   Spacer(),
                   Text(
                     '$electionname',
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                    style:
+                        TextStyle(color: AppColors.buttoncolor, fontSize: 30.0),
                   ),
                   Spacer(),
                 ],
@@ -328,27 +338,31 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
                         onPressed: uidf == 1
                             ? () {
                                 vote_2(context, ethClient!);
+                                deactivatebutton();
                               }
                             : null,
                         child: Text(
                           'Vote',
-                          style: TextStyle(fontSize: 30.0),
+                          style: TextStyle(
+                              fontSize: 30.0, color: AppColors.backgroundcolor),
                         ),
                       )
                     ],
                   ),
-                  /*    Row(
-                    children: [
-                      Spacer(),
-                      Text(
-                        uuiid == 1 ? "" : 'You have already voted',
-                      ),
-                      Spacer(),
-                    ],
-                  ),*/
                   Spacer(),
                 ],
               ),
+              Row(
+                children: [
+                  Spacer(),
+                  Text(
+                    uidf == 0 ? 'You have already voted' : '',
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
+                  ),
+                  Spacer(),
+                ],
+              ),
+
               /*  SizedBox(
                 height: 25.0,
               ),
