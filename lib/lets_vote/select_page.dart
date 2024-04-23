@@ -71,6 +71,7 @@ class _Selection_pageState extends State<Selection_page> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Sending wrong OTP')),
                         );
+
                         Navigator.pop(context);
                       }
                     },
