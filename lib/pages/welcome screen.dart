@@ -793,6 +793,24 @@ class _DashBoardState extends State<DashBoard> {
                             },
                           );
                         }),
+                        Builder(builder: (context) {
+                          return ListTile(
+                            leading: Icon(
+                              Icons.dashboard,
+                              color: Colors.white,
+                            ),
+                            title: const Text('management Dashboard',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                            onTap: () {
+                              /*   Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ()),
+                              );*/
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),
