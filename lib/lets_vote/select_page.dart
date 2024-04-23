@@ -1,5 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import '../Colors/colors.dart';
 import '../pages/Attempts/List_Succesful_attempts.dart';
@@ -17,7 +19,9 @@ class Selection_page extends StatefulWidget {
 }
 
 class _Selection_pageState extends State<Selection_page> {
-  Future openDialog() => showDialog(
+  void fuck() {}
+
+  /*Future openDialog() => showDialog(
       context: context,
       builder: (context) => AlertDialog(
             title: Text('Management OTP'),
@@ -37,12 +41,44 @@ class _Selection_pageState extends State<Selection_page> {
                       );
                     } else {
                       print("hukapn poonnaya");
-                      Navigator.pop(context);
+
+                      fuck();
                     }
                   },
                   child: Text('Submit'))
             ],
-          ));
+          ));*/
+  Future<void> openDialog() async {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Management OTP'),
+              content: TextField(
+                decoration: InputDecoration(hintText: 'Enter Management OTP'),
+                onChanged: (value) {
+                  inpotp = int.parse(value);
+                },
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () async {
+                      if (inpotp == ootp) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DashBoard()),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Sending wrong OTP')),
+                        );
+
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: Text('Submit'))
+              ],
+            ));
+  }
 
   int inpotp = 0000;
   int ootp = 0;
