@@ -88,6 +88,7 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
 
   String cn1name = "";
   String cn2name = "";
+  String electionname = "";
 
   @override
   void initState() {
@@ -99,6 +100,40 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
 
     uidref = FirebaseDatabase.instance.reference().child('uuids/$uuiid/stat');
     removeref = FirebaseDatabase.instance.reference().child('uuids');
+
+    _candidate1reference =
+        FirebaseDatabase.instance.reference().child('candi_1');
+    _candidate2reference =
+        FirebaseDatabase.instance.reference().child('candi_2');
+    _electionnamereference =
+        FirebaseDatabase.instance.reference().child('el_name');
+
+    _candidate1reference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          cn1name = snapshot.value.toString();
+        });
+      }
+    });
+
+    _candidate2reference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          cn2name = snapshot.value.toString();
+        });
+      }
+    });
+
+    _electionnamereference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          electionname = snapshot.value.toString();
+        });
+      }
+    });
 
     uidref.onValue.listen((event) {
       final snapshot = event.snapshot;
@@ -168,7 +203,7 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
                 children: [
                   Spacer(),
                   Text(
-                    'You only get only once Chance to vote',
+                    '$electionname',
                     style: TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
                   Spacer(),
@@ -234,7 +269,7 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
                   Column(
                     children: [
                       Text(
-                        'Candidate 1',
+                        '$cn1name',
                         style: TextStyle(
                             color: AppColors.buttoncolor, fontSize: 30.0),
                       ),
@@ -244,7 +279,7 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
                   Column(
                     children: [
                       Text(
-                        'Candidate 2',
+                        '$cn2name',
                         style: TextStyle(
                             color: AppColors.buttoncolor, fontSize: 30.0),
                       ),
@@ -266,12 +301,19 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
                   Column(
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          vote_1(context, ethClient!);
-                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.buttoncolor,
+                        ),
+                        onPressed: uidf == 1
+                            ? () {
+                                vote_1(context, ethClient!);
+                                deactivatebutton();
+                              }
+                            : null,
                         child: Text(
-                          'Vote 1',
-                          style: TextStyle(fontSize: 30.0),
+                          'Vote',
+                          style: TextStyle(
+                              fontSize: 30.0, color: AppColors.backgroundcolor),
                         ),
                       )
                     ],
@@ -280,16 +322,30 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
                   Column(
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          vote_2(context, ethClient!);
-                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.buttoncolor,
+                        ),
+                        onPressed: uidf == 1
+                            ? () {
+                                vote_2(context, ethClient!);
+                              }
+                            : null,
                         child: Text(
-                          'Vote 2',
+                          'Vote',
                           style: TextStyle(fontSize: 30.0),
                         ),
                       )
                     ],
                   ),
+                  /*    Row(
+                    children: [
+                      Spacer(),
+                      Text(
+                        uuiid == 1 ? "" : 'You have already voted',
+                      ),
+                      Spacer(),
+                    ],
+                  ),*/
                   Spacer(),
                 ],
               ),
