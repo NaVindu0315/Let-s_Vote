@@ -21,9 +21,6 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
   double setlvl = 0.0;
 
   TextEditingController lvlcontroller = TextEditingController();
-  TextEditingController msgcontrller = TextEditingController();
-  String titlee = "";
-  String msgg = "";
 
   @override
   Widget build(BuildContext context) {
