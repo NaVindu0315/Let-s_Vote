@@ -7,6 +7,7 @@ import 'package:lets_vote/pages/Attempts/employee_details.dart';
 
 import '../../Colors/colors.dart';
 import '../../firebase_options.dart';
+import 'Mng_empdetails.dart';
 
 late User loggedinuser;
 late String client;
@@ -174,8 +175,10 @@ class em_list extends State<Mng_employee_list> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => detailed_employee(
-                                          selectedusser: '${data['email']}')),
+                                      builder: (context) =>
+                                          Mng_detailed_employee(
+                                              selectedusser:
+                                                  '${data['email']}')),
                                 );
                                 print(client);
                               },
