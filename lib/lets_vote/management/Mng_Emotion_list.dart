@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Election_Analytics.dart';
 import 'package:lets_vote/pages/Attempts/detailed_success_attempts.dart';
 import 'package:lets_vote/pages/Attempts/detiled_other_Attempt.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
@@ -95,13 +96,14 @@ class suc_attempt extends State<Mng_Emotion_List> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DashBoard()),
+                MaterialPageRoute(
+                    builder: (context) => Mng_Election_Analytics()),
               );
             },
           ),
 
           title: Text(
-            'Test Emotion List',
+            'Emotion Stats',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: IconThemeData(color: Colors.white),
