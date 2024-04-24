@@ -236,6 +236,39 @@ class _Mng_Election_AnalyticsState extends State<Mng_Election_Analytics> {
                                             BorderRadius.circular(10.0),
                                       )),
                                 )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Mng_Emotion_List()),
+                                    );
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                          Text(
+                                            'Previous Election Details',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+
                                 //second box
                                 /*  Expanded(
                                     child: GestureDetector(
