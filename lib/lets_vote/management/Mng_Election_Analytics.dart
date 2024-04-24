@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/pages/Attempts/List_failed.dart';
 import 'package:lets_vote/pages/Attempts/List_other_errors.dart';
 import 'package:lets_vote/pages/Attempts/employee_list.dart';
@@ -113,14 +114,14 @@ class _Mng_Election_AnalyticsState extends State<Mng_Election_Analytics> {
                               Icons.home,
                               color: Colors.white,
                             ),
-                            title: const Text('Home',
+                            title: const Text('Management Dashboard',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DashBoard()),
+                                    builder: (context) => Mng_Dashboard()),
                               );
                             },
                           );
@@ -141,7 +142,7 @@ class _Mng_Election_AnalyticsState extends State<Mng_Election_Analytics> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'Employee Management',
+                    'Election Analytics',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -193,21 +194,6 @@ class _Mng_Election_AnalyticsState extends State<Mng_Election_Analytics> {
                               ],
                             ),
 
-                            ///row for the designation
-                            Row(
-                              children: [
-                                Spacer(),
-                                Text(
-                                  'Designation',
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0),
-                                ),
-                                Spacer()
-                              ],
-                            ),
-
                             ///row for the designation end
                             SizedBox(
                               height: 40.0,
@@ -220,12 +206,12 @@ class _Mng_Election_AnalyticsState extends State<Mng_Election_Analytics> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
+                                    /*   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               employee_list()),
-                                    );
+                                    );*/
                                   },
                                   child: Container(
                                       height: 120.0,
@@ -233,7 +219,7 @@ class _Mng_Election_AnalyticsState extends State<Mng_Election_Analytics> {
                                         children: [
                                           Spacer(),
                                           Text(
-                                            'Employees',
+                                            'Emotion Stats',
                                             style: TextStyle(
                                               color: Colors.white,
                                             ),
