@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Emotion_list.dart';
 import 'package:lets_vote/pages/Attempts/List_failed.dart';
 import 'package:lets_vote/pages/Attempts/List_other_errors.dart';
 import 'package:lets_vote/pages/Attempts/employee_list.dart';
@@ -206,12 +207,12 @@ class _Mng_Election_AnalyticsState extends State<Mng_Election_Analytics> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
-                                    /*   Navigator.push(
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              employee_list()),
-                                    );*/
+                                              Mng_Emotion_List()),
+                                    );
                                   },
                                   child: Container(
                                       height: 120.0,

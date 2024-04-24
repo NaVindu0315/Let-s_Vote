@@ -9,6 +9,7 @@ import 'package:lets_vote/test_voting/Test_emotion_level_display.dart';
 
 import '../../Colors/colors.dart';
 import '../../firebase_options.dart';
+import 'Mng_Emotion_Display.dart';
 
 late User loggedinuser;
 late String client;
@@ -179,9 +180,8 @@ class suc_attempt extends State<Mng_Emotion_List> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          Test_Emotion_level_Display(
-                                              successid: '${data['email']}')),
+                                      builder: (context) => Mng_Emotion_Display(
+                                          successid: '${data['email']}')),
                                 );
                                 print('${data['email']}');
                               },
