@@ -6,6 +6,7 @@ import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Election_Analytics.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Configs.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Results.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Settings.dart';
@@ -734,7 +735,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Emp_Complaints()),
+                                              Mng_Election_Analytics()),
                                     );
                                   },
                                   child: Container(
