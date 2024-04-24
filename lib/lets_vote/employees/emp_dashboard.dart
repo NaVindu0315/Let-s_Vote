@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
@@ -755,7 +756,7 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Management_Dashboard()),
+                                              Emp_Complaints()),
                                     );
                                   },
                                   child: Container(
