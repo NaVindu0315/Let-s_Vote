@@ -14,32 +14,16 @@ class Mng_Election_configs extends StatefulWidget {
 }
 
 class _Mng_Election_configsState extends State<Mng_Election_configs> {
-  String username = 'letsvotelv2024@gmail.com';
-  String password = 'edpxfzzripyqjqms';
+  double lvl = 0.0;
+  int iselection = 0;
+  int isresults = 0;
 
-  final smtpServer = gmail('letsvotelv2024@gmail.com', 'edpxfzzripyqjqms');
-  TextEditingController titlecontroller = TextEditingController();
+  double setlvl = 0.0;
+
+  TextEditingController lvlcontroller = TextEditingController();
   TextEditingController msgcontrller = TextEditingController();
   String titlee = "";
   String msgg = "";
-
-  Future<void> MailSend(String title, String msg) async {
-    final message = Message()
-      ..from = Address(username)
-      ..recipients.add('electionofficerletsvote@gmail.com')
-      ..subject = title
-      ..text = msg;
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-    } on MailerException catch (e) {
-      print('Message not sent.');
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +56,7 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
         body: Column(
           children: [
             SizedBox(
-              height: 50.0,
+              height: 10.0,
             ),
             Row(
               children: [
@@ -90,61 +74,53 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
             ),
             Row(
               children: [
-                SizedBox(
-                  height: 70,
-                  width: 400, // Set the width of the SizedBox to 300 pixels
-                  child: Card(
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      controller: titlecontroller,
-                      onChanged: (value) {
-                        //email = value;
-                        titlee = value;
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.title,
-                        ),
-                        labelText: 'Title',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
+                Spacer(),
+                Text(
+                  'Current Similarity Level - $lvl',
+                  style: TextStyle(fontSize: 25.0, color: Colors.white),
                 ),
+                Spacer(),
               ],
             ),
             SizedBox(
-              height: 50.0,
+              height: 20.0,
             ),
             Row(
               children: [
                 SizedBox(
                   height: 70,
-                  width: 400, // Set the width of the SizedBox to 300 pixels
+                  width: 300, // Set the width of the SizedBox to 300 pixels
                   child: Card(
                     elevation: 10,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      controller: msgcontrller,
+                      controller: lvlcontroller,
                       onChanged: (value) {
                         //email = value;
-                        msgg = value;
+                        setlvl = value as double;
                       },
                       decoration: InputDecoration(
                         prefixIcon: Icon(
-                          Icons.message,
+                          Icons.summarize_outlined,
                         ),
-                        labelText: 'Message',
+                        labelText: 'New Similarity level',
                         border: OutlineInputBorder(),
                       ),
                     ),
                   ),
                 ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.buttoncolor,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'Set',
+                      style: TextStyle(
+                          fontSize: 30.0, color: AppColors.backgroundcolor),
+                    )),
               ],
             ),
             SizedBox(
@@ -153,18 +129,37 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
             Row(
               children: [
                 Spacer(),
+                Text(
+                  'Voting Enabled',
+                  style: TextStyle(fontSize: 25.0, color: Colors.white),
+                ),
+                Spacer(),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              children: [
+                Spacer(),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: AppColors.buttoncolor,
                     ),
-                    onPressed: () {
-                      MailSend(titlee, msgg);
-                      titlecontroller.clear();
-
-                      msgcontrller.clear();
-                    },
+                    onPressed: () {},
                     child: Text(
-                      'Send',
+                      'Enable',
+                      style: TextStyle(
+                          fontSize: 30.0, color: AppColors.backgroundcolor),
+                    )),
+                Spacer(),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.buttoncolor,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'Disable',
                       style: TextStyle(
                           fontSize: 30.0, color: AppColors.backgroundcolor),
                     )),
