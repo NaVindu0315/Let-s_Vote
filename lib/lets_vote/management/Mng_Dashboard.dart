@@ -400,7 +400,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Emp_Vote_Page()),
+                            builder: (context) => Mng_Vote_Page()),
                       );
                     });
 
@@ -855,8 +855,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              Emp_Complaints()),
+                                          builder: (context) => GroupChat()),
                                     );
                                   },
                                   child: Container(
