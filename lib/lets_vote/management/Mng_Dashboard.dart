@@ -709,7 +709,36 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                       child: Card(
                                         color: AppColors.backgroundcolor,
                                         child: Text(
-                                          "Report Something",
+                                          "Employee Management",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Emp_Complaints()),
+                                    );
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Text(
+                                          "Election Analytics",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20.0),
@@ -833,7 +862,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                       child: Card(
                                         color: AppColors.backgroundcolor,
                                         child: Text(
-                                          "Report Something",
+                                          "Message",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20.0),
@@ -869,7 +898,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                       child: Card(
                                         color: AppColors.backgroundcolor,
                                         child: Text(
-                                          "Report Something",
+                                          "Election Configs",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20.0),
@@ -899,7 +928,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                       child: Card(
                                         color: AppColors.backgroundcolor,
                                         child: Text(
-                                          "Report Something",
+                                          "New Election",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20.0),
