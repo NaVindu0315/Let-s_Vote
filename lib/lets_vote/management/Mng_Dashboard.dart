@@ -6,6 +6,7 @@ import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Election_Results.dart';
 import 'package:lets_vote/lets_vote/management/Mng_EmpList.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Voting_page.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
@@ -766,13 +767,13 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                     child: GestureDetector(
                                   onTap: isresults == 1
                                       ? () {
-                                          /*  Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Em_Election_Results()),
-                                            );
-                                            print("hukpm");*/
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Mng_Election_Results()),
+                                          );
+                                          print("hukpm");
                                         }
                                       : () {
                                           QuickAlert.show(

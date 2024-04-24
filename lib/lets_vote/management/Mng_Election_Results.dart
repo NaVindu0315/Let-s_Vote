@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart';
 import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:lets_vote/test_voting/test_functions.dart';
 import 'package:path/path.dart';
@@ -123,7 +124,7 @@ class _Mng_Election_ResultsState extends State<Mng_Election_Results> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Emp_Dashboard()),
+                MaterialPageRoute(builder: (context) => Mng_Dashboard()),
               ); // go back to the previous screen
             },
           ),
