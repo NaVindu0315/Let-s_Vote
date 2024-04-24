@@ -165,7 +165,50 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
                     )),
                 Spacer(),
               ],
-            )
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            Row(
+              children: [
+                Spacer(),
+                Text(
+                  'Results Enabled',
+                  style: TextStyle(fontSize: 25.0, color: Colors.white),
+                ),
+                Spacer(),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              children: [
+                Spacer(),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.buttoncolor,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'Enable',
+                      style: TextStyle(
+                          fontSize: 30.0, color: AppColors.backgroundcolor),
+                    )),
+                Spacer(),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.buttoncolor,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'Disable',
+                      style: TextStyle(
+                          fontSize: 30.0, color: AppColors.backgroundcolor),
+                    )),
+                Spacer(),
+              ],
+            ),
           ],
         ),
       ),
