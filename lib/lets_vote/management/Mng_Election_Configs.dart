@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 
@@ -21,6 +22,30 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
   double setlvl = 0.0;
 
   TextEditingController lvlcontroller = TextEditingController();
+
+  late DatabaseReference _elctionreference;
+  late DatabaseReference _resultreference;
+  late DatabaseReference _levlreferece;
+
+  Future<void> levelset(double lvl) async {
+    await _levlreferece.set(lvl);
+  }
+
+  Future<void> disableelection() async {
+    await _elctionreference.set(0);
+  }
+
+  Future<void> enableelection() async {
+    await _elctionreference.set(1);
+  }
+
+  Future<void> enableresults() async {
+    await _resultreference.set(1);
+  }
+
+  Future<void> disableresults() async {
+    await _resultreference.set(0);
+  }
 
   @override
   Widget build(BuildContext context) {
