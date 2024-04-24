@@ -27,6 +27,16 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
   late DatabaseReference _resultreference;
   late DatabaseReference _levlreferece;
 
+  Future<void> enableelectiondisbaleresults() async {
+    await _elctionreference.set(1);
+    await _resultreference.set(0);
+  }
+
+  Future<void> disableelectiondisbalenableresults() async {
+    await _elctionreference.set(0);
+    await _resultreference.set(1);
+  }
+
   Future<void> levelset(double lvl) async {
     await _levlreferece.set(lvl);
   }
@@ -210,7 +220,7 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
                       ),
                       onPressed: iselection == 0
                           ? () {
-                              enableelection();
+                              enableelectiondisbaleresults();
                             }
                           : null,
                       child: Text(
@@ -225,7 +235,7 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
                       ),
                       onPressed: iselection == 1
                           ? () {
-                              disableelection();
+                              disableelectiondisbalenableresults();
                             }
                           : null,
                       child: Text(
@@ -261,7 +271,7 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
                       ),
                       onPressed: isresults == 0
                           ? () {
-                              enableresults();
+                              disableelectiondisbalenableresults();
                             }
                           : null,
                       child: Text(
@@ -276,7 +286,7 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
                       ),
                       onPressed: isresults == 1
                           ? () {
-                              disableresults();
+                              enableelectiondisbaleresults();
                             }
                           : null,
                       child: Text(
