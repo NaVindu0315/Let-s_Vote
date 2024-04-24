@@ -48,6 +48,42 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    _levlreferece = FirebaseDatabase.instance.reference().child('level');
+    _elctionreference = FirebaseDatabase.instance.reference().child('election');
+    _resultreference = FirebaseDatabase.instance.reference().child('results');
+
+    _elctionreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          iselection = snapshot.value as int;
+        });
+      }
+    });
+
+    _resultreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          isresults = snapshot.value as int;
+        });
+      }
+    });
+
+    _levlreferece.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          lvl = snapshot.value as double;
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
@@ -152,7 +188,7 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
               children: [
                 Spacer(),
                 Text(
-                  'Voting Enabled',
+                  'Voting Enabled  $iselection',
                   style: TextStyle(fontSize: 25.0, color: Colors.white),
                 ),
                 Spacer(),
@@ -195,7 +231,7 @@ class _Mng_Election_configsState extends State<Mng_Election_configs> {
               children: [
                 Spacer(),
                 Text(
-                  'Results Enabled',
+                  'Results Enabled  $isresults',
                   style: TextStyle(fontSize: 25.0, color: Colors.white),
                 ),
                 Spacer(),
