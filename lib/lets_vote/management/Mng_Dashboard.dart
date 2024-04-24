@@ -605,7 +605,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                               Icons.where_to_vote,
                               color: Colors.white,
                             ),
-                            title: const Text(' Emp Voting Page',
+                            title: const Text(' Mng  Voting Page',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
@@ -629,7 +629,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                   backgroundColor: AppColors.backgroundcolor,
 
                   title: Text(
-                    'Employee Dashboard',
+                    'Management Dashboard',
                     style: TextStyle(color: Colors.white),
                   ),
                   iconTheme: IconThemeData(color: Colors.white),
@@ -671,7 +671,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                               children: [
                                 Spacer(),
                                 Text(
-                                  '${data!['username']}',
+                                  '${data!['username']}  - Manager',
                                   style: TextStyle(
                                       color: AppColors.backgroundcolor,
                                       fontWeight: FontWeight.bold,
@@ -682,29 +682,55 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                             ),
 
                             ///row for the designation
-                            Row(
-                              children: [
-                                Spacer(),
-                                Text(
-                                  'Employee',
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0),
-                                ),
-                                Spacer()
-                              ],
-                            ),
 
                             ///row for the designation end
                             SizedBox(
-                              height: 40.0,
+                              height: 10.0,
                             ),
 
                             ///row end
                             Row(
                               children: [
                                 ///for the employee management
+
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Emp_Complaints()),
+                                    );
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Text(
+                                          "Report Something",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+
+                                ///for the camera preview
+                              ],
+                            ),
+
+                            ///second row
+                            Row(
+                              children: [
+                                ///to compare the face and navigate to the votig home
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: isresults == 1
@@ -749,44 +775,6 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                 )),
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Emp_Complaints()),
-                                    );
-                                  },
-                                  child: Container(
-                                      height: 120.0,
-                                      child: Card(
-                                        color: AppColors.backgroundcolor,
-                                        child: Text(
-                                          "Report Something",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20.0),
-                                        ),
-                                      ),
-                                      margin: EdgeInsets.all(15.0),
-                                      decoration: BoxDecoration(
-                                        //color: Color(0xFF101E33),
-                                        color: AppColors.backgroundcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      )),
-                                )),
-
-                                ///for the camera preview
-                              ],
-                            ),
-
-                            ///second row
-                            Row(
-                              children: [
-                                ///to compare the face and navigate to the votig home
-                                Expanded(
-                                    child: GestureDetector(
                                   onTap: iselection == 1
                                       ? () async {
                                           HapticFeedback.mediumImpact();
@@ -829,6 +817,35 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                             BorderRadius.circular(10.0),
                                       )),
                                 )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Emp_Complaints()),
+                                    );
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Text(
+                                          "Report Something",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
                               ],
                             ),
 
@@ -838,18 +855,24 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                 //first box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    final position = await _geolocatorPlatform
-                                        .getCurrentPosition();
-                                    print(position);
-                                    //printIps();
-                                    //   print(_connectionStatus);
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Emp_Complaints()),
+                                    );
                                   },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/create.png'),
+                                        child: Text(
+                                          "Report Something",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
@@ -862,19 +885,24 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                 //second box
                                 Expanded(
                                     child: GestureDetector(
-                                  onTap: () async {
-                                    print('fuck');
+                                  onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => GroupChat()),
+                                          builder: (context) =>
+                                              Emp_Complaints()),
                                     );
                                   },
                                   child: Container(
                                       height: 120.0,
                                       child: Card(
                                         color: AppColors.backgroundcolor,
-                                        child: Image.asset('assets/post.png'),
+                                        child: Text(
+                                          "Report Something",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
                                       ),
                                       margin: EdgeInsets.all(15.0),
                                       decoration: BoxDecoration(
