@@ -197,7 +197,9 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                       child: Text(
                         'Create New Election',
                         style: TextStyle(
-                            fontSize: 20.0, color: AppColors.backgroundcolor),
+                            fontSize: 20.0,
+                            color: AppColors.backgroundcolor,
+                            fontWeight: FontWeight.bold),
                       )),
                   Spacer(),
                 ],
@@ -216,7 +218,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         child: Container(
                             height: 53.0,
                             child: Card(
-                              color: AppColors.buttoncolor,
+                              color: AppColors.backgroundcolor,
                               child: Column(
                                 children: [
                                   Row(
@@ -226,7 +228,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                                         style: TextStyle(
                                             fontSize: 28.0,
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.backgroundcolor),
+                                            color: AppColors.buttoncolor),
                                       ),
                                     ],
                                   ),
@@ -257,7 +259,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         child: Container(
                             height: 53.0,
                             child: Card(
-                              color: AppColors.buttoncolor,
+                              color: AppColors.backgroundcolor,
                               child: Column(
                                 children: [
                                   Row(
@@ -267,7 +269,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                                         style: TextStyle(
                                             fontSize: 28.0,
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.backgroundcolor),
+                                            color: AppColors.buttoncolor),
                                       ),
                                     ],
                                   ),
@@ -290,7 +292,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         child: Container(
                             height: 53.0,
                             child: Card(
-                              color: AppColors.buttoncolor,
+                              color: AppColors.backgroundcolor,
                               child: Column(
                                 children: [
                                   Row(
@@ -299,7 +301,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                                         '   3',
                                         style: TextStyle(
                                             fontSize: 28.0,
-                                            color: AppColors.buttontextcolor,
+                                            color: AppColors.buttoncolor,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
@@ -333,7 +335,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         child: Container(
                             height: 53.0,
                             child: Card(
-                              color: AppColors.buttoncolor,
+                              color: AppColors.backgroundcolor,
                               child: Column(
                                 children: [
                                   Row(
@@ -343,7 +345,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                                         style: TextStyle(
                                             fontSize: 28.0,
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.backgroundcolor),
+                                            color: AppColors.buttoncolor),
                                       ),
                                     ],
                                   ),
@@ -366,7 +368,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         child: Container(
                             height: 53.0,
                             child: Card(
-                              color: AppColors.buttoncolor,
+                              color: AppColors.backgroundcolor,
                               child: Column(
                                 children: [
                                   Row(
@@ -375,7 +377,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                                         '   3',
                                         style: TextStyle(
                                             fontSize: 28.0,
-                                            color: AppColors.buttontextcolor,
+                                            color: AppColors.buttoncolor,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
@@ -412,7 +414,9 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                       child: Text(
                         'Save & Clear Election Data',
                         style: TextStyle(
-                            fontSize: 20.0, color: AppColors.backgroundcolor),
+                            fontSize: 20.0,
+                            color: AppColors.backgroundcolor,
+                            fontWeight: FontWeight.bold),
                       )),
                   Spacer(),
                 ],
