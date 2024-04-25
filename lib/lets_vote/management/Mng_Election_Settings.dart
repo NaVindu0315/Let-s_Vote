@@ -646,11 +646,11 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         final elc =
                             _firestore.collection("electionss").doc(electionid);
                         elc.set({
-                          'electionname': "ename",
-                          'candidate1': "c3",
-                          'candidate2': "c2",
-                          'cn1votes': 2,
-                          'cn2votes': 4,
+                          'electionname': "$electionname",
+                          'candidate1': "$candidatename1",
+                          'candidate2': "$candidatename2",
+                          'cn1votes': cn1votes,
+                          'cn2votes': cn2votes,
                           'electionid': electionid,
                           'date & time': now,
                         });
