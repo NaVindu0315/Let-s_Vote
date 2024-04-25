@@ -11,6 +11,7 @@ import 'package:lets_vote/test_voting/Test_emotion_level_display.dart';
 import '../../Colors/colors.dart';
 import '../../firebase_options.dart';
 import 'Mng_Emotion_Display.dart';
+import 'Mng_Previous_Election_Details.dart';
 
 late User loggedinuser;
 late String client;
@@ -102,8 +103,8 @@ class suc_attempt extends State<Mng_previous_election_List> {
             },
           ),
 
-          title: Text(
-            'Emotion Stats',
+          title: const Text(
+            'Previous Election Details',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: IconThemeData(color: Colors.white),
@@ -179,12 +180,14 @@ class suc_attempt extends State<Mng_previous_election_List> {
                             ),
                             title: GestureDetector(
                               onTap: () {
-                                /*   Navigator.push(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Mng_Emotion_Display(
-                                          successid: '${data['email']}')),
-                                );*/
+                                      builder: (context) =>
+                                          Mng_Previous_election_details(
+                                              successid:
+                                                  '${data['electionid']}')),
+                                );
                                 print('${data['electionid']}');
                               },
                               child: Ink(
