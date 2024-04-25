@@ -24,7 +24,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
 
   final smtpServer = gmail('letsvotelv2024@gmail.com', 'edpxfzzripyqjqms');
 
-  Future<void> SendMailtoAll() async {
+  Future<void> SendMailtoAll(String elname, String cn1, String cn2) async {
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('useremails').get();
     List<String> emailList = [];
@@ -33,8 +33,12 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
     }
     final message = Message()
       ..from = Address(username)
-      ..subject = 'Your subject here'
-      ..text = 'Your message here';
+      ..subject = 'New Election is Created'
+      ..text = 'New election : $elname \n'
+          'Candidates :  $cn1 , $cn2\n'
+          'Please Vote wisely'
+          'Thank You'
+          'Election Officer';
     try {
       for (var email in emailList) {
         message.recipients.add(email);
@@ -78,6 +82,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
   late DatabaseReference _isresultsreference;
   late DatabaseReference _candidate1reference;
   late DatabaseReference _cadndidate2reference;
+  late DatabaseReference _uidreference;
 
   ///references end
   ///
@@ -98,6 +103,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
         FirebaseDatabase.instance.reference().child('candi_1');
     _cadndidate2reference =
         FirebaseDatabase.instance.reference().child('candi_2');
+    _uidreference = FirebaseDatabase.instance.reference().child('uuids');
 
     ///reference end
     ///
@@ -168,6 +174,21 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
 
   Future<void> setissavedto1() async {
     await _issavedreference.set(1);
+  }
+
+  Future<void> enablevotingbuttons() async {
+    await _uidreference.remove();
+  }
+
+  Future<void> enableelectiondisbaleresults() async {
+    await _iselectionreference.set(1);
+    await _isresultsreference.set(0);
+  }
+
+  Future<void> createnewelectioon(String ename, String c1, String c2) async {
+    await _electionnamereference.set(ename);
+    await _candidate1reference.set(c1);
+    await _cadndidate2reference.set(c2);
   }
 
   ///function for rtdb value end
@@ -314,7 +335,21 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
 
                               setissavedto0();
 
+                              ///mail to all users
                               //SendMailtoAll();
+                              SendMailtoAll(election, candidate1, candidate2);
+
+                              ///clear all uuids here
+                              enablevotingbuttons();
+
+                              ///results disbaled election enabled here
+                              ///
+                              ///
+                              enableelectiondisbaleresults();
+
+                              ///set realtime values here
+                              createnewelectioon(
+                                  election, candidate1, candidate2);
                             }
                           : () {
                               QuickAlert.show(
