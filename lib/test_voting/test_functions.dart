@@ -128,3 +128,12 @@ Future<String> clearall(BuildContext context, Web3Client ethClient) async {
   );
   return response;
 }
+
+Future<String> voteclearblockchain(Web3Client ethClient) async {
+  var response =
+      await callFunction("clearall", [], ethClient, voter_private_key);
+  print("all cleared");
+  print(response);
+
+  return response;
+}

@@ -663,6 +663,9 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         resetnames();
 
                         ///add blockchain clear all function here
+                        ///
+                        // voteclearblockchain(ethClient!);
+                        clearall(context, ethClient!);
 
                         QuickAlert.show(
                           context: context,
