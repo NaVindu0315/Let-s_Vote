@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import '../../Colors/colors.dart';
 
@@ -98,7 +100,77 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
         FirebaseDatabase.instance.reference().child('candi_2');
 
     ///reference end
+    ///
+    /// assigning values
+    ///
+    _iselectionreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          iselection = snapshot.value as int;
+        });
+      }
+    });
+
+    _isresultsreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          isresults = snapshot.value as int;
+        });
+      }
+    });
+
+    _issavedreference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          issaved = snapshot.value as int;
+        });
+      }
+    });
+
+    _electionnamereference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          electionname = snapshot.value.toString();
+        });
+      }
+    });
+
+    _candidate1reference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename1 = snapshot.value.toString();
+        });
+      }
+    });
+
+    _cadndidate2reference.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename2 = snapshot.value.toString();
+        });
+      }
+    });
+
+    /// assigning values end
   }
+
+  ///functons to set values to rtdb
+  ///
+  Future<void> setissavedto0() async {
+    await _issavedreference.set(0);
+  }
+
+  Future<void> setissavedto1() async {
+    await _issavedreference.set(1);
+  }
+
+  ///function for rtdb value end
 
   @override
   Widget build(BuildContext context) {
@@ -121,8 +193,8 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
           ),
 
           title: Text(
-            'Election Settings',
-            style: TextStyle(fontSize: 30.0, color: AppColors.buttoncolor),
+            'Election Settings $iselection $isresults $issaved',
+            style: TextStyle(fontSize: 26.0, color: AppColors.buttoncolor),
           ),
           iconTheme: IconThemeData(color: Colors.white),
 
@@ -148,7 +220,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         controller: electioncontroller,
                         onChanged: (value) {
                           //email = value;
-                          electionname = value;
+                          election = value;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(
@@ -234,13 +306,28 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.buttoncolor,
                       ),
-                      onPressed: () {
-                        candidate1controller.clear();
-                        candidate2controller.clear();
-                        electioncontroller.clear();
+                      onPressed: issaved == 1
+                          ? () {
+                              candidate1controller.clear();
+                              candidate2controller.clear();
+                              electioncontroller.clear();
 
-                        SendMailtoAll();
-                      },
+                              setissavedto0();
+
+                              //SendMailtoAll();
+                            }
+                          : () {
+                              QuickAlert.show(
+                                context: context,
+                                type: QuickAlertType.warning,
+                                title: 'Need To Save',
+                                text:
+                                    'Save and clear Previous Election Data before creating a new one',
+                                backgroundColor: Colors.black,
+                                titleColor: Colors.white,
+                                textColor: Colors.white,
+                              );
+                            },
                       child: Text(
                         'Create New Election',
                         style: TextStyle(
@@ -271,7 +358,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        '             $election ',
+                                        '             $electionname ',
                                         style: TextStyle(
                                             fontSize: 28.0,
                                             fontWeight: FontWeight.bold,
@@ -457,7 +544,27 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.buttoncolor,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        setissavedto1();
+
+                        ///voting and reuslts disbale here
+
+                        ///clear realtime data here
+
+                        ///add save data to firebase function here
+
+                        ///add blockchain clear all function here
+
+                        QuickAlert.show(
+                          context: context,
+                          type: QuickAlertType.success,
+                          title: 'Election Saved',
+                          text: 'Election Saved and Cleared',
+                          backgroundColor: Colors.black,
+                          titleColor: Colors.white,
+                          textColor: Colors.white,
+                        );
+                      },
                       child: Text(
                         'Save & Clear Election Data',
                         style: TextStyle(
