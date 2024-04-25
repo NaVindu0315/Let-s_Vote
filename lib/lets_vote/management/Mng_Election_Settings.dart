@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:web3dart/web3dart.dart';
 
 import '../../Colors/colors.dart';
-
+import 'package:http/http.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+
+import '../../test_voting/test_constants.dart';
+import '../../test_voting/test_functions.dart';
 
 class Mng_Election_Settings extends StatefulWidget {
   const Mng_Election_Settings({Key? key}) : super(key: key);
@@ -18,6 +22,19 @@ class Mng_Election_Settings extends StatefulWidget {
 }
 
 class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
+  ///
+  /// blockchcain
+  Client? httpClient;
+  Web3Client? ethClient;
+
+  late Future<List> _cndi2future;
+
+  late Future<List> _cndi1future;
+  int cn2votes = 0; // Variable to store the value obtained from the future
+  int cn1votes = 0;
+
+  /// blcokchain end
+
   //firebase
   final _firestore = FirebaseFirestore.instance;
   DateTime now = DateTime.now();
@@ -170,6 +187,33 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
     });
 
     /// assigning values end
+    ///
+    /// blockchain values
+    httpClient = Client();
+    ethClient = Web3Client(infura_url, httpClient!);
+
+    _cndi2future =
+        getvotes_2(ethClient!); // Assuming getvotes_2 returns a Future<List>
+
+    _cndi1future = getvotes_1(ethClient!);
+
+    _cndi2future.then((value) {
+      setState(() {
+        cn2votes = int.parse(value[0].toString());
+        // Update the display text when future completes
+        // votesCandidate2 = _displayText2.toDouble();
+      });
+    });
+
+    _cndi1future.then((value) {
+      setState(() {
+        cn1votes = int.parse(value[0].toString());
+        // Update the display text when future completes
+        //  votesCandidate1 = _displayText1.toDouble();
+      });
+    });
+
+    /// blockchcian values assigning end
   }
 
   ///functons to set values to rtdb
@@ -484,7 +528,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        '   3',
+                                        '   $cn1votes',
                                         style: TextStyle(
                                             fontSize: 28.0,
                                             color: AppColors.buttoncolor,
@@ -560,7 +604,7 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        '   3',
+                                        '   $cn2votes',
                                         style: TextStyle(
                                             fontSize: 28.0,
                                             color: AppColors.buttoncolor,
