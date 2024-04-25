@@ -280,6 +280,38 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                       )),
 
                   ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 53.0,
+                            child: Card(
+                              color: AppColors.buttoncolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '   3',
+                                        style: TextStyle(
+                                            fontSize: 28.0,
+                                            color: AppColors.buttontextcolor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
                   ///blockchain values end
                 ],
               ),
@@ -322,6 +354,8 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                               borderRadius: BorderRadius.circular(10.0),
                             )),
                       )),
+
+                  ///blocckchian values here
                   Expanded(
                       flex: 1,
                       child: GestureDetector(
@@ -354,7 +388,6 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                             )),
                       )),
 
-                  ///blocckchian values here
                   ///blockchain values end
                 ],
               ),
