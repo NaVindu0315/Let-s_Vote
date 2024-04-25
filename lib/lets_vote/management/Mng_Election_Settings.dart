@@ -18,6 +18,12 @@ class Mng_Election_Settings extends StatefulWidget {
 }
 
 class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
+  //firebase
+  final _firestore = FirebaseFirestore.instance;
+  DateTime now = DateTime.now();
+
+  ///firebase end
+
   ///mail send
   String username = 'letsvotelv2024@gmail.com';
   String password = 'edpxfzzripyqjqms';
@@ -189,6 +195,17 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
     await _electionnamereference.set(ename);
     await _candidate1reference.set(c1);
     await _cadndidate2reference.set(c2);
+  }
+
+  Future<void> disablebothresultsandelections() async {
+    await _iselectionreference.set(0);
+    await _isresultsreference.set(0);
+  }
+
+  Future<void> resetnames() async {
+    await _electionnamereference.set("-");
+    await _candidate1reference.set("-");
+    await _cadndidate2reference.set("-");
   }
 
   ///function for rtdb value end
@@ -580,13 +597,26 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         primary: AppColors.buttoncolor,
                       ),
                       onPressed: () {
+                        ///add save data to firebase function here
+                        String electionid = "$electionname$now";
+                        final elc =
+                            _firestore.collection("electionss").doc(electionid);
+                        elc.set({
+                          'electionname': "ename",
+                          'candidate1': "c3",
+                          'candidate2': "c2",
+                          'cn1votes': 2,
+                          'cn2votes': 4,
+                          'electionid': electionid,
+                          'date & time': now,
+                        });
                         setissavedto1();
 
                         ///voting and reuslts disbale here
+                        disablebothresultsandelections();
 
                         ///clear realtime data here
-
-                        ///add save data to firebase function here
+                        resetnames();
 
                         ///add blockchain clear all function here
 
