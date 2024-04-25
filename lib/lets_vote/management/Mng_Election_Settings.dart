@@ -435,7 +435,22 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                 ],
               ),
               SizedBox(
-                height: 30.0,
+                height: 40.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Current Election Details',
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  )
+                ],
+              ),
+
+              SizedBox(
+                height: 20.0,
               ),
 
               ///To display results and names
