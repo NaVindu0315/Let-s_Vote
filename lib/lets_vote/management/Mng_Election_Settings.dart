@@ -202,6 +202,9 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                   Spacer(),
                 ],
               ),
+              SizedBox(
+                height: 30.0,
+              ),
 
               ///To display results and names
               Row(
@@ -398,6 +401,22 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
               ),
 
               ///end displaynng
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.buttoncolor,
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'Save & Clear Election Data',
+                        style: TextStyle(
+                            fontSize: 20.0, color: AppColors.backgroundcolor),
+                      )),
+                  Spacer(),
+                ],
+              ),
             ],
           ),
         ),
