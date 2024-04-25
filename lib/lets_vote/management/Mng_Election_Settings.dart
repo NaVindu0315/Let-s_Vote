@@ -14,14 +14,11 @@ class Mng_Election_Settings extends StatefulWidget {
 }
 
 class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
+  ///mail send
   String username = 'letsvotelv2024@gmail.com';
   String password = 'edpxfzzripyqjqms';
 
   final smtpServer = gmail('letsvotelv2024@gmail.com', 'edpxfzzripyqjqms');
-  TextEditingController titlecontroller = TextEditingController();
-  TextEditingController msgcontrller = TextEditingController();
-  String titlee = "";
-  String msgg = "";
 
   Future<void> MailSend(String title, String msg) async {
     final message = Message()
@@ -40,6 +37,23 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
       }
     }
   }
+
+  ///mail send end
+
+  TextEditingController candidate1controller = TextEditingController();
+  TextEditingController candidate2controller = TextEditingController();
+  TextEditingController electioncontroller = TextEditingController();
+  late String candidate1;
+  late String candidate2;
+  late String electionname;
+
+  ///realtime data
+  ///
+  String candidatename1 = "Candidate1";
+  String candidatename2 = "candidate2";
+  String election = "election name";
+
+  ///relatime data end
 
   @override
   Widget build(BuildContext context) {
@@ -63,115 +77,296 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
 
           title: Text(
             'Election Settings',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(fontSize: 30.0, color: AppColors.buttoncolor),
           ),
           iconTheme: IconThemeData(color: Colors.white),
 
           //centerTitle: true,
         ),
-        body: Column(
-          children: [
-            SizedBox(
-              height: 50.0,
-            ),
-            Row(
-              children: [
-                Spacer(),
-                Text(
-                  'Election Settings',
-                  style:
-                      TextStyle(fontSize: 30.0, color: AppColors.buttoncolor),
-                ),
-                Spacer(),
-              ],
-            ),
-            SizedBox(
-              height: 50.0,
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  height: 70,
-                  width: 400, // Set the width of the SizedBox to 300 pixels
-                  child: Card(
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      controller: titlecontroller,
-                      onChanged: (value) {
-                        //email = value;
-                        titlee = value;
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.title,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 70,
+                    width: 400, // Set the width of the SizedBox to 300 pixels
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: electioncontroller,
+                        onChanged: (value) {
+                          //email = value;
+                          electionname = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.how_to_vote,
+                          ),
+                          labelText: 'Election Name',
+                          border: OutlineInputBorder(),
                         ),
-                        labelText: 'Title',
-                        border: OutlineInputBorder(),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 50.0,
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  height: 70,
-                  width: 400, // Set the width of the SizedBox to 300 pixels
-                  child: Card(
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      controller: msgcontrller,
-                      onChanged: (value) {
-                        //email = value;
-                        msgg = value;
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.message,
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 70,
+                    width: 400, // Set the width of the SizedBox to 300 pixels
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: candidate1controller,
+                        onChanged: (value) {
+                          //email = value;
+                          candidate1 = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.person_add_alt_1_sharp,
+                          ),
+                          labelText: 'Candidate 1',
+                          border: OutlineInputBorder(),
                         ),
-                        labelText: 'Message',
-                        border: OutlineInputBorder(),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 50.0,
-            ),
-            Row(
-              children: [
-                Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.buttoncolor,
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 70,
+                    width: 400, // Set the width of the SizedBox to 300 pixels
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: candidate2controller,
+                        onChanged: (value) {
+                          //email = value;
+                          candidate2 = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.person_add_alt_1_sharp,
+                          ),
+                          labelText: 'Candidate 2',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
                     ),
-                    onPressed: () {
-                      MailSend(titlee, msgg);
-                      titlecontroller.clear();
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.buttoncolor,
+                      ),
+                      onPressed: () {
+                        candidate1controller.clear();
+                        candidate2controller.clear();
+                        electioncontroller.clear();
+                      },
+                      child: Text(
+                        'Create New Election',
+                        style: TextStyle(
+                            fontSize: 20.0, color: AppColors.backgroundcolor),
+                      )),
+                  Spacer(),
+                ],
+              ),
 
-                      msgcontrller.clear();
-                    },
-                    child: Text(
-                      'Send',
-                      style: TextStyle(
-                          fontSize: 30.0, color: AppColors.backgroundcolor),
-                    )),
-                Spacer(),
-              ],
-            )
-          ],
+              ///To display results and names
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 53.0,
+                            child: Card(
+                              color: AppColors.buttoncolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '             $election ',
+                                        style: TextStyle(
+                                            fontSize: 28.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.backgroundcolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  ///blockchain values end
+                ],
+              ),
+
+              ///second row
+              ///
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 53.0,
+                            child: Card(
+                              color: AppColors.buttoncolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  $candidatename1 ',
+                                        style: TextStyle(
+                                            fontSize: 28.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.backgroundcolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  ///blockchain values end
+                ],
+              ),
+
+              ///secodn row end
+              ///
+
+              ///third row
+              ///
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 53.0,
+                            child: Card(
+                              color: AppColors.buttoncolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  $candidatename2 ',
+                                        style: TextStyle(
+                                            fontSize: 28.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.backgroundcolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 53.0,
+                            child: Card(
+                              color: AppColors.buttoncolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '   3',
+                                        style: TextStyle(
+                                            fontSize: 28.0,
+                                            color: AppColors.buttontextcolor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  ///blockchain values end
+                ],
+              ),
+
+              ///third row end
+              SizedBox(
+                height: 10.0,
+              ),
+
+              ///end displaynng
+            ],
+          ),
         ),
       ),
     );
