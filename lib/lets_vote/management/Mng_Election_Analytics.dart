@@ -3,6 +3,7 @@ import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Emotion_list.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Previous_Election_List.dart';
 import 'package:lets_vote/pages/Attempts/List_failed.dart';
 import 'package:lets_vote/pages/Attempts/List_other_errors.dart';
 import 'package:lets_vote/pages/Attempts/employee_list.dart';
@@ -243,7 +244,7 @@ class _Mng_Election_AnalyticsState extends State<Mng_Election_Analytics> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Mng_Emotion_List()),
+                                              Mng_previous_election_List()),
                                     );
                                   },
                                   child: Container(
