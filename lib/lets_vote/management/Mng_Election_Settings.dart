@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 
@@ -20,16 +22,23 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
 
   final smtpServer = gmail('letsvotelv2024@gmail.com', 'edpxfzzripyqjqms');
 
-  Future<void> MailSend(String title, String msg) async {
+  Future<void> SendMailtoAll() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('useremails').get();
+    List<String> emailList = [];
+    for (var doc in querySnapshot.docs) {
+      emailList.add(doc['umail']);
+    }
     final message = Message()
       ..from = Address(username)
-      ..recipients.add('electionofficerletsvote@gmail.com')
-      ..subject = title
-      ..text = msg;
-
+      ..subject = 'Your subject here'
+      ..text = 'Your message here';
     try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
+      for (var email in emailList) {
+        message.recipients.add(email);
+        final sendReport = await send(message, smtpServer);
+        print('Message sent to $email: ' + sendReport.toString());
+      }
     } on MailerException catch (e) {
       print('Message not sent.');
       for (var p in e.problems) {
@@ -43,9 +52,6 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
   TextEditingController candidate1controller = TextEditingController();
   TextEditingController candidate2controller = TextEditingController();
   TextEditingController electioncontroller = TextEditingController();
-  late String candidate1;
-  late String candidate2;
-  late String electionname;
 
   ///realtime data
   ///
@@ -54,6 +60,45 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
   String election = "election name";
 
   ///relatime data end
+  ///variables for rtdb
+  int iselection = 0;
+  int issaved = 0;
+  int isresults = 0;
+  String candidate1 = "";
+  String candidate2 = " ";
+  String electionname = "";
+
+  ///variables for rtdb end
+  ///references
+  late DatabaseReference _electionnamereference;
+  late DatabaseReference _iselectionreference;
+  late DatabaseReference _issavedreference;
+  late DatabaseReference _isresultsreference;
+  late DatabaseReference _candidate1reference;
+  late DatabaseReference _cadndidate2reference;
+
+  ///references end
+  ///
+
+  @override
+  void initState() {
+    super.initState();
+
+    ///reference initilzing
+    _electionnamereference =
+        FirebaseDatabase.instance.reference().child('el_name');
+    _iselectionreference =
+        FirebaseDatabase.instance.reference().child('election');
+    _issavedreference = FirebaseDatabase.instance.reference().child('issaved');
+    _isresultsreference =
+        FirebaseDatabase.instance.reference().child('results');
+    _candidate1reference =
+        FirebaseDatabase.instance.reference().child('candi_1');
+    _cadndidate2reference =
+        FirebaseDatabase.instance.reference().child('candi_2');
+
+    ///reference end
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,6 +238,8 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         candidate1controller.clear();
                         candidate2controller.clear();
                         electioncontroller.clear();
+
+                        SendMailtoAll();
                       },
                       child: Text(
                         'Create New Election',
