@@ -44,3 +44,4 @@ app.*.map.json
 /android/app/release
 
 lib/lets_vote/consts.dart
+lib/test_voting/test_constants.dart
