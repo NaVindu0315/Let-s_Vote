@@ -20,7 +20,7 @@ Future<List<dynamic>> ask(
 }
 
 Future<String> letsvotejson() async {
-  final ref = FirebaseStorage.instance.ref('jsons/lvote.json');
+  final ref = FirebaseStorage.instance.ref('jsons/lvote2.json');
   final bytes = await ref.getData();
   final jsonString = utf8.decode(bytes!);
   return (jsonString);
@@ -36,8 +36,8 @@ Future<DeployedContract> loadContract() async {
   return contract;*/
 
   final abiFile = await letsvotejson();
-  final contract = DeployedContract(ContractAbi.fromJson(abiFile, 'lvote'),
-      EthereumAddress.fromHex(contractAddress1));
+  final contract = DeployedContract(ContractAbi.fromJson(abiFile, 'lvote2'),
+      EthereumAddress.fromHex(contractadrs2));
   //print("payyya");
   return contract;
 }
