@@ -251,7 +251,7 @@ class _Mng_Election_ResultsState extends State<Mng_Election_Results> {
               Row(
                 children: [
                   Spacer(),
-                  /* BarChartWidget(
+                  BarChartWidget(
                     bars: [votesCandidate1, votesCandidate2],
                     labels: [
                       '$candidate_1',
@@ -261,7 +261,7 @@ class _Mng_Election_ResultsState extends State<Mng_Election_Results> {
                     axisLineColor: AppColors.buttoncolor,
                     barGap: 15.0,
                     size: Size(260, 400),
-                  ),*/
+                  ),
                   Spacer(),
                 ],
               ),
