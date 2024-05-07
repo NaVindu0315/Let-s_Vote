@@ -434,6 +434,15 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                   Spacer(),
                 ],
               ),
+
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {}, child: Text('Election Selection Page')),
+                  Spacer(),
+                ],
+              ),
               SizedBox(
                 height: 40.0,
               ),
