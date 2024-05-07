@@ -33,7 +33,7 @@ class _election_setup_3State extends State<election_setup_3> {
           ),
 
           title: Text(
-            '2 Person Election ',
+            '3 Person Election ',
             style: TextStyle(fontSize: 26.0, color: AppColors.buttoncolor),
           ),
           iconTheme: IconThemeData(color: Colors.white),
