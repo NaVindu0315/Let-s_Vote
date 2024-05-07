@@ -47,9 +47,50 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
               Row(
                 children: [
                   Spacer(),
-                  Text(
+                  /*    Text(
                     'paka',
                     style: TextStyle(color: Colors.white),
+                  ),*/
+                  PopupMenuButton<String>(
+                    color: Colors.white,
+                    // This will change the background color of the popup menu
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(
+                            10.0), // This will round the edges of the container
+                      ),
+                      child: const Text("Select an option",
+                          style: TextStyle(color: Colors.black, fontSize: 35)),
+                    ),
+                    onSelected: (value) {
+                      print(value);
+                    },
+                    itemBuilder: (BuildContext bc) {
+                      return const [
+                        PopupMenuItem(
+                          child: Text("Option 1",
+                              style: TextStyle(
+                                  color: Colors
+                                      .black)), // This will change the text color of the item
+                          value: 'Option 1',
+                        ),
+                        PopupMenuItem(
+                          child: Text("Option 2",
+                              style: TextStyle(
+                                  color: Colors
+                                      .black)), // This will change the text color of the item
+                          value: 'Option 2',
+                        ),
+                        PopupMenuItem(
+                          child: Text("Option 3",
+                              style: TextStyle(
+                                  color: Colors
+                                      .black)), // This will change the text color of the item
+                          value: 'Option 3',
+                        )
+                      ];
+                    },
                   ),
                   Spacer(),
                 ],
