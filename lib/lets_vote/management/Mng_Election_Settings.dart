@@ -13,6 +13,7 @@ import 'package:mailer/smtp_server.dart';
 
 import '../../test_voting/test_constants.dart';
 import '../../test_voting/test_functions.dart';
+import 'mng_election_select_page.dart';
 
 class Mng_Election_Settings extends StatefulWidget {
   const Mng_Election_Settings({Key? key}) : super(key: key);
@@ -439,7 +440,14 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                 children: [
                   Spacer(),
                   ElevatedButton(
-                      onPressed: () {}, child: Text('Election Selection Page')),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => mng_election_type_select()),
+                        );
+                      },
+                      child: Text('Election Selection Page')),
                   Spacer(),
                 ],
               ),
