@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Settings.dart';
 
 import '../../Colors/colors.dart';
+import '../Election_Types/Mngs/2_election_setup.dart';
+import '../Election_Types/Mngs/3_election_setup.dart';
+import '../Election_Types/Mngs/4_election_setup.dart';
+import '../Election_Types/Mngs/5_election_setup.dart';
 
 class mng_election_type_select extends StatefulWidget {
   const mng_election_type_select({Key? key}) : super(key: key);
@@ -135,7 +139,7 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
                 ],
               ),
               SizedBox(
-                height: 50.0,
+                height: 25.0,
               ),
               Row(
                 children: [
@@ -149,6 +153,51 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
               ),
               SizedBox(
                 height: 150.0,
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        ///2 person
+                        if (el_type == 2) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => election_setup_2()),
+                          );
+                        }
+
+                        ///3 person
+                        else if (el_type == 3) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => election_setup_3()),
+                          );
+                        }
+
+                        ///4 person
+                        else if (el_type == 4) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => election_setup_4()),
+                          );
+                        }
+
+                        ///5 person
+                        else if (el_type == 5) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => election_setup_5()),
+                          );
+                        }
+                      },
+                      child: Text('Continue')),
+                  Spacer(),
+                ],
               ),
             ],
           ),
