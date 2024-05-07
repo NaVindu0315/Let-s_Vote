@@ -51,7 +51,7 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
                     'paka',
                     style: TextStyle(color: Colors.white),
                   ),*/
-                  PopupMenuButton<String>(
+                  PopupMenuButton<int>(
                     color: Colors.white,
                     // This will change the background color of the popup menu
                     child: Container(
@@ -60,8 +60,8 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
                         borderRadius: BorderRadius.circular(
                             10.0), // This will round the edges of the container
                       ),
-                      child: const Text("Select an option",
-                          style: TextStyle(color: Colors.black, fontSize: 35)),
+                      child: const Text("choose Election type",
+                          style: TextStyle(color: Colors.black, fontSize: 30)),
                     ),
                     onSelected: (value) {
                       print(value);
@@ -69,26 +69,33 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
                     itemBuilder: (BuildContext bc) {
                       return const [
                         PopupMenuItem(
-                          child: Text("Option 1",
+                          child: Text("2 person election",
                               style: TextStyle(
                                   color: Colors
                                       .black)), // This will change the text color of the item
-                          value: 'Option 1',
+                          value: 2,
                         ),
                         PopupMenuItem(
-                          child: Text("Option 2",
+                          child: Text("3 person election",
                               style: TextStyle(
                                   color: Colors
                                       .black)), // This will change the text color of the item
-                          value: 'Option 2',
+                          value: 3,
                         ),
                         PopupMenuItem(
-                          child: Text("Option 3",
+                          child: Text("4 person election",
                               style: TextStyle(
                                   color: Colors
                                       .black)), // This will change the text color of the item
-                          value: 'Option 3',
-                        )
+                          value: 4,
+                        ),
+                        PopupMenuItem(
+                          child: Text("5 person election",
+                              style: TextStyle(
+                                  color: Colors
+                                      .black)), // This will change the text color of the item
+                          value: 5,
+                        ),
                       ];
                     },
                   ),
