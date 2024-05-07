@@ -12,6 +12,8 @@ class mng_election_type_select extends StatefulWidget {
 }
 
 class _mng_election_type_selectState extends State<mng_election_type_select> {
+  int el_num = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,6 +48,9 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
             children: [
               Row(
                 children: [
+                  SizedBox(
+                    height: 250.0,
+                  ),
                   Spacer(),
                   /*    Text(
                     'paka',
@@ -65,6 +70,8 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
                     ),
                     onSelected: (value) {
                       print(value);
+                      el_num = value;
+                      print(el_num);
                     },
                     itemBuilder: (BuildContext bc) {
                       return const [
