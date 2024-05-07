@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Settings.dart';
 
@@ -12,7 +13,30 @@ class mng_election_type_select extends StatefulWidget {
 }
 
 class _mng_election_type_selectState extends State<mng_election_type_select> {
+  int el_type = 0;
   int el_num = 0;
+
+  late DatabaseReference _electiontype;
+
+  Future<void> setelectiontype(int num) async {
+    await _electiontype.set(num);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _electiontype = FirebaseDatabase.instance.reference().child('electiontype');
+
+    _electiontype.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          el_type = snapshot.value as int;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +96,7 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
                       print(value);
                       el_num = value;
                       print(el_num);
+                      setelectiontype(el_num);
                     },
                     itemBuilder: (BuildContext bc) {
                       return const [
@@ -110,17 +135,20 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
                 ],
               ),
               SizedBox(
-                height: 150.0,
+                height: 50.0,
               ),
               Row(
                 children: [
                   Spacer(),
                   Text(
-                    '$el_num',
+                    '$el_type',
                     style: TextStyle(fontSize: 40.0, color: Colors.white),
                   ),
                   Spacer(),
                 ],
+              ),
+              SizedBox(
+                height: 150.0,
               ),
             ],
           ),
