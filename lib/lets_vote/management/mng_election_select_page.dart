@@ -109,6 +109,19 @@ class _mng_election_type_selectState extends State<mng_election_type_select> {
                   Spacer(),
                 ],
               ),
+              SizedBox(
+                height: 150.0,
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  Text(
+                    '$el_num',
+                    style: TextStyle(fontSize: 40.0, color: Colors.white),
+                  ),
+                  Spacer(),
+                ],
+              ),
             ],
           ),
         ),
