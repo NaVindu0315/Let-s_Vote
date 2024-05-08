@@ -180,6 +180,10 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
     await _issavedref.set(0);
   }
 
+  Future<void> setissavedto1() async {
+    await _issavedref.set(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -219,6 +223,9 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
               ///candidate 5 textbox
 
               ///election name
+              SizedBox(
+                height: 20.0,
+              ),
               Row(
                 children: [
                   Spacer(),
@@ -259,6 +266,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                 ],
               ),
 
+              ///election available
               Row(
                 children: [
                   Expanded(
@@ -274,7 +282,135 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        'Election:  $electionname ',
+                                        election == 1
+                                            ? 'Election   :     Available Now'
+                                            : 'Election   :     Not available Right now',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///voting status
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        results == 1
+                                            ? 'status      :     Results available'
+                                            : 'Status      :     Voting Enabled',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///election type
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Type         :     $electiontype Person Election',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///
+
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Name       :      $electionname ',
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.bold,
@@ -657,6 +793,61 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                       )),
 
                   ///blockchain values end
+                ],
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.buttoncolor,
+                      ),
+                      onPressed: () {
+                        ///add save data to firebase function here
+                        /* String electionid = "$electionname$now";
+                        final elc =
+                        _firestore.collection("electionss").doc(electionid);
+                        elc.set({
+                          'electionname': "$electionname",
+                          'candidate1': "$candidatename1",
+                          'candidate2': "$candidatename2",
+                          'cn1votes': cn1votes,
+                          'cn2votes': cn2votes,
+                          'electionid': electionid,
+                          'date & time': now,
+                        });
+                        setissavedto1();
+
+                        ///voting and reuslts disbale here
+                        disablebothresultsandelections();
+
+                        ///clear realtime data here
+                        resetnames();
+
+                        ///add blockchain clear all function here
+                        ///
+                        // voteclearblockchain(ethClient!);
+                        clearall(context, ethClient!);*/
+                        setissavedto1();
+
+                        QuickAlert.show(
+                          context: context,
+                          type: QuickAlertType.success,
+                          title: 'Election Saved',
+                          text: 'Election Saved and Cleared',
+                          backgroundColor: Colors.black,
+                          titleColor: Colors.white,
+                          textColor: Colors.white,
+                        );
+                      },
+                      child: Text(
+                        'Save & Clear Election Data',
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            color: AppColors.backgroundcolor,
+                            fontWeight: FontWeight.bold),
+                      )),
+                  Spacer(),
                 ],
               ),
             ],
