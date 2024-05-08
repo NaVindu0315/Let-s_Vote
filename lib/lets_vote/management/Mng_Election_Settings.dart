@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
+import 'package:lets_vote/lets_vote/management/Mng_new_Election_settings.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:web3dart/web3dart.dart';
@@ -13,6 +14,7 @@ import 'package:mailer/smtp_server.dart';
 
 import '../../test_voting/test_constants.dart';
 import '../../test_voting/test_functions.dart';
+import 'mng_election_select_page.dart';
 
 class Mng_Election_Settings extends StatefulWidget {
   const Mng_Election_Settings({Key? key}) : super(key: key);
@@ -431,6 +433,38 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                             color: AppColors.backgroundcolor,
                             fontWeight: FontWeight.bold),
                       )),
+                  Spacer(),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => mng_election_type_select()),
+                        );
+                      },
+                      child: Text('Election Selection Page')),
+                  Spacer(),
+                ],
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Mng_new_Election_settings()),
+                        );
+                      },
+                      child: Text('New election Settings Page')),
                   Spacer(),
                 ],
               ),
