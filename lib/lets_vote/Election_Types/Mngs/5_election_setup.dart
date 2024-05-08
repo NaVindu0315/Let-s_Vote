@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Colors/colors.dart';
@@ -42,6 +43,81 @@ class _election_setup_5State extends State<election_setup_5> {
   TextEditingController name5controller = TextEditingController();
 
   ///controllers end
+  ///database referenneces
+  late DatabaseReference _candidate1nameref;
+  late DatabaseReference _candidate2nameref;
+  late DatabaseReference _candidate3nameref;
+  late DatabaseReference _candidate4nameref;
+  late DatabaseReference _candidate5nameref;
+
+  ///references end
+  ///
+
+  @override
+  void initState() {
+    super.initState();
+
+    ///initialzing
+    _candidate1nameref = FirebaseDatabase.instance.reference().child('candi_1');
+    _candidate2nameref = FirebaseDatabase.instance.reference().child('candi_2');
+    _candidate3nameref = FirebaseDatabase.instance.reference().child('candi_3');
+    _candidate4nameref = FirebaseDatabase.instance.reference().child('candi_4');
+    _candidate5nameref = FirebaseDatabase.instance.reference().child('candi_5');
+
+    /// initialzing end
+    /// assigning values
+    /// 1 candidate
+    _candidate1nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename1 = snapshot.value.toString();
+        });
+      }
+    });
+
+    ///2nd candidate
+    _candidate2nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename2 = snapshot.value.toString();
+        });
+      }
+    });
+
+    ///3rd candidate
+    _candidate3nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename3 = snapshot.value.toString();
+        });
+      }
+    });
+
+    ///4th candidate
+    _candidate4nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename4 = snapshot.value.toString();
+        });
+      }
+    });
+
+    ///5th candidate
+    _candidate5nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename5 = snapshot.value.toString();
+        });
+      }
+    });
+
+    /// assgining values end
+  }
 
   @override
   Widget build(BuildContext context) {
