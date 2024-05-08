@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
+import 'package:lets_vote/lets_vote/management/Mng_new_Election_settings.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:web3dart/web3dart.dart';
@@ -459,10 +460,11 @@ class _Mng_Election_SettingsState extends State<Mng_Election_Settings> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => mng_election_type_select()),
+                              builder: (context) =>
+                                  Mng_new_Election_settings()),
                         );
                       },
-                      child: Text('')),
+                      child: Text('New election Settings Page')),
                   Spacer(),
                 ],
               ),
