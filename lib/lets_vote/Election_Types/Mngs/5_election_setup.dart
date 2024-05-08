@@ -166,10 +166,12 @@ class _election_setup_5State extends State<election_setup_5> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Row(),
-              SizedBox(
-                height: 500.0,
-              ),
+              ///electionname textbox
+              ///candidate 1 textbox
+              ///candidate 2 textbox
+              ///candidate 3 textbox
+              ///candidate 4 textbox
+              ///candidate 5 textbox
 
               ///election name
               Row(
