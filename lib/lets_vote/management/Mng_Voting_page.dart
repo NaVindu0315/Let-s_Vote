@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart';
 import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 import 'package:lets_vote/test_voting/test_functions.dart';
 
@@ -16,14 +17,14 @@ import 'package:quickalert/quickalert.dart';
 late User loggedinuser;
 late String client;
 
-class Emp_Vote_Page extends StatefulWidget {
-  const Emp_Vote_Page({Key? key}) : super(key: key);
+class Mng_Vote_Page extends StatefulWidget {
+  const Mng_Vote_Page({Key? key}) : super(key: key);
 
   @override
-  State<Emp_Vote_Page> createState() => _Emp_Vote_PageState();
+  State<Mng_Vote_Page> createState() => _Mng_Vote_PageState();
 }
 
-class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
+class _Mng_Vote_PageState extends State<Mng_Vote_Page> {
   Client? httpClient;
   Web3Client? ethClient;
 
@@ -179,13 +180,13 @@ class _Emp_Vote_PageState extends State<Emp_Vote_Page> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Emp_Dashboard()),
+                MaterialPageRoute(builder: (context) => Mng_Dashboard()),
               ); // go back to the previous screen
             },
           ),
 
           title: Text(
-            'Employee Voting',
+            'Manager Voting',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: IconThemeData(color: Colors.white),
