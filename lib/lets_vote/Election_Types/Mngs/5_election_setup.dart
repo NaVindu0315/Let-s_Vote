@@ -19,6 +19,8 @@ class _election_setup_5State extends State<election_setup_5> {
   String candidatename4 = "-";
   String candidatename5 = "-";
 
+  String electionname = "";
+
   int cn1votes = 0;
   int cn2votes = 0;
   int cn3votes = 0;
@@ -32,6 +34,7 @@ class _election_setup_5State extends State<election_setup_5> {
   String name3candi = "";
   String name4candi = "";
   String name5candi = "";
+  String nameelection = "";
 
   ///variables to set end
   ///
@@ -41,6 +44,7 @@ class _election_setup_5State extends State<election_setup_5> {
   TextEditingController name3controller = TextEditingController();
   TextEditingController name4controller = TextEditingController();
   TextEditingController name5controller = TextEditingController();
+  TextEditingController electioncontroller = TextEditingController();
 
   ///controllers end
   ///database referenneces
@@ -49,6 +53,7 @@ class _election_setup_5State extends State<election_setup_5> {
   late DatabaseReference _candidate3nameref;
   late DatabaseReference _candidate4nameref;
   late DatabaseReference _candidate5nameref;
+  late DatabaseReference _electionnameref;
 
   ///references end
   ///
@@ -58,6 +63,7 @@ class _election_setup_5State extends State<election_setup_5> {
     super.initState();
 
     ///initialzing
+    _electionnameref = FirebaseDatabase.instance.reference().child('el_name');
     _candidate1nameref = FirebaseDatabase.instance.reference().child('candi_1');
     _candidate2nameref = FirebaseDatabase.instance.reference().child('candi_2');
     _candidate3nameref = FirebaseDatabase.instance.reference().child('candi_3');
@@ -116,6 +122,16 @@ class _election_setup_5State extends State<election_setup_5> {
       }
     });
 
+    ///election name
+    _electionnameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          electionname = snapshot.value.toString();
+        });
+      }
+    });
+
     /// assgining values end
   }
 
@@ -147,157 +163,417 @@ class _election_setup_5State extends State<election_setup_5> {
 
           //centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Row(),
-            SizedBox(
-              height: 400.0,
-            ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(),
+              SizedBox(
+                height: 500.0,
+              ),
 
-            ///firstcandidate
-            Row(
-              children: [
-                Expanded(
-                    flex: 3,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                          height: 40.0,
-                          child: Card(
-                            color: AppColors.backgroundcolor,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      '  $candidatename1 ',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.buttoncolor),
-                                    ),
-                                  ],
-                                ),
-                              ],
+              ///election name
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '             $electionname ',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          margin: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            //color: Color(0xFF101E33),
-                            color: AppColors.backgroundcolor,
-                            borderRadius: BorderRadius.circular(10.0),
-                          )),
-                    )),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
 
-                ///blocckchian values here
-                Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                          height: 40.0,
-                          child: Card(
-                            color: AppColors.backgroundcolor,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      '   6',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: AppColors.buttoncolor,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                  ///blocckchian values here
+                  ///blockchain values end
+                ],
+              ),
+
+              ///firstcandidate
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  $candidatename1 ',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          margin: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            //color: Color(0xFF101E33),
-                            color: AppColors.backgroundcolor,
-                            borderRadius: BorderRadius.circular(10.0),
-                          )),
-                    )),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
 
-                ///blockchain values end
-              ],
-            ),
-
-            ///second candidate
-            Row(
-              children: [
-                Expanded(
-                    flex: 3,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                          height: 40.0,
-                          child: Card(
-                            color: AppColors.backgroundcolor,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      '  $candidatename2 ',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.buttoncolor),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '   6',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: AppColors.buttoncolor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          margin: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            //color: Color(0xFF101E33),
-                            color: AppColors.backgroundcolor,
-                            borderRadius: BorderRadius.circular(10.0),
-                          )),
-                    )),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
 
-                ///blocckchian values here
-                Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                          height: 40.0,
-                          child: Card(
-                            color: AppColors.backgroundcolor,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      '   5',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: AppColors.buttoncolor,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                  ///blockchain values end
+                ],
+              ),
+
+              ///second candidate
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  $candidatename2 ',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          margin: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            //color: Color(0xFF101E33),
-                            color: AppColors.backgroundcolor,
-                            borderRadius: BorderRadius.circular(10.0),
-                          )),
-                    )),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
 
-                ///blockchain values end
-              ],
-            ),
-          ],
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '   5',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: AppColors.buttoncolor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///3rd candidate
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  $candidatename3 ',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '   5',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: AppColors.buttoncolor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///
+              /// 4th candidate
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  $candidatename4 ',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '   5',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: AppColors.buttoncolor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///
+              /// 5th candidate
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  $candidatename5 ',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 40.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '   5',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: AppColors.buttoncolor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blockchain values end
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
