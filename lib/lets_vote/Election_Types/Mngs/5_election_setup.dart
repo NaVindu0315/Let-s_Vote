@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:lets_vote/lets_vote/management/Mng_new_Election_settings.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 
@@ -153,7 +154,7 @@ class _election_setup_5State extends State<election_setup_5> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => mng_election_type_select()),
+                    builder: (context) => Mng_new_Election_settings()),
               ); // go back to the previous screen
             },
           ),
@@ -368,12 +369,26 @@ class _election_setup_5State extends State<election_setup_5> {
                         print(name4candi);
                         print(name5candi);*/
 
+                        SendMailtoAll(nameelection, name1candi, name2candi,
+                            name3candi, name4candi, name5candi);
+                        createnewelectioon(nameelection, name1candi, name2candi,
+                            name3candi, name4candi, name5candi);
+
+                        enableelectiondisbaleresults();
                         electioncontroller.clear();
                         name1controller.clear();
                         name2controller.clear();
                         name3controller.clear();
                         name4controller.clear();
                         name5controller.clear();
+
+                        enablevotingbuttons();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Mng_new_Election_settings()),
+                        );
                       },
                       child: Text(
                         'Create  Election',
