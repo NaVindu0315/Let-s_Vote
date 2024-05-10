@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/lets_vote/Election_Types/Mngs/Mng_Vote_5.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
 import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
@@ -80,6 +81,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
   TextEditingController url1controller = TextEditingController();
   TextEditingController capturedimageurlcontroller = TextEditingController();
   late String url1img;
+  int electiontype = 0;
 
   ///camera end
   ///Failed attempt email
@@ -112,6 +114,8 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
   DateTime now = DateTime.now();
 
   Color clickcolor = AppColors.backgroundcolor;
+
+  late DatabaseReference _electiontyperef;
 
   ///capturing and storing function
   Future<void> uploadimage() async {
@@ -238,6 +242,17 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
     });
 
     //_initNetworkInfo();
+
+    _electiontyperef =
+        FirebaseDatabase.instance.reference().child('electiontype');
+    _electiontyperef.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          electiontype = snapshot.value as int;
+        });
+      }
+    });
   }
 
   void getcurrentuser() async {
@@ -922,12 +937,11 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
-                                    /* Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Emp_new_Election_results()),
-                                        );*/
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Mng_Vote_5()),
+                                    );
                                     print("hukpm");
                                   },
                                   child: Container(
