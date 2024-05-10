@@ -6,6 +6,7 @@ import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
+import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Analytics.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Configs.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Results.dart';
@@ -572,15 +573,15 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                               Icons.home,
                               color: Colors.white,
                             ),
-                            title: const Text('Home',
+                            title: const Text('Test Dashboard',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              /*   Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DashBoard()),
-                              );*/
+                              );
                             },
                           );
                         }),
@@ -593,14 +594,14 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                               Icons.manage_accounts,
                               color: Colors.white,
                             ),
-                            title: const Text(' dashboard',
+                            title: const Text(' Employee Dashboard',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DashBoard()),
+                                    builder: (context) => Emp_Dashboard()),
                               );
                             },
                           );
