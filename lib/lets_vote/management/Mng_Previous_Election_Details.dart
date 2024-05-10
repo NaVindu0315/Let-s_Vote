@@ -65,8 +65,14 @@ class _Mng_Previous_election_detailsState
 
   double cn1double = 0.0;
   double cn2double = 0.0;
+  double cn3double = 0.0;
+  double cn4double = 0.0;
+  double cn5double = 0.0;
   int cn1int = 0;
   int cn2int = 0;
+  int cn3int = 0;
+  int cn4int = 0;
+  int cn5int = 0;
 
   ///
 
@@ -84,9 +90,15 @@ class _Mng_Previous_election_detailsState
 
           cn1int = data?['cn1votes'] ?? 0;
           cn2int = data?['cn2votes'] ?? 0;
+          cn3int = data?['cn3votes'] ?? 0;
+          cn4int = data?['cn4votes'] ?? 0;
+          cn5int = data?['cn5votes'] ?? 0;
 
           cn1double = cn1int.toDouble();
-          cn2double = cn2double.toDouble();
+          cn2double = cn2int.toDouble();
+          cn3double = cn3int.toDouble();
+          cn4double = cn4int.toDouble();
+          cn5double = cn5int.toDouble();
 
           return
 
@@ -169,9 +181,6 @@ class _Mng_Previous_election_detailsState
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
 
                             ///gem code end
                             ///gem name
@@ -208,9 +217,7 @@ class _Mng_Previous_election_detailsState
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
+
                             Container(
                               padding: EdgeInsets.only(left: 20),
                               height: 60,
@@ -244,9 +251,7 @@ class _Mng_Previous_election_detailsState
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
+
                             Container(
                               padding: EdgeInsets.only(left: 20),
                               height: 60,
@@ -280,6 +285,105 @@ class _Mng_Previous_election_detailsState
                                 ],
                               ),
                             ),
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['candidate3']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['cn3votes']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['candidate4']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['cn4votes']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              height: 60,
+                              width: double.infinity,
+                              color: AppColors.backgroundcolor,
+                              child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['candidate5']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+
+                                  ///place the gemcode variable here
+                                  Expanded(
+                                    child: Text(
+                                      '${data?['cn5votes']}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 22,
+                                          height: 2,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             SizedBox(
                               height: 10.0,
                             ),
@@ -290,16 +394,28 @@ class _Mng_Previous_election_detailsState
 
                             Row(
                               children: [
+                                SizedBox(
+                                  width: 50.0,
+                                ),
                                 BarChartWidget(
-                                  bars: [cn1double, cn2double],
+                                  bars: [
+                                    cn1double,
+                                    cn2double,
+                                    cn3double,
+                                    cn4double,
+                                    cn5double
+                                  ],
                                   labels: [
                                     '${data?['candidate1']}',
-                                    '${data?['candidate2']}'
+                                    '${data?['candidate2']}',
+                                    '${data?['candidate3']}',
+                                    '${data?['candidate4']}',
+                                    '${data?['candidate5']}',
                                   ],
                                   barColor: Colors.blueAccent,
                                   axisLineColor: Colors.red,
                                   barGap: 4.0,
-                                  size: Size(300, 400),
+                                  size: Size(250, 300),
                                 ),
                               ],
                             ),
