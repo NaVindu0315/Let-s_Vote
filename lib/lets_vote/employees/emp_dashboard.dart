@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/lets_vote/Election_Types/Empss/Emp_Vote_2.dart';
+import 'package:lets_vote/lets_vote/Election_Types/Empss/Emp_Vote_4.dart';
+import 'package:lets_vote/lets_vote/Election_Types/Empss/Emp_Vote_5.dart';
+import 'package:lets_vote/lets_vote/Election_Types/Empss/Emp_vote_3.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_new_Election_Results.dart';
@@ -412,11 +416,28 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                     // autoCloseDuration: const Duration(seconds: 4),
                     showConfirmBtn: true,
                     onConfirmBtnTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Emp_Vote_Page()),
-                      );
+                      if (electiontype == 5) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Emp_Vote_5()),
+                        );
+                      } else if (electiontype == 4) {
+                        print('pakaooo');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Emp_Vote_4()),
+                        );
+                      } else if (electiontype == 3) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Emp_Vote_3()),
+                        );
+                      } else if (electiontype == 2) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Emp_Vote_2()),
+                        );
+                      }
                     });
 
                 // You can store these values in variables or a data model as required
@@ -657,11 +678,32 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Emp_Vote_Page()),
-                              );
+                              if (electiontype == 5) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Emp_Vote_5()),
+                                );
+                              } else if (electiontype == 4) {
+                                print('pakaooo');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Emp_Vote_4()),
+                                );
+                              } else if (electiontype == 3) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Emp_Vote_3()),
+                                );
+                              } else if (electiontype == 2) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Emp_Vote_2()),
+                                );
+                              }
                             },
                           );
                         }),
@@ -916,6 +958,33 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                               builder: (context) =>
                                                   Emp_new_Election_results()),
                                         );*/
+
+                                    if (electiontype == 5) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Emp_Vote_5()),
+                                      );
+                                    } else if (electiontype == 4) {
+                                      print('pakaooo');
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Emp_Vote_4()),
+                                      );
+                                    } else if (electiontype == 3) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Emp_Vote_3()),
+                                      );
+                                    } else if (electiontype == 2) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Emp_Vote_2()),
+                                      );
+                                    }
                                     print("hukpm");
                                   },
                                   child: Container(
