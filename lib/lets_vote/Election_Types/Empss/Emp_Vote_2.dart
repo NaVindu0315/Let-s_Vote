@@ -352,7 +352,7 @@ class _Emp_Vote_2State extends State<Emp_Vote_2> {
                         child: Text(
                           'Vote',
                           style: TextStyle(
-                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                              fontSize: 15.0, color: AppColors.backgroundcolor),
                         ),
                       )),
 
@@ -411,7 +411,7 @@ class _Emp_Vote_2State extends State<Emp_Vote_2> {
                         child: Text(
                           'Vote',
                           style: TextStyle(
-                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                              fontSize: 15.0, color: AppColors.backgroundcolor),
                         ),
                       )),
 

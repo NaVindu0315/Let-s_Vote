@@ -352,7 +352,7 @@ class _Mng_Vote_4State extends State<Mng_Vote_4> {
                         child: Text(
                           'Vote',
                           style: TextStyle(
-                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                              fontSize: 15.0, color: AppColors.backgroundcolor),
                         ),
                       )),
 
@@ -411,7 +411,7 @@ class _Mng_Vote_4State extends State<Mng_Vote_4> {
                         child: Text(
                           'Vote',
                           style: TextStyle(
-                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                              fontSize: 15.0, color: AppColors.backgroundcolor),
                         ),
                       )),
 
@@ -470,7 +470,7 @@ class _Mng_Vote_4State extends State<Mng_Vote_4> {
                         child: Text(
                           'Vote',
                           style: TextStyle(
-                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                              fontSize: 15.0, color: AppColors.backgroundcolor),
                         ),
                       )),
 
@@ -529,7 +529,7 @@ class _Mng_Vote_4State extends State<Mng_Vote_4> {
                         child: Text(
                           'Vote',
                           style: TextStyle(
-                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                              fontSize: 15.0, color: AppColors.backgroundcolor),
                         ),
                       )),
 
