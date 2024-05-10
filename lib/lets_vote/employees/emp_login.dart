@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
 import 'package:lets_vote/pages/welcome%20screen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -135,7 +136,7 @@ class _Emp_loginState extends State<Emp_login> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DashBoard()),
+                                      builder: (context) => Emp_Dashboard()),
                                 );
                               }
                             } catch (e) {
