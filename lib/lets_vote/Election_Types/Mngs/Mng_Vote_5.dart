@@ -345,7 +345,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                         ),
                         onPressed: uidf == 1
                             ? () {
-                                vote_2(context, ethClient!);
+                                vote_1(context, ethClient!);
                                 deactivatebutton();
                               }
                             : null,
@@ -463,7 +463,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                         ),
                         onPressed: uidf == 1
                             ? () {
-                                vote_2(context, ethClient!);
+                                vote_3(context, ethClient!);
                                 deactivatebutton();
                               }
                             : null,
@@ -522,7 +522,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                         ),
                         onPressed: uidf == 1
                             ? () {
-                                vote_2(context, ethClient!);
+                                vote_4(context, ethClient!);
                                 deactivatebutton();
                               }
                             : null,
@@ -581,7 +581,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                         ),
                         onPressed: uidf == 1
                             ? () {
-                                vote_2(context, ethClient!);
+                                vote_5(context, ethClient!);
                                 deactivatebutton();
                               }
                             : null,

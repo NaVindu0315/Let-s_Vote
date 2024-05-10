@@ -636,7 +636,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Mng_Vote_Page()),
+                                    builder: (context) => Mng_Vote_5()),
                               );
                             },
                           );
