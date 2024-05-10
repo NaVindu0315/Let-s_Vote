@@ -6,6 +6,7 @@ import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
 import 'package:lets_vote/pages/Test/testgrapgh.dart';
@@ -518,7 +519,8 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                       if (inpotp == 1011) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => DashBoard()),
+                          MaterialPageRoute(
+                              builder: (context) => Mng_Dashboard()),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
