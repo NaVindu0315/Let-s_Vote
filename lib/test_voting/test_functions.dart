@@ -20,7 +20,7 @@ Future<List<dynamic>> ask(
 }
 
 Future<String> letsvotejson() async {
-  final ref = FirebaseStorage.instance.ref('jsons/lvote2.json');
+  final ref = FirebaseStorage.instance.ref('jsons/lvote3.json');
   final bytes = await ref.getData();
   final jsonString = utf8.decode(bytes!);
   return (jsonString);
@@ -36,8 +36,8 @@ Future<DeployedContract> loadContract() async {
   return contract;*/
 
   final abiFile = await letsvotejson();
-  final contract = DeployedContract(ContractAbi.fromJson(abiFile, 'lvote2'),
-      EthereumAddress.fromHex(contractadrs2));
+  final contract = DeployedContract(ContractAbi.fromJson(abiFile, 'lvote3'),
+      EthereumAddress.fromHex(contractadrs5));
   //print("payyya");
   return contract;
 }
@@ -69,14 +69,38 @@ Future<List> getvotes_1(Web3Client ethClient) async {
 ///candidate 1 vote count end
 ///
 ///
-///to get candidate 1 votes
+///to get candidate 2 votes
 ///
 Future<List> getvotes_2(Web3Client ethClient) async {
   List<dynamic> result = await ask('get_2', [], ethClient);
   return result;
 }
 
-///candidate 1 vote count end
+///candidate 2 vote count end
+///to get candidate 3 votes
+///
+Future<List> getvotes_3(Web3Client ethClient) async {
+  List<dynamic> result = await ask('get_3', [], ethClient);
+  return result;
+}
+
+///candidate 3 vote count end
+///to get candidate 3 votes
+///
+Future<List> getvotes_4(Web3Client ethClient) async {
+  List<dynamic> result = await ask('get_4', [], ethClient);
+  return result;
+}
+
+///candidate 3 vote count end
+///to get candidate 3 votes
+///
+Future<List> getvotes_5(Web3Client ethClient) async {
+  List<dynamic> result = await ask('get_5', [], ethClient);
+  return result;
+}
+
+///candidate 5 vote count end
 
 Future<String> vote_1(BuildContext context, Web3Client ethClient) async {
   var response = await callFunction("vote_1", [], ethClient, voter_private_key);
@@ -103,6 +127,57 @@ Future<String> vote_2(BuildContext context, Web3Client ethClient) async {
     context: context,
     type: QuickAlertType.success,
     title: 'Voted for Candidate 2',
+    text: '$response',
+    backgroundColor: Colors.black,
+    titleColor: Colors.white,
+    textColor: Colors.white,
+  );
+  return response;
+}
+
+Future<String> vote_3(BuildContext context, Web3Client ethClient) async {
+  var response = await callFunction("vote_3", [], ethClient, voter_private_key);
+  print("Vote counted successfully for candidate 3");
+
+  print(response);
+  QuickAlert.show(
+    context: context,
+    type: QuickAlertType.success,
+    title: 'Voted for Candidate 3',
+    text: '$response',
+    backgroundColor: Colors.black,
+    titleColor: Colors.white,
+    textColor: Colors.white,
+  );
+  return response;
+}
+
+Future<String> vote_4(BuildContext context, Web3Client ethClient) async {
+  var response = await callFunction("vote_4", [], ethClient, voter_private_key);
+  print("Vote counted successfully for candidate 4");
+
+  print(response);
+  QuickAlert.show(
+    context: context,
+    type: QuickAlertType.success,
+    title: 'Voted for Candidate 4',
+    text: '$response',
+    backgroundColor: Colors.black,
+    titleColor: Colors.white,
+    textColor: Colors.white,
+  );
+  return response;
+}
+
+Future<String> vote_5(BuildContext context, Web3Client ethClient) async {
+  var response = await callFunction("vote_5", [], ethClient, voter_private_key);
+  print("Vote counted successfully for candidate 5");
+
+  print(response);
+  QuickAlert.show(
+    context: context,
+    type: QuickAlertType.success,
+    title: 'Voted for Candidate 5',
     text: '$response',
     backgroundColor: Colors.black,
     titleColor: Colors.white,

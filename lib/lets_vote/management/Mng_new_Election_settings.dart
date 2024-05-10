@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Settings.dart';
 import 'package:lets_vote/lets_vote/management/mng_election_select_page.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -198,8 +199,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => Mng_Election_Settings()),
+                MaterialPageRoute(builder: (context) => Mng_Dashboard()),
               ); // go back to the previous screen
             },
           ),
