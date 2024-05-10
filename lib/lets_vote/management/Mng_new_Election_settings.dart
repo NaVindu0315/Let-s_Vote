@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
@@ -40,6 +41,10 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
   int cn3votes = 0;
   int cn4votes = 0;
   int cn5votes = 0;
+
+  //firebase
+  final _firestore = FirebaseFirestore.instance;
+  DateTime now = DateTime.now();
 
   ///variables end
 
@@ -898,6 +903,24 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                         // voteclearblockchain(ethClient!);
                         clearall(context, ethClient!);*/
                         setissavedto1();
+                        String electionid = "$electionname$now";
+                        final elc =
+                            _firestore.collection("electionss").doc(electionid);
+                        elc.set({
+                          'electionname': "$electionname",
+                          'candidate1': "$candidatename1",
+                          'candidate2': "$candidatename2",
+                          'candidate3': "$candidatename3",
+                          'candidate4': "$candidatename4",
+                          'candidate5': "$candidatename5",
+                          'cn1votes': cn1votes,
+                          'cn2votes': cn2votes,
+                          'cn3votes': cn3votes,
+                          'cn4votes': cn4votes,
+                          'cn5votes': cn5votes,
+                          'electionid': electionid,
+                          'date & time': now,
+                        });
 
                         QuickAlert.show(
                           context: context,
