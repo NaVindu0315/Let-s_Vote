@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
+import 'package:lets_vote/lets_vote/Election_Types/Mngs/Mng_Vote_5.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
 import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
@@ -55,6 +56,10 @@ import '../../pages/Voting_home.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 
+import '../Election_Types/Mngs/Mng_Vote_2.dart';
+import '../Election_Types/Mngs/Mng_Vote_3.dart';
+import '../Election_Types/Mngs/Mng_Vote_4.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -80,6 +85,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
   TextEditingController url1controller = TextEditingController();
   TextEditingController capturedimageurlcontroller = TextEditingController();
   late String url1img;
+  int electiontype = 0;
 
   ///camera end
   ///Failed attempt email
@@ -112,6 +118,8 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
   DateTime now = DateTime.now();
 
   Color clickcolor = AppColors.backgroundcolor;
+
+  late DatabaseReference _electiontyperef;
 
   ///capturing and storing function
   Future<void> uploadimage() async {
@@ -238,6 +246,17 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
     });
 
     //_initNetworkInfo();
+
+    _electiontyperef =
+        FirebaseDatabase.instance.reference().child('electiontype');
+    _electiontyperef.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          electiontype = snapshot.value as int;
+        });
+      }
+    });
   }
 
   void getcurrentuser() async {
@@ -403,11 +422,28 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                     // autoCloseDuration: const Duration(seconds: 4),
                     showConfirmBtn: true,
                     onConfirmBtnTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Mng_Vote_Page()),
-                      );
+                      if (electiontype == 5) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mng_Vote_5()),
+                        );
+                      } else if (electiontype == 4) {
+                        print('pakaooo');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mng_Vote_4()),
+                        );
+                      } else if (electiontype == 3) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mng_Vote_3()),
+                        );
+                      } else if (electiontype == 2) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mng_Vote_2()),
+                        );
+                      }
                     });
 
                 // You can store these values in variables or a data model as required
@@ -618,11 +654,32 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Mng_Vote_Page()),
-                              );
+                              if (electiontype == 5) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Mng_Vote_5()),
+                                );
+                              } else if (electiontype == 4) {
+                                print('pakaooo');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Mng_Vote_4()),
+                                );
+                              } else if (electiontype == 3) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Mng_Vote_3()),
+                                );
+                              } else if (electiontype == 2) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Mng_Vote_2()),
+                                );
+                              }
                             },
                           );
                         }),
@@ -906,6 +963,57 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                         color: AppColors.backgroundcolor,
                                         child: Text(
                                           "Election Configs",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    if (electiontype == 5) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Mng_Vote_5()),
+                                      );
+                                    } else if (electiontype == 4) {
+                                      print('pakaooo');
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Mng_Vote_4()),
+                                      );
+                                    } else if (electiontype == 3) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Mng_Vote_3()),
+                                      );
+                                    } else if (electiontype == 2) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Mng_Vote_2()),
+                                      );
+                                    }
+
+                                    print("hukpm");
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Text(
+                                          "Voting Test",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20.0),
