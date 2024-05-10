@@ -919,6 +919,36 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                             BorderRadius.circular(10.0),
                                       )),
                                 )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Emp_new_Election_results()),
+                                        );*/
+                                    print("hukpm");
+                                  },
+                                  child: Container(
+                                      height: 120.0,
+                                      child: Card(
+                                        color: AppColors.backgroundcolor,
+                                        child: Text(
+                                          "Voting Test",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0),
+                                        ),
+                                      ),
+                                      margin: EdgeInsets.all(15.0),
+                                      decoration: BoxDecoration(
+                                        //color: Color(0xFF101E33),
+                                        color: AppColors.backgroundcolor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                )),
                                 //second box
                                 Expanded(
                                     child: GestureDetector(
