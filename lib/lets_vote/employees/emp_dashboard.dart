@@ -75,6 +75,7 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
   TextEditingController url1controller = TextEditingController();
   TextEditingController capturedimageurlcontroller = TextEditingController();
   late String url1img;
+  int electiontype = 0;
 
   ///camera end
   ///Failed attempt email
@@ -107,6 +108,8 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
   DateTime now = DateTime.now();
 
   Color clickcolor = AppColors.backgroundcolor;
+
+  late DatabaseReference _electiontyperef;
 
   ///capturing and storing function
   Future<void> uploadimage() async {
@@ -233,6 +236,17 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
     });
 
     //_initNetworkInfo();
+
+    _electiontyperef =
+        FirebaseDatabase.instance.reference().child('electiontype');
+    _electiontyperef.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          electiontype = snapshot.value as int;
+        });
+      }
+    });
   }
 
   void getcurrentuser() async {
