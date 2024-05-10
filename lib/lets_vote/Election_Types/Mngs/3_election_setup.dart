@@ -317,7 +317,7 @@ class _election_setup_3State extends State<election_setup_3> {
                           name3candi,
                         );
                         createnewelectioon(nameelection, name1candi, name2candi,
-                            name3candi, "", "");
+                            name3candi, "-", "-");
 
                         enableelectiondisbaleresults();
                         electioncontroller.clear();

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
@@ -40,6 +41,10 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
   int cn3votes = 0;
   int cn4votes = 0;
   int cn5votes = 0;
+
+  //firebase
+  final _firestore = FirebaseFirestore.instance;
+  DateTime now = DateTime.now();
 
   ///variables end
 
@@ -252,6 +257,16 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
 
   Future<void> setissavedto1() async {
     await _issavedref.set(1);
+  }
+
+  Future<void> resetnames() async {
+    await _electionnameref.set("-");
+    await _candidate1nameref.set("-");
+    await _candidate2nameref.set("-");
+    await _candidate3nameref.set("-");
+    await _candidate4nameref.set("-");
+    await _candidate5nameref.set("-");
+    await _isreusltsref.set(0);
   }
 
   @override
@@ -896,8 +911,29 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                         ///add blockchain clear all function here
                         ///
                         // voteclearblockchain(ethClient!);
-                        clearall(context, ethClient!);*/
+                        */
                         setissavedto1();
+                        String electionid = "$electionname$now";
+                        final elc =
+                            _firestore.collection("electionss").doc(electionid);
+                        elc.set({
+                          'electionname': "$electionname",
+                          'candidate1': "$candidatename1",
+                          'candidate2': "$candidatename2",
+                          'candidate3': "$candidatename3",
+                          'candidate4': "$candidatename4",
+                          'candidate5': "$candidatename5",
+                          'cn1votes': cn1votes,
+                          'cn2votes': cn2votes,
+                          'cn3votes': cn3votes,
+                          'cn4votes': cn4votes,
+                          'cn5votes': cn5votes,
+                          'electionid': electionid,
+                          'date & time': now,
+                        });
+
+                        clearall(context, ethClient!);
+                        resetnames();
 
                         QuickAlert.show(
                           context: context,

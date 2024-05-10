@@ -343,7 +343,7 @@ class _election_setup_4State extends State<election_setup_4> {
                         SendMailtoAll(nameelection, name1candi, name2candi,
                             name3candi, name4candi);
                         createnewelectioon(nameelection, name1candi, name2candi,
-                            name3candi, name4candi, "");
+                            name3candi, name4candi, "-");
 
                         enableelectiondisbaleresults();
                         electioncontroller.clear();
