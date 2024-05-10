@@ -91,6 +91,18 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
   String cn2name = "";
   String electionname = "";
 
+  String candidatename1 = "-";
+  String candidatename2 = "-";
+  String candidatename3 = "-";
+  String candidatename4 = "-";
+  String candidatename5 = "-";
+
+  late DatabaseReference _candidate1nameref;
+  late DatabaseReference _candidate2nameref;
+  late DatabaseReference _candidate3nameref;
+  late DatabaseReference _candidate4nameref;
+  late DatabaseReference _candidate5nameref;
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -150,6 +162,61 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
         setState(() {
           uiddisplay = '1';
           uidf = int.parse(uiddisplay);
+        });
+      }
+    });
+
+    _candidate1nameref = FirebaseDatabase.instance.reference().child('candi_1');
+    _candidate2nameref = FirebaseDatabase.instance.reference().child('candi_2');
+    _candidate3nameref = FirebaseDatabase.instance.reference().child('candi_3');
+    _candidate4nameref = FirebaseDatabase.instance.reference().child('candi_4');
+    _candidate5nameref = FirebaseDatabase.instance.reference().child('candi_5');
+
+    _candidate1nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename1 = snapshot.value.toString();
+        });
+      }
+    });
+
+    ///2nd candidate
+    _candidate2nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename2 = snapshot.value.toString();
+        });
+      }
+    });
+
+    ///3rd candidate
+    _candidate3nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename3 = snapshot.value.toString();
+        });
+      }
+    });
+
+    ///4th candidate
+    _candidate4nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename4 = snapshot.value.toString();
+        });
+      }
+    });
+
+    ///5th candidate
+    _candidate5nameref.onValue.listen((event) {
+      final snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        setState(() {
+          candidatename5 = snapshot.value.toString();
         });
       }
     });
@@ -224,56 +291,9 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                 ],
               ),
 
-              ///vote count display row
-              /*  Row(
-                children: [
-                  Spacer(),
-                  Column(
-                    children: [
-                      FutureBuilder<List>(
-                          future: getvotes_1(ethClient!),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            return Text(
-                              snapshot.data![0].toString(),
-                              style: TextStyle(
-                                  fontSize: 50, fontWeight: FontWeight.bold),
-                            );
-                          }),
-                    ],
-                  ),
-                  Spacer(),
-                  Column(
-                    children: [
-                      FutureBuilder<List>(
-                          future: getvotes_2(ethClient!),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            return Text(
-                              snapshot.data![0].toString(),
-                              style: TextStyle(
-                                  fontSize: 50, fontWeight: FontWeight.bold),
-                            );
-                          }),
-                    ],
-                  ),
-                  Spacer(),
-                ],
-              )*/
-
               /// vote count display row end
               SizedBox(
-                height: 70.0,
+                height: 20.0,
               ),
 
               ///row to display name of the candidates
@@ -297,7 +317,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                                   Row(
                                     children: [
                                       Text(
-                                        '  name1 ',
+                                        ' $candidatename1 ',
                                         style: TextStyle(
                                             fontSize: 24.0,
                                             fontWeight: FontWeight.bold,
@@ -356,7 +376,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                                   Row(
                                     children: [
                                       Text(
-                                        '  name1 ',
+                                        ' $candidatename2 ',
                                         style: TextStyle(
                                             fontSize: 24.0,
                                             fontWeight: FontWeight.bold,
@@ -415,7 +435,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                                   Row(
                                     children: [
                                       Text(
-                                        '  name1 ',
+                                        ' $candidatename3 ',
                                         style: TextStyle(
                                             fontSize: 24.0,
                                             fontWeight: FontWeight.bold,
@@ -474,7 +494,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                                   Row(
                                     children: [
                                       Text(
-                                        '  name1 ',
+                                        ' $candidatename4 ',
                                         style: TextStyle(
                                             fontSize: 24.0,
                                             fontWeight: FontWeight.bold,
@@ -533,7 +553,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                                   Row(
                                     children: [
                                       Text(
-                                        '  name1 ',
+                                        ' $candidatename5 ',
                                         style: TextStyle(
                                             fontSize: 24.0,
                                             fontWeight: FontWeight.bold,

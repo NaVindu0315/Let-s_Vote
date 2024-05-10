@@ -284,8 +284,8 @@ class _election_setup_2State extends State<election_setup_2> {
                           name1candi,
                           name2candi,
                         );
-                        createnewelectioon(
-                            nameelection, name1candi, name2candi, "", "", "");
+                        createnewelectioon(nameelection, name1candi, name2candi,
+                            "-", "-", "-");
 
                         enableelectiondisbaleresults();
                         electioncontroller.clear();
