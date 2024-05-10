@@ -277,65 +277,49 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
               ),
 
               ///row to display name of the candidates
-              Row(
-                children: [
-                  Spacer(),
-                  Column(
-                    children: [
-                      Text(
-                        '$cn1name',
-                        style: TextStyle(
-                            color: AppColors.buttoncolor, fontSize: 30.0),
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Column(
-                    children: [
-                      Text(
-                        '$cn2name',
-                        style: TextStyle(
-                            color: AppColors.buttoncolor, fontSize: 30.0),
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                ],
-              ),
 
               ///candidate display row end
               SizedBox(
                 height: 30.0,
               ),
-
-              ///row for the buttons
               Row(
                 children: [
-                  Spacer(),
-                  Column(
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: AppColors.buttoncolor,
-                        ),
-                        onPressed: uidf == 1
-                            ? () {
-                                vote_1(context, ethClient!);
-                                deactivatebutton();
-                              }
-                            : null,
-                        child: Text(
-                          'Vote',
-                          style: TextStyle(
-                              fontSize: 30.0, color: AppColors.backgroundcolor),
-                        ),
-                      )
-                    ],
-                  ),
-                  Spacer(),
-                  Column(
-                    children: [
-                      ElevatedButton(
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 45.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  name1 ',
+                                        style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: AppColors.buttoncolor,
                         ),
@@ -348,14 +332,250 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
                         child: Text(
                           'Vote',
                           style: TextStyle(
-                              fontSize: 30.0, color: AppColors.backgroundcolor),
+                              fontSize: 25.0, color: AppColors.backgroundcolor),
                         ),
-                      )
-                    ],
-                  ),
-                  Spacer(),
+                      )),
+
+                  ///blockchain values end
                 ],
               ),
+
+              ///second
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 45.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  name1 ',
+                                        style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.buttoncolor,
+                        ),
+                        onPressed: uidf == 1
+                            ? () {
+                                vote_2(context, ethClient!);
+                                deactivatebutton();
+                              }
+                            : null,
+                        child: Text(
+                          'Vote',
+                          style: TextStyle(
+                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                        ),
+                      )),
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///third
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 45.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  name1 ',
+                                        style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.buttoncolor,
+                        ),
+                        onPressed: uidf == 1
+                            ? () {
+                                vote_2(context, ethClient!);
+                                deactivatebutton();
+                              }
+                            : null,
+                        child: Text(
+                          'Vote',
+                          style: TextStyle(
+                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                        ),
+                      )),
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///4th
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 45.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  name1 ',
+                                        style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.buttoncolor,
+                        ),
+                        onPressed: uidf == 1
+                            ? () {
+                                vote_2(context, ethClient!);
+                                deactivatebutton();
+                              }
+                            : null,
+                        child: Text(
+                          'Vote',
+                          style: TextStyle(
+                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                        ),
+                      )),
+
+                  ///blockchain values end
+                ],
+              ),
+
+              ///5th
+              Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                            height: 45.0,
+                            child: Card(
+                              color: AppColors.backgroundcolor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '  name1 ',
+                                        style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.buttoncolor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.all(15.0),
+                            decoration: BoxDecoration(
+                              //color: Color(0xFF101E33),
+                              color: AppColors.backgroundcolor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                      )),
+
+                  ///blocckchian values here
+                  Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.buttoncolor,
+                        ),
+                        onPressed: uidf == 1
+                            ? () {
+                                vote_2(context, ethClient!);
+                                deactivatebutton();
+                              }
+                            : null,
+                        child: Text(
+                          'Vote',
+                          style: TextStyle(
+                              fontSize: 25.0, color: AppColors.backgroundcolor),
+                        ),
+                      )),
+
+                  ///blockchain values end
+                ],
+              ),
+
               Row(
                 children: [
                   Spacer(),
