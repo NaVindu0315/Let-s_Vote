@@ -17,14 +17,14 @@ import 'package:quickalert/quickalert.dart';
 late User loggedinuser;
 late String client;
 
-class Mng_Vote_5 extends StatefulWidget {
-  const Mng_Vote_5({Key? key}) : super(key: key);
+class Mng_Vote_4 extends StatefulWidget {
+  const Mng_Vote_4({Key? key}) : super(key: key);
 
   @override
-  State<Mng_Vote_5> createState() => _Mng_Vote_5State();
+  State<Mng_Vote_4> createState() => _Mng_Vote_4State();
 }
 
-class _Mng_Vote_5State extends State<Mng_Vote_5> {
+class _Mng_Vote_4State extends State<Mng_Vote_4> {
   Client? httpClient;
   Web3Client? ethClient;
 
@@ -253,7 +253,7 @@ class _Mng_Vote_5State extends State<Mng_Vote_5> {
           ),
 
           title: Text(
-            'Manager Voting',
+            '4 Manager Voting',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: IconThemeData(color: Colors.white),

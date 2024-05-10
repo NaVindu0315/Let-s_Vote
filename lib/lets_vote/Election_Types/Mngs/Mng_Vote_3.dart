@@ -17,14 +17,14 @@ import 'package:quickalert/quickalert.dart';
 late User loggedinuser;
 late String client;
 
-class Mng_Vote_5 extends StatefulWidget {
-  const Mng_Vote_5({Key? key}) : super(key: key);
+class Mng_Vote_3 extends StatefulWidget {
+  const Mng_Vote_3({Key? key}) : super(key: key);
 
   @override
-  State<Mng_Vote_5> createState() => _Mng_Vote_5State();
+  State<Mng_Vote_3> createState() => _Mng_Vote_3State();
 }
 
-class _Mng_Vote_5State extends State<Mng_Vote_5> {
+class _Mng_Vote_3State extends State<Mng_Vote_3> {
   Client? httpClient;
   Web3Client? ethClient;
 
