@@ -202,6 +202,47 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
     _cndi4future = getvotes_4(ethClient!);
     _cndi5future = getvotes_5(ethClient!);
 
+    ///values assigning
+    _cndi1future.then((value) {
+      setState(() {
+        cn1votes = int.parse(value[0].toString());
+        // Update the display text when future completes
+        //  votesCandidate1 = _displayText1.toDouble();
+      });
+    });
+
+    _cndi2future.then((value) {
+      setState(() {
+        cn2votes = int.parse(value[0].toString());
+        // Update the display text when future completes
+        //  votesCandidate1 = _displayText1.toDouble();
+      });
+    });
+
+    _cndi3future.then((value) {
+      setState(() {
+        cn3votes = int.parse(value[0].toString());
+        // Update the display text when future completes
+        //  votesCandidate1 = _displayText1.toDouble();
+      });
+    });
+
+    _cndi4future.then((value) {
+      setState(() {
+        cn4votes = int.parse(value[0].toString());
+        // Update the display text when future completes
+        //  votesCandidate1 = _displayText1.toDouble();
+      });
+    });
+
+    _cndi5future.then((value) {
+      setState(() {
+        cn5votes = int.parse(value[0].toString());
+        // Update the display text when future completes
+        //  votesCandidate1 = _displayText1.toDouble();
+      });
+    });
+
     /// blokchain end
   }
 
