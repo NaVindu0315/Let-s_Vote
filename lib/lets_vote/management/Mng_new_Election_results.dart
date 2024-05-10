@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_graph/flutter_graph.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Settings.dart';
 import 'package:lets_vote/lets_vote/management/mng_election_select_page.dart';
@@ -66,6 +67,12 @@ class _Mng_new_Election_resultsState extends State<Mng_new_Election_results> {
   late Future<List> _cndi3future;
   late Future<List> _cndi4future;
   late Future<List> _cndi5future;
+
+  double doublecn1 = 0.0;
+  double doublecn2 = 0.0;
+  double doublecn3 = 0.0;
+  double doublecn4 = 0.0;
+  double doublecn5 = 0.0;
 
   ///blockchaiin end
   @override
@@ -208,6 +215,7 @@ class _Mng_new_Election_resultsState extends State<Mng_new_Election_results> {
         cn1votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn1 = cn1votes.toDouble();
       });
     });
 
@@ -216,6 +224,7 @@ class _Mng_new_Election_resultsState extends State<Mng_new_Election_results> {
         cn2votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn2 = cn2votes.toDouble();
       });
     });
 
@@ -224,6 +233,7 @@ class _Mng_new_Election_resultsState extends State<Mng_new_Election_results> {
         cn3votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn3 = cn3votes.toDouble();
       });
     });
 
@@ -232,6 +242,7 @@ class _Mng_new_Election_resultsState extends State<Mng_new_Election_results> {
         cn4votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn4 = cn4votes.toDouble();
       });
     });
 
@@ -240,6 +251,7 @@ class _Mng_new_Election_resultsState extends State<Mng_new_Election_results> {
         cn5votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn5 = cn5votes.toDouble();
       });
     });
 
@@ -293,51 +305,37 @@ class _Mng_new_Election_resultsState extends State<Mng_new_Election_results> {
 
               ///election name
               SizedBox(
-                height: 10.0,
+                height: 5.0,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 60.0,
+                  ),
+                  BarChartWidget(
+                    bars: [
+                      doublecn1,
+                      doublecn2,
+                      doublecn3,
+                      doublecn4,
+                      doublecn5
+                    ],
+                    labels: [
+                      '$candidatename1',
+                      '$candidatename2',
+                      '$candidatename3',
+                      '$candidatename4',
+                      '$candidatename5',
+                    ],
+                    barColor: Colors.blueAccent,
+                    axisLineColor: AppColors.buttoncolor,
+                    barGap: 12.0,
+                    size: Size(250, 350),
+                  ),
+                ],
               ),
 
               ///election available
-
-              ///election type
-              Row(
-                children: [
-                  Expanded(
-                      flex: 3,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                            height: 40.0,
-                            child: Card(
-                              color: AppColors.backgroundcolor,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Type         :     $electiontype Person Election',
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.buttoncolor),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            margin: EdgeInsets.all(15.0),
-                            decoration: BoxDecoration(
-                              //color: Color(0xFF101E33),
-                              color: AppColors.backgroundcolor,
-                              borderRadius: BorderRadius.circular(10.0),
-                            )),
-                      )),
-
-                  ///blocckchian values here
-
-                  ///blockchain values end
-                ],
-              ),
 
               ///
 
@@ -356,7 +354,7 @@ class _Mng_new_Election_resultsState extends State<Mng_new_Election_results> {
                                   Row(
                                     children: [
                                       Text(
-                                        'Name       :      $electionname ',
+                                        '  Name       :      $electionname ',
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.bold,
