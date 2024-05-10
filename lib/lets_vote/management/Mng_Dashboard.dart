@@ -13,6 +13,7 @@ import 'package:lets_vote/lets_vote/management/Mng_Election_Results.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Settings.dart';
 import 'package:lets_vote/lets_vote/management/Mng_EmpList.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Voting_page.dart';
+import 'package:lets_vote/lets_vote/management/Mng_new_Election_results.dart';
 import 'package:lets_vote/lets_vote/management/Mng_new_Election_settings.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
@@ -776,7 +777,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Mng_Election_Results()),
+                                                    Mng_new_Election_results()),
                                           );
                                           print("hukpm");
                                         }
