@@ -422,11 +422,28 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                     // autoCloseDuration: const Duration(seconds: 4),
                     showConfirmBtn: true,
                     onConfirmBtnTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Mng_Vote_Page()),
-                      );
+                      if (electiontype == 5) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mng_Vote_5()),
+                        );
+                      } else if (electiontype == 4) {
+                        print('pakaooo');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mng_Vote_4()),
+                        );
+                      } else if (electiontype == 3) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mng_Vote_3()),
+                        );
+                      } else if (electiontype == 2) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Mng_Vote_2()),
+                        );
+                      }
                     });
 
                 // You can store these values in variables or a data model as required
@@ -637,11 +654,32 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Mng_Vote_5()),
-                              );
+                              if (electiontype == 5) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Mng_Vote_5()),
+                                );
+                              } else if (electiontype == 4) {
+                                print('pakaooo');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Mng_Vote_4()),
+                                );
+                              } else if (electiontype == 3) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Mng_Vote_3()),
+                                );
+                              } else if (electiontype == 2) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Mng_Vote_2()),
+                                );
+                              }
                             },
                           );
                         }),
