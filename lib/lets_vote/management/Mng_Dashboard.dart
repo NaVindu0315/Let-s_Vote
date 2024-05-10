@@ -56,6 +56,10 @@ import '../../pages/Voting_home.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 
+import '../Election_Types/Mngs/Mng_Vote_2.dart';
+import '../Election_Types/Mngs/Mng_Vote_3.dart';
+import '../Election_Types/Mngs/Mng_Vote_4.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -937,11 +941,33 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                 Expanded(
                                     child: GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Mng_Vote_5()),
-                                    );
+                                    if (electiontype == 5) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Mng_Vote_5()),
+                                      );
+                                    } else if (electiontype == 4) {
+                                      print('pakaooo');
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Mng_Vote_4()),
+                                      );
+                                    } else if (electiontype == 3) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Mng_Vote_3()),
+                                      );
+                                    } else if (electiontype == 2) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Mng_Vote_2()),
+                                      );
+                                    }
+
                                     print("hukpm");
                                   },
                                   child: Container(

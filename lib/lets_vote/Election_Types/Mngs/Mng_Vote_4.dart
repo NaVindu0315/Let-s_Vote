@@ -537,65 +537,6 @@ class _Mng_Vote_4State extends State<Mng_Vote_4> {
                 ],
               ),
 
-              ///5th
-              Row(
-                children: [
-                  Expanded(
-                      flex: 3,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                            height: 45.0,
-                            child: Card(
-                              color: AppColors.backgroundcolor,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        ' $candidatename5 ',
-                                        style: TextStyle(
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.buttoncolor),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            margin: EdgeInsets.all(15.0),
-                            decoration: BoxDecoration(
-                              //color: Color(0xFF101E33),
-                              color: AppColors.backgroundcolor,
-                              borderRadius: BorderRadius.circular(10.0),
-                            )),
-                      )),
-
-                  ///blocckchian values here
-                  Expanded(
-                      flex: 1,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: AppColors.buttoncolor,
-                        ),
-                        onPressed: uidf == 1
-                            ? () {
-                                vote_5(context, ethClient!);
-                                deactivatebutton();
-                              }
-                            : null,
-                        child: Text(
-                          'Vote',
-                          style: TextStyle(
-                              fontSize: 25.0, color: AppColors.backgroundcolor),
-                        ),
-                      )),
-
-                  ///blockchain values end
-                ],
-              ),
-
               Row(
                 children: [
                   Spacer(),
