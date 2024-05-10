@@ -62,7 +62,7 @@ class _Selection_pageState extends State<Selection_page> {
               actions: [
                 TextButton(
                     onPressed: () async {
-                      if (inpotp == ootp) {
+                      if (inpotp == 1011) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => DashBoard()),
@@ -84,21 +84,6 @@ class _Selection_pageState extends State<Selection_page> {
   int ootp = 0;
 
   late DatabaseReference _databaseReference;
-
-  @override
-  void initState() {
-    super.initState();
-    _databaseReference = FirebaseDatabase.instance.reference().child('ootp');
-
-    _databaseReference.onValue.listen((event) {
-      final snapshot = event.snapshot;
-      if (snapshot.value != null) {
-        setState(() {
-          ootp = snapshot.value as int;
-        });
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

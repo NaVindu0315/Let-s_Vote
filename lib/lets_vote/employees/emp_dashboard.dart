@@ -6,6 +6,8 @@ import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
+import 'package:lets_vote/lets_vote/employees/Emp_new_Election_Results.dart';
+import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
 import 'package:lets_vote/pages/Test/testgrapgh.dart';
@@ -501,6 +503,40 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
   /// end
 
   ///function end
+  Future<void> openDialog() async {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Management OTP'),
+              content: TextField(
+                decoration: InputDecoration(hintText: 'Enter Management OTP'),
+                onChanged: (value) {
+                  inpotp = int.parse(value);
+                },
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () async {
+                      if (inpotp == 1011) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Mng_Dashboard()),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Sending wrong OTP')),
+                        );
+
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: Text('Submit'))
+              ],
+            ));
+  }
+
+  int inpotp = 0000;
 
   @override
   void dispose() {
@@ -568,15 +604,15 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                               Icons.home,
                               color: Colors.white,
                             ),
-                            title: const Text('Home',
+                            title: const Text('Test Dashboard',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              /*   Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DashBoard()),
-                              );*/
+                              );
                             },
                           );
                         }),
@@ -589,15 +625,11 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                               Icons.manage_accounts,
                               color: Colors.white,
                             ),
-                            title: const Text(' dashboard',
+                            title: const Text(' Management Dashboard',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DashBoard()),
-                              );
+                              openDialog();
                             },
                           );
                         }),
@@ -715,7 +747,7 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Em_Election_Results()),
+                                                    Emp_new_Election_results()),
                                           );
                                           print("hukpm");
                                         }
