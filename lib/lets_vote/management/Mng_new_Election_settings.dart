@@ -259,6 +259,16 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
     await _issavedref.set(1);
   }
 
+  Future<void> resetnames() async {
+    await _electionnameref.set("-");
+    await _candidate1nameref.set("-");
+    await _candidate2nameref.set("-");
+    await _candidate3nameref.set("-");
+    await _candidate4nameref.set("-");
+    await _candidate5nameref.set("-");
+    await _isreusltsref.set(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -901,7 +911,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                         ///add blockchain clear all function here
                         ///
                         // voteclearblockchain(ethClient!);
-                        clearall(context, ethClient!);*/
+                        */
                         setissavedto1();
                         String electionid = "$electionname$now";
                         final elc =
@@ -921,6 +931,9 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                           'electionid': electionid,
                           'date & time': now,
                         });
+
+                        clearall(context, ethClient!);
+                        resetnames();
 
                         QuickAlert.show(
                           context: context,
