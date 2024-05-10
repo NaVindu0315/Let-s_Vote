@@ -8,6 +8,11 @@ import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import '../../../Colors/colors.dart';
 
+import 'package:web3dart/web3dart.dart';
+import '../../test_voting/test_constants.dart';
+import '../../test_voting/test_functions.dart';
+import 'package:http/http.dart';
+
 class Mng_new_Election_settings extends StatefulWidget {
   const Mng_new_Election_settings({Key? key}) : super(key: key);
 
@@ -52,7 +57,17 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
 
   ///references end
   ///
+  ///blockchain\
+  Client? httpClient;
+  Web3Client? ethClient;
 
+  late Future<List> _cndi1future;
+  late Future<List> _cndi2future;
+  late Future<List> _cndi3future;
+  late Future<List> _cndi4future;
+  late Future<List> _cndi5future;
+
+  ///blockchaiin end
   @override
   void initState() {
     super.initState();
@@ -175,6 +190,19 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
     });
 
     /// assgining values end
+    ///
+    /// blockchain
+
+    httpClient = Client();
+    ethClient = Web3Client(infura_url, httpClient!);
+
+    _cndi1future = getvotes_1(ethClient!);
+    _cndi2future = getvotes_2(ethClient!);
+    _cndi3future = getvotes_3(ethClient!);
+    _cndi4future = getvotes_4(ethClient!);
+    _cndi5future = getvotes_5(ethClient!);
+
+    /// blokchain end
   }
 
   Future<void> setissavedto0() async {
@@ -483,7 +511,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        '   6',
+                                        '   $cn1votes',
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: AppColors.buttoncolor,
@@ -555,7 +583,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        '   5',
+                                        '   $cn2votes',
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: AppColors.buttoncolor,
@@ -627,7 +655,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        '   5',
+                                        '   $cn3votes',
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: AppColors.buttoncolor,
@@ -700,7 +728,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        '   5',
+                                        '   $cn4votes',
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: AppColors.buttoncolor,
@@ -773,7 +801,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        '   5',
+                                        '   $cn5votes',
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: AppColors.buttoncolor,
