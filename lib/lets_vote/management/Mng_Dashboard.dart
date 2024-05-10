@@ -6,12 +6,15 @@ import 'package:lets_vote/Colors/colors.dart';
 import 'package:lets_vote/cam.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Complaint.dart';
 import 'package:lets_vote/lets_vote/employees/Emp_Vote_Page.dart';
+import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Analytics.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Configs.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Results.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Settings.dart';
 import 'package:lets_vote/lets_vote/management/Mng_EmpList.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Voting_page.dart';
+import 'package:lets_vote/lets_vote/management/Mng_new_Election_results.dart';
+import 'package:lets_vote/lets_vote/management/Mng_new_Election_settings.dart';
 import 'package:lets_vote/lets_vote/select_page.dart';
 import 'package:lets_vote/pages/Group_Chat.dart';
 import 'package:lets_vote/pages/Test/testgrapgh.dart';
@@ -572,15 +575,15 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                               Icons.home,
                               color: Colors.white,
                             ),
-                            title: const Text('Home',
+                            title: const Text('Test Dashboard',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
-                              /*   Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DashBoard()),
-                              );*/
+                              );
                             },
                           );
                         }),
@@ -593,14 +596,14 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                               Icons.manage_accounts,
                               color: Colors.white,
                             ),
-                            title: const Text(' dashboard',
+                            title: const Text(' Employee Dashboard',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 17)),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DashBoard()),
+                                    builder: (context) => Emp_Dashboard()),
                               );
                             },
                           );
@@ -774,7 +777,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Mng_Election_Results()),
+                                                    Mng_new_Election_results()),
                                           );
                                           print("hukpm");
                                         }
@@ -924,7 +927,7 @@ class _Mng_DashboardState extends State<Mng_Dashboard> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Mng_Election_Settings()),
+                                              Mng_new_Election_settings()),
                                     );
                                   },
                                   child: Container(

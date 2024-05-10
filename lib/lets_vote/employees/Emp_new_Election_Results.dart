@@ -1,8 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_graph/flutter_graph.dart';
+import 'package:lets_vote/lets_vote/employees/emp_dashboard.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Dashboard.dart';
 import 'package:lets_vote/lets_vote/management/Mng_Election_Settings.dart';
 import 'package:lets_vote/lets_vote/management/mng_election_select_page.dart';
+import 'package:path/path.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
@@ -13,15 +16,15 @@ import '../../test_voting/test_constants.dart';
 import '../../test_voting/test_functions.dart';
 import 'package:http/http.dart';
 
-class Mng_new_Election_settings extends StatefulWidget {
-  const Mng_new_Election_settings({Key? key}) : super(key: key);
+class Emp_new_Election_results extends StatefulWidget {
+  const Emp_new_Election_results({Key? key}) : super(key: key);
 
   @override
-  State<Mng_new_Election_settings> createState() =>
-      _Mng_new_Election_settingsState();
+  State<Emp_new_Election_results> createState() =>
+      _Emp_new_Election_resultsState();
 }
 
-class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
+class _Emp_new_Election_resultsState extends State<Emp_new_Election_results> {
   ///declaring variables to fetch from rtdb
   String candidatename1 = "-";
   String candidatename2 = "-";
@@ -66,6 +69,12 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
   late Future<List> _cndi3future;
   late Future<List> _cndi4future;
   late Future<List> _cndi5future;
+
+  double doublecn1 = 0.0;
+  double doublecn2 = 0.0;
+  double doublecn3 = 0.0;
+  double doublecn4 = 0.0;
+  double doublecn5 = 0.0;
 
   ///blockchaiin end
   @override
@@ -208,6 +217,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
         cn1votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn1 = cn1votes.toDouble();
       });
     });
 
@@ -216,6 +226,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
         cn2votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn2 = cn2votes.toDouble();
       });
     });
 
@@ -224,6 +235,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
         cn3votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn3 = cn3votes.toDouble();
       });
     });
 
@@ -232,6 +244,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
         cn4votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn4 = cn4votes.toDouble();
       });
     });
 
@@ -240,6 +253,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
         cn5votes = int.parse(value[0].toString());
         // Update the display text when future completes
         //  votesCandidate1 = _displayText1.toDouble();
+        doublecn5 = cn5votes.toDouble();
       });
     });
 
@@ -268,13 +282,13 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Mng_Dashboard()),
+                MaterialPageRoute(builder: (context) => Emp_Dashboard()),
               ); // go back to the previous screen
             },
           ),
 
           title: Text(
-            'New Election settings',
+            'Election Results - Employee',
             style: TextStyle(fontSize: 26.0, color: AppColors.buttoncolor),
           ),
           iconTheme: IconThemeData(color: Colors.white),
@@ -293,174 +307,37 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
 
               ///election name
               SizedBox(
-                height: 20.0,
+                height: 5.0,
               ),
               Row(
                 children: [
-                  Spacer(),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: AppColors.buttoncolor,
-                      ),
-                      onPressed: issaved == 1
-                          ? () {
-                              setissavedto0();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        mng_election_type_select()),
-                              );
-                            }
-                          : () {
-                              QuickAlert.show(
-                                context: context,
-                                type: QuickAlertType.warning,
-                                title: 'Need To Save',
-                                text:
-                                    'Save and clear Previous Election Data before creating a new one',
-                                backgroundColor: Colors.black,
-                                titleColor: Colors.white,
-                                textColor: Colors.white,
-                              );
-                            },
-                      child: Text(
-                        'Create New Election',
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: AppColors.backgroundcolor,
-                            fontWeight: FontWeight.bold),
-                      )),
-                  Spacer(),
+                  SizedBox(
+                    width: 60.0,
+                  ),
+                  BarChartWidget(
+                    bars: [
+                      doublecn1,
+                      doublecn2,
+                      doublecn3,
+                      doublecn4,
+                      doublecn5
+                    ],
+                    labels: [
+                      '$candidatename1',
+                      '$candidatename2',
+                      '$candidatename3',
+                      '$candidatename4',
+                      '$candidatename5',
+                    ],
+                    barColor: Colors.blueAccent,
+                    axisLineColor: AppColors.buttoncolor,
+                    barGap: 12.0,
+                    size: Size(250, 350),
+                  ),
                 ],
               ),
 
               ///election available
-              Row(
-                children: [
-                  Expanded(
-                      flex: 3,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                            height: 40.0,
-                            child: Card(
-                              color: AppColors.backgroundcolor,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        election == 1
-                                            ? 'Election   :     Available Now'
-                                            : 'Election   :     Not available Right now',
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.buttoncolor),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            margin: EdgeInsets.all(15.0),
-                            decoration: BoxDecoration(
-                              //color: Color(0xFF101E33),
-                              color: AppColors.backgroundcolor,
-                              borderRadius: BorderRadius.circular(10.0),
-                            )),
-                      )),
-
-                  ///blocckchian values here
-
-                  ///blockchain values end
-                ],
-              ),
-
-              ///voting status
-              Row(
-                children: [
-                  Expanded(
-                      flex: 3,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                            height: 40.0,
-                            child: Card(
-                              color: AppColors.backgroundcolor,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        results == 1
-                                            ? 'status      :     Results available'
-                                            : 'Status      :     Voting Enabled',
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.buttoncolor),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            margin: EdgeInsets.all(15.0),
-                            decoration: BoxDecoration(
-                              //color: Color(0xFF101E33),
-                              color: AppColors.backgroundcolor,
-                              borderRadius: BorderRadius.circular(10.0),
-                            )),
-                      )),
-
-                  ///blocckchian values here
-
-                  ///blockchain values end
-                ],
-              ),
-
-              ///election type
-              Row(
-                children: [
-                  Expanded(
-                      flex: 3,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                            height: 40.0,
-                            child: Card(
-                              color: AppColors.backgroundcolor,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Type         :     $electiontype Person Election',
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.buttoncolor),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            margin: EdgeInsets.all(15.0),
-                            decoration: BoxDecoration(
-                              //color: Color(0xFF101E33),
-                              color: AppColors.backgroundcolor,
-                              borderRadius: BorderRadius.circular(10.0),
-                            )),
-                      )),
-
-                  ///blocckchian values here
-
-                  ///blockchain values end
-                ],
-              ),
 
               ///
 
@@ -479,7 +356,7 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                                   Row(
                                     children: [
                                       Text(
-                                        'Name       :      $electionname ',
+                                        '  Name       :      $electionname ',
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.bold,
@@ -862,61 +739,6 @@ class _Mng_new_Election_settingsState extends State<Mng_new_Election_settings> {
                       )),
 
                   ///blockchain values end
-                ],
-              ),
-              Row(
-                children: [
-                  Spacer(),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: AppColors.buttoncolor,
-                      ),
-                      onPressed: () {
-                        ///add save data to firebase function here
-                        /* String electionid = "$electionname$now";
-                        final elc =
-                        _firestore.collection("electionss").doc(electionid);
-                        elc.set({
-                          'electionname': "$electionname",
-                          'candidate1': "$candidatename1",
-                          'candidate2': "$candidatename2",
-                          'cn1votes': cn1votes,
-                          'cn2votes': cn2votes,
-                          'electionid': electionid,
-                          'date & time': now,
-                        });
-                        setissavedto1();
-
-                        ///voting and reuslts disbale here
-                        disablebothresultsandelections();
-
-                        ///clear realtime data here
-                        resetnames();
-
-                        ///add blockchain clear all function here
-                        ///
-                        // voteclearblockchain(ethClient!);
-                        clearall(context, ethClient!);*/
-                        setissavedto1();
-
-                        QuickAlert.show(
-                          context: context,
-                          type: QuickAlertType.success,
-                          title: 'Election Saved',
-                          text: 'Election Saved and Cleared',
-                          backgroundColor: Colors.black,
-                          titleColor: Colors.white,
-                          textColor: Colors.white,
-                        );
-                      },
-                      child: Text(
-                        'Save & Clear Election Data',
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: AppColors.backgroundcolor,
-                            fontWeight: FontWeight.bold),
-                      )),
-                  Spacer(),
                 ],
               ),
             ],
