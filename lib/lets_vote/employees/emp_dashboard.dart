@@ -542,9 +542,10 @@ class _Emp_DashboardState extends State<Emp_Dashboard> {
     return showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text('Management OTP'),
+              title: Text('Management PIN'),
               content: TextField(
-                decoration: InputDecoration(hintText: 'Enter Management OTP'),
+                decoration: InputDecoration(
+                    hintText: 'Enter Management PIN for testing PIN = 1011'),
                 onChanged: (value) {
                   inpotp = int.parse(value);
                 },
