@@ -10,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 ///for camera
 import 'package:camera/camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:lets_vote/lets_vote/employees/emp_login.dart';
 import 'package:lets_vote/pages/login.dart';
 import '../cam.dart';
 import 'package:quickalert/quickalert.dart';
@@ -579,7 +580,7 @@ class _signupState extends State<signup> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => lgin()),
+                                          builder: (context) => Emp_login()),
                                     );
                                   });
 
@@ -641,7 +642,7 @@ class _signupState extends State<signup> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => lgin()),
+                                        builder: (context) => Emp_login()),
                                   );
                                   // Add your sign up button onPressed code here
                                 },
